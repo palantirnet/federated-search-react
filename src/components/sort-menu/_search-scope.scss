@@ -1,0 +1,69 @@
+/**
+ * search-scope.scss
+ * Define search scope styles.
+ *
+ * @copyright Copyright (c) 2017 Palantir.net
+ */
+
+.search-scope {
+  @extend %clearfix;
+  margin: rhythm(1) 0;
+}
+
+.search-scope__filter {
+  @include float-span(6);
+
+  @include breakpoint($bp1) {
+    @include float-span(4);
+  }
+
+  &:nth-of-type(3n+1) {
+    @include float-span(6, 'first');
+
+    @include breakpoint($bp1) {
+      @include isolation-span(4, 1, 'both');
+    }
+  }
+
+  &:nth-of-type(3n+2) {
+    @include float-span(6, 'last');
+
+    @include breakpoint($bp1) {
+      @include isolation-span(4, 5, 'none');
+    }
+  }
+
+  &:nth-of-type(3n+3) {
+    @include float-span(6, 'first');
+
+    @include breakpoint($bp1) {
+      @include isolation-span(4, 9, 'none');
+    }
+  }
+}
+
+.search-scope__select {
+  @include adjust-font-size-to($label, .8);
+  border-radius: 3px;
+  border: 1px solid $gray-light;
+  user-select: none;
+  appearance: none;
+  margin-bottom: rhythm(.75);
+  width: 100% !important;
+  background-image: url("imgs/chevron-small-down.svg");
+  background-repeat: no-repeat;
+  background-position: 90% 50%;
+  background-size: .6em .6em;
+  background-color: $white;
+  padding: .7rem 1.5rem .7rem .7rem;
+
+  @include breakpoint($bp2) {
+    padding: .35rem 1rem .35rem .35rem;
+    margin-bottom: rhythm(.5);
+    background-position: 97% 50%;
+  }
+}
+
+.search-scope__label {
+  @extend %search-filters__label;
+}

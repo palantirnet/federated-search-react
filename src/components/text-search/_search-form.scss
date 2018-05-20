@@ -1,0 +1,73 @@
+/**
+ * search-form.scss
+ * Define search form styles.
+ *
+ * @copyright Copyright (c) 2017 Palantir.net
+ */
+
+.search-form {
+  margin-bottom: rhythm(2);
+}
+
+.search-form__label,
+%search-form__label {
+  @include adjust-font-size-to($label);
+  display: block;
+  margin-bottom: .1em;
+  @extend %track-out;
+}
+
+.search-form__input-wrapper {
+  border-radius: 3px;
+  display: flex;
+  justify-content: space-between;
+
+  @include breakpoint($bp1) {
+    width: 75%;
+  }
+
+  @include breakpoint($bp3) {
+    width: 50%;
+  }
+}
+
+.search-form__input {
+  @include adjust-font-size-to($label, .8);
+  /* stylelint-disable property-no-vendor-prefix */
+  -webkit-appearance: none;
+  /* stylelint-enable */
+  border-radius: 3px 0 0 3px;
+  flex: 1;
+  border: 1px solid $gray-light;
+  padding: .5rem;
+
+  @include breakpoint($bp2) {
+    padding: .35rem;
+  }
+}
+
+.search-form__submit {
+  padding: .5rem .7rem;
+  background-color: $c-secondary;
+  border-radius: 0 3px 3px 0;
+  border: 1px solid $gray-light;
+  border-left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+
+  @include breakpoint($bp2) {
+    padding: .35rem .6rem;
+  }
+
+  &:active,
+  &:hover,
+  &:focus {
+    background-color: $c-secondary-dark;
+  }
+
+  svg {
+    height: 1em;
+  }
+}

@@ -1,0 +1,117 @@
+/**
+ * pagination.scss
+ * Define pagination styles.
+ *
+ * @copyright Copyright (c) 2017 Palantir.net
+ */
+.search-pager {
+  background-color: transparent;
+}
+
+.search-pager__items {
+  @extend %list--simple;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-radius: 3px;
+  background-color: $gray-pale;
+  padding: 0 rhythm(2);
+  margin: rhythm(3) 0;
+
+  @include breakpoint($bp0) {
+    justify-content: flex-start;
+    border-radius: 0;
+    background-color: transparent;
+    padding: 0;
+  }
+}
+
+// Pager list item styles
+.search-pager__item {
+  display: inline-block;
+  cursor: pointer;
+
+  @include breakpoint($bp0) {
+    margin-right: rhythm(.35);
+  }
+
+  @include breakpoint($bp2) {
+    margin-right: rhythm(.25);
+  }
+
+  // Link styles
+  a {
+    @include trans();
+    @include adjust-font-size-to(.9em, 1);
+    font-weight: 700;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 0;
+    text-align: center;
+    padding: rhythm(.25);
+
+    @include breakpoint($bp0) {
+      background-color: $c-secondary;
+      border-radius: 3px;
+      width: rhythm(1.5);
+      height: rhythm(1.5);
+      padding: 0;
+    }
+
+    @include breakpoint($bp2) {
+      @include adjust-font-size-to($label, .9);
+      width: rhythm(1.2);
+      height: rhythm(1.2);
+    }
+
+    &:hover,
+    &:active {
+      text-decoration: underline;
+      color: $c-primary-dark;
+      background-color: $c-secondary;
+
+      @include breakpoint($bp0) {
+        @include adjust-font-size-to($text, 1);
+        background-color: $c-secondary-dark;
+      }
+
+      svg {
+        fill: $c-primary-dark;
+      }
+    }
+
+    svg {
+      height: 1.3em;
+      fill: $link-color;
+      display: block;
+
+      @include breakpoint($bp0) {
+        height: 1em;
+      }
+    }
+  }
+
+  // Active page
+  &.is-active a {
+    @include adjust-font-size-to($text, 1);
+
+    @include breakpoint($bp0) {
+      background-color: $link-color;
+      color: $white;
+
+      &:hover,
+      &:active {
+        background-color: $c-primary-dark;
+      }
+    }
+  }
+
+  &.not-active {
+    display: none;
+
+    @include breakpoint($bp0) {
+      display: inline-block;
+    }
+  }
+}

@@ -1,0 +1,41 @@
+/**
+ * @file
+ * Centralize your imports here.
+ * Styles are organized using the SMACSS technique.
+ * @see http://smacss.com/book/
+ */
+
+/* Import Sass mixins, variables, Compass modules, etc. */
+@import "init";
+
+/* Set browser support */
+@import "support-for";
+
+/* Set the vertical rhythm */
+@import "vertical-rhythm/vertical_rhythm";
+
+/* HTML element (SMACSS base) rules */
+@import "normalize";
+
+/* Layout rules */
+@import "grid-layouts/_l-singularity";
+@import "grid-layouts/_l-1up";
+@import "grid-layouts/_l-2up";
+@import "grid-layouts/_l-3up";
+@import "grid-layouts/_l-4up";
+@import "grid-layouts/_l-6up";
+@import "grid-layouts/_l-33-66";
+@import "grid-layouts/_l-66-33";
+@import "grid-layouts/_l-25-75";
+
+/* Component (SMACSS module) rules */
+@import "components/text-search/search-form";
+@import "components/search-filters";
+@import "components/aside";
+@import "components/results/search-results";
+@import "components/sort-menu/search-scope";
+@import "components/results/pagination";
+@import "components/results/search-results-stat";
+@import "components/current-query/applied-filters";
+@import "components/range-facet/react-dates";
+@import "components/range-facet/react-dates-overrides";

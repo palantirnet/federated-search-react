@@ -1,0 +1,27 @@
+/**
+ * applied-filters.scss
+ * Define applied filters styles.
+ *
+ * @copyright Copyright (c) 2017 Palantir.net
+ */
+
+.applied-filters {
+  margin: rhythm(1) 0;
+  display: block;
+}
+
+.applied-filters__filter {
+  @include adjust-font-size-to($label, .8);
+  padding-bottom: rhythm(.2);
+  border-bottom: solid 2px $c-secondary;
+  margin-right: rhythm(.5);
+  margin-bottom: rhythm(.5);
+  display: inline-block;
+  cursor: pointer;
+
+  &:after {
+    @include adjust-font-size-to(1.2em);
+    content: "\D7";
+    margin-left: rhythm(.2);
+  }
+}

@@ -1,0 +1,15 @@
+/**
+ * aside.scss
+ * Define aside styles.
+ *
+ * @copyright Copyright (c) 2017 Palantir.net
+ */
+
+aside {
+  margin-bottom: rhythm(1);
+  background-color: $c-bg-gray;
+
+  @include breakpoint($bp2) {
+    padding-top: rhythm(1);
+  }
+}

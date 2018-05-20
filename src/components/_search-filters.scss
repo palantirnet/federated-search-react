@@ -1,0 +1,253 @@
+/**
+ * search-form.scss
+ * Define search form styles.
+ *
+ * @copyright Copyright (c) 2017 Palantir.net
+ */
+
+.search-filters__trigger,
+.search-accordion__title {
+  @include adjust-font-size-to($sm-heading, 1);
+  display: block;
+  padding-right: 1.25rem;
+  padding-left: 1.25rem;
+
+  &:hover,
+  &:focus,
+  &:active {
+    text-decoration: none;
+  }
+
+  // Display plus symbol at initial state
+  &:after {
+    content: "+";
+    float: right;
+  }
+}
+
+.search-filters__trigger {
+  width: 100%;
+  background-color: transparent;
+  border-radius: 0;
+  border: 0;
+  padding-top: rhythm(.5);
+  padding-bottom: rhythm(.5);
+
+  @include breakpoint($bp2) {
+    display: none;
+  }
+
+  &.js-search-filters-open {
+    background-color: $gray-dark;
+    color: $gray-pale;
+  }
+
+  // Replace plus symbol with en dash when search-filters is open
+  &.js-search-filters-open:after {
+    content: "–";
+  }
+
+  &:hover,
+  &:active,
+  &:focus {
+    background-color: $gray-light;
+    color: $gray-dark;
+  }
+}
+
+.search-filters__form {
+  @extend %clearfix;
+  padding-bottom: rhythm(1);
+
+  fieldset {
+    padding: 0;
+    margin: 0;
+    border: 0;
+
+    @include breakpoint($bp2) {
+      margin-bottom: rhythm(.5);
+      padding: rhythm(1) 0;
+    }
+  }
+}
+
+.search-filters__row {
+  padding: 0 1.25rem;
+}
+
+.search-filters__title {
+  display: none;
+  @include breakpoint($bp2) {
+    display: block;
+    padding: 0;
+    @include adjust-font-size-to($h2-font-size, 1.1);
+    @include leader(0);
+    @include trailer(.5, $h2-font-size);
+  }
+}
+
+.search-filters__label,
+%search-filters__label {
+  @extend %search-form__label;
+  @include adjust-font-size-to($crumb, .6);
+  margin-bottom: .2em;
+}
+
+.search-filters__reset {
+  @include adjust-font-size-to($label);
+  padding: .2em .75em;
+  border-radius: 3px;
+  display: inline-block;
+  cursor: pointer;
+  width: 100%;
+  background-color: $gray-light;
+  border: 1px solid darken($gray-light, 10);
+
+  @include breakpoint($bp1 $bp2) {
+    width: auto;
+  }
+
+  &:active,
+  &:hover,
+  &:focus {
+    background-color: darken($gray-light, 5);
+    border: 1px solid darken($gray-light, 15);
+    text-decoration: underline;
+  }
+}
+
+///////////////////////////////
+// search-accordion styles
+///////////////////////////////
+
+.search-accordion {
+  margin-bottom: rhythm(1);
+  color: $gray-dark;
+  padding: 0;
+}
+
+.search-accordion__checkbox-label {
+  cursor: pointer;
+  display: block;
+  padding: rhythm(.5) 0;
+
+  @include breakpoint($bp2) {
+    @include adjust-font-size-to($label, .8);
+    padding: rhythm(.35) 0;
+  }
+}
+
+.search-accordion__content {
+  margin: 0;
+  padding: rhythm(.5) 1.25rem;
+
+  @media only screen and (min-width: 1025px) {
+    // Center date-picker which we can't set to display:block.
+    #solr-list-facet-ds_federated_date & {
+      text-align: center;
+    }
+  }
+
+  @media only screen and (max-width: 425px) {
+    // Center date-picker which we can't set to display:block.
+    #solr-list-facet-ds_federated_date & {
+      text-align: center;
+    }
+  }
+
+  @media only screen and (max-width: 1350px) and (min-width: 768px)  {
+    #solr-list-facet-ds_federated_date & {
+      padding: rhythm(.5) .5rem;
+    }
+  }
+}
+
+.search-accordion__group,
+.search-accordion__subgroup {
+  list-style: none;
+  padding: 0;
+
+  li {
+    display: block;
+    margin: 0;
+    overflow: hidden;
+
+    &#solr-list-facet-ds_federated_date {
+      overflow: visible;
+
+      li {
+        overflow: visible;
+      }
+    }
+  }
+}
+
+.search-accordion__group {
+  margin: 0;
+}
+
+.search-accordion__subgroup {
+  margin: 0 0 0 rhythm(.5);
+}
+
+.search-accordion__title {
+  border-bottom: solid 1px $gray-light;
+  padding-top: rhythm(.75);
+  padding-bottom: rhythm(.75);
+
+  @include breakpoint($bp2) {
+    @include adjust-font-size-to($label, .8);
+    padding-top: rhythm(.3);
+    padding-bottom: rhythm(.3);
+  }
+
+  &:active,
+  &:hover,
+  &:focus {
+    border-bottom: solid 1px darken($gray-light, 10);
+    outline: 0;
+  }
+  
+  &:hover {
+    cursor: pointer;
+  }
+
+  // Replace plus symbol with en dash when search-accordion is open
+  &.js-search-accordion-open:after {
+    content: "–";
+  }
+}
+
+// Accordion animation styles.
+
+// transition
+.slide-appear {
+  opacity    : 0;
+  transition : opacity .5s ease-in;
+
+}
+
+.slide-appear.slide-appear-active {
+  opacity : 1;
+}
+
+// CSSTransitionGroup Component
+.slide-enter {
+  max-height : 0;
+  transition : all .7s ease-in;
+}
+
+.slide-enter.slide-enter-active {
+  max-height : 10000px;
+}
+
+// CSSTransitionGroup
+.slide-leave {
+  max-height : 10000px;
+  transition : all .3s ease-out;
+}
+
+.slide-leave.slide-leave-active {
+  max-height : 0;
+  transition: all .3s ease;
+}

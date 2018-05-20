@@ -1,0 +1,188 @@
+//
+// Initialization partial
+//
+// To make it easier to use all variables and mixins in any Sass file in this
+// theme, each .scss file has a @import "init" declaration. And this _init.scss
+// file is in charge of importing all the other partials needed for the theme.
+//
+// This initialization partial is organized in this way:
+// - First we set any shared Sass variables.
+// - Next we import Compass plug-ins (Sass mixin libraries).
+// - Last we define our custom mixins for this theme.
+//
+
+
+// =============================================================================
+// Variables
+// =============================================================================
+
+// Support the same browsers as normalize.css v3.
+/* stylelint-disable function-comma-space-after */
+$support-for: (
+  ie:      9,
+  '*':     -4,
+);
+/* stylelint-enable */
+
+//
+// Font faces, stacks and sizes.
+//
+
+// Compass' vertical_rhythm extension is a powerful tool to set up a vertical
+// rhythm for your entire page. You can see some of its mixins and functions in
+// use in the normalize.scss file.
+// @see http://compass-style.org/reference/compass/typography/vertical_rhythm/
+
+$base-font-size: 15px; // The font size set on the root html element.
+$base-line-height: 22px; // This line-height determines the basic unit of vertical rhythm.
+
+// Modular Scale
+// Major Third: 16px @ 1:1.25
+$xl-heading: 2.44 * $base-font-size;
+$lg-heading: 1.5 * $base-font-size;
+$md-heading: 1.1 * $base-font-size;
+$sm-heading: 1 * $base-font-size;
+$text: 1 * $base-font-size;
+$label: .8 * $base-font-size;
+$crumb: .7 * $base-font-size;
+
+$h1-font-size: $lg-heading;
+$h2-font-size: $md-heading;
+$h3-font-size: $sm-heading;
+$h4-font-size: $text;
+$h5-font-size: $label;
+$h6-font-size: $label;
+
+// The following font family declarations are based on the Microsoft core web
+// fonts which are common fonts available on most computer systems. The DejaVu
+// and Nimbus Sans fonts are commonly available on Linux systems where the MS
+// fonts are less common. Tahoma and Helvetica are also widely available.
+//
+// A user's web browser will look at the comma-separated list and will
+// attempt to use each font in turn until it finds one that is available
+// on the user's computer. The final "generic" font (sans-serif, serif or
+// monospace) hints at what type of font to use if the web browser doesn't
+// find any of the fonts in the list.
+
+@font-face {
+  font-family: HelveticaNeue;
+  src: url("fonts/helveticaneue-light.ttf");
+  font-style: normal;
+  font-weight: 300;
+}
+
+@font-face {
+  font-family: HelveticaNeue;
+  src: url("fonts/helveticaneue-lightItalic.ttf");
+  font-style: italic;
+  font-weight: 300;
+}
+
+@font-face {
+  font-family: HelveticaNeue;
+  src: url("fonts/helveticaneue.ttf");
+  font-style: normal;
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: HelveticaNeue;
+  src: url("fonts/helveticaneue-italic.ttf");
+  font-style: italic;
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: HelveticaNeue;
+  src: url("fonts/helveticaneue-medium.ttf");
+  font-style: normal;
+  font-weight: 500;
+}
+
+@font-face {
+  font-family: HelveticaNeue;
+  src: url("fonts/helveticaneue-mediumItalic.ttf");
+  font-style: italic;
+  font-weight: 500;
+}
+
+@font-face {
+  font-family: HelveticaNeue;
+  src: url("fonts/helveticaneue-bold.ttf");
+  font-style: normal;
+  font-weight: 700;
+}
+
+@font-face {
+  font-family: HelveticaNeue;
+  src: url("fonts/helveticaneue-boldItalic.ttf");
+  font-style: italic;
+  font-weight: 700;
+}
+
+// First, let's create some font stacks.
+$helvetica: Helvetica, Arial, "Nimbus Sans L", sans-serif;
+$arial: Arial, Helvetica, "Nimbus Sans L", sans-serif;
+$helvetica-neue: HelveticaNeue, Helvetica, Arial, sans-serif;
+
+// For an explanation of why "sans-serif" is at the end of this list, see
+// http://meyerweb.com/eric/thoughts/2510/02/12/fixed-monospace-sizing/
+$courier: "Courier New", "DejaVu Sans Mono", monospace, sans-serif;
+
+// Now create some variables for the font stacks we want to use on this site.
+$base-font-family: $helvetica-neue; // The font family set on the html element.
+$font-monospace: $courier;
+
+// Sass color variables, etc.
+$black: #222;
+$lighter-black: #333;
+$white: #fff;
+$white-60: rgba($white, .6);
+$white-30: rgba($white, .3);
+$yellow: #ff0;
+$gray-pale: #eff0f1;
+$gray-light: #e5e5e5;
+$gray-medium: #555;
+$gray-dark: #333;
+
+$c-bg-gray: #f6f6f6;
+
+$c-primary: #00274c;
+$c-primary-light: #0d57aa;
+$c-primary-dark: #002a5b;
+$c-secondary: #ffcb05;
+$c-secondary-light: #fff2c0;
+$c-secondary-dark: #f4bb06;
+
+// Use above sass variables to define defaults in normalize.scss
+$text-color: $gray-dark;
+$background-color: $white;
+$link-color: $c-primary-light;
+$link-hover: $c-primary-dark;
+
+///////////////////////////////////////////////////////////
+
+// Breakpoint Variables
+$bp0: 450px;
+$bp1: 600px;
+$bp2: 900px;
+$bp3: 1100px;
+
+// Vertical spacing unit
+$slug: rhythm(8);
+
+// The amount lists, blockquotes and comments are indented.
+$indent-amount: 1em;
+
+
+// =============================================================================
+// Partials to be shared with all .scss files.
+// =============================================================================
+
+// Add the Singularity Grids responsive layout mixins.
+@import '../node_modules/singularitygs/stylesheets/singularitygs';
+// Add the Breakpoint mixin.
+@import '../node_modules/breakpoint-sass/stylesheets/breakpoint';
+
+// Now we add our custom helper mixins.
+@import 'mixins';

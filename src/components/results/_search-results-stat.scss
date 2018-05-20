@@ -1,0 +1,15 @@
+/**
+ * search-results-stat.scss
+ * Define search results statistic styles.
+ *
+ * @copyright Copyright (c) 2017 Palantir.net
+ */
+
+.search-results-stat {
+  @include adjust-font-size-to(.9em, 1);
+  color: $gray-medium;
+
+  &:focus {
+    outline:0;
+  }
+}
