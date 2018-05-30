@@ -1,7 +1,7 @@
 {
-  "name": "react-search",
-  "version": "0.1.0",
-  "private": true,
+  "name": "@palantirnet/federated-search-react",
+  "description": "A ReactJS front end for faceted Solr search.",
+  "version": "0.3.0",
   "homepage": ".",
   "dependencies": {
     "@palantirnet/react-scripts": "1.1.4",
