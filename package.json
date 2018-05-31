@@ -1,9 +1,9 @@
 {
-  "name": "react-search",
-  "version": "0.1.0",
-  "private": true,
+  "name": "@palantirnet/federated-search-react",
+  "description": "A ReactJS front end for faceted Solr search.",
+  "version": "0.3.0",
   "homepage": ".",
-  "dependencies": {
+  "devDependencies": {
     "@palantirnet/react-scripts": "1.1.4",
     "breakpoint-sass": "^2.7.0",
     "moment": "2.21.0",
@@ -24,9 +24,10 @@
     "start-js": "react-scripts start",
     "start": "npm-run-all -p watch-css start-js",
     "build-js": "react-scripts build",
-    "build": "npm-run-all build-css build-js update-libraries",
+    "build": "npm-run-all build-css build-js copypackage",
+    "copypackage": "cp -rf package.json build/static",
+    "dist": "cd build/static && npm publish --access public",
     "test": "react-scripts test --env=jsdom",
-    "update-libraries": "lib/update-libraries-yaml.js",
     "eject": "react-scripts eject"
   }
 }

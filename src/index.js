@@ -104,20 +104,22 @@ const init = (settings) => {
 // If we are in the production environment (i.e. using the build compiled js)
 // @see https://github.com/facebook/create-react-app/blob/master/packages/react-scripts/template/README.md#adding-custom-environment-variables
 if (process.env.NODE_ENV === 'production') {
-  // The endpoint where production config options live.
-  const url = '/search_api_federated_solr/settings?_format=json';
+  // Get the root element where the app will be rendered.
+  const root = document.getElementById("root");
 
-  // Get configuration settings from the endpoint.
-  fetch(url)
-    .then(res => res.json())
-    .then(
-      (result) => {
-        init(result); // Load the app, passing in the config.
-      },
-      (error) => {
-        console.error('search_api_federated_solr | Could not load configuration for search app: ', error);
-      }
-    );
+  if (root) {
+    // Get the data attribute which has the stringified configuration data json object.
+    if (Object.hasOwnProperty.call(root.dataset, 'federatedSearchAppConfig')) {
+      const settings = JSON.parse(root.dataset.federatedSearchAppConfig);
+      init(settings);
+    }
+    else {
+      console.error('Federated Search React | Could not find a data-federated-search-app-config attribute on div#root.  Please populate data-federated-search-app-config with search app configuration data.');
+    }
+  }
+  else {
+    console.error('Federated Search React | Could not find div#root in which to load the search app.');
+  }
 }
 // This is not production (i.e. not using the build compiled js)
 else {
@@ -128,7 +130,7 @@ else {
         init(settings); // Load the app, passing in the ./.env.local.js config.
       },
       (error) => {
-        console.error('search_api_federated_solr | Could not load local configuration for search app: ', error);
+        console.error('Federated Search React | Could not load local configuration for search app: ', error);
       }
     );
 }
