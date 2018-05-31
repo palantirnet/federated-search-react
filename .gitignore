@@ -11,6 +11,8 @@
 
 # local environment config
 /src/.env.local.js
+!/src/fonts/
+/src/fonts/*
 
 # misc
 .DS_Store
