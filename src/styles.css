@@ -8,54 +8,6 @@
 /* Import Sass mixins, variables, Compass modules, etc. */
 /* stylelint-disable function-comma-space-after */
 /* stylelint-enable */
-@font-face {
-  font-family: HelveticaNeue;
-  src: url("fonts/helveticaneue-light.ttf");
-  font-style: normal;
-  font-weight: 300; }
-
-@font-face {
-  font-family: HelveticaNeue;
-  src: url("fonts/helveticaneue-lightItalic.ttf");
-  font-style: italic;
-  font-weight: 300; }
-
-@font-face {
-  font-family: HelveticaNeue;
-  src: url("fonts/helveticaneue.ttf");
-  font-style: normal;
-  font-weight: 400; }
-
-@font-face {
-  font-family: HelveticaNeue;
-  src: url("fonts/helveticaneue-italic.ttf");
-  font-style: italic;
-  font-weight: 400; }
-
-@font-face {
-  font-family: HelveticaNeue;
-  src: url("fonts/helveticaneue-medium.ttf");
-  font-style: normal;
-  font-weight: 500; }
-
-@font-face {
-  font-family: HelveticaNeue;
-  src: url("fonts/helveticaneue-mediumItalic.ttf");
-  font-style: italic;
-  font-weight: 500; }
-
-@font-face {
-  font-family: HelveticaNeue;
-  src: url("fonts/helveticaneue-bold.ttf");
-  font-style: normal;
-  font-weight: 700; }
-
-@font-face {
-  font-family: HelveticaNeue;
-  src: url("fonts/helveticaneue-boldItalic.ttf");
-  font-style: italic;
-  font-weight: 700; }
-
 /**
  * @file
  * Define your custom Sass mixins and extends here.
@@ -158,7 +110,7 @@ html {
   color: #333;
   font-size: 93.75%;
   line-height: 1.46667em;
-  font-family: HelveticaNeue, Helvetica, Arial, sans-serif;
+  font-family: Helvetica, Arial, "Nimbus Sans L", sans-serif;
   /* 1 */
   font-weight: 400;
   /* stylelint-disable property-no-vendor-prefix */
@@ -301,7 +253,7 @@ h1 {
   line-height: 1.27111em;
   margin-top: 0em;
   margin-bottom: 0.48889em;
-  color: #00274c;
+  color: #333;
   font-weight: 700; }
 
 h2 {
@@ -1205,9 +1157,9 @@ textarea {
 
 .search-form__submit {
   padding: .5rem .7rem;
-  background-color: #ffcb05;
+  background-color: #0000ff;
   border-radius: 0 3px 3px 0;
-  border: 1px solid #e5e5e5;
+  border: 1px solid #333;
   border-left: 0;
   display: flex;
   align-items: center;
@@ -1217,9 +1169,10 @@ textarea {
     .search-form__submit {
       padding: .35rem .6rem; } }
   .search-form__submit:active, .search-form__submit:hover, .search-form__submit:focus {
-    background-color: #f4bb06; }
+    background-color: navy; }
   .search-form__submit svg {
-    height: 1em; }
+    height: 1em;
+    fill: #fff; }
 
 /**
  * search-form.scss
@@ -1428,7 +1381,7 @@ aside {
 .search-results em {
   font-style: normal;
   font-weight: 700;
-  background-color: rgba(255, 203, 5, 0.3); }
+  background-color: rgba(0, 0, 255, 0.3); }
 
 .search-results__container--left {
   flex: 1 0 0;
@@ -1463,18 +1416,18 @@ aside {
     -webkit-text-decoration-skip: objects;
     /* 2 */
     /* stylelint-enable */
-    color: #0d57aa;
+    color: #737373;
     text-decoration: none;
-    border-bottom: 2px dashed #0d57aa;
+    border-bottom: 2px dashed #737373;
     /**
      * Remove the outline on focused links when they are also active or hovered
      * in all browsers (opinionated).
      */ }
     .search-results__heading a:active, .search-results__heading a:hover {
       outline-width: 0;
-      color: #002a5b;
+      color: black;
       background-color: #e5e5e5;
-      border-bottom: 2px solid #002a5b; }
+      border-bottom: 2px solid black; }
 
 .search-results__teaser {
   margin-bottom: 0.73333em; }
@@ -1627,7 +1580,8 @@ aside {
     padding: 0.36667em; }
     @media (min-width: 450px) {
       .search-pager__item a {
-        background-color: #ffcb05;
+        background-color: #0000ff;
+        color: #fff;
         border-radius: 3px;
         width: 2.2em;
         height: 2.2em;
@@ -1640,18 +1594,18 @@ aside {
         height: 1.76em; } }
     .search-pager__item a:hover, .search-pager__item a:active {
       text-decoration: underline;
-      color: #002a5b;
-      background-color: #ffcb05; }
+      color: #fff;
+      background-color: #0000ff; }
       @media (min-width: 450px) {
         .search-pager__item a:hover, .search-pager__item a:active {
           font-size: 1em;
           line-height: 1.46667em;
-          background-color: #f4bb06; } }
+          background-color: navy; } }
       .search-pager__item a:hover svg, .search-pager__item a:active svg {
-        fill: #002a5b; }
+        fill: black; }
     .search-pager__item a svg {
       height: 1.3em;
-      fill: #0d57aa;
+      fill: #fff;
       display: block; }
       @media (min-width: 450px) {
         .search-pager__item a svg {
@@ -1661,10 +1615,10 @@ aside {
     line-height: 1.46667em; }
     @media (min-width: 450px) {
       .search-pager__item.is-active a {
-        background-color: #0d57aa;
+        background-color: #737373;
         color: #fff; }
         .search-pager__item.is-active a:hover, .search-pager__item.is-active a:active {
-          background-color: #002a5b; } }
+          background-color: black; } }
   .search-pager__item.not-active {
     display: none; }
     @media (min-width: 450px) {
@@ -1698,7 +1652,7 @@ aside {
   font-size: 0.8em;
   line-height: 1.46667em;
   padding-bottom: 0.29333em;
-  border-bottom: solid 2px #ffcb05;
+  border-bottom: solid 2px #0000ff;
   margin-right: 0.73333em;
   margin-bottom: 0.73333em;
   display: inline-block;
@@ -2538,80 +2492,80 @@ aside {
   Default styles in _react-dates.scss
  */
 .PresetDateRangePicker_button {
-  border: 2px solid #1277e9;
-  color: #1277e9; }
+  border: 2px solid #b3b3b3;
+  color: #b3b3b3; }
 
 .PresetDateRangePicker_button__selected {
   color: #fff;
-  background: #1277e9; }
+  background: #b3b3b3; }
 
 .DayPickerKeyboardShortcuts_show__bottomRight {
   border-top: 26px solid transparent;
-  border-right: 33px solid #1277e9; }
+  border-right: 33px solid #737373; }
 
 .DayPickerKeyboardShortcuts_show__bottomRight:hover {
-  border-right: 33px solid #0d57aa; }
+  border-right: 33px solid #4d4d4d; }
 
 .DayPickerKeyboardShortcuts_show__topRight {
   border-bottom: 26px solid transparent;
-  border-right: 33px solid #1277e9; }
+  border-right: 33px solid #737373; }
 
 .DayPickerKeyboardShortcuts_show__topRight:hover {
-  border-right: 33px solid #0d57aa; }
+  border-right: 33px solid #4d4d4d; }
 
 .DayPickerKeyboardShortcuts_show__topLeft {
   border-bottom: 26px solid transparent;
-  border-left: 33px solid #1277e9; }
+  border-left: 33px solid #b3b3b3; }
 
 .DayPickerKeyboardShortcuts_show__topLeft:hover {
-  border-left: 33px solid #0d57aa; }
+  border-left: 33px solid #333; }
 
 .CalendarDay__selected_span {
-  background: #bcd9fa;
-  border: 1px solid #8dbef6;
-  color: #0b478a; }
+  background: #e6e6e6;
+  border: 1px solid gray;
+  color: #737373; }
 
 .CalendarDay__selected_span:active,
 .CalendarDay__selected_span:hover {
-  background: #3e92f0;
-  border: 1px solid #3e92f0;
+  background: #ccc;
+  border: 1px solid #ccc;
   color: #fff; }
 
 .CalendarDay__last_in_range {
-  border-right: #1277e9; }
+  border-right: #b3b3b3; }
 
 .CalendarDay__selected,
 .CalendarDay__selected:active,
 .CalendarDay__selected:hover {
-  background: #1277e9;
-  border: 1px solid #1277e9;
+  background: #737373;
+  border: 1px solid #737373;
   color: #fff; }
 
 .CalendarDay__hovered_span,
 .CalendarDay__hovered_span:hover {
-  background: #bcd9fa;
-  border: 1px solid #8dbef6;
-  color: #0b478a; }
+  background: #e6e6e6;
+  border: 1px solid gray;
+  color: #737373; }
 
 .CalendarDay__hovered_span:active {
-  background: #8dbef6;
-  border: 1px solid #8dbef6;
-  color: #06274b; }
+  background: #e6e6e6;
+  border: 1px solid gray;
+  color: #737373; }
 
 .DateInput_input__focused {
-  border-bottom: 2px solid #0d57aa; }
+  border-bottom: 2px solid #737373; }
 
 .CalendarDay__highlighted_calendar {
-  background: #fff7e8;
-  color: #565a5c; }
+  background: #8080ff;
+  color: #555; }
 
 .CalendarDay__highlighted_calendar:active,
 .CalendarDay__highlighted_calendar:hover {
-  background: #ffcb05;
-  color: #565a5c; }
+  background: #0000ff;
+  color: #555; }
 
 .DateInput_input::placeholder {
-  color: #565a5c; }
+  color: #555; }
 
 .DayPicker_weekHeader_li {
   display: inline-block !important; }
@@ -2638,7 +2592,7 @@ aside {
   font-family: monospace;
   font-size: 12px;
   text-transform: uppercase;
-  background: #f2f2f2;
+  background: #f6f6f6;
   padding: 2px 6px; }
 
 .KeyboardShortcutRow_action {

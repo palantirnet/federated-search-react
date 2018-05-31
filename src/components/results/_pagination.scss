@@ -53,6 +53,7 @@
 
     @include breakpoint($bp0) {
       background-color: $c-secondary;
+      color: $white;
       border-radius: 3px;
       width: rhythm(1.5);
       height: rhythm(1.5);
@@ -68,7 +69,7 @@
     &:hover,
     &:active {
       text-decoration: underline;
-      color: $c-primary-dark;
+      color: $white;
       background-color: $c-secondary;
 
       @include breakpoint($bp0) {
@@ -83,7 +84,7 @@
 
     svg {
       height: 1.3em;
-      fill: $link-color;
+      fill: $white;
       display: block;
 
       @include breakpoint($bp0) {
