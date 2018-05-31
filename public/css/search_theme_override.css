@@ -1,0 +1,13 @@
+/**
+ * Add your search theme override style declarations in ./theme/search_theme_override.scss
+ *
+ * To see your styles render, first run `yarn install` to get the app dependencies,
+ * then run `yarn start` to build the dev version of the search app.
+ *
+ * As you update and save ./theme/search_theme_override.scss, you should see the app
+ * update accordingly.
+ *
+ * Once you're happy with the styles, you can either copy ./theme/search_theme_override.scss
+ * or the compiled ./public/css/search_theme_override.css file and add it to your site
+ * theme sass/css.
+ */
