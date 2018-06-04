@@ -12,6 +12,20 @@ const getFacetValues = (type, results, field, lowerBound, upperBound) =>
 
 class FederatedSolrFacetedSearch extends React.Component {
 
+  resetFilters() {
+    let {query} = this.props;
+    // Keep only the value of the main search field.
+    for (let field of query.searchFields) {
+      if (field.field !== query.mainQueryField) {
+        delete(field.value);
+      }
+    }
+    // Update state to remove the filter field values.
+    this.setState({query});
+    // Execute search.
+    this.props.onSearchFieldChange();
+  }
+
   render() {
     const { customComponents, bootstrapCss, query, results, truncateFacetListsAt } = this.props;
     const { onSearchFieldChange, onSortFieldChange, onPageChange, onCsvExport } = this.props;
@@ -46,7 +60,7 @@ class FederatedSolrFacetedSearch extends React.Component {
     return (
         <div className="container">
           <aside className="l-25-75--1">
-            <SearchFieldContainerComponent bootstrapCss={bootstrapCss} onNewSearch={this.props.onNewSearch}>
+            <SearchFieldContainerComponent bootstrapCss={bootstrapCss} onNewSearch={this.resetFilters.bind(this)}>
               {searchFields.filter((searchFields) => this.props.sidebarFilters.indexOf(searchFields.field) > -1).map((searchField, i) => {
                 const { type, field, lowerBound, upperBound } = searchField;
                 const SearchComponent = customComponents.searchFields[type];
