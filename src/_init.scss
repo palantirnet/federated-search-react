@@ -64,73 +64,16 @@ $h6-font-size: $label;
 // monospace) hints at what type of font to use if the web browser doesn't
 // find any of the fonts in the list.
 
-@font-face {
-  font-family: HelveticaNeue;
-  src: url("fonts/helveticaneue-light.ttf");
-  font-style: normal;
-  font-weight: 300;
-}
-
-@font-face {
-  font-family: HelveticaNeue;
-  src: url("fonts/helveticaneue-lightItalic.ttf");
-  font-style: italic;
-  font-weight: 300;
-}
-
-@font-face {
-  font-family: HelveticaNeue;
-  src: url("fonts/helveticaneue.ttf");
-  font-style: normal;
-  font-weight: 400;
-}
-
-@font-face {
-  font-family: HelveticaNeue;
-  src: url("fonts/helveticaneue-italic.ttf");
-  font-style: italic;
-  font-weight: 400;
-}
-
-@font-face {
-  font-family: HelveticaNeue;
-  src: url("fonts/helveticaneue-medium.ttf");
-  font-style: normal;
-  font-weight: 500;
-}
-
-@font-face {
-  font-family: HelveticaNeue;
-  src: url("fonts/helveticaneue-mediumItalic.ttf");
-  font-style: italic;
-  font-weight: 500;
-}
-
-@font-face {
-  font-family: HelveticaNeue;
-  src: url("fonts/helveticaneue-bold.ttf");
-  font-style: normal;
-  font-weight: 700;
-}
-
-@font-face {
-  font-family: HelveticaNeue;
-  src: url("fonts/helveticaneue-boldItalic.ttf");
-  font-style: italic;
-  font-weight: 700;
-}
-
 // First, let's create some font stacks.
 $helvetica: Helvetica, Arial, "Nimbus Sans L", sans-serif;
 $arial: Arial, Helvetica, "Nimbus Sans L", sans-serif;
-$helvetica-neue: HelveticaNeue, Helvetica, Arial, sans-serif;
 
 // For an explanation of why "sans-serif" is at the end of this list, see
 // http://meyerweb.com/eric/thoughts/2510/02/12/fixed-monospace-sizing/
 $courier: "Courier New", "DejaVu Sans Mono", monospace, sans-serif;
 
 // Now create some variables for the font stacks we want to use on this site.
-$base-font-family: $helvetica-neue; // The font family set on the html element.
+$base-font-family: $helvetica; // The font family set on the html element.
 $font-monospace: $courier;
 
 // Sass color variables, etc.
@@ -139,20 +82,24 @@ $lighter-black: #333;
 $white: #fff;
 $white-60: rgba($white, .6);
 $white-30: rgba($white, .3);
+$blue: #0000ff;
 $yellow: #ff0;
 $gray-pale: #eff0f1;
 $gray-light: #e5e5e5;
 $gray-medium: #555;
 $gray-dark: #333;
 
+$c-border-gray: #ccc;
+$c-border-gray-dark: #b5b5b5;
 $c-bg-gray: #f6f6f6;
+$c-bg-gray-dark: #d8d8d8;
 
-$c-primary: #00274c;
-$c-primary-light: #0d57aa;
-$c-primary-dark: #002a5b;
-$c-secondary: #ffcb05;
-$c-secondary-light: #fff2c0;
-$c-secondary-dark: #f4bb06;
+$c-primary: $gray-dark;
+$c-primary-light: lighten($c-primary, 25%);
+$c-primary-dark: darken($c-primary, 25%);
+$c-secondary: $blue;
+$c-secondary-light: lighten($c-secondary, 25%);
+$c-secondary-dark: darken($c-secondary, 25%);
 
 // Use above sass variables to define defaults in normalize.scss
 $text-color: $gray-dark;

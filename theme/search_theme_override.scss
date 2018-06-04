@@ -1,0 +1,411 @@
+/**
+ * Add your search theme override style declarations in ./theme/search_theme_override.scss
+ *
+ * To see your styles render, first run `yarn install` to get the app dependencies,
+ * then run `yarn start` to build the dev version of the search app.
+ *
+ * As you update and save ./theme/search_theme_override.scss, you should see the app
+ * update accordingly.
+ *
+ * Once you're happy with the styles, you can either copy ./theme/search_theme_override.scss
+ * or the compiled ./public/css/search_theme_override.css file and add it to your site
+ * theme sass/css.
+ */
+//
+//// Fonts
+//// You can place font files in ../src/fonts and define theme here so that you can use them for development purposes.
+//// For production, you can likely remove the font family declarations here and just ensure your font stack variable is accurate.
+//$helvetica-neue: HelveticaNeue, Helvetica, Arial, sans-serif;
+//
+//// Sass color variables, etc.
+//$black: #222;
+//$lighter-black: #333;
+//$white: #fff;
+//$white-60: rgba($white, .6);
+//$white-30: rgba($white, .3);
+//$gray-pale: #eff0f1;
+//$gray-light: #e5e5e5;
+//$gray-medium: #555;
+//$gray-dark: #333;
+//
+//$c-border-gray: #ccc;
+//$c-border-gray-dark: #b5b5b5;
+//$c-bg-gray: #f6f6f6;
+//$c-bg-gray-dark: #d8d8d8;
+//
+//$c-primary: #00274c;
+//$c-primary-pale: #8dbef6;
+//$c-primary-light: #0d57aa;
+//$c-primary-dark: #002a5b;
+//
+//$c-secondary: #ffcb05;
+//$c-secondary-light: #fff2c0;
+//$c-secondary-dark: #f4bb06;
+//$c-tertiary: $gray-medium;
+//$c-tertiary-dark: $gray-dark;
+//$c-tertiary-light: $gray-light;
+//
+//// Use above sass variables to define defaults in normalize.scss
+//$text-color: $gray-dark;
+//$background-color: $white;
+//$link-color: $c-primary-light;
+//$link-hover: $c-primary-dark;
+//
+//// Breakpoint Variables
+//$bp0: 450px;
+//$bp1: 600px;
+//$bp2: 900px;
+//$bp3: 1100px;
+//
+///*
+// * Begin search override styles
+// */
+//
+//html {
+//  font-family: $helvetica-neue;
+//}
+//
+///**
+// * Search filters
+// */
+//
+///* The container for the search filters */
+//aside {
+//  background-color: $c-bg-gray;
+//}
+//
+///* Search filters */
+//.search-filters {
+//  /* Mobile search button / Desktop sidebar title */
+//  &__trigger,
+//  &__title {
+//    color: $lighter-black;
+//    font-size: 1.1em;
+//    line-height: 1.46667em;
+//  }
+//
+//  /* Search filters clear button */
+//  &__reset {
+//    background-color: $gray-light;
+//    border: 1px solid $c-border-gray;
+//    border-radius: 3px;
+//    font-size: .8em;
+//    line-height: 1.83333em;
+//
+//    &:active,
+//    &:hover,
+//    &:focus {
+//      background-color: $c-bg-gray-dark;
+//      border-color: $c-border-gray-dark;
+//      text-decoration: underline;
+//    }
+//  }
+//}
+//
+///* Search filter accordion */
+//.search-accordion {
+//  color: $gray-dark;
+//
+//  /* Top level accordion links */
+//  &__title {
+//    color: $link-color;
+//    border-bottom: 1px solid $gray-light;
+//    font-size: .8em;
+//
+//    &:active,
+//    &:hover {
+//      color: $link-hover;
+//      background-color: $gray-light;
+//      border-color: $c-border-gray-dark;
+//      text-decoration: none;
+//    }
+//
+//    &:focus,
+//    &.js-search-accordion-open {
+//      color: $link-color;
+//      border-color: $c-border-gray-dark;
+//      text-decoration: none;
+//    }
+//  }
+//}
+//
+//
+///**
+// * Search form
+// */
+//.search-form {
+//  &__label {
+//    color: $black;
+//    font-size: .8em;
+//    line-height: 1.83333em;
+//  }
+//
+//  &__input {
+//    border-radius: 3px 0 0 3px;
+//    border: 1px solid $gray-light;
+//
+//    &:focus {
+//      border: 1px solid $gray-medium;
+//      outline: 0;
+//    }
+//  }
+//
+//  &__submit {
+//    background-color: $c-secondary;
+//    border-radius: 0 3px 3px 0;
+//    border: 1px solid $gray-light;
+//    border-left: 0;
+//
+//    svg {
+//      fill: $black;
+//    }
+//
+//    &:active,
+//    &:hover,
+//    &:focus {
+//      background-color: $c-secondary-dark;
+//      border-color: $gray-light;
+//
+//      svg {
+//        fill: $black;
+//      }
+//    }
+//  }
+//}
+//
+///**
+// * Applied Filters
+// */
+//.applied-filters {
+//  &__filter {
+//    border-bottom: solid 2px $c-secondary;
+//    font-size: .8em;
+//    line-height: 1.46667em;
+//    padding-bottom: .29333em;
+//  }
+//}
+//
+///**
+// * Search results list
+// */
+//.search-results {
+//  &__heading a {
+//    background-color: transparent;
+//    color: $link-color;
+//    text-decoration: none;
+//    border-bottom: 2px dashed $link-color;
+//
+//    &:active,
+//    &:hover {
+//      outline-width: 0;
+//      color: $link-hover;
+//      background-color: $gray-light;
+//      border-bottom: 2px solid $link-hover;
+//    }
+//  }
+//
+//  /* Search results eyebrow (i.e. the content type). */
+//  &__label {
+//    color: $gray-medium;
+//    font-size: .8em;
+//  }
+//
+//  /* Search results metadata (i.e. the site + date) */
+//  &__meta {
+//    color: $c-tertiary;
+//    font-size: .8em;
+//    line-height: 1.46667em;
+//  }
+//
+//  /* Search result snippet text */
+//  &__teaser {
+//    font-size: 18px;
+//    line-height: 1.3;
+//  }
+//
+//  /* highlighted text in snippet */
+//  em {
+//    font-weight: 700;
+//    background-color: rgba($c-secondary-light, .85);
+//  }
+//}
+//
+///**
+// * Pagination component
+// */
+//.search-pager {
+//  background-color: transparent;
+//
+//  /** pagination component **/
+//  &__items {
+//    border-radius: 3px;
+//    background-color: $gray-pale;
+//
+//    @media (min-width: $bp0) {
+//      background-color: transparent;
+//    }
+//  }
+//
+//  /** inactive page links **/
+//  &__item a {
+//
+//    @media (min-width: $bp0) {
+//      background-color: $c-secondary;
+//      border-radius: 3px;
+//    }
+//
+//    &:hover,
+//    &:active {
+//      text-decoration: underline;
+//      color: $c-primary;
+//      background-color: $c-secondary;
+//
+//      @media (min-width: $bp0) {
+//        background-color: $c-secondary-dark;
+//      }
+//
+//      svg {
+//        fill: $c-primary;
+//      }
+//    }
+//  }
+//
+//  /** active page link **/
+//  &__item.is-active a {
+//    @media (min-width: $bp0) {
+//      background-color: $c-primary-light;
+//      color: $white;
+//
+//      &:hover,
+//      &:active {
+//        background-color: $c-primary-dark;
+//      }
+//    }
+//  }
+//}
+//
+///**
+// DatePicker widget
+// */
+//// Override default color values with site colors.
+//.PresetDateRangePicker_button {
+//  border: 2px solid lighten($c-primary-light, 25%);
+//  color: lighten($c-primary-light, 25%);
+//}
+//.PresetDateRangePicker_button__selected {
+//  color: $white;
+//  background: lighten($c-primary-light, 25%);
+//}
+//.DayPickerKeyboardShortcuts_show__bottomRight {
+//  border-top: 26px solid transparent;
+//  border-right: 33px solid $c-primary-light;
+//}
+//.DayPickerKeyboardShortcuts_show__bottomRight:hover {
+//  border-right: 33px solid darken($c-primary-light, 15%);
+//}
+//.DayPickerKeyboardShortcuts_show__topRight {
+//  border-bottom: 26px solid transparent;
+//  border-right: 33px solid $c-primary-light;
+//}
+//.DayPickerKeyboardShortcuts_show__topRight:hover {
+//  border-right: 33px solid darken($c-primary-light, 15%);
+//}
+//.DayPickerKeyboardShortcuts_show__topLeft {
+//  border-bottom: 26px solid transparent;
+//  border-left: 33px solid lighten($c-primary-light, 25%);
+//}
+//.DayPickerKeyboardShortcuts_show__topLeft:hover {
+//  border-left: 33px solid $c-primary;
+//}
+//.CalendarDay__selected_span {
+//  background: lighten($c-primary-light, 60%);
+//  border: 1px solid lighten($c-primary-light, 35%);
+//  color: $c-primary-light;
+//}
+//.CalendarDay__selected_span:active,
+//.CalendarDay__selected_span:hover {
+//  background: $c-bg-gray-dark;
+//  border: 1px solid $c-border-gray-dark;
+//  color: $white;
+//}
+//.CalendarDay__last_in_range {
+//  border-right: lighten($c-primary-light, 25%);
+//}
+//.CalendarDay__selected,
+//.CalendarDay__selected:active,
+//.CalendarDay__selected:hover {
+//  background: $c-primary-light;
+//  border: 1px solid $c-primary-light;
+//  color: $white;
+//}
+//.CalendarDay__hovered_span,
+//.CalendarDay__hovered_span:hover {
+//  background: lighten($c-primary-light, 60%);
+//  border: 1px solid lighten($c-primary-light, 35%);
+//  color: $c-primary-light;
+//}
+//.CalendarDay__hovered_span:active {
+//  background: lighten($c-primary-light, 60%);
+//  border: 1px solid lighten($c-primary-light, 35%);
+//  color: $c-primary-light;
+//}
+//.DateInput_input__focused {
+//  border-bottom: 2px solid $c-primary-light;
+//}
+//
+//.CalendarDay__highlighted_calendar {
+//  background: $c-secondary-light;
+//  color: $gray-medium;
+//}
+//.CalendarDay__highlighted_calendar:active,
+//.CalendarDay__highlighted_calendar:hover {
+//  background: $c-secondary;
+//  color: $gray-medium;
+//}
+//
+//.DateInput_input::placeholder {
+//  color: $gray-medium;
+//}
+//
+//// Override default layout.
+//.DayPicker_weekHeader_li {
+//  display: inline-block !important; // To override .search-accordion__group li
+//}
+//
+//.DateRangePickerInput_clearDates_default:focus,
+//.DateRangePickerInput_clearDates_default:hover {
+//  border-radius: 0;
+//}
+//
+//@media only screen and (max-width: 1350px) and (min-width: 901px)  {
+//  .DateInput_input__small {
+//    font-size: 12px;
+//    line-height: 18px;
+//    padding: 8px 4px 6px;
+//  }
+//
+//  .DateInput__small {
+//    width: 70px;
+//  }
+//}
+//
+//.KeyboardShortcutRow_keyContainer {
+//  display: inline-block;
+//  white-space: nowrap;
+//  text-align: right;
+//  margin-right: 6px;
+//}
+//
+//.KeyboardShortcutRow_key {
+//  font-family: monospace;
+//  font-size: 12px;
+//  text-transform: uppercase;
+//  background: $c-bg-gray;
+//  padding: 2px 6px;
+//}
+//
+//.KeyboardShortcutRow_action {
+//  display: inline;
+//  word-break: break-word;
+//  margin-left: 8px;
+//}

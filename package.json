@@ -1,7 +1,7 @@
 {
   "name": "@palantirnet/federated-search-react",
   "description": "A ReactJS front end for faceted Solr search.",
-  "version": "0.3.0",
+  "version": "0.5.0",
   "homepage": ".",
   "devDependencies": {
     "@palantirnet/react-scripts": "1.1.4",
@@ -19,13 +19,16 @@
     "solr-faceted-search-react": "https://github.com/palantirnet/solr-faceted-search-react"
   },
   "scripts": {
+    "theme-styles": "node-sass-chokidar ./theme/search_theme_override.scss ./public/css/search_theme_override.css --watch",
     "build-css": "node-sass-chokidar --include-path ./src --include-path ./node_modules src/ -o src/",
     "watch-css": "npm run build-css && node-sass-chokidar --include-path ./src --include-path ./node_modules src/ -o src/ --watch --recursive",
     "start-js": "react-scripts start",
-    "start": "npm-run-all -p watch-css start-js",
+    "start": "npm-run-all -p watch-css theme-styles start-js",
     "build-js": "react-scripts build",
-    "build": "npm-run-all build-css build-js copypackage",
-    "copypackage": "cp -rf package.json build/static",
+    "build": "npm-run-all build-css build-js copy-package remove-theme fix-media-path",
+    "remove-theme": "rm -rf build/css",
+    "copy-package": "cp -rf package.json build/static",
+    "fix-media-path": "replace-x '../../static/media/' '../media/' ./build/static/css/*",
     "dist": "cd build/static && npm publish --access public",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"

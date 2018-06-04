@@ -3,114 +3,83 @@
   See https://github.com/airbnb/react-dates#without-webpack
   Default styles in _react-dates.scss
  */
-
-// Create color variables based on default values + site colors.
-$c-dark-default: #007a87;
-$c-dark: #0b478a;
-$c-dark-selected: #06274b;
-
-$c-regular-default: #008489;
-$c-regular: #0d57aa;
-
-$c-bright-default: #00a699;
-$c-bright: #1277e9;
-
-$c-light-default: #80e8e0;
-$c-light: #8dbef6;
-
-$c-bg-default: #66e2da;
-$c-bg: #6dadf4;
-
-$c-border-default: #33dacd;
-$c-border: #3e92f0;
-
-$c-bright-bg-default: #b2f1ec;
-$c-bright-bg: #bcd9fa;
-
-$c-yellow-bright-default: #ffce71;
-$c-yellow-bright: #ffcb05;
-
-$c-yellow-light-default: #ffe8bc;
-$c-yellow-light: #fff7e8;
-
-// Override default color values with site colors.
 .PresetDateRangePicker_button {
-  border: 2px solid $c-bright;
-  color: $c-bright;
+  border: 2px solid lighten($c-primary-light, 25%);
+  color: lighten($c-primary-light, 25%);
 }
 .PresetDateRangePicker_button__selected {
-  color: #fff;
-  background: $c-bright;
+  color: $white;
+  background: lighten($c-primary-light, 25%);
 }
 .DayPickerKeyboardShortcuts_show__bottomRight {
   border-top: 26px solid transparent;
-  border-right: 33px solid $c-bright;
+  border-right: 33px solid $c-primary-light;
 }
 .DayPickerKeyboardShortcuts_show__bottomRight:hover {
-  border-right: 33px solid $c-regular;
+  border-right: 33px solid darken($c-primary-light, 15%);
 }
 .DayPickerKeyboardShortcuts_show__topRight {
   border-bottom: 26px solid transparent;
-  border-right: 33px solid $c-bright;
+  border-right: 33px solid $c-primary-light;
 }
 .DayPickerKeyboardShortcuts_show__topRight:hover {
-  border-right: 33px solid $c-regular;
+  border-right: 33px solid darken($c-primary-light, 15%);
 }
 .DayPickerKeyboardShortcuts_show__topLeft {
   border-bottom: 26px solid transparent;
-  border-left: 33px solid $c-bright;
+  border-left: 33px solid lighten($c-primary-light, 25%);
 }
 .DayPickerKeyboardShortcuts_show__topLeft:hover {
-  border-left: 33px solid $c-regular;
+  border-left: 33px solid $c-primary;
 }
 .CalendarDay__selected_span {
-  background: $c-bright-bg;
-  border: 1px solid $c-light;
-  color: $c-dark;
+  background: lighten($c-primary-light, 45%);
+  border: 1px solid lighten($c-primary-light, 5%);
+  color: $c-primary-light;
 }
 .CalendarDay__selected_span:active,
 .CalendarDay__selected_span:hover {
-  background: $c-border;
-  border: 1px solid $c-border;
-  color: #fff
+  background: $c-border-gray;
+  border: 1px solid $c-border-gray;
+  color: $white;
 }
 .CalendarDay__last_in_range {
-  border-right: $c-bright;
+  border-right: lighten($c-primary-light, 25%);
 }
 .CalendarDay__selected,
 .CalendarDay__selected:active,
 .CalendarDay__selected:hover {
-  background: $c-bright;
-  border: 1px solid $c-bright;
-  color: #fff
+  background: $c-primary-light;
+  border: 1px solid $c-primary-light;
+  color: $white;
 }
 .CalendarDay__hovered_span,
 .CalendarDay__hovered_span:hover {
-  background: $c-bright-bg;
-  border: 1px solid $c-light;
-  color: $c-dark;
+  background: lighten($c-primary-light, 45%);
+  border: 1px solid lighten($c-primary-light, 5%);
+  color: $c-primary-light;
 }
 .CalendarDay__hovered_span:active {
-  background: $c-light;
-  border: 1px solid $c-light;
-  color: $c-dark-selected;
+  background: lighten($c-primary-light, 45%);
+  border: 1px solid lighten($c-primary-light, 5%);
+  color: $c-primary-light;
 }
 .DateInput_input__focused {
-  border-bottom: 2px solid $c-regular;
+  border-bottom: 2px solid $c-primary-light;
 }
 
 .CalendarDay__highlighted_calendar {
-  background: $c-yellow-light;
-  color: #565a5c
+  background: $c-secondary-light;
+  color: $gray-medium;
 }
 .CalendarDay__highlighted_calendar:active,
 .CalendarDay__highlighted_calendar:hover {
-  background: $c-yellow-bright;
-  color: #565a5c
+  background: $c-secondary;
+  color: $gray-medium;
 }
 
 .DateInput_input::placeholder {
-  color: #565a5c
+  color: $gray-medium;
 }
 
 // Override default layout.
@@ -146,7 +115,7 @@ $c-yellow-light: #fff7e8;
   font-family: monospace;
   font-size: 12px;
   text-transform: uppercase;
-  background: #f2f2f2;
+  background: $c-bg-gray;
   padding: 2px 6px;
 }
 

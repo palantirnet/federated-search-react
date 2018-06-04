@@ -50,7 +50,7 @@
   padding: .5rem .7rem;
   background-color: $c-secondary;
   border-radius: 0 3px 3px 0;
-  border: 1px solid $gray-light;
+  border: 1px solid $gray-dark;
   border-left: 0;
   display: flex;
   align-items: center;
@@ -69,5 +69,6 @@
 
   svg {
     height: 1em;
+    fill: $white;
   }
 }
