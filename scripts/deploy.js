@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 /**
  * This task pushes to the `package` branch of the repo.
  */
