@@ -31,6 +31,7 @@
     "copy-package": "cp -rf package.json build/static",
     "fix-media-path": "replace-x '../../static/media/' '../media/' ./build/static/css/*",
     "dist": "cd build/static && npm publish --access public",
+    "deploy": "scripts/deploy.js",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
   },
