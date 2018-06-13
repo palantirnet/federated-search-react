@@ -7,7 +7,19 @@
 const ghpages = require('gh-pages');
 const version = require('../package.json').version;
 
-ghpages.publish('build/static', {
+// Define options for publish method.
+let options = {
   branch: 'package',
   message: `Auto-generated commit during deploy: ${version}`
+};
+
+// Process the args passed in to find tag
+const tag = process.argv.find((arg) => arg === 'tag');
+if (tag) {
+ options.tag = `v${version}`;
+}
+
+// Deploy the static output to package branch using defined options.
+ghpages.publish('build/static', options, function(err) {
+  console.error(`Federated Search React | There was an error during deployment: ${err}`);
 });
