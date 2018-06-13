@@ -21,5 +21,7 @@ if (tag) {
 
 // Deploy the static output to package branch using defined options.
 ghpages.publish('build/static', options, function(err) {
-  console.error(`Federated Search React | There was an error during deployment: ${err}`);
+  if (err) {
+    console.error(`Federated Search React | There was an error during deployment: ${err}`);
+  }
 });
