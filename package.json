@@ -1,11 +1,12 @@
 {
   "name": "@palantirnet/federated-search-react",
   "description": "A ReactJS front end for faceted Solr search.",
-  "version": "0.5.0",
+  "version": "0.5.2",
   "homepage": ".",
   "devDependencies": {
     "@palantirnet/react-scripts": "1.1.4",
     "breakpoint-sass": "^2.7.0",
+    "gh-pages": "1.2.0",
     "moment": "2.21.0",
     "node-sass-chokidar": "1.2.2",
     "npm-run-all": "4.1.2",
@@ -29,8 +30,9 @@
     "remove-theme": "rm -rf build/css",
     "copy-package": "cp -rf package.json build/static",
     "fix-media-path": "replace-x '../../static/media/' '../media/' ./build/static/css/*",
-    "dist": "cd build/static && npm publish --access public",
+    "deploy": "scripts/deploy.js",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
-  }
+  },
+  "dependencies": {}
 }
