@@ -9,7 +9,7 @@ const version = require('../package.json').version;
 
 // Define options for publish method.
 let options = {
-  branch: 'package',
+  branch: 'master',
   message: `Auto-generated commit during deploy: ${version}`
 };
 
