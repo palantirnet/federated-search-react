@@ -65,14 +65,14 @@ class FederatedListFacet extends React.Component {
       const key = facetValues[i];
       facetInputs[key] = facetCounts[i];
     });
-
+    // eslint-disable-next-line
     const facetSortValue = facetSort ? facetSort :
       query.facetSort ? query.facetSort :
       (query.facetLimit && query.facetLimit > -1 ? "count" : "index");
 
     const expanded = !(collapse || false);
     const height = expanded ? 'auto' : 0;
-
+    // eslint-disable-next-line
     const showMoreLink = truncateFacetListsAt > -1 && truncateFacetListsAt < facetValues.length ?
       <li className={cx({"list-group-item": bootstrapCss})} onClick={() => this.setState({truncateFacetListsAt: -1})}>
         Show all ({facetValues.length})
@@ -176,7 +176,7 @@ class FederatedListFacet extends React.Component {
           height={height}
         >
           <ul className="search-accordion__content" key={`solr-list-facet-${field}-ul`}>
-            {facetValues.filter((facetValue, i) => facetInputs[facetValue] > 0 && truncateFacetListsAt < 0 || i < truncateFacetListsAt).map((facetValue, i) => this.state.filter.length === 0 || facetValue.toLowerCase().indexOf(this.state.filter.toLowerCase()) > -1 ? (<li key={`${facetValue}_${facetInputs[facetValue]}`}>
+            {facetValues.filter((facetValue, i) => (facetInputs[facetValue] > 0 && truncateFacetListsAt < 0) || i < truncateFacetListsAt).map((facetValue, i) => this.state.filter.length === 0 || facetValue.toLowerCase().indexOf(this.state.filter.toLowerCase()) > -1 ? (<li key={`${facetValue}_${facetInputs[facetValue]}`}>
               <label className="search-accordion__checkbox-label">
               <input
                 type="checkbox"
