@@ -24,4 +24,7 @@ ghpages.publish('build/static', options, function(err) {
   if (err) {
     console.error(`Federated Search React | There was an error during deployment: ${err}`);
   }
+  else {
+    console.log(`Federated Search React | Woo-hoo! 🎉 The deployment was a success!`)
+  }
 });
