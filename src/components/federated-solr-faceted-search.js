@@ -1,6 +1,5 @@
 import React from "react";
 import PropTypes from 'prop-types';
-import cx from "classnames";
 
 //import componentPack from "./component-pack";
 import FederatedSolrComponentPack from "./federated_solr_component_pack";
@@ -28,7 +27,7 @@ class FederatedSolrFacetedSearch extends React.Component {
 
   render() {
     const { customComponents, bootstrapCss, query, results, truncateFacetListsAt } = this.props;
-    const { onSearchFieldChange, onSortFieldChange, onPageChange, onCsvExport } = this.props;
+    const { onSearchFieldChange, onSortFieldChange, onPageChange } = this.props;
 
     const { searchFields, sortFields, rows } = query;
     const start = query.start ? query.start : 0;
@@ -44,7 +43,6 @@ class FederatedSolrFacetedSearch extends React.Component {
     const ResultPendingComponent = customComponents.results.pending;
     const PaginateComponent = customComponents.results.paginate;
     const PreloadComponent = customComponents.results.preloadIndicator;
-    const CsvExportComponent = customComponents.results.csvExport;
     const CurrentQueryComponent = customComponents.searchFields.currentQuery;
     const SortComponent = customComponents.sortFields.menu;
     const resultPending = results.pending ? (<ResultPendingComponent bootstrapCss={bootstrapCss} />) : null;

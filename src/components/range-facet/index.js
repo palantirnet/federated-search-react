@@ -55,7 +55,7 @@ class FederatedRangeFacet extends React.Component {
   }
 
   render() {
-    const { query, label, facets, field, value, bootstrapCss, facetSort, collapse } = this.props;
+    const { label, facets, field, collapse } = this.props;
 
     const expanded = !(collapse || false);
     const height = expanded ? 'auto' : 0;
