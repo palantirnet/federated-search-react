@@ -4,9 +4,6 @@ import queryString from "query-string";
 import moment from "moment";
 
 class FederatedCurrentQuery extends React.Component {
-  constructor(props){
-    super(props);
-  }
 
 	render() {
 		const { query } = this.props;
@@ -57,9 +54,6 @@ const FacetType = (props) => {
 
 // Configure and render the FacetType component to render as list facet type.
 class ListFacetType extends React.Component {
-  constructor(props){
-    super(props);
-  }
 
   removeListFacetValue(field, values, value) {
     const foundIdx = values.indexOf(value);
@@ -81,9 +75,6 @@ class ListFacetType extends React.Component {
 
 // Configure and render the FacetType component to render as range facet type.
 class RangeFacetType extends React.Component {
-  constructor(props){
-    super(props);
-  }
 
   removeRangeFacetValue(field) {
     this.props.onChange(field, []);
@@ -117,9 +108,6 @@ class RangeFacetType extends React.Component {
 
 // Configure and render the FacetType component to render as text facet type.
 class TextFacetType extends React.Component {
-  constructor(props){
-    super(props);
-  }
 
   removeTextValue(field) {
     this.props.onChange(field, "");

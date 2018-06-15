@@ -60,7 +60,7 @@ class FederatedPagination extends React.Component {
     let lastPageHidden = (pageAmt === 0 || currentPage === pageAmt - 1);
 
     return (
-      <nav className="search-pager" role="navigation" aria-labelledby="pagination-heading">
+      <nav className="search-pager" aria-labelledby="pagination-heading">
         <h4 id="pagination-heading" className="element-invisible">Pagination</h4>
         <ul className="search-pager__items">
           <li className={cx("search-pager__item", {"element-invisible": firstPageHidden})} key="start">
