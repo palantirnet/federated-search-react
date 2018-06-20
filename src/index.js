@@ -45,9 +45,6 @@ const init = (settings) => {
     ],
     // The solr field to use as the source for the main query param "q".
     mainQueryField: "tm_rendered_item",
-    // The default site search facet value.
-    siteSearch: null,
-    // The options by which to sort results.
     sortFields: [
       {label: "Relevance", field: "score"},
       {label: "Date", field: "ds_federated_date"}

@@ -15,18 +15,6 @@ class FederatedListFacet extends React.Component {
     };
   }
 
-  // This method runs once as the component first renders.
-  componentWillMount() {
-    // If we are in the Site name list facet.
-    if (this.props.field === "ss_site_name") {
-      // If there is a default search site option passed in.
-
-      if (this.props.options.siteSearch) {
-        this.handleClick(this.props.options.siteSearch);
-      }
-    }
-  }
-
   handleClick(value) {
     const foundIdx = this.props.value.indexOf(value);
     if (foundIdx < 0) {
