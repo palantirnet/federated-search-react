@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import React from "react";
 import cx from "classnames";
+import queryString from "query-string";
 import AnimateHeight from 'react-animate-height';
 
 
@@ -15,24 +16,53 @@ class FederatedListFacet extends React.Component {
     };
   }
 
-  // This method runs once as the component first renders.
-  componentWillMount() {
-    // If we are in the Site name list facet.
-    if (this.props.field === "ss_site_name") {
-      // If there is a default search site option passed in.
-
-      if (this.props.options.siteSearch) {
-        this.handleClick(this.props.options.siteSearch);
-      }
-    }
-  }
-
   handleClick(value) {
     const foundIdx = this.props.value.indexOf(value);
+    // Get existing querystring params.
+    let parsed = queryString.parse(window.location.search);
+
+    // Those filter fields for which we want to preserve state in qs.
+    // @todo handle parsing of terms and dates
+    // @todo store this in app config?
+    const filterFieldsWithQsState = [
+      "ss_site_name",
+      "ss_federated_type"
+    ];
+
+    const isQsParamField = filterFieldsWithQsState.find((item) => item === this.props.field);
+
     if (foundIdx < 0) {
+      // Add a param for this field to the parsed qs object.
+      if (isQsParamField) {
+        parsed[this.props.field] = value;
+      }
+
+      // Send new query based on app state.
       this.props.onChange(this.props.field, this.props.value.concat(value));
-    } else {
+    }
+    else {
+      if (isQsParamField) {
+        // Remove the param for this field from the parsed qs object.
+        delete parsed[this.props.field];
+      }
+
+      // Send new query based on app state.
       this.props.onChange(this.props.field, this.props.value.filter((v, i) => i !== foundIdx));
+    }
+
+    if (isQsParamField) {
+      // Update the search querystring param with the value from the search field.
+      const stringified = queryString.stringify(parsed);
+      // Update the querystring params in the browser, add path to history.
+      // See: https://developer.mozilla.org/en-US/docs/Web/API/History_API#The_pushState()_method
+      if (window.history.pushState) {
+        const newurl = window.location.protocol + "//" + window.location.host + window.location.pathname + '?' + stringified;
+        window.history.pushState({path: newurl}, '', newurl);
+        console.log(newurl)
+      }
+      else {
+        window.location.search = stringified;
+      }
     }
   }
 
