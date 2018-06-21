@@ -10,17 +10,65 @@ import FederatedSolrFacetedSearch from "./components/federated-solr-faceted-sear
 import './styles.css';
 
 /**
- * Executes search query based on the value of URL querystring "q" param.
+ * Executes search query based on the value of URL querystring params.
  *
  * @param solrClient
  *   Instantiated solrClient.
+ * @param options
+ *   Config options, used to determine initial site search name
  */
-const searchFromQuerystring = (solrClient) => {
-  // Initialize with a search based on querystring term or else load blank search.
+const searchFromQuerystring = (solrClient, options = {}) => {
+  // Get the qs params, break into array of [key,value] pairs
   const parsed = queryString.parse(window.location.search);
-  // We assume the querystring key for search terms is q: i.e. ?q=search%20term
+  const params = Object.entries(parsed);
+
+  let searchFieldsState = solrClient.state.query.searchFields;
+  console.log('searchFieldState', searchFieldsState);
+
+  // The querystring key for search terms is 'search' (i.e. ?search=search%20term)
   if (Object.prototype.hasOwnProperty.call(parsed,'search')) {
-    solrClient.setSearchFieldValue("tm_rendered_item", parsed.search);
+
+    // Set the state for searchFields based on qs params.
+    searchFieldsState.map((searchField) => {
+      // Get the field machine name for the main query field.
+      if (Object.prototype.hasOwnProperty.call(options,'mainQueryField') && searchField.field === options.mainQueryField) {
+        // Set the state of the main query field to the value of the search qs param
+        searchField.value = parsed.search;
+      }
+
+      // Define those filter fields for which we want to preserve state in qs.
+      // @todo handle parsing of terms and dates
+      // @todo store this in app config?
+      const filterFieldsWithQsState = [
+        "ss_site_name",
+        "ss_federated_type"
+      ];
+
+      // If the searchField is one for which we preserve state through qs.
+      if (filterFieldsWithQsState.find((filterField) => filterField === searchField.field )) {
+        // Check if the filter field exists in qs params.
+        const param = params.find((item) => item[0] === searchField.field);
+        // If searchField has corresponding qs param present.
+        if (param) {
+          // Ensure we can push to searchField value.
+          searchField.value = searchField.value || [];
+          // Don't add qs param values if they're already set in app state.
+          // i.e. don't set the value twice
+          if (!searchField.value.find((item) => item === param[1])) {
+            searchField.value.push(param[1]);
+          }
+        }
+        // If the searchField does not have qs param present, clear its value in state.
+        else {
+          delete searchField.value;
+        }
+      }
+    });
+
+    // Ensure the initial query succeeds by setting a default start value.
+    solrClient.state.query.start = solrClient.state.query.start || 0;
+    // Send query based on state derived from querystring.
+    solrClient.sendQuery(solrClient.state.query);
   }
   // Reset search fields, fetches all results from solr. Note: results will be hidden
   // since there is no search term.  See: federated-solr-faceted-search where
@@ -45,9 +93,6 @@ const init = (settings) => {
     ],
     // The solr field to use as the source for the main query param "q".
     mainQueryField: "tm_rendered_item",
-    // The default site search facet value.
-    siteSearch: null,
-    // The options by which to sort results.
     sortFields: [
       {label: "Relevance", field: "score"},
       {label: "Date", field: "ds_federated_date"}
@@ -93,12 +138,12 @@ const init = (settings) => {
   });
 
   // Check if there is a querystring param search term and make initial query.
-  searchFromQuerystring(solrClient);
+  searchFromQuerystring(solrClient, options);
 
-  // Listen for browser history changes and update querystring, make new query as necessary.
+  // Listen for browser history changes / updated querystring, make new query.
   // See https://developer.mozilla.org/en-US/docs/Web/Events/popstate
   window.onpopstate = function() {
-    searchFromQuerystring(solrClient);
+    searchFromQuerystring(solrClient, options);
   };
 };
 

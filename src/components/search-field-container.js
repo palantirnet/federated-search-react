@@ -36,7 +36,7 @@ class FederatedSearchFieldContainer extends React.Component {
             height={height}
         >
           <form className="search-filters__form">
-            <section className="search-accordion" role="region" aria-labelledby="section-title">
+            <section className="search-accordion" aria-labelledby="section-title">
               <div className="search-filters__row">
                 <h2 className="search-filters__title" id="section-title">Filter Results</h2>
               </div>

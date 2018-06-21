@@ -4,9 +4,6 @@ import queryString from "query-string";
 import moment from "moment";
 
 class FederatedCurrentQuery extends React.Component {
-  constructor(props){
-    super(props);
-  }
 
 	render() {
 		const { query } = this.props;
@@ -57,13 +54,41 @@ const FacetType = (props) => {
 
 // Configure and render the FacetType component to render as list facet type.
 class ListFacetType extends React.Component {
-  constructor(props){
-    super(props);
-  }
 
   removeListFacetValue(field, values, value) {
     const foundIdx = values.indexOf(value);
+    // Get existing querystring params.
+    let parsed = queryString.parse(window.location.search);
+
+    // Those filter fields for which we want to preserve state in qs.
+    // @todo handle parsing of terms and dates
+    // @todo store this in app config?
+    const filterFieldsWithQsState = [
+      "ss_site_name",
+      "ss_federated_type"
+    ];
+
+    const isQsParamField = filterFieldsWithQsState.find((item) => item === field );
+
     if (foundIdx > -1) {
+      if (isQsParamField) {
+        // Remove the param for this field from the parsed qs object.
+        delete parsed[field];
+        // Update the search querystring param with the value from the search field.
+        const stringified = queryString.stringify(parsed);
+        // Update the querystring params in the browser, add path to history.
+        // See: https://developer.mozilla.org/en-US/docs/Web/API/History_API#The_pushState()_method
+        if (window.history.pushState) {
+          const newurl = window.location.protocol + "//" + window.location.host + window.location.pathname + '?' + stringified;
+          window.history.pushState({path: newurl}, '', newurl);
+          console.log(newurl)
+        }
+        else {
+          window.location.search = stringified;
+        }
+      }
+
+      // Send query based on new state.
       this.props.onChange(field, values.filter((v, i) => i !== foundIdx));
     }
   }
@@ -81,9 +106,6 @@ class ListFacetType extends React.Component {
 
 // Configure and render the FacetType component to render as range facet type.
 class RangeFacetType extends React.Component {
-  constructor(props){
-    super(props);
-  }
 
   removeRangeFacetValue(field) {
     this.props.onChange(field, []);
@@ -117,9 +139,6 @@ class RangeFacetType extends React.Component {
 
 // Configure and render the FacetType component to render as text facet type.
 class TextFacetType extends React.Component {
-  constructor(props){
-    super(props);
-  }
 
   removeTextValue(field) {
     this.props.onChange(field, "");

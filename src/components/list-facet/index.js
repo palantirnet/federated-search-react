@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import React from "react";
 import cx from "classnames";
+import queryString from "query-string";
 import AnimateHeight from 'react-animate-height';
 
 
@@ -15,24 +16,53 @@ class FederatedListFacet extends React.Component {
     };
   }
 
-  // This method runs once as the component first renders.
-  componentWillMount() {
-    // If we are in the Site name list facet.
-    if (this.props.field === "ss_site_name") {
-      // If there is a default search site option passed in.
-
-      if (this.props.options.siteSearch) {
-        this.handleClick(this.props.options.siteSearch);
-      }
-    }
-  }
-
   handleClick(value) {
     const foundIdx = this.props.value.indexOf(value);
+    // Get existing querystring params.
+    let parsed = queryString.parse(window.location.search);
+
+    // Those filter fields for which we want to preserve state in qs.
+    // @todo handle parsing of terms and dates
+    // @todo store this in app config?
+    const filterFieldsWithQsState = [
+      "ss_site_name",
+      "ss_federated_type"
+    ];
+
+    const isQsParamField = filterFieldsWithQsState.find((item) => item === this.props.field);
+
     if (foundIdx < 0) {
+      // Add a param for this field to the parsed qs object.
+      if (isQsParamField) {
+        parsed[this.props.field] = value;
+      }
+
+      // Send new query based on app state.
       this.props.onChange(this.props.field, this.props.value.concat(value));
-    } else {
+    }
+    else {
+      if (isQsParamField) {
+        // Remove the param for this field from the parsed qs object.
+        delete parsed[this.props.field];
+      }
+
+      // Send new query based on app state.
       this.props.onChange(this.props.field, this.props.value.filter((v, i) => i !== foundIdx));
+    }
+
+    if (isQsParamField) {
+      // Update the search querystring param with the value from the search field.
+      const stringified = queryString.stringify(parsed);
+      // Update the querystring params in the browser, add path to history.
+      // See: https://developer.mozilla.org/en-US/docs/Web/API/History_API#The_pushState()_method
+      if (window.history.pushState) {
+        const newurl = window.location.protocol + "//" + window.location.host + window.location.pathname + '?' + stringified;
+        window.history.pushState({path: newurl}, '', newurl);
+        console.log(newurl)
+      }
+      else {
+        window.location.search = stringified;
+      }
     }
   }
 
@@ -54,7 +84,7 @@ class FederatedListFacet extends React.Component {
   }
 
   render() {
-    const { query, label, facets, field, value, bootstrapCss, facetSort, collapse, hierarchy } = this.props;
+    const { label, facets, field, value, collapse, hierarchy } = this.props;
     const { truncateFacetListsAt } = this.state;
 
     const facetCounts = facets.filter((facet, i) => i % 2 === 1);
@@ -66,17 +96,8 @@ class FederatedListFacet extends React.Component {
       facetInputs[key] = facetCounts[i];
     });
 
-    const facetSortValue = facetSort ? facetSort :
-      query.facetSort ? query.facetSort :
-      (query.facetLimit && query.facetLimit > -1 ? "count" : "index");
-
     const expanded = !(collapse || false);
     const height = expanded ? 'auto' : 0;
-
-    const showMoreLink = truncateFacetListsAt > -1 && truncateFacetListsAt < facetValues.length ?
-      <li className={cx({"list-group-item": bootstrapCss})} onClick={() => this.setState({truncateFacetListsAt: -1})}>
-        Show all ({facetValues.length})
-      </li> : null;
 
     // If we need to generate multiple list-fact accordion groups from this list-facet field (i.e. sm_federated_terms).
     if (hierarchy) {
@@ -176,7 +197,7 @@ class FederatedListFacet extends React.Component {
           height={height}
         >
           <ul className="search-accordion__content" key={`solr-list-facet-${field}-ul`}>
-            {facetValues.filter((facetValue, i) => facetInputs[facetValue] > 0 && truncateFacetListsAt < 0 || i < truncateFacetListsAt).map((facetValue, i) => this.state.filter.length === 0 || facetValue.toLowerCase().indexOf(this.state.filter.toLowerCase()) > -1 ? (<li key={`${facetValue}_${facetInputs[facetValue]}`}>
+            {facetValues.filter((facetValue, i) => facetInputs[facetValue] > 0 && (truncateFacetListsAt < 0 || i < truncateFacetListsAt)).map((facetValue, i) => this.state.filter.length === 0 || facetValue.toLowerCase().indexOf(this.state.filter.toLowerCase()) > -1 ? (<li key={`${facetValue}_${facetInputs[facetValue]}`}>
               <label className="search-accordion__checkbox-label">
               <input
                 type="checkbox"
