@@ -1,6 +1,5 @@
 import PropTypes from 'prop-types';
 import React from "react";
-import cx from "classnames";
 
 // Custom class for the result component
 class FederatedResult extends React.Component {
@@ -23,7 +22,7 @@ class FederatedResult extends React.Component {
   }
 
   render() {
-    const { doc, fields, highlight } = this.props;
+    const { doc, highlight } = this.props;
 
     return (
       <li onClick={() => this.props.onSelect(doc)}>
