@@ -23,13 +23,12 @@ const searchFromQuerystring = (solrClient, options = {}) => {
   const params = Object.entries(parsed);
 
   let searchFieldsState = solrClient.state.query.searchFields;
-  console.log('searchFieldState', searchFieldsState);
 
   // The querystring key for search terms is 'search' (i.e. ?search=search%20term)
   if (Object.prototype.hasOwnProperty.call(parsed,'search')) {
 
     // Set the state for searchFields based on qs params.
-    searchFieldsState.map((searchField) => {
+    searchFieldsState.forEach((searchField) => {
       // Get the field machine name for the main query field.
       if (Object.prototype.hasOwnProperty.call(options,'mainQueryField') && searchField.field === options.mainQueryField) {
         // Set the state of the main query field to the value of the search qs param
