@@ -78,7 +78,8 @@ TODO
 
 ## Publishing releases
 
-TODO
+- `yarn deploy` will push code to `master`
+- `yarn deploy tag` will push to `master` and tag it with the version specified in `package.json` (be sure to bump as you see fit and commit that change before running this)
 
 ## Additional documentation
 
