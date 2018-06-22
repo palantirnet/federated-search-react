@@ -78,8 +78,9 @@ TODO
 
 ## Publishing releases
 
-- `yarn deploy` will push code to `master`
-- `yarn deploy tag` will push to `master` and tag it with the version specified in `package.json` (be sure to bump as you see fit and commit that change before running this)
+- Run `yarn build` to build the static assets and copy the `package.json` file into the `build/static` directory
+- Run `yarn deploy` to push the contents of `build/static` to the `master` branch of this repository 
+- Run `yarn deploy tag` to push the contents of `build/static` to the `master` branch and tag it with the version listed in `package.json` (be sure to bump as you see fit and commit that change before running this)
 
 ## Additional documentation
 
