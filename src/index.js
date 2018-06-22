@@ -111,6 +111,7 @@ const init = (settings) => {
   // The client class
   const solrClient = new SolrClient({
     url: options.url,
+    userpass: options.userpass,
     searchFields: options.searchFields,
     sortFields: options.sortFields,
     pageStrategy: options.pageStrategy,
