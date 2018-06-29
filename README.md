@@ -82,6 +82,14 @@ TODO
 - Run `yarn deploy` to push the contents of `build/static` to the `master` branch of this repository 
 - Run `yarn deploy tag` to push the contents of `build/static` to the `master` branch and tag it with the version listed in `package.json` (be sure to bump as you see fit and commit that change before running this)
 
+### Requiring this project as a dependency
+
+Because this repo is currently private, it can't be included via public registries. I can still be included via `npm`/`yarn` as follows, assuming you have read access to this repo and GitHub SSH keys set up locally:
+
+`yarn add @palantirnet/federated-search-react:git+ssh://git@github.com:palantirnet/federated-search-react.git#v1.0.1`
+
+To update the package, increment the version number accordingly and run `yarn install`.
+
 ## Additional documentation
 
 This project was created with the [Create React App](https://github.com/facebook/create-react-app).
