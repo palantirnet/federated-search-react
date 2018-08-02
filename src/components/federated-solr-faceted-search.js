@@ -55,6 +55,11 @@ class FederatedSolrFacetedSearch extends React.Component {
     const preloadListItem = query.pageStrategy === "cursor" && results.docs.length < results.numFound ?
         <PreloadComponent {...this.props} /> : null;
 
+    let pageTitle;
+    if (this.props.options.pageTitle != null) {
+      pageTitle = <h1>{this.props.options.pageTitle}</h1>;
+    }
+
     return (
         <div className="container">
           <aside className="l-25-75--1">
@@ -75,7 +80,7 @@ class FederatedSolrFacetedSearch extends React.Component {
             </SearchFieldContainerComponent>
           </aside>
           <div className="l-25-75--2">
-            <h1>Sitewide Search</h1>
+            {pageTitle}
             <div className="search-form" autoComplete="on">
               <FederatedTextSearch
                   field="tm_rendered_item"
