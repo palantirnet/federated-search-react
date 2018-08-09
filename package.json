@@ -43,5 +43,7 @@
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
   },
-  "dependencies": {}
+  "dependencies": {
+    "babel-polyfill": "^6.26.0"
+  }
 }
