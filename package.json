@@ -7,6 +7,7 @@
   "private": true,
   "devDependencies": {
     "@palantirnet/react-scripts": "1.1.4",
+    "babel-polyfill": "^6.26.0",
     "breakpoint-sass": "^2.7.0",
     "eslint": "^4.9.0",
     "eslint-config-airbnb": "^16.1.0",
@@ -43,7 +44,5 @@
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
   },
-  "dependencies": {
-    "babel-polyfill": "^6.26.0"
-  }
+  "dependencies": {}
 }
