@@ -1,4 +1,5 @@
 // index.js
+import 'babel-polyfill';
 import queryString from "query-string";
 import React from "react";
 import ReactDOM from "react-dom";

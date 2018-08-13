@@ -1172,6 +1172,7 @@ textarea {
     background-color: navy; }
   .search-form__submit svg {
     height: 1em;
+    width: 1em;
     fill: #fff; }
 
 /**
@@ -1533,6 +1534,8 @@ aside {
       padding: .35rem 1rem .35rem .35rem;
       margin-bottom: 0.73333em;
       background-position: 97% 50%; } }
+  .search-scope__select::-ms-expand {
+    display: none; }
 
 /**
  * pagination.scss
