@@ -62,6 +62,10 @@
     margin-bottom: rhythm(.5);
     background-position: 97% 50%;
   }
+
+  &::-ms-expand {
+    display: none;
+  }
 }
 
 .search-scope__label {
