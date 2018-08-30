@@ -31,7 +31,7 @@ class FederatedResult extends React.Component {
     }, [arr[0]]);
   }
 
-  renderSitenameLinks(sitenames, urls) {
+  renderSitenameLinks(sitenames, urls, originalSitename) {
     if (sitenames != null && urls != null) {
       console.log(sitenames);
       console.log(urls);
@@ -44,6 +44,10 @@ class FederatedResult extends React.Component {
         }
       }
       return this.intersperse(sites, " | ");
+    }
+
+    if (originalSitename != null) {
+      return originalSitename;
     }
 
     return null;
@@ -63,7 +67,7 @@ class FederatedResult extends React.Component {
           <span className="search-results__label">{doc.ss_federated_type}</span>
           <h3 className="search-results__heading"><a href={doc.ss_url}>{doc.ss_federated_title}</a></h3>
           <div className="search-results__meta">
-            <cite className="search-results__citation">{this.renderSitenameLinks(doc.sm_site_name, doc.sm_search_api_urls)}</cite>
+            <cite className="search-results__citation">{this.renderSitenameLinks(doc.sm_site_name, doc.sm_search_api_urls, doc.ss_site_name)}</cite>
             {this.dateFormat(doc.ds_federated_date)}
           </div>
           <p className="search-results__teaser" dangerouslySetInnerHTML={{__html: highlight.tm_rendered_item}} />
