@@ -40,15 +40,14 @@ class FederatedSearchFieldContainer extends React.Component {
               <div className="search-filters__row">
                 <h2 className="search-filters__title" id="section-title">Filter Results</h2>
               </div>
-
-              <ul className="search-accordion__group">
-                {this.props.children}
-              </ul>
+              { this.props.resultsCount > 0
+                ? (<ul className="search-accordion__group">{this.props.children}</ul>)
+                : <div className="search-filters__no-results">There are no results to filter.</div> }
             </section>
 
-            <div className="search-filters__row">
-              <input className="search-filters__reset" type="button" defaultValue="Clear All" onClick={onNewSearch} />
-            </div>
+            { this.props.resultsCount > 0
+              ? <div className="search-filters__row"><input className="search-filters__reset" type="button" defaultValue="Clear All" onClick={onNewSearch} /></div>
+              : null }
           </form>
         </AnimateHeight>
       </div>

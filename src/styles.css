@@ -1266,6 +1266,13 @@ textarea {
     border: 1px solid #bfbfbf;
     text-decoration: underline; }
 
+.search-filters__no-results {
+  font-size: 0.8em;
+  line-height: 1.46667em;
+  display: block;
+  padding-right: 1.25rem;
+  padding-left: 1.25rem; }
+
 .search-accordion {
   margin-bottom: 1.46667em;
   color: #333;
