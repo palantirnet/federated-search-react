@@ -1,5 +1,7 @@
 import PropTypes from 'prop-types';
 import React from "react";
+import 'intl';
+import 'intl/locale-data/jsonp/en';
 
 // Custom class for the result component
 class FederatedResult extends React.Component {
