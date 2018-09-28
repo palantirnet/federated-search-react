@@ -44,5 +44,7 @@
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
   },
-  "dependencies": {}
+  "dependencies": {
+    "intl": "^1.2.5"
+  }
 }

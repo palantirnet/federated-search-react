@@ -1,5 +1,7 @@
 import PropTypes from 'prop-types';
 import React from "react";
+import 'intl';
+import 'intl/locale-data/jsonp/en';
 
 // Custom class for the result component
 class FederatedResult extends React.Component {
@@ -39,7 +41,7 @@ class FederatedResult extends React.Component {
       var sites = [];
       for (var i = 0; i < sitenames.length; i++) {
         sites.push(<a href={urls[i]}>{sitenames[i]}</a>);
-        if (i != (sitenames.length - 1)) {
+        if (i !== (sitenames.length - 1)) {
 
         }
       }
@@ -65,7 +67,7 @@ class FederatedResult extends React.Component {
         }
         <div className="search-results__container--right">
           <span className="search-results__label">{doc.ss_federated_type}</span>
-          <h3 className="search-results__heading"><a href={doc.ss_url}>{doc.ss_federated_title}</a></h3>
+          <h3 className="search-results__heading"><a href={doc.ss_url} dangerouslySetInnerHTML={{__html: doc.ss_federated_title}} /></h3>
           <div className="search-results__meta">
             <cite className="search-results__citation">{this.renderSitenameLinks(doc.sm_site_name, doc.sm_urls, doc.ss_site_name)}</cite>
             {this.dateFormat(doc.ds_federated_date)}
