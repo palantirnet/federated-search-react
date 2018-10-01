@@ -40,7 +40,7 @@ const searchFromQuerystring = (solrClient, options = {}) => {
       // @todo handle parsing of terms and dates
       // @todo store this in app config?
       const filterFieldsWithQsState = [
-        "ss_site_name",
+        "sm_site_name",
         "ss_federated_type"
       ];
 
@@ -86,7 +86,7 @@ const init = (settings) => {
     // The search fields and filterable facets.
     searchFields: [
       {label: "Enter Search Term:", field: "tm_rendered_item", type: "text"},
-      {label: "Site Name", field: "ss_site_name", type: "list-facet", collapse: true},
+      {label: "Site Name", field: "sm_site_name", type: "list-facet", collapse: true},
       {label: "Type", field: "ss_federated_type", type: "list-facet", collapse: true},
       {label: "Date", field: "ds_federated_date", type: "range-facet", collapse: true},
       {label: "Federated Terms", field: "sm_federated_terms", type: "list-facet", hierarchy: true},

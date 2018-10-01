@@ -25,7 +25,7 @@ class FederatedListFacet extends React.Component {
     // @todo handle parsing of terms and dates
     // @todo store this in app config?
     const filterFieldsWithQsState = [
-      "ss_site_name",
+      "sm_site_name",
       "ss_federated_type"
     ];
 

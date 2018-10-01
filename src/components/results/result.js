@@ -35,12 +35,10 @@ class FederatedResult extends React.Component {
 
   renderSitenameLinks(sitenames, urls, originalSitename) {
     if (sitenames != null && urls != null) {
-      console.log(sitenames);
-      console.log(urls);
 
       var sites = [];
       for (var i = 0; i < sitenames.length; i++) {
-        sites.push(<a href={urls[i]}>{sitenames[i]}</a>);
+        sites.push(<a href={urls[i]} key={i}>{sitenames[i]}</a>);
         if (i !== (sitenames.length - 1)) {
 
         }
