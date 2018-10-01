@@ -63,7 +63,7 @@ class FederatedSolrFacetedSearch extends React.Component {
     return (
         <div className="container">
           <aside className="l-25-75--1">
-            <SearchFieldContainerComponent bootstrapCss={bootstrapCss} onNewSearch={this.resetFilters.bind(this)}>
+            <SearchFieldContainerComponent bootstrapCss={bootstrapCss} onNewSearch={this.resetFilters.bind(this)} resultsCount={this.props.results.numFound}>
               {searchFields.filter((searchFields) => this.props.sidebarFilters.indexOf(searchFields.field) > -1).map((searchField, i) => {
                 const { type, field, lowerBound, upperBound } = searchField;
                 const SearchComponent = customComponents.searchFields[type];
