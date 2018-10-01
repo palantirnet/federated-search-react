@@ -36,7 +36,7 @@ class FederatedResult extends React.Component {
 
       var sites = [];
       for (var i = 0; i < sitenames.length; i++) {
-        sites.push(<a href={urls[i]}>{sitenames[i]}</a>);
+        sites.push(<a href={urls[i]} key={i}>{sitenames[i]}</a>);
         if (i != (sitenames.length - 1)) {
 
         }
