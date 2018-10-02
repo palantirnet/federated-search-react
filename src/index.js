@@ -129,7 +129,8 @@ const init = (settings) => {
           {...handlers}
           customComponents={FederatedSolrComponentPack}
           bootstrapCss={false}
-          onSelectDoc={(doc) => console.log(doc)}
+          //onSelectDoc={(doc) => console.log(doc)}
+          onSelectDoc={()=>{}}
           truncateFacetListsAt={-1}
           options={options}
         />,
