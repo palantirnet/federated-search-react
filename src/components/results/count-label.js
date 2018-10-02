@@ -7,7 +7,7 @@ function searchResultsStat(currentPage, numFound, rows, pageAmt, noResultsText) 
       <p id="stat" tabIndex="-1" className="search-results-stat">Showing page <strong>{currentPage+1}</strong> of <strong>{pageAmt}</strong> (<strong>{numFound}</strong> results). </p>
     )
   }
-  else if (numFound < rows && numFound > 1) { // Single page
+  else if (numFound <= rows && numFound > 1) { // Single page
     return (
       <p id="stat" tabIndex="-1" className="search-results-stat">Showing <strong>{numFound}</strong> results.</p>
     )
