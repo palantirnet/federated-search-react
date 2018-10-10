@@ -23,6 +23,21 @@ class FederatedResult extends React.Component {
     }
   }
 
+  getCanonicalLink(urls) {
+    const { hostname } = this.props;
+
+    // If one of our links matches the current site, use it.
+    for (let i = 0; i < urls.length; i++) {
+      const url = new URL(urls[i]);
+      if (url.hostname === hostname) {
+        return urls[i];
+      }
+    }
+
+    // Otherwise, use the first in the list, which is the canonical (or only).
+    return urls[0];
+  }
+
   intersperse(arr, sep) {
     if (arr.length === 0) {
       return [];
@@ -65,7 +80,7 @@ class FederatedResult extends React.Component {
         }
         <div className="search-results__container--right">
           <span className="search-results__label">{doc.ss_federated_type}</span>
-          <h3 className="search-results__heading"><a href={doc.ss_url} dangerouslySetInnerHTML={{__html: doc.ss_federated_title}} /></h3>
+          <h3 className="search-results__heading"><a href={this.getCanonicalLink(doc.sm_urls)} dangerouslySetInnerHTML={{__html: doc.ss_federated_title}} /></h3>
           <div className="search-results__meta">
             <cite className="search-results__citation">{this.renderSitenameLinks(doc.sm_site_name, doc.sm_urls, doc.ss_site_name)}</cite>
             {this.dateFormat(doc.ds_federated_date)}
@@ -80,7 +95,8 @@ class FederatedResult extends React.Component {
 FederatedResult.propTypes = {
 	doc: PropTypes.object,
 	fields: PropTypes.array,
-	onSelect: PropTypes.func.isRequired
+	onSelect: PropTypes.func.isRequired,
+    hostname: PropTypes.string,
 };
 
 export default FederatedResult;
