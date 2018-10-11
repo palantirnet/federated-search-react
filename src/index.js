@@ -103,7 +103,9 @@ const init = (settings) => {
       usePhraseHighlighter: true // highlight phrase queries
     },
     pageStrategy: "paginate",
-    rows: 20
+    rows: 20,
+    // Hostname overridable in ./.env.local.js for testing purposes.
+    hostname: window.location.hostname,
   };
 
   const options = Object.assign(defaults, settings);

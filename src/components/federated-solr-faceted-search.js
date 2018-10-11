@@ -109,6 +109,7 @@ class FederatedSolrFacetedSearch extends React.Component {
                                      rows={rows}
                                      start={start}
                                      highlight={results.highlighting[doc.id]}
+                                     hostname={this.props.options.hostname}
                     />
                 ))}
                 {preloadListItem}
