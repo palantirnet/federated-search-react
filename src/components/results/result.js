@@ -43,7 +43,8 @@ class FederatedResult extends React.Component {
       return url;
     }
 
-    // If no valid urls are passed, return nothing.
+    // If no valid urls are passed, return nothing. This will result in an
+    // unlinked title, but at least it won't crash.
     return [];
   }
 
