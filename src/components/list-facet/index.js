@@ -135,7 +135,7 @@ class FederatedListFacet extends React.Component {
       // Remove duplicate types
       // So facet values of "Condition>Bones", "Condition>Bone growth" should only
       // Add "Condition" type once so we only render 1 Condition accordion group.
-      const uniqueTypes = types.filter((value, index, self) => self.indexOf(value) === index);
+      const uniqueTypes = types.filter((value, index, self) => self.indexOf(value) === index).filter(String);
 
       // Define array of accordion Lis which we'll populate with react fragments.
       let listFacetHierarchyLis = [];
