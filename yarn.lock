@@ -7305,7 +7305,7 @@ sockjs@0.3.18:
 
 "solr-faceted-search-react@https://github.com/palantirnet/solr-faceted-search-react":
   version "0.12.1"
-  resolved "https://github.com/palantirnet/solr-faceted-search-react#5122ff57078ddafc2976cbd7e905c512a89c3ff2"
+  resolved "https://github.com/palantirnet/solr-faceted-search-react#2df2db3ce3d0bd4781d19179217f53013f4f7c44"
   dependencies:
     classnames "^2.2.5"
     prop-types "^15.6.1"
