@@ -84,11 +84,12 @@ TODO
 
 ### Requiring this project as a dependency
 
-Because this repo is currently private, it can't be included via public registries. I can still be included via `npm`/`yarn` as follows, assuming you have read access to this repo and GitHub SSH keys set up locally:
+Deploying this package produces production-ready JS and CSS files that can be referenced in a project as external dependencies. For example:
 
-`yarn add @palantirnet/federated-search-react:git+ssh://git@github.com:palantirnet/federated-search-react.git#v1.0.1`
+- CSS: `https://cdn.jsdelivr.net/gh/palantirnet/federated-search-react@v1.0.10/css/main.cf6a58ce.css`
+- JS: `https://cdn.jsdelivr.net/gh/palantirnet/federated-search-react@v1.0.10/js/main.d41fc3fe.js`
 
-To update the package, increment the version number accordingly and run `yarn install`.
+To update the package, increment the version number AND hash for each file based on the current release.
 
 ## Additional documentation
 
