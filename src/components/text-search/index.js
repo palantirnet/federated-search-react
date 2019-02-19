@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
-import queryString from "query-string";
-import React from "react";
-import SearchIcon from "../icons/search";
+import queryString from 'query-string';
+import React from 'react';
+import SearchIcon from '../icons/search';
 
 
 class FederatedTextSearch extends React.Component {
@@ -9,19 +9,23 @@ class FederatedTextSearch extends React.Component {
     super(props);
 
     this.state = {
-      value: ""
+      value: '',
     };
   }
 
   componentWillReceiveProps(nextProps) {
     this.setState({
-      value: nextProps.value
+      value: nextProps.value,
     });
+
+    this.handleInputChange = this.handleInputChange.bind(this);
+    this.handleInputKeyDown = this.handleInputKeyDown.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   handleInputChange(ev) {
     this.setState({
-      value: ev.target.value
+      value: ev.target.value,
     });
   }
 
@@ -34,17 +38,16 @@ class FederatedTextSearch extends React.Component {
   handleSubmit() {
     this.props.onChange(this.props.field, this.state.value);
     // Get existing querystring params.
-    let parsed = queryString.parse(window.location.search);
+    const parsed = queryString.parse(window.location.search);
     // Update the search querystring param with the value from the search field.
     parsed.search = this.state.value;
     const stringified = queryString.stringify(parsed);
     // Update the querystring params in the browser, add path to history.
     // See: https://developer.mozilla.org/en-US/docs/Web/API/History_API#The_pushState()_method
     if (window.history.pushState) {
-      const newurl = window.location.protocol + "//" + window.location.host + window.location.pathname + '?' + stringified;
-      window.history.pushState({path:newurl},'',newurl);
-    }
-    else {
+      const newUrl = `${window.location.protocol}//${window.location.host}${window.location.pathname}?${stringified}`;
+      window.history.pushState({ path: newUrl }, '', newUrl);
+    } else {
       window.location.search = stringified;
     }
   }
@@ -56,11 +59,23 @@ class FederatedTextSearch extends React.Component {
       <React.Fragment>
         <label htmlFor="search" className="search-form__label">{label}</label>
         <div className="search-form__input-wrapper">
-          <input type="search" name="search" id="search" className="search-form__input" autoFocus
-                 onChange={this.handleInputChange.bind(this)}
-                 onKeyDown={this.handleInputKeyDown.bind(this)}
-                 value={this.state.value || ""} />
-          <button type="submit" className="search-form__submit" onClick={this.handleSubmit.bind(this)}><span className="element-invisible">Perform Search</span><SearchIcon /></button>
+          <input
+            type="search"
+            name="search"
+            id="search"
+            className="search-form__input"
+            autoFocus
+            onChange={this.handleInputChange}
+            onKeyDown={this.handleInputKeyDown}
+            value={this.state.value || ''}
+          />
+          <button
+            type="submit"
+            className="search-form__submit"
+            onClick={this.handleSubmit}>
+            <span className="element-invisible">Perform Search</span>
+            <SearchIcon />
+          </button>
         </div>
       </React.Fragment>
     );
@@ -68,13 +83,16 @@ class FederatedTextSearch extends React.Component {
 }
 
 FederatedTextSearch.defaultProps = {
-  field: null
+  label: '',
+  onChange: () => {},
+  value: '',
 };
 
 FederatedTextSearch.propTypes = {
   field: PropTypes.string.isRequired,
   label: PropTypes.string,
   onChange: PropTypes.func,
+  value: PropTypes.string,
 };
 
 export default FederatedTextSearch;
