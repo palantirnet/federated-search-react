@@ -26,7 +26,7 @@ class FederatedSolrFacetedSearch extends React.Component {
   }
 
   render() {
-    const { customComponents, bootstrapCss, query, results, truncateFacetListsAt } = this.props;
+    const { customComponents, bootstrapCss, query, results, truncateFacetListsAt, options } = this.props;
     const { onSearchFieldChange, onSortFieldChange, onPageChange } = this.props;
 
     const { searchFields, sortFields, rows } = query;
@@ -83,6 +83,7 @@ class FederatedSolrFacetedSearch extends React.Component {
             {pageTitle}
             <div className="search-form" autoComplete="on">
               <FederatedTextSearch
+                  autocomplete={options.autocomplete}
                   field="tm_rendered_item"
                   label="Enter search term:"
                   onChange={onSearchFieldChange}
