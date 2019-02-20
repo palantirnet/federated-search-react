@@ -106,6 +106,7 @@ const init = (settings) => {
     rows: 20,
     // Hostname overridable in ./.env.local.js for testing purposes.
     hostname: window.location.hostname,
+    autocomplete: false,
   };
 
   const options = Object.assign(defaults, settings);
