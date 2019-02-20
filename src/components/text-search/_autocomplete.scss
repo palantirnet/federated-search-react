@@ -76,8 +76,11 @@
     padding: 10px 20px;
     background-color: $white;
     border: 1px solid $white;
-    border-bottom-left-radius: 4px;
-    border-bottom-right-radius: 4px;
+
+    &:last-child {
+      border-bottom-left-radius: 4px;
+      border-bottom-right-radius: 4px;
+    }
   }
 
   &__suggestion-link {
@@ -87,7 +90,5 @@
   &__suggestion--highlighted {
     background-color: $c-bg-gray;
     border: 1px solid $c-bg-gray;
-    border-bottom-left-radius: 4px;
-    border-bottom-right-radius: 4px;
   }
 }
