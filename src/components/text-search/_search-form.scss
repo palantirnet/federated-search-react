@@ -44,6 +44,11 @@
   @include breakpoint($bp2) {
     padding: .35rem;
   }
+
+  &:focus {
+    border-color: $gray-dark;
+    outline: none;
+  }
 }
 
 .search-form__submit {
