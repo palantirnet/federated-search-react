@@ -6549,6 +6549,13 @@ react-animate-height@1.0.2:
   optionalDependencies:
     "@types/react" ">=15"
 
+react-aria-live@2.0.2:
+  version "2.0.2"
+  resolved "https://registry.yarnpkg.com/react-aria-live/-/react-aria-live-2.0.2.tgz#9cfc2352544275586f74b66d18c54a8b3b00398a"
+  integrity sha512-a94NMIidZMX+p+s2+UPTcE+fzl+68RYcdjs4GUDOTe7xV9W0w9fw223Me7E7+PSibwBHrlf6LaJLQBgyi+TbyQ==
+  dependencies:
+    uuid "^3.2.1"
+
 react-autosuggest@9.4.3:
   version "9.4.3"
   resolved "https://registry.yarnpkg.com/react-autosuggest/-/react-autosuggest-9.4.3.tgz#eb46852422a48144ab9f39fb5470319222f26c7c"
@@ -8153,6 +8160,11 @@ uuid@^2.0.2:
 uuid@^3.0.0, uuid@^3.1.0:
   version "3.2.1"
   resolved "https://registry.yarnpkg.com/uuid/-/uuid-3.2.1.tgz#12c528bb9d58d0b9265d9a2f6f0fe8be17ff1f14"
+
+uuid@^3.2.1:
+  version "3.3.2"
+  resolved "https://registry.yarnpkg.com/uuid/-/uuid-3.3.2.tgz#1b4af4955eb3077c501c23872fc6513811587131"
+  integrity sha512-yXJmeNaw3DnnKAOKJE51sL/ZaYfWJRl1pK9dr19YFCu0ObS231AB1/LbqTKRAQ5kw8A90rA6fr4riOUpTZvQZA==
 
 validate-npm-package-license@^3.0.1:
   version "3.0.3"
