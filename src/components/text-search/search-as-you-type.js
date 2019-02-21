@@ -225,6 +225,8 @@ class FederatedTextSearchAsYouType extends React.Component {
       onChange: this.onChange,
       onKeyDown: this.handleInputKeyDown,
       value: value || '',
+      role: 'combobox',
+      'aria-autocomplete': 'both',
     };
 
     return (
