@@ -31,7 +31,8 @@ class FederatedTextSearchAsYouType extends React.Component {
 
   componentWillReceiveProps(nextProps) {
     this.setState({
-      value: nextProps.value,
+      value: nextProps.suggestQuery ? nextProps.suggestQuery.value : nextProps.value,
+      suggestions: nextProps.suggestions ? nextProps.suggestions.docs : this.state.suggestions,
     });
   }
 
@@ -59,7 +60,7 @@ class FederatedTextSearchAsYouType extends React.Component {
     }
   }
 
-  // Will be called every time you need to recalculate suggestions.
+  // Called every time you need to recalculate suggestions.
   onSuggestionsFetchRequested({ value }) {
     this.loadSuggestions(value);
   }
@@ -84,16 +85,10 @@ class FederatedTextSearchAsYouType extends React.Component {
   }
 
   // Gets search suggestions based on input.
+  // @todo support different modes: term, results
   loadSuggestions(value) {
-    const { url, queryField } = this.props.autocomplete;
-
-    fetch(`${url}?q=${value}&rows=10&df=${queryField}&wt=json`)
-      .then(response => response.json())
-      .then((responseJson) => {
-        this.setState({
-          suggestions: responseJson.response.docs,
-        });
-      });
+    // Run typeahead search query based on the autocomplete config and current value.
+    this.props.onSuggest(this.props.autocomplete, value);
   }
 
   // Calls submit handler when enter is pressed while text input
@@ -105,7 +100,7 @@ class FederatedTextSearchAsYouType extends React.Component {
     }
   }
 
-  // Triggers search query execution by updating the current URL based
+  // Trigger search query execution by updating the current URL based
   // on current state.
   handleSubmit() {
     this.props.onChange(this.props.field, this.state.value);
@@ -145,7 +140,8 @@ class FederatedTextSearchAsYouType extends React.Component {
 
   render() {
     const { label } = this.props;
-    const { suggestions } = this.state;
+    const { suggestions, value } = this.state;
+    // Define props for autocomplete input element.
     const inputProps = {
       type: 'search',
       name: 'search',
@@ -153,7 +149,7 @@ class FederatedTextSearchAsYouType extends React.Component {
       className: 'react-autosuggest__input',
       onChange: this.onChange,
       onKeyDown: this.handleInputKeyDown,
-      value: this.state.value || '',
+      value: value || '',
     };
 
     return (
@@ -202,6 +198,7 @@ FederatedTextSearchAsYouType.propTypes = {
   field: PropTypes.string.isRequired,
   label: PropTypes.string,
   onChange: PropTypes.func,
+  onSuggest: PropTypes.func.isRequired,
   value: PropTypes.string,
 };
 
