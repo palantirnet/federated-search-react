@@ -3,7 +3,9 @@ import queryString from 'query-string';
 import React from 'react';
 import SearchIcon from '../icons/search';
 
-
+// Renders plain text input and submit button for text search.
+// Rendered when env config autocomplete is not present or set to false.
+// @see /env.local.js.example
 class FederatedTextSearchNoAutocomplete extends React.Component {
   constructor(props) {
     super(props);
@@ -11,16 +13,16 @@ class FederatedTextSearchNoAutocomplete extends React.Component {
     this.state = {
       value: '',
     };
+
+    this.handleInputChange = this.handleInputChange.bind(this);
+    this.handleInputKeyDown = this.handleInputKeyDown.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   componentWillReceiveProps(nextProps) {
     this.setState({
       value: nextProps.value,
     });
-
-    this.handleInputChange = this.handleInputChange.bind(this);
-    this.handleInputKeyDown = this.handleInputKeyDown.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   handleInputChange(ev) {
