@@ -65,11 +65,33 @@ class FederatedTextSearchAsYouType extends React.Component {
     this.loadSuggestions(value);
   }
 
-  // Will be called every time suggestion is selected via mouse or keyboard.
-  static onSuggestionSelected(event, suggestion) {
-    if (event.keyCode === 13) {
+  /**
+   * Called every time suggestion is selected via mouse or keyboard.
+   *
+   * @param event
+   *   Event object
+   * @param suggestion
+   *   The selected suggestion
+   *   Unused: suggestionValue
+   *     The value of the selected suggestion
+   *     (equivalent to getSuggestionValue(suggestion))
+   *   Unused: suggestionIndex
+   *     The index of the selected suggestion in the suggestions array
+   *   Unused: sectionIndex
+   *     When rendering multiple sections,this will be the section index
+   *     (in suggestions) of the selected suggestion. Otherwise, it will be null.
+   * @param method
+   *   String describing how user selected the suggestion. The possible values are:
+   *     'click' - user clicked (or tapped) on the suggestion
+   *     'enter' - user selected the suggestion using Enter
+   */
+  onSuggestionSelected(event, { suggestion, method }) {
+    const { mode } = this.props.autocomplete;
+    // If results are rendered, redirect to the result url and prevent search execution.
+    if (mode === 'result' && (event.keyCode === 13 || method === 'click')) {
       event.preventDefault(); // don't submit the search query
-      window.location.replace(suggestion.suggestion.sm_urls[0]); // redirect to the selected item
+      event.stopPropagation(); // don't bubble up event
+      window.location.assign(suggestion.sm_urls[0]); // redirect to the selected item
     }
   }
 
@@ -91,11 +113,11 @@ class FederatedTextSearchAsYouType extends React.Component {
     this.props.onSuggest(this.props.autocomplete, value);
   }
 
-  // Calls submit handler when enter is pressed while text input
-  // has focused.  This functionality is overridden in the
+  // Call submit handler when enter is pressed while text input
+  // has focused.  This functionality is prevented by the
   // onSuggestionSelected method.
-  handleInputKeyDown(ev) {
-    if (ev.keyCode === 13) {
+  handleInputKeyDown(event) {
+    if (event.keyCode === 13 && !event.defaultPrevented) {
       this.handleSubmit();
     }
   }
@@ -191,6 +213,7 @@ FederatedTextSearchAsYouType.defaultProps = {
 
 FederatedTextSearchAsYouType.propTypes = {
   autocomplete: PropTypes.shape({
+    mode: PropTypes.string,
     method: PropTypes.string,
     url: PropTypes.string,
     queryField: PropTypes.string,
