@@ -1,9 +1,14 @@
 import React from 'react';
 import queryString from 'query-string';
+import he from 'he';
 import PropTypes from 'prop-types';
 import Autosuggest from 'react-autosuggest';
+import helpers from '../../helpers';
 import SearchIcon from '../icons/search';
 
+// Renders autcomplete text input and submit button for text search.
+// Rendered when env config autocomplete is present.
+// @see /env.local.js.example
 class FederatedTextSearchAsYouType extends React.Component {
   // When the input is focused, Autosuggest will consult this function
   // when to render suggestions. Use it, for example, if you want to
@@ -20,10 +25,12 @@ class FederatedTextSearchAsYouType extends React.Component {
       suggestions: [],
     };
 
+    this.getSuggestionValue = this.getSuggestionValue.bind(this);
     this.handleInputKeyDown = this.handleInputKeyDown.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.loadSuggestions = this.loadSuggestions.bind(this);
     this.onChange = this.onChange.bind(this);
+    this.onSuggestionSelected = this.onSuggestionSelected.bind(this);
     this.onSuggestionsFetchRequested = this.onSuggestionsFetchRequested.bind(this);
     this.onSuggestionsClearRequested = this.onSuggestionsClearRequested.bind(this);
     this.renderSuggestion = this.renderSuggestion.bind(this);
@@ -37,20 +44,21 @@ class FederatedTextSearchAsYouType extends React.Component {
   }
 
   /**
+   * Called every time the input value changes
    *
    * @param event
-   *   called every time the input value changes
+   *   Event object
    * @param newValue
-   *   the new value of the input
+   *   The new value of the input
    * @param method
-   *   string describing how the change has occurred. The possible values are:
-   *   'down' - user pressed Down
-   *   'up' - user pressed Up
-   *   'escape' - user pressed Escape
-   *   'enter' - user pressed Enter
-   *   'click' - user clicked (or tapped) on suggestion
-   *   'type' - none of the methods above (usually means that user typed something,
-   *     but can also be that they pressed Backspace, pasted something into the input, etc.)
+   *   String describing how the change has occurred. The possible values are:
+   *     'down' - user pressed Down
+   *     'up' - user pressed Up
+   *     'escape' - user pressed Escape
+   *     'enter' - user pressed Enter
+   *     'click' - user clicked (or tapped) on suggestion
+   *     'type' - none of the methods above (usually means that user typed something,
+   *       but can also be that they pressed Backspace, pasted something into the input, etc.)
    */
   onChange(event, { newValue, method }) {
     if (method === 'type') {
@@ -95,15 +103,23 @@ class FederatedTextSearchAsYouType extends React.Component {
     }
   }
 
-  // Will be called every time you need to set suggestions to [].
+  // Called every time you need to set suggestions to [].
   onSuggestionsClearRequested() {
     this.setState({
       suggestions: [],
     });
   }
 
-  static getSuggestionValue(suggestion) {
-    return suggestion;
+  // For search term autocomplete mode:
+  // When user navigates the suggestions using the Up and Down keys,
+  // the input value should be set according to the highlighted suggestion.
+  getSuggestionValue(suggestion) {
+    const { mode } = this.props.autocomplete;
+    if (mode === 'result') return false;
+    if (mode === 'term') {
+      return suggestion.ss_federated_title; // @todo get the value of the term
+    }
+    return false;
   }
 
   // Gets search suggestions based on input.
@@ -141,17 +157,54 @@ class FederatedTextSearchAsYouType extends React.Component {
     }
   }
 
-  renderSuggestion(suggestion) {
-    const { autocomplete } = this.props;
-    return (
-      <a
-        className="react-autosuggest__suggestion-link"
-        href={suggestion.sm_urls[0]}
-        dangerouslySetInnerHTML={{ __html: suggestion.ss_federated_title }}
-      />
-    );
+  /**
+   * Define how suggestions are rendered.
+   * Note: must be a pure function.
+   *
+   * @param suggestion
+   *   The suggestion to render
+   *
+   * @param query
+   * Used to highlight the matching string. As user types in the input,
+   * query will be equal to the trimmed value of the input. Then, if user
+   * interacts using the Up or Down keys, the input will get the value of
+   * the highlighted suggestion, but query will remain to be equal to the
+   * trimmed value of the input prior to the Up and Down interactions.
+   *
+   * unused - isHighlighted
+   * Whether or not the suggestion is highlighted.
+   *
+   * @return a string or a ReactElement
+   */
+  renderSuggestion(suggestion, { query }) {
+    // Determine if we are returning results or terms. @todo or both
+    const { mode } = this.props.autocomplete;
+    // Decode any html entities that come from title.
+    const decodedTitle = he.decode(suggestion.ss_federated_title);
+    // Wrap the query partial string in <b>.
+    const highlightedTitle = helpers.highlightText(decodedTitle, query);
+
+    // Render a link for search result suggestions.
+    if (mode === 'result') {
+      return (
+        <a
+          className="react-autosuggest__suggestion-link"
+          href={suggestion.sm_urls[0]}
+        >
+          {highlightedTitle}
+        </a>
+      );
+    }
+
+    // Render plain text for search term suggestions.
+    // @todo update this when we have a return structure for terms.
+    if (mode === 'term') {
+      return highlightedTitle;
+    }
+    return suggestion;
   }
 
+  // Wrap the input component with our expected wrapper.
   static renderInputComponent(inputProps) {
     return (
       <div className="search-form__input-wrapper">
@@ -181,11 +234,11 @@ class FederatedTextSearchAsYouType extends React.Component {
           {/* @see: https://github.com/moroshko/react-autosuggest#react-autosuggest */}
           <Autosuggest
             focusInputOnSuggestionClick={false}
-            getSuggestionValue={FederatedTextSearchAsYouType.getSuggestionValue}
+            getSuggestionValue={this.getSuggestionValue}
             inputProps={inputProps}
             onSuggestionsClearRequested={this.onSuggestionsClearRequested}
             onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
-            onSuggestionSelected={FederatedTextSearchAsYouType.onSuggestionSelected}
+            onSuggestionSelected={this.onSuggestionSelected}
             renderInputComponent={FederatedTextSearchAsYouType.renderInputComponent}
             renderSuggestion={this.renderSuggestion}
             shouldRenderSuggestions={FederatedTextSearchAsYouType.shouldRenderSuggestions}
@@ -207,7 +260,6 @@ class FederatedTextSearchAsYouType extends React.Component {
 
 FederatedTextSearchAsYouType.defaultProps = {
   label: 'Enter a search term',
-  onChange: () => {},
   value: '',
 };
 
@@ -220,7 +272,7 @@ FederatedTextSearchAsYouType.propTypes = {
   }).isRequired,
   field: PropTypes.string.isRequired,
   label: PropTypes.string,
-  onChange: PropTypes.func,
+  onChange: PropTypes.func.isRequired,
   onSuggest: PropTypes.func.isRequired,
   value: PropTypes.string,
 };
