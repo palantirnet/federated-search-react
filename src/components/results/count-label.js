@@ -1,39 +1,50 @@
 import PropTypes from 'prop-types';
-import React from "react";
+import React from 'react';
+import { LiveMessage } from 'react-aria-live';
+import helpers from '../../helpers';
 
-function searchResultsStat(currentPage, numFound, rows, pageAmt, noResultsText) {
+function searchResultsStat(currentPage, numFound, rows, pageAmt, noResultsText, termValue) {
+  // Set visible and a11y message based on query results.
+  let message = '';
+  let a11yMessage = '';
   if (numFound > rows) { // Many pages
-    return (
-      <p id="stat" tabIndex="-1" className="search-results-stat">Showing page <strong>{currentPage+1}</strong> of <strong>{pageAmt}</strong> (<strong>{numFound}</strong> results). </p>
-    )
+    a11yMessage = `Showing page ${currentPage + 1} of ${pageAmt} (${numFound} results).`;
+    message = [`${currentPage + 1}`, `${pageAmt}`, `${numFound}`].reduce((acc, item) => helpers.highlightText(acc, item), a11yMessage);
+  } else if (numFound <= rows && numFound > 1) { // Single page
+    a11yMessage = `Showing ${numFound} results.`;
+    message = helpers.highlightText(a11yMessage, numFound);
+  } else if (numFound === 1) { // Single item
+    a11yMessage = `Showing ${numFound} result.`;
+    message = helpers.highlightText(a11yMessage, numFound);
+  } else if (numFound === 0) { // No results
+    message = noResultsText || 'Sorry, your search yielded no results.';
+    a11yMessage = message;
   }
-  else if (numFound <= rows && numFound > 1) { // Single page
-    return (
-      <p id="stat" tabIndex="-1" className="search-results-stat">Showing <strong>{numFound}</strong> results.</p>
-    )
-  }
-  else if (numFound === 1) { // Single item
-    return (
-      <p id="stat" tabIndex="-1" className="search-results-stat">Showing <strong>{numFound}</strong> result.</p>
-    )
-  }
-  else if (numFound === 0) { // No results
-    return (
-      <p id="stat" tabIndex="-1" className="search-results-stat">{noResultsText || 'Your search yielded no results.'}</p>
-    )
-  }
+  // Don't announce total results when wildcard query sent on term clear.
+  a11yMessage = termValue ? a11yMessage : '';
+  return (
+    <React.Fragment>
+      <LiveMessage message={a11yMessage} aria-live="polite" />
+      <p id="stat" tabIndex="-1" className="search-results-stat">{message}</p>
+    </React.Fragment>
+  );
 }
 
 class FederatedCountLabel extends React.Component {
   render() {
-    const { numFound, start, rows, noResultsText } = this.props;
+    const {
+      numFound,
+      start,
+      rows,
+      noResultsText,
+      termValue,
+    } = this.props;
     const currentPage = start / rows;
     const pageAmt = Math.ceil(numFound / rows);
-
     return (
-        <React.Fragment>
-          {searchResultsStat(currentPage, numFound, rows, pageAmt, noResultsText)}
-        </React.Fragment>
+      <React.Fragment>
+        {searchResultsStat(currentPage, numFound, rows, pageAmt, noResultsText, termValue)}
+      </React.Fragment>
     );
   }
 }
@@ -41,11 +52,11 @@ class FederatedCountLabel extends React.Component {
 FederatedCountLabel.propTypes = {
   numFound: PropTypes.number.isRequired,
   start: PropTypes.number.isRequired,
-  rows: PropTypes.number
+  rows: PropTypes.number,
 };
 
 FederatedCountLabel.defaultProps = {
-  start: 0
+  start: 0,
 };
 
 export default FederatedCountLabel;

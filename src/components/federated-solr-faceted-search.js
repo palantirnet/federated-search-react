@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { LiveAnnouncer, LiveMessage } from 'react-aria-live';
 import FederatedSolrComponentPack from './federated_solr_component_pack';
 //import componentPack from "./component-pack";
 
@@ -73,6 +74,7 @@ class FederatedSolrFacetedSearch extends React.Component {
     }
 
     return (
+      <LiveAnnouncer>
         <div className="container">
           <aside className="l-25-75--1">
             <SearchFieldContainerComponent
@@ -117,7 +119,7 @@ class FederatedSolrFacetedSearch extends React.Component {
                 label="Enter search term:"
                 onSuggest={onTextInputChange}
                 onChange={onSearchFieldChange}
-                value={searchFields.find(sf => sf.field === 'tm_rendered_item').value }
+                value={searchFields.find(sf => sf.field === 'tm_rendered_item').value}
               />
               <CurrentQueryComponent {...this.props} onChange={onSearchFieldChange} />
               <SortComponent
@@ -137,6 +139,7 @@ class FederatedSolrFacetedSearch extends React.Component {
                     rows={rows}
                     onChange={onPageChange}
                     noResultsText={this.props.options.noResults || null}
+                    termValue={searchFields.find(sf => sf.field === 'tm_rendered_item').value}
                   />
                   {resultPending}
                 </ResultHeaderComponent>
@@ -162,6 +165,7 @@ class FederatedSolrFacetedSearch extends React.Component {
             </div>
           </div>
         </div>
+      </LiveAnnouncer>
     );
   }
 }
