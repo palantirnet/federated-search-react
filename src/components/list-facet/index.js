@@ -208,7 +208,14 @@ class FederatedListFacet extends React.Component {
           className={cx('search-accordion__title', { 'js-search-accordion-open': expanded })}
           id={label.replace(/\s+/g, '-').toLowerCase()}
           onClick={this.toggleExpand.bind(this)}
-        >{label}</a>
+          onKeyDown={(event) => {
+            if (event.keyCode === 13) {
+              this.toggleExpand();
+            }
+          }}
+        >
+          <span className="element-invisible">Toggle filter group for</span> {label}
+        </a>
         <AnimateHeight
           duration={600}
           height={height}
@@ -221,16 +228,18 @@ class FederatedListFacet extends React.Component {
                   || facetValue.toLowerCase().indexOf(this.state.filter.toLowerCase()) > -1) {
                   return (
                     <li key={`${facetValue}_${facetInputs[facetValue]}`}>
-              <label className="search-accordion__checkbox-label">
-              <input
-                type="checkbox"
-                name={field}
-                value={facetValue}
-                checked={value.indexOf(facetValue) > -1 ? true : false}
-                onChange={() => this.handleClick(facetValue)}
-              /> {facetValue}
-              <span className="facet-item-amount"> ({facetInputs[facetValue]})</span>
-            </label>
+                      <label className="search-accordion__checkbox-label">
+                        <input
+                          type="checkbox"
+                          name={field}
+                          value={facetValue}
+                          checked={value.indexOf(facetValue) > -1}
+                          onChange={() => this.handleClick(facetValue)}
+                        /> {facetValue}
+                        <span className="facet-item-amount"> ({facetInputs[facetValue]}
+                          <span className="element-invisible">results</span>)
+                        </span>
+                      </label>
                     </li>
                   );
                 }
