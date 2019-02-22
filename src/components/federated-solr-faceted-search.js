@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { LiveAnnouncer, LiveMessage } from 'react-aria-live';
+import { LiveAnnouncer } from 'react-aria-live';
 import FederatedSolrComponentPack from './federated_solr_component_pack';
 //import componentPack from "./component-pack";
 

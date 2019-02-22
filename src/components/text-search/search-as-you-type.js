@@ -34,6 +34,7 @@ class FederatedTextSearchAsYouType extends React.Component {
     this.onSuggestionsFetchRequested = this.onSuggestionsFetchRequested.bind(this);
     this.onSuggestionsClearRequested = this.onSuggestionsClearRequested.bind(this);
     this.renderSuggestion = this.renderSuggestion.bind(this);
+    this.renderSuggestionsContainer = this.renderSuggestionsContainer.bind(this);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -157,6 +158,32 @@ class FederatedTextSearchAsYouType extends React.Component {
     }
   }
 
+  renderSuggestionsContainer({ containerProps, children, query }) {
+    const { mode, directionsText } = this.props.autocomplete;
+    const titleText = this.props.autocomplete[mode].titleText || 'What are you looking for?';
+    const suggestionsWrapperClasses = directionsText
+      ? 'react-autosuggest__suggestions-itemslist-wrapper react-autosuggest__suggestions-itemslist-wrapper--with-directions'
+      : 'react-autosuggest__suggestions-itemslist-wrapper';
+
+    return (
+      <div {... containerProps}>
+        <div className="react-autosuggest__container-title">
+          {titleText}
+          <button className="react-autosuggest__container-close-button" onClick={this.onSuggestionsClearRequested}>x</button>
+        </div>
+        <div className={suggestionsWrapperClasses}>
+          {children}
+        </div>
+        {directionsText &&
+          <div className="react-autosuggest__container-directions">
+            <span className="react-autosuggest__container-directions-item">Press <code>ENTER</code> to search for <strong>{query}</strong> or <code>ESC</code> to close.</span>
+            <span className="react-autosuggest__container-directions-item">Press ↑ and ↓ to highlight a suggestion then <code>ENTER</code> to be redirected to that suggestion.</span>
+          </div>
+        }
+      </div>
+    );
+  }
+
   /**
    * Define how suggestions are rendered.
    * Note: must be a pure function.
@@ -243,6 +270,7 @@ class FederatedTextSearchAsYouType extends React.Component {
             onSuggestionSelected={this.onSuggestionSelected}
             renderInputComponent={FederatedTextSearchAsYouType.renderInputComponent}
             renderSuggestion={this.renderSuggestion}
+            renderSuggestionsContainer={this.renderSuggestionsContainer}
             shouldRenderSuggestions={FederatedTextSearchAsYouType.shouldRenderSuggestions}
             suggestions={suggestions}
           />
@@ -266,12 +294,16 @@ FederatedTextSearchAsYouType.defaultProps = {
 };
 
 FederatedTextSearchAsYouType.propTypes = {
-  autocomplete: PropTypes.shape({
-    mode: PropTypes.string,
-    method: PropTypes.string,
-    url: PropTypes.string,
-    queryField: PropTypes.string,
-  }).isRequired,
+  autocomplete: PropTypes.oneOfType([
+    PropTypes.shape({
+      mode: PropTypes.string,
+      method: PropTypes.string,
+      url: PropTypes.string,
+      queryField: PropTypes.string,
+      directionsText: PropTypes.bool,
+    }),
+    PropTypes.bool,
+  ]).isRequired,
   field: PropTypes.string.isRequired,
   label: PropTypes.string,
   onChange: PropTypes.func.isRequired,

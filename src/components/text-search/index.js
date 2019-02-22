@@ -7,7 +7,7 @@ const FederatedTextSearch = (props) => {
   const InputComponent = autocomplete
     ? FederatedTextSearchAsYouType
     : FederatedTextSearchNoAutocomplete;
-  return <InputComponent {...props} />
+  return <InputComponent {...props} />;
 };
 
 export default FederatedTextSearch;
