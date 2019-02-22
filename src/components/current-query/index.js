@@ -2,6 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import queryString from 'query-string';
 import moment from 'moment';
+import { LiveMessenger } from 'react-aria-live';
+
 
 // Create dumb component which can be configured by props.
 const FacetType = props => (
@@ -16,6 +18,7 @@ const FacetType = props => (
 // Configure and render the FacetType component to render as list facet type.
 class ListFacetType extends React.Component {
   removeListFacetValue(field, values, value) {
+    this.props.announcePolite(`Removed ${field.value} filter.`);
     const foundIdx = values.indexOf(value);
     // Get existing querystring params.
     const parsed = queryString.parse(window.location.search);
@@ -69,6 +72,7 @@ class ListFacetType extends React.Component {
 // Configure and render the FacetType component to render as range facet type.
 class RangeFacetType extends React.Component {
   removeRangeFacetValue(field) {
+    this.props.announcePolite(`Removed ${field.value} filter.`);
     this.props.onChange(field, []);
   }
 
@@ -101,6 +105,7 @@ class RangeFacetType extends React.Component {
 // Configure and render the FacetType component to render as text facet type.
 class TextFacetType extends React.Component {
   removeTextValue(field) {
+    this.props.announcePolite(`Removed search term ${field.value}.`);
     this.props.onChange(field, '');
     // Get current querystring params.
     const parsed = queryString.parse(window.location.search);
@@ -149,23 +154,34 @@ class FederatedCurrentQuery extends React.Component {
     };
 
     return (
-      <React.Fragment>
-        {fields.length > 0 && // Only render this if there are filters applied.
-          <div className="applied-filters">
-            <h2 className="element-invisible">
-              Currently Applied Search Filters.
-            </h2>
-            <p className="element-invisible">
-              Click a filter to remove it from your search query.
-            </p>
-            {fields.map((searchField, i) => {
-              // Determine which child component to render.
-              const MyFacetType = facetTypes[searchField.type];
-              return <MyFacetType key={i} searchField={searchField} {...this.props} />;
-            })}
-          </div>
-        }
-      </React.Fragment>
+      <LiveMessenger>
+        {({ announcePolite }) => (
+          <React.Fragment>
+            {fields.length > 0 && // Only render this if there are filters applied.
+              <div className="applied-filters">
+                <h2 className="element-invisible">
+                  Currently Applied Search Filters.
+                </h2>
+                <p className="element-invisible">
+                  Click a filter to remove it from your search query.
+                </p>
+                {fields.map((searchField, i) => {
+                  // Determine which child component to render.
+                  const MyFacetType = facetTypes[searchField.type];
+                  return (
+                    <MyFacetType
+                      {...this.props}
+                      key={i}
+                      searchField={searchField}
+                      announcePolite={announcePolite}
+                    />
+                  );
+                })}
+              </div>
+            }
+          </React.Fragment>
+        )}
+      </LiveMessenger>
     );
   }
 }
