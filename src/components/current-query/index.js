@@ -5,9 +5,12 @@ import moment from 'moment';
 
 // Create dumb component which can be configured by props.
 const FacetType = props => (
-  <span className="applied-filters__filter" key={props.id} onClick={props.onClick}>
+  <button className="applied-filters__filter" key={props.id} onClick={props.onClick}>
+    <span className="element-invisible">
+      Remove filter
+    </span>
     {props.children}
-  </span>
+  </button>
 );
 
 // Configure and render the FacetType component to render as list facet type.

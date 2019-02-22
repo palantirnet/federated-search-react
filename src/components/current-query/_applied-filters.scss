@@ -13,6 +13,7 @@
 .applied-filters__filter {
   @include adjust-font-size-to($label, .8);
   padding-bottom: rhythm(.2);
+  border: 0;
   border-bottom: solid 2px $c-secondary;
   margin-right: rhythm(.5);
   margin-bottom: rhythm(.5);
