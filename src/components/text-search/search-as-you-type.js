@@ -215,6 +215,9 @@ class FederatedTextSearchAsYouType extends React.Component {
     const decodedTitle = he.decode(suggestion.ss_federated_title);
     // Wrap the query partial string in <b>.
     const highlightedTitle = helpers.highlightText(decodedTitle, query);
+    // Define a11y message i.e. (1 of 3) to append to suggestion text.
+    const currentHumanIndex = this.state.suggestions.indexOf(suggestion) + 1;
+    const suggestionsLength = this.state.suggestions.length;
 
     // Render a link for search result suggestions.
     if (mode === 'result') {
@@ -224,6 +227,9 @@ class FederatedTextSearchAsYouType extends React.Component {
           href={suggestion.sm_urls[0]}
         >
           {highlightedTitle}
+          <span className="element-invisible">
+            {` (${currentHumanIndex} of ${suggestionsLength})`}
+          </span>
         </a>
       );
     }
