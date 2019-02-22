@@ -121,7 +121,10 @@ class FederatedSolrFacetedSearch extends React.Component {
                 onChange={onSearchFieldChange}
                 value={searchFields.find(sf => sf.field === 'tm_rendered_item').value}
               />
-              <CurrentQueryComponent {...this.props} onChange={onSearchFieldChange} />
+              <CurrentQueryComponent
+                {...this.props}
+                onChange={onSearchFieldChange}
+              />
               <SortComponent
                 bootstrapCss={bootstrapCss}
                 onChange={onSortFieldChange}
