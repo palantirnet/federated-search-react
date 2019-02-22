@@ -130,12 +130,17 @@ class FederatedTextSearchAsYouType extends React.Component {
     this.props.onSuggest(this.props.autocomplete, value);
   }
 
-  // Call submit handler when enter is pressed while text input
-  // has focused.  This functionality is prevented by the
-  // onSuggestionSelected method.
   handleInputKeyDown(event) {
+    // Call submit handler when enter is pressed while text input
+    // has focused.  This functionality is prevented by the
+    // onSuggestionSelected method.
     if (event.keyCode === 13 && !event.defaultPrevented) {
       this.handleSubmit();
+    }
+
+    // Clear and close suggetsions.
+    if (event.keyCode === 27) {
+      this.onSuggestionsClearRequested();
     }
   }
 
