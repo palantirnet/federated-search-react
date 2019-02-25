@@ -66,6 +66,9 @@ class FederatedTextSearchAsYouType extends React.Component {
       this.setState({
         value: newValue,
       });
+
+      // Ensure that the suggestQuery.value prop gets cleared on backspace / cut.
+      this.props.suggestQuery.value = newValue;
     }
   }
 
@@ -127,7 +130,7 @@ class FederatedTextSearchAsYouType extends React.Component {
   // @todo support different modes: term, results
   loadSuggestions(value) {
     // Run typeahead search query based on the autocomplete config and current value.
-    this.props.onSuggest(this.props.autocomplete, value);
+    this.props.onSuggest(this.props.query, this.props.autocomplete, value);
   }
 
   handleInputKeyDown(event) {
@@ -252,7 +255,7 @@ class FederatedTextSearchAsYouType extends React.Component {
   }
 
   render() {
-    const { label } = this.props;
+    const { label, suggestQuery } = this.props;
     const { suggestions, value } = this.state;
     // Define props for autocomplete input element.
     const inputProps = {
@@ -283,6 +286,7 @@ class FederatedTextSearchAsYouType extends React.Component {
             renderSuggestion={this.renderSuggestion}
             renderSuggestionsContainer={this.renderSuggestionsContainer}
             shouldRenderSuggestions={FederatedTextSearchAsYouType.shouldRenderSuggestions}
+            suggestQuery={suggestQuery}
             suggestions={suggestions}
           />
           <button
@@ -302,6 +306,9 @@ class FederatedTextSearchAsYouType extends React.Component {
 FederatedTextSearchAsYouType.defaultProps = {
   label: 'Enter a search term',
   value: '',
+  suggestQuery: {
+    value: '',
+  },
 };
 
 FederatedTextSearchAsYouType.propTypes = {
@@ -319,6 +326,9 @@ FederatedTextSearchAsYouType.propTypes = {
   label: PropTypes.string,
   onChange: PropTypes.func.isRequired,
   onSuggest: PropTypes.func.isRequired,
+  suggestQuery: PropTypes.shape({
+    value: PropTypes.string,
+  }),
   value: PropTypes.string,
 };
 
