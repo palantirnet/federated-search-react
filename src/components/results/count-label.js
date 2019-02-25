@@ -1,7 +1,6 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import { LiveMessage } from 'react-aria-live';
-import helpers from '../../helpers';
 
 function searchResultsStat(currentPage, numFound, rows, pageAmt, noResultsText, termValue) {
   // Set visible and a11y message based on query results.
@@ -9,13 +8,19 @@ function searchResultsStat(currentPage, numFound, rows, pageAmt, noResultsText, 
   let a11yMessage = '';
   if (numFound > rows) { // Many pages
     a11yMessage = `Showing page ${currentPage + 1} of ${pageAmt} (${numFound} results).`;
-    message = [`${currentPage + 1}`, `${pageAmt}`, `${numFound}`].reduce((acc, item) => helpers.highlightText(acc, item), a11yMessage);
+    message = (
+      <span>Showing page
+        <b> {currentPage + 1}</b> of
+        <b> {pageAmt}</b>
+        (<b> {numFound}</b> results).
+      </span>
+    );
   } else if (numFound <= rows && numFound > 1) { // Single page
     a11yMessage = `Showing ${numFound} results.`;
-    message = helpers.highlightText(a11yMessage, numFound);
+    message = (<span>Showing <b>{numFound}</b> results.</span>);
   } else if (numFound === 1) { // Single item
     a11yMessage = `Showing ${numFound} result.`;
-    message = helpers.highlightText(a11yMessage, numFound);
+    message = (<span>Showing <b>{numFound}</b> result.</span>);
   } else if (numFound === 0) { // No results
     message = noResultsText || 'Sorry, your search yielded no results.';
     a11yMessage = message;
