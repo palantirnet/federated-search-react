@@ -10,13 +10,6 @@ import SearchIcon from '../icons/search';
 // Rendered when env config autocomplete is present.
 // @see /env.local.js.example
 class FederatedTextSearchAsYouType extends React.Component {
-  // When the input is focused, Autosuggest will consult this function
-  // when to render suggestions. Use it, for example, if you want to
-  // display suggestions when input value is at least 2 characters long.
-  static shouldRenderSuggestions(value) {
-    return value.trim().length >= 2;
-  }
-
   constructor(props) {
     super(props);
 
@@ -35,6 +28,7 @@ class FederatedTextSearchAsYouType extends React.Component {
     this.onSuggestionsClearRequested = this.onSuggestionsClearRequested.bind(this);
     this.renderSuggestion = this.renderSuggestion.bind(this);
     this.renderSuggestionsContainer = this.renderSuggestionsContainer.bind(this);
+    this.shouldRenderSuggestions = this.shouldRenderSuggestions.bind(this);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -166,6 +160,14 @@ class FederatedTextSearchAsYouType extends React.Component {
     }
   }
 
+  // When the input is focused, Autosuggest will consult this function
+  // when to render suggestions. Use it, for example, if you want to
+  // display suggestions when input value is at least 2 characters long.
+  shouldRenderSuggestions(value) {
+    const numChars = this.props.autocomplete.numChars || 2;
+    return value.trim().length > numChars;
+  }
+
   renderSuggestionsContainer({ containerProps, children, query }) {
     const { mode } = this.props.autocomplete;
     const titleText = this.props.autocomplete[mode].titleText || 'What are you looking for?';
@@ -287,7 +289,7 @@ class FederatedTextSearchAsYouType extends React.Component {
             renderInputComponent={FederatedTextSearchAsYouType.renderInputComponent}
             renderSuggestion={this.renderSuggestion}
             renderSuggestionsContainer={this.renderSuggestionsContainer}
-            shouldRenderSuggestions={FederatedTextSearchAsYouType.shouldRenderSuggestions}
+            shouldRenderSuggestions={this.shouldRenderSuggestions}
             suggestQuery={suggestQuery}
             suggestions={suggestions}
           />
@@ -320,7 +322,12 @@ FederatedTextSearchAsYouType.propTypes = {
       method: PropTypes.string,
       url: PropTypes.string,
       queryField: PropTypes.string,
-      directionsText: PropTypes.bool,
+      suggestionRows: PropTypes.number,
+      numChars: PropTypes.number,
+      result: {
+        titleText: PropTypes.string,
+        directionsText: PropTypes.bool,
+      },
     }),
     PropTypes.bool,
   ]).isRequired,
