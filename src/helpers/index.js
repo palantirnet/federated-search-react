@@ -3,25 +3,25 @@ import React from 'react';
 /**
  * Find and highlight relevant keywords within a block of text
  * @param  {string} text - The text to parse
- * @param  {string} value - The search keyword to highlight
+ * @param  {string} highlight - The search keyword/partial to highlight
  * @return {object} A JSX object containing an array of alternating strings and JSX
  */
-const highlightText = (text, value) => {
-  if (!value) {
-    return text;
+const highlightText = (text, highlight) => {
+  if (!highlight.toString().trim()) {
+    return <span>{text}</span>;
   }
-  return (<span>
-    { text.split(value)
-      .reduce((prev, current, i) => {
-        if (!i) {
-          return [current];
-        }
-        return prev.concat(<b key={value + current}>{ value }</b>, current);
-      }, [])
-    }
-  </span>);
+  // Split on highlight term and include term into parts, ignore case
+  const parts = text.split(new RegExp(`(${highlight})`, 'gi'));
+  return (
+    <span> { parts.map((part, i) =>
+      (
+        <span key={i} style={part.toLowerCase() === highlight.toString().toLowerCase() ? { fontWeight: 'bold' } : {}}>
+          { part }
+        </span>
+      ))}
+    </span>);
 };
 
 export default {
   highlightText,
-}
+};
