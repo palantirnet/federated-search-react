@@ -167,8 +167,9 @@ class FederatedTextSearchAsYouType extends React.Component {
   }
 
   renderSuggestionsContainer({ containerProps, children, query }) {
-    const { mode, directionsText } = this.props.autocomplete;
+    const { mode } = this.props.autocomplete;
     const titleText = this.props.autocomplete[mode].titleText || 'What are you looking for?';
+    const directionsText = this.props.autocomplete[mode].directionsText || true;
     const suggestionsWrapperClasses = directionsText
       ? 'react-autosuggest__suggestions-itemslist-wrapper react-autosuggest__suggestions-itemslist-wrapper--with-directions'
       : 'react-autosuggest__suggestions-itemslist-wrapper';
@@ -182,6 +183,7 @@ class FederatedTextSearchAsYouType extends React.Component {
         <div className={suggestionsWrapperClasses}>
           {children}
         </div>
+        {/* @todo add logic for suggestion mode and alter directionsText accordingly */}
         {directionsText &&
           <div className="react-autosuggest__container-directions">
             <span className="react-autosuggest__container-directions-item">Press <code>ENTER</code> to search for <strong>{query}</strong> or <code>ESC</code> to close.</span>
