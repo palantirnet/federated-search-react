@@ -213,7 +213,7 @@ class FederatedTextSearchAsYouType extends React.Component {
    * unused - isHighlighted
    * Whether or not the suggestion is highlighted.
    *
-   * @return a string or a ReactElement
+   * @return a ReactElement
    */
   renderSuggestion(suggestion, { query }) {
     // Determine if we are returning results or terms. @todo or both
@@ -226,27 +226,25 @@ class FederatedTextSearchAsYouType extends React.Component {
     const currentHumanIndex = this.state.suggestions.indexOf(suggestion) + 1;
     const suggestionsLength = this.state.suggestions.length;
 
-    // Render a link for search result suggestions.
-    if (mode === 'result') {
-      return (
-        <a
-          className="react-autosuggest__suggestion-link"
-          href={suggestion.sm_urls[0]}
-        >
-          {highlightedTitle}
-          <span className="element-invisible">
-            {` (${currentHumanIndex} of ${suggestionsLength})`}
-          </span>
-        </a>
-      );
-    }
-
     // Render plain text for search term suggestions.
     // @todo update this when we have a return structure for terms.
     if (mode === 'term') {
-      return highlightedTitle;
+      return <span>highlightedTitle</span>;
     }
-    return suggestion;
+
+    // Defaults to result based autosuggestion.
+    // Render a link for search result suggestions.
+    return (
+      <a
+        className="react-autosuggest__suggestion-link"
+        href={suggestion.sm_urls[0]}
+      >
+        {highlightedTitle}
+        <span className="element-invisible">
+          {` (${currentHumanIndex} of ${suggestionsLength})`}
+        </span>
+      </a>
+    );
   }
 
   // Wrap the input component with our expected wrapper.
