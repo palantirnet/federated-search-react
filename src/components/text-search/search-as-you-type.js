@@ -222,14 +222,14 @@ class FederatedTextSearchAsYouType extends React.Component {
    *   The suggestion to render
    *
    * @param query
-   * Used to highlight the matching string. As user types in the input,
-   * query will be equal to the trimmed value of the input. Then, if user
-   * interacts using the Up or Down keys, the input will get the value of
-   * the highlighted suggestion, but query will remain to be equal to the
-   * trimmed value of the input prior to the Up and Down interactions.
+   *   Used to highlight the matching string. As user types in the input,
+   *   query will be equal to the trimmed value of the input. Then, if user
+   *   interacts using the Up or Down keys, the input will get the value of
+   *   the highlighted suggestion, but query will remain to be equal to the
+   *   trimmed value of the input prior to the Up and Down interactions.
    *
    * unused - isHighlighted
-   * Whether or not the suggestion is highlighted.
+   *   Whether or not the suggestion is highlighted.
    *
    * @return a ReactElement
    */

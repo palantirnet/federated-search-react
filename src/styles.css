@@ -1117,7 +1117,7 @@ textarea {
  * search-form.scss
  * Define search form styles.
  *
- * @copyright Copyright (c) 2017 Palantir.net
+ * @copyright Copyright (c) 2019 Palantir.net
  */
 .search-form {
   margin-bottom: 2.93333em; }
@@ -1183,7 +1183,7 @@ textarea {
  * Define autocomplete input + suggestion styles.
  * @see: https://github.com/moroshko/react-autosuggest#theme-optional
  *
- * @copyright Copyright (c) 2017 Palantir.net
+ * @copyright Copyright (c) 2019 Palantir.net
  */
 .search-form__autocomplete-container {
   display: flex; }
@@ -1294,7 +1294,7 @@ textarea {
  * search-form.scss
  * Define search form styles.
  *
- * @copyright Copyright (c) 2017 Palantir.net
+ * @copyright Copyright (c) 2019 Palantir.net
  */
 .search-filters__trigger,
 .search-accordion__title {
@@ -1482,7 +1482,7 @@ textarea {
  * aside.scss
  * Define aside styles.
  *
- * @copyright Copyright (c) 2017 Palantir.net
+ * @copyright Copyright (c) 2019 Palantir.net
  */
 aside {
   margin-bottom: 1.46667em;
@@ -1495,7 +1495,7 @@ aside {
  * search-form.scss
  * Define search results styles.
  *
- * @copyright Copyright (c) 2017 Palantir.net
+ * @copyright Copyright (c) 2019 Palantir.net
  */
 .search-results li {
   margin-bottom: 1.46667em;
@@ -1569,7 +1569,7 @@ aside {
  * search-scope.scss
  * Define search scope styles.
  *
- * @copyright Copyright (c) 2017 Palantir.net
+ * @copyright Copyright (c) 2019 Palantir.net
  */
 .search-scope {
   margin: 1.46667em 0; }
@@ -1663,7 +1663,7 @@ aside {
  * pagination.scss
  * Define pagination styles.
  *
- * @copyright Copyright (c) 2017 Palantir.net
+ * @copyright Copyright (c) 2019 Palantir.net
  */
 .search-pager {
   background-color: transparent; }
@@ -1754,7 +1754,7 @@ aside {
  * search-results-stat.scss
  * Define search results statistic styles.
  *
- * @copyright Copyright (c) 2017 Palantir.net
+ * @copyright Copyright (c) 2019 Palantir.net
  */
 .search-results-stat {
   font-size: 0.9em;
@@ -1767,7 +1767,7 @@ aside {
  * applied-filters.scss
  * Define applied filters styles.
  *
- * @copyright Copyright (c) 2017 Palantir.net
+ * @copyright Copyright (c) 2019 Palantir.net
  */
 .applied-filters {
   margin: 1.46667em 0;
