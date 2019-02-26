@@ -6,7 +6,7 @@ import Autosuggest from 'react-autosuggest';
 import helpers from '../../helpers';
 import SearchIcon from '../icons/search';
 
-// Renders autcomplete text input and submit button for text search.
+// Renders autocomplete text input and submit button for text search.
 // Rendered when env config autocomplete is present.
 // @see /env.local.js.example
 class FederatedTextSearchAsYouType extends React.Component {
@@ -170,8 +170,26 @@ class FederatedTextSearchAsYouType extends React.Component {
 
   renderSuggestionsContainer({ containerProps, children, query }) {
     const { mode } = this.props.autocomplete;
-    const titleText = this.props.autocomplete[mode].titleText || 'What are you looking for?';
-    const directionsText = this.props.autocomplete[mode].directionsText || true;
+    const hasResultModeConfig = Object.hasOwnProperty.call(this.props.autocomplete, 'result');
+    const hasTermModeConfig = Object.hasOwnProperty.call(this.props.autocomplete, 'term');
+    const resultTitleText = hasResultModeConfig && this.props.autocomplete.result.titleText
+      ? this.props.autocomplete.result.titleText
+      : 'What are you looking for?';
+    const resultShowDirectionsText = hasResultModeConfig
+      && this.props.autocomplete.result.showDirectionsText
+      ? this.props.autocomplete.result.showDirectionsText
+      : true;
+    const termTitleText = hasTermModeConfig && this.props.autocomplete.term.titleText
+      ? this.props.autocomplete.term.titleText
+      : 'Suggested search terms';
+    const termShowDirectionsText = hasTermModeConfig
+      && this.props.autocomplete.term.showDirectionsText
+      ? this.props.autocomplete.term.showDirectionsText
+      : true;
+
+    const titleText = mode === 'term' ? termTitleText : resultTitleText;
+    const directionsText = mode === 'term' ? termShowDirectionsText : resultShowDirectionsText;
+
     const suggestionsWrapperClasses = directionsText
       ? 'react-autosuggest__suggestions-itemslist-wrapper react-autosuggest__suggestions-itemslist-wrapper--with-directions'
       : 'react-autosuggest__suggestions-itemslist-wrapper';
@@ -324,7 +342,11 @@ FederatedTextSearchAsYouType.propTypes = {
       numChars: PropTypes.number,
       result: {
         titleText: PropTypes.string,
-        directionsText: PropTypes.bool,
+        showDirectionsText: PropTypes.bool,
+      },
+      term: {
+        titleText: PropTypes.string,
+        showDirectionsText: PropTypes.bool,
       },
     }),
     PropTypes.bool,
