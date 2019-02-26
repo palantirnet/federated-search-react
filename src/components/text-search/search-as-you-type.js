@@ -229,7 +229,7 @@ class FederatedTextSearchAsYouType extends React.Component {
     // Render plain text for search term suggestions.
     // @todo update this when we have a return structure for terms.
     if (mode === 'term') {
-      return <span>highlightedTitle</span>;
+      return (<span>highlightedTitle</span>);
     }
 
     // Defaults to result based autosuggestion.
