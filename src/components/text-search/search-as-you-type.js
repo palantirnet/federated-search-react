@@ -33,7 +33,9 @@ class FederatedTextSearchAsYouType extends React.Component {
 
   componentWillReceiveProps(nextProps) {
     this.setState({
-      value: nextProps.suggestQuery ? nextProps.suggestQuery.value : nextProps.value,
+      value: nextProps.suggestQuery && nextProps.suggestQuery.value
+        ? nextProps.suggestQuery.value
+        : nextProps.value,
       suggestions: nextProps.suggestions ? nextProps.suggestions.docs : this.state.suggestions,
     });
   }
