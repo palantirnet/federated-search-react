@@ -111,6 +111,16 @@ const init = (settings) => {
 
   const options = Object.assign(defaults, settings);
 
+  // Update searchFields to indicate which facets or filters should be hidden in the UI.
+  // Note: these facets and filters may still be used in the query.
+  settings.hiddenSearchFields = settings.hiddenSearchFields || [];
+  options.searchFields = options.searchFields.map(searchField => {
+    if (settings.hiddenSearchFields.includes(searchField.field)) {
+      searchField.isHidden = true;
+    }
+    return searchField;
+  });
+
   // The client class
   const solrClient = new SolrClient({
     url: options.url,
