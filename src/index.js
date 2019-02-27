@@ -85,11 +85,11 @@ const init = (settings) => {
     url: "",
     // The search fields and filterable facets.
     searchFields: [
-      {label: "Enter Search Term:", field: "tm_rendered_item", type: "text"},
-      {label: "Site Name", field: "sm_site_name", type: "list-facet", collapse: true},
-      {label: "Type", field: "ss_federated_type", type: "list-facet", collapse: true},
-      {label: "Date", field: "ds_federated_date", type: "range-facet", collapse: true},
-      {label: "Federated Terms", field: "sm_federated_terms", type: "list-facet", hierarchy: true},
+      {label: "Enter Search Term:", field: "tm_rendered_item", type: "text", isHidden: false},
+      {label: "Site Name", field: "sm_site_name", type: "list-facet", collapse: true, isHidden: false},
+      {label: "Type", field: "ss_federated_type", type: "list-facet", collapse: true, isHidden: false},
+      {label: "Date", field: "ds_federated_date", type: "range-facet", collapse: true, isHidden: false},
+      {label: "Federated Terms", field: "sm_federated_terms", type: "list-facet", hierarchy: true, isHidden: false},
     ],
     // The solr field to use as the source for the main query param "q".
     mainQueryField: "tm_rendered_item",
