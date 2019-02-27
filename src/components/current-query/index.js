@@ -165,7 +165,8 @@ class FederatedCurrentQuery extends React.Component {
                 <p className="element-invisible">
                   Click a filter to remove it from your search query.
                 </p>
-                {fields.map((searchField, i) => {
+                {/* Only render the values for visible facets / filters */}
+                {fields.filter(searchField => !searchField.isHidden).map((searchField, i) => {
                   // Determine which child component to render.
                   const MyFacetType = facetTypes[searchField.type];
                   return (
