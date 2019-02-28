@@ -1,8 +1,8 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import cx from 'classnames';
-import queryString from 'query-string';
 import AnimateHeight from 'react-animate-height';
+import helpers from '../../helpers';
 
 
 class FederatedListFacet extends React.Component {
@@ -17,54 +17,43 @@ class FederatedListFacet extends React.Component {
   }
 
   handleClick(value) {
-    const foundIdx = this.props.value.indexOf(value);
-    // Get existing querystring params.
-    const parsed = queryString.parse(window.location.search, { arrayFormat: 'bracket' });
-    const params = Object.entries(parsed);
+    const {
+      foundIdx,
+      parsed,
+      isQsParamField,
+      param,
+    } = helpers.qs.getFieldQsInfo({
+      field: this.props.field,
+      values: this.props.value,
+      value,
+    });
 
-    // Those filter fields for which we want to preserve state in qs.
-    // @todo handle parsing of terms and dates
-    // @todo store this in app config?
-    const filterFieldsWithQsState = [
-      'sm_site_name',
-      'ss_federated_type',
-      'sm_federated_terms',
-    ];
+    // console.log(foundIdx, parsed, isQsParamField, param);
 
-    const isQsParamField = filterFieldsWithQsState.find(item => item === this.props.field);
-    const param = params.find(item => item[0] === this.props.field);
+    // Define var for new parsed qs params object.
+    let newParsed = parsed;
 
     if (foundIdx < 0) {
-      // Add a param for this field to the parsed qs object.
       if (isQsParamField && param) {
-        // Handle single value params.
-        if (typeof param[1] !== 'object' && value !== param[1]) {
-          // Add the param for this field from the parsed qs object.
-          parsed[this.props.field] = value;
-        }
-        // Handle multi value params.
-        if (typeof param[1] === 'object' && !param[1].includes(value)) {
-          // Add the list item facet value to the param value.
-          param[1].push(value);
-          // Set the new param value.
-          parsed[this.props.field] = [...param[1]];
-        }
+        // Add value to parsed qs params.
+        newParsed = helpers.qs.addValueToQsParam({
+          field: this.props.field,
+          value,
+          param,
+          parsed,
+        });
       }
 
       // Send new query based on app state.
       this.props.onChange(this.props.field, this.props.value.concat(value));
     } else {
       if (isQsParamField && param) {
-        // Handle single value params.
-        if (typeof param[1] !== 'object' && value === param[1]) {
-          // Remove the param for this field from the parsed qs object.
-          delete parsed[this.props.field];
-        }
-        // Handle multi value params.
-        if (typeof param[1] === 'object' && param[1].includes(value)) {
-          // Remove the list facet value from the param.
-          parsed[this.props.field] = param[1].filter(item => item !== value);
-        }
+        newParsed = helpers.qs.removeValueFromQsParam({
+          field: this.props.field,
+          value,
+          param,
+          parsed,
+        });
       }
 
       // Send new query based on app state.
@@ -72,16 +61,7 @@ class FederatedListFacet extends React.Component {
     }
 
     if (isQsParamField) {
-      // Update the search querystring param with the value from the search field.
-      const stringified = queryString.stringify(parsed, { arrayFormat: 'bracket' });
-      // Update the querystring params in the browser, add path to history.
-      // See: https://developer.mozilla.org/en-US/docs/Web/API/History_API#The_pushState()_method
-      if (window.history.pushState) {
-        const newurl = `${window.location.protocol}//${window.location.host}${window.location.pathname}?${stringified}`;
-        window.history.pushState({ path: newurl }, '', newurl);
-      } else {
-        window.location.search = stringified;
-      }
+      helpers.qs.addNewUrlToBrowserHistory(newParsed);
     }
   }
 

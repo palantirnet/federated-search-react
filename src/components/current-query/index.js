@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import queryString from 'query-string';
 import moment from 'moment';
 import { LiveMessenger } from 'react-aria-live';
+import helpers from '../../helpers';
 
 
 // Create dumb component which can be configured by props.
@@ -19,46 +20,28 @@ const FacetType = props => (
 class ListFacetType extends React.Component {
   removeListFacetValue(field, values, value) {
     this.props.announcePolite(`Removed ${field.value} filter.`);
-    const foundIdx = values.indexOf(value);
-    // console.log(field, values, value);
-    // Get existing querystring params.
-    const parsed = queryString.parse(window.location.search, { arrayFormat: 'bracket' });
-    const params = Object.entries(parsed);
 
-    // Those filter fields for which we want to preserve state in qs.
-    // @todo handle parsing of terms and dates
-    // @todo store this in app config?
-    const filterFieldsWithQsState = [
-      'sm_site_name',
-      'ss_federated_type',
-      'sm_federated_terms',
-    ];
-
-    const isQsParamField = filterFieldsWithQsState.find(item => item === field);
-    const param = params.find(item => item[0] === field);
+    const {
+      foundIdx,
+      parsed,
+      isQsParamField,
+      param,
+    } = helpers.qs.getFieldQsInfo({
+      field,
+      values,
+      value,
+    });
 
     if (foundIdx > -1) {
       if (isQsParamField && param) {
-        // Handle single value params.
-        if (typeof param[1] !== 'object' && value === param[1]) {
-          // Remove the param for this field from the parsed qs object.
-          delete parsed[field];
-        }
-        // Handle multi value params.
-        if (typeof param[1] === 'object' && param[1].includes(value)) {
-          // Remove the clicked list item facet value.
-          parsed[field] = param[1].filter(item => item !== value);
-        }
-        // Update the search querystring param with the value from the search field.
-        const stringified = queryString.stringify(parsed, { arrayFormat: 'bracket' });
-        // Update the querystring params in the browser, add path to history.
-        // See: https://developer.mozilla.org/en-US/docs/Web/API/History_API#The_pushState()_method
-        if (window.history.pushState) {
-          const newurl = `${window.location.protocol}//${window.location.host}${window.location.pathname}?${stringified}`;
-          window.history.pushState({ path: newurl }, '', newurl);
-        } else {
-          window.location.search = stringified;
-        }
+        const newParsed = helpers.qs.removeValueFromQsParam({
+          field,
+          value,
+          param,
+          parsed,
+        });
+
+        helpers.qs.addNewUrlToBrowserHistory(newParsed);
       }
 
       // Send query based on new state.
