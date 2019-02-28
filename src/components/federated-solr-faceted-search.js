@@ -82,8 +82,11 @@ class FederatedSolrFacetedSearch extends React.Component {
               onNewSearch={this.resetFilters.bind(this)}
               resultsCount={this.props.results.numFound}
             >
+              {/* Only render the visible facets / filters.
+                  Note: their values may still be used in the query, if they were pre-set. */}
               {searchFields
-                .filter(searchField => this.props.sidebarFilters.indexOf(searchField.field) > -1)
+                .filter(searchField => this.props.sidebarFilters.indexOf(searchField.field) > -1
+                  && !searchField.isHidden)
                 .map((searchField, i) => {
                   const {
                     type,
