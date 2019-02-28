@@ -28,39 +28,44 @@ class FederatedListFacet extends React.Component {
       value,
     });
 
-    // console.log(foundIdx, parsed, isQsParamField, param);
-
     // Define var for new parsed qs params object.
     let newParsed = parsed;
 
-    if (foundIdx < 0) {
-      if (isQsParamField && param) {
-        // Add value to parsed qs params.
-        newParsed = helpers.qs.addValueToQsParam({
-          field: this.props.field,
-          value,
-          param,
-          parsed,
-        });
-      }
-
-      // Send new query based on app state.
-      this.props.onChange(this.props.field, this.props.value.concat(value));
-    } else {
-      if (isQsParamField && param) {
-        newParsed = helpers.qs.removeValueFromQsParam({
-          field: this.props.field,
-          value,
-          param,
-          parsed,
-        });
-      }
-
-      // Send new query based on app state.
-      this.props.onChange(this.props.field, this.props.value.filter((v, i) => i !== foundIdx));
-    }
-
     if (isQsParamField) {
+      if (foundIdx < 0) {
+        if (param) {
+          // Add value to parsed qs params.
+          newParsed = helpers.qs.addValueToQsParam({
+            field: this.props.field,
+            value,
+            param,
+            parsed,
+          });
+        } else {
+          // Add new qs param for field + value.
+          newParsed = helpers.qs.addQsParam({
+            field: this.props.field,
+            value,
+            parsed,
+          });
+        }
+
+        // Send new query based on app state.
+        this.props.onChange(this.props.field, this.props.value.concat(value));
+      } else {
+        if (param) {
+          newParsed = helpers.qs.removeValueFromQsParam({
+            field: this.props.field,
+            value,
+            param,
+            parsed,
+          });
+        }
+
+        // Send new query based on app state.
+        this.props.onChange(this.props.field, this.props.value.filter((v, i) => i !== foundIdx));
+      }
+
       helpers.qs.addNewUrlToBrowserHistory(newParsed);
     }
   }

@@ -45,15 +45,12 @@ const qs = {
     const foundIdx = values.indexOf(value);
     // Get existing querystring params.
     const { parsed, params } = qs.getParsedQsAndParams();
-    console.log(parsed, params);
 
     // Check if the search field is one for which we preserve state through qs.
     const isQsParamField = filterFieldsWithQsState.find(item => item === field);
-    console.log(isQsParamField);
 
     // Check if the filter field exists in qs param.
     const param = params.find(item => item[0] === field);
-    console.log(param);
 
     return {
       foundIdx,
@@ -80,6 +77,24 @@ const qs = {
       param[1].push(value);
       // Set the new param value.
       newParsed[field] = [...param[1]];
+    }
+    return newParsed;
+  },
+  addQsParam: ({
+    field,
+    value,
+    parsed,
+  }) => {
+    const newParsed = parsed;
+    // Handle single value params.
+    if (typeof value !== 'object') {
+      // Add the param for this field from the parsed qs object.
+      newParsed[field] = value;
+    }
+    // Handle multi value params.
+    if (typeof value === 'object') {
+      // Set the new param value.
+      newParsed[field] = [value];
     }
     return newParsed;
   },
