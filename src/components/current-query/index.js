@@ -20,8 +20,10 @@ class ListFacetType extends React.Component {
   removeListFacetValue(field, values, value) {
     this.props.announcePolite(`Removed ${field.value} filter.`);
     const foundIdx = values.indexOf(value);
+    // console.log(field, values, value);
     // Get existing querystring params.
-    const parsed = queryString.parse(window.location.search);
+    const parsed = queryString.parse(window.location.search, { arrayFormat: 'bracket' });
+    const params = Object.entries(parsed);
 
     // Those filter fields for which we want to preserve state in qs.
     // @todo handle parsing of terms and dates
@@ -29,16 +31,26 @@ class ListFacetType extends React.Component {
     const filterFieldsWithQsState = [
       'sm_site_name',
       'ss_federated_type',
+      'sm_federated_terms',
     ];
 
     const isQsParamField = filterFieldsWithQsState.find(item => item === field);
+    const param = params.find(item => item[0] === field);
 
     if (foundIdx > -1) {
-      if (isQsParamField) {
-        // Remove the param for this field from the parsed qs object.
-        delete parsed[field];
+      if (isQsParamField && param) {
+        // Handle single value params.
+        if (typeof param[1] !== 'object' && value === param[1]) {
+          // Remove the param for this field from the parsed qs object.
+          delete parsed[field];
+        }
+        // Handle multi value params.
+        if (typeof param[1] === 'object' && param[1].includes(value)) {
+          // Remove the clicked list item facet value.
+          parsed[field] = param[1].filter(item => item !== value);
+        }
         // Update the search querystring param with the value from the search field.
-        const stringified = queryString.stringify(parsed);
+        const stringified = queryString.stringify(parsed, { arrayFormat: 'bracket' });
         // Update the querystring params in the browser, add path to history.
         // See: https://developer.mozilla.org/en-US/docs/Web/API/History_API#The_pushState()_method
         if (window.history.pushState) {
