@@ -19,8 +19,10 @@ import './styles.css';
  *   Config options, used to determine initial site search name
  */
 const searchFromQuerystring = (solrClient, options = {}) => {
-  // Get the qs params, break into array of [key,value] pairs
-  const parsed = queryString.parse(window.location.search);
+  // Get the qs params, break into array of [key,value] pairs.
+  // Params with multiple values (i.e. federated terms) use the following syntax:
+  // ...&sm_federated_terms[]=value1&sm_federated_terms[]=value2
+  const parsed = queryString.parse(window.location.search, { arrayFormat: 'bracket' });
   const params = Object.entries(parsed);
 
   let searchFieldsState = solrClient.state.query.searchFields;
@@ -41,7 +43,8 @@ const searchFromQuerystring = (solrClient, options = {}) => {
       // @todo store this in app config?
       const filterFieldsWithQsState = [
         "sm_site_name",
-        "ss_federated_type"
+        "ss_federated_type",
+        "sm_federated_terms",
       ];
 
       // If the searchField is one for which we preserve state through qs.
@@ -54,8 +57,16 @@ const searchFromQuerystring = (solrClient, options = {}) => {
           searchField.value = searchField.value || [];
           // Don't add qs param values if they're already set in app state.
           // i.e. don't set the value twice
-          if (!searchField.value.find((item) => item === param[1])) {
-            searchField.value.push(param[1]);
+          // Push single values onto the searchField.value array.
+          if (typeof param[1] !== 'object' && !searchField.value.find((item) => item === param[1])) {
+            searchField.value.push(decodeURI(param[1]));
+          }
+          // Concatenate existing searchField.value array with multivalue param array..
+          if (typeof param[1] === 'object' && searchField.value !== param[1]) {
+            // Decode param values.
+            const decodedParam = param[1].map(item => decodeURI(item));
+            // Set the searchField.value to the new decoded param values.
+            searchField.value = [...decodedParam];
           }
         }
         // If the searchField does not have qs param present, clear its value in state.
