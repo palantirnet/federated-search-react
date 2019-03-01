@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { LiveAnnouncer } from 'react-aria-live';
 import FederatedSolrComponentPack from './federated_solr_component_pack';
+import helpers from '../helpers';
 //import componentPack from "./component-pack";
 
 const getFacetValues = (type, results, field, lowerBound, upperBound) => {
@@ -13,16 +14,40 @@ const getFacetValues = (type, results, field, lowerBound, upperBound) => {
 };
 
 class FederatedSolrFacetedSearch extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.resetFilters = this.resetFilters.bind(this);
+  }
+
   resetFilters() {
-    let {query} = this.props;
+    let { query } = this.props;
+    let searchTerm = '';
     // Keep only the value of the main search field.
-    for (let field of query.searchFields) {
+    for (const field of query.searchFields) {
       if (field.field !== query.mainQueryField) {
-        delete(field.value);
+        // Remove the field value.
+        delete (field.value);
+        // Collapse the sidebar filter toggle.
+        field.collapse = true;
+        // Collapse the terms sidebar filter toggle.
+        if (Object.hasOwnProperty.call(field, 'expandedHierarchies')) {
+          field.expandedHierarchies = [];
+        }
+      } else {
+        // Extract the value of the main search term to use when setting new URL for this state.
+        searchTerm = field.value;
       }
     }
+    // Set new parsed params based on only search term value.
+    const parsed = {
+      search: searchTerm,
+    };
+    // Add new url to browser window history.
+    helpers.qs.addNewUrlToBrowserHistory(parsed);
+
     // Update state to remove the filter field values.
-    this.setState({query});
+    this.setState({ query });
     // Execute search.
     this.props.onSearchFieldChange();
   }
@@ -79,7 +104,7 @@ class FederatedSolrFacetedSearch extends React.Component {
           <aside className="l-25-75--1">
             <SearchFieldContainerComponent
               bootstrapCss={bootstrapCss}
-              onNewSearch={this.resetFilters.bind(this)}
+              onNewSearch={this.resetFilters}
               resultsCount={this.props.results.numFound}
             >
               {/* Only render the visible facets / filters.

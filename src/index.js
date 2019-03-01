@@ -1,11 +1,11 @@
 // index.js
 import 'babel-polyfill';
-import queryString from "query-string";
-import React from "react";
-import ReactDOM from "react-dom";
-import { SolrClient } from "./solr-faceted-search-react/src/index";
-import FederatedSolrComponentPack from "./components/federated_solr_component_pack";
-import FederatedSolrFacetedSearch from "./components/federated-solr-faceted-search";
+import React from 'react';
+import ReactDOM from 'react-dom';
+import { SolrClient } from './solr-faceted-search-react/src/index';
+import FederatedSolrComponentPack from './components/federated_solr_component_pack';
+import FederatedSolrFacetedSearch from './components/federated-solr-faceted-search';
+import helpers from './helpers';
 
 // import search app boilerplate styles
 import './styles.css';
@@ -19,63 +19,32 @@ import './styles.css';
  *   Config options, used to determine initial site search name
  */
 const searchFromQuerystring = (solrClient, options = {}) => {
-  // Get the qs params, break into array of [key,value] pairs
-  const parsed = queryString.parse(window.location.search);
-  const params = Object.entries(parsed);
+  // Get existing querystring params.
+  const { parsed, params } = helpers.qs.getParsedQsAndParams();
 
   let searchFieldsState = solrClient.state.query.searchFields;
 
-  // The querystring key for search terms is 'search' (i.e. ?search=search%20term)
-  if (Object.prototype.hasOwnProperty.call(parsed,'search')) {
+  // Set the state for searchFields based on qs params.
+  searchFieldsState.forEach((searchField) => {
+    // Get the field machine name for the main query field.
+    if (Object.prototype.hasOwnProperty.call(options,'mainQueryField') && searchField.field === options.mainQueryField) {
+      // Set the state of the main query field to the value of the search qs param
+      searchField.value = parsed.search;
+    }
 
-    // Set the state for searchFields based on qs params.
-    searchFieldsState.forEach((searchField) => {
-      // Get the field machine name for the main query field.
-      if (Object.prototype.hasOwnProperty.call(options,'mainQueryField') && searchField.field === options.mainQueryField) {
-        // Set the state of the main query field to the value of the search qs param
-        searchField.value = parsed.search;
-      }
+    // If the searchField is one for which we preserve state through qs.
+    if (helpers.filterFieldsWithQsState.find((filterField) => filterField === searchField.field )) {
+      searchField = helpers.qs.setFieldStateFromQs({
+        params,
+        searchField
+      })
+    }
+  });
 
-      // Define those filter fields for which we want to preserve state in qs.
-      // @todo handle parsing of terms and dates
-      // @todo store this in app config?
-      const filterFieldsWithQsState = [
-        "sm_site_name",
-        "ss_federated_type"
-      ];
-
-      // If the searchField is one for which we preserve state through qs.
-      if (filterFieldsWithQsState.find((filterField) => filterField === searchField.field )) {
-        // Check if the filter field exists in qs params.
-        const param = params.find((item) => item[0] === searchField.field);
-        // If searchField has corresponding qs param present.
-        if (param) {
-          // Ensure we can push to searchField value.
-          searchField.value = searchField.value || [];
-          // Don't add qs param values if they're already set in app state.
-          // i.e. don't set the value twice
-          if (!searchField.value.find((item) => item === param[1])) {
-            searchField.value.push(param[1]);
-          }
-        }
-        // If the searchField does not have qs param present, clear its value in state.
-        else {
-          delete searchField.value;
-        }
-      }
-    });
-
-    // Ensure the initial query succeeds by setting a default start value.
-    solrClient.state.query.start = solrClient.state.query.start || 0;
-    // Send query based on state derived from querystring.
-    solrClient.sendQuery(solrClient.state.query);
-  }
-  // Reset search fields, fetches all results from solr. Note: results will be hidden
-  // since there is no search term.  See: federated-solr-faceted-search where
-  // ResultContainerComponent is rendered.
-  else {
-    solrClient.resetSearchFields();
-  }
+  // Ensure the initial query succeeds by setting a default start value.
+  solrClient.state.query.start = solrClient.state.query.start || 0;
+  // Send query based on state derived from querystring.
+  solrClient.sendQuery(solrClient.state.query);
 };
 
 // Initialize the solr client + search app with settings.
@@ -89,7 +58,7 @@ const init = (settings) => {
       {label: "Site Name", field: "sm_site_name", type: "list-facet", collapse: true, isHidden: false},
       {label: "Type", field: "ss_federated_type", type: "list-facet", collapse: true, isHidden: false},
       {label: "Date", field: "ds_federated_date", type: "range-facet", collapse: true, isHidden: false},
-      {label: "Federated Terms", field: "sm_federated_terms", type: "list-facet", hierarchy: true, isHidden: false},
+      {label: "Federated Terms", field: "sm_federated_terms", type: "list-facet", hierarchy: true, expandedHierarchies: [], isHidden: false},
     ],
     // The solr field to use as the source for the main query param "q".
     mainQueryField: "tm_rendered_item",
