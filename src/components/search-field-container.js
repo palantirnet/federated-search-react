@@ -1,11 +1,10 @@
 import PropTypes from 'prop-types';
-import React from "react";
-import cx from "classnames";
+import React from 'react';
+import cx from 'classnames';
 import AnimateHeight from 'react-animate-height';
 
 
 class FederatedSearchFieldContainer extends React.Component {
-
   constructor(props) {
     super(props);
 
@@ -14,14 +13,16 @@ class FederatedSearchFieldContainer extends React.Component {
 
     this.state = {
       // Filters are visible for large / hidden for small screens by default.
-      expanded: intFrameWidth > 900
+      expanded: intFrameWidth > 900,
     };
+
+    this.handleClick = this.handleClick.bind(this);
   }
 
   handleClick() {
     this.setState({
-      expanded: !this.state.expanded
-    })
+      expanded: !this.state.expanded,
+    });
   }
 
   render() {
@@ -30,10 +31,17 @@ class FederatedSearchFieldContainer extends React.Component {
 
     return (
       <div className="search-filters">
-        <button className={cx("search-filters__trigger", {"js-search-filters-open": this.state.expanded})} onClick={this.handleClick.bind(this)}>Filter Results</button>
+        <button
+          className={cx('search-filters__trigger', {
+            'js-search-filters-open': this.state.expanded,
+          })}
+          onClick={this.handleClick}
+        >
+            Filter Results
+        </button>
         <AnimateHeight
-            duration={450}
-            height={height}
+          duration={450}
+          height={height}
         >
           <form className="search-filters__form">
             <section className="search-accordion" aria-labelledby="section-title">
@@ -57,7 +65,7 @@ class FederatedSearchFieldContainer extends React.Component {
 
 FederatedSearchFieldContainer.propTypes = {
   children: PropTypes.array,
-  onNewSearch: PropTypes.func
+  onNewSearch: PropTypes.func,
 };
 
 export default FederatedSearchFieldContainer;
