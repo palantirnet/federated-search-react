@@ -86,13 +86,16 @@ const qs = {
     parsed,
   }) => {
     const newParsed = parsed;
+    const fieldType = field.split('_')[0];
+    const isMultiple = fieldType.charAt(fieldType.length - 1);
+
     // Handle single value params.
-    if (typeof value !== 'object') {
+    if (!isMultiple) {
       // Add the param for this field from the parsed qs object.
       newParsed[field] = value;
     }
     // Handle multi value params.
-    if (typeof value === 'object') {
+    if (isMultiple) {
       // Set the new param value.
       newParsed[field] = [value];
     }
