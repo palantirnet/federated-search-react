@@ -31,8 +31,11 @@ class FederatedListFacet extends React.Component {
     // Define var for new parsed qs params object.
     let newParsed = parsed;
 
+    // If the clicked list facet field is one whose state is tracked in the qs.
     if (isQsParamField) {
+      // If the click is adding the field value.
       if (foundIdx < 0) {
+        // If there is already a qs param for this field value.
         if (param) {
           // Add value to parsed qs params.
           newParsed = helpers.qs.addValueToQsParam({
@@ -41,7 +44,7 @@ class FederatedListFacet extends React.Component {
             param,
             parsed,
           });
-        } else {
+        } else { // If there is not already a qs param for this field value.
           // Add new qs param for field + value.
           newParsed = helpers.qs.addQsParam({
             field: this.props.field,
@@ -52,7 +55,8 @@ class FederatedListFacet extends React.Component {
 
         // Send new query based on app state.
         this.props.onChange(this.props.field, this.props.value.concat(value));
-      } else {
+      } else { // If the click is removing this field value.
+        // If their is already a qs param for this field value.
         if (param) {
           newParsed = helpers.qs.removeValueFromQsParam({
             field: this.props.field,

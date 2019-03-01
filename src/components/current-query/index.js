@@ -32,7 +32,9 @@ class ListFacetType extends React.Component {
       value,
     });
 
+    // Confirm the field value is set in state.
     if (foundIdx > -1) {
+      // If the field is one whose state is tracked in qs and there is currently a param for it.
       if (isQsParamField && param) {
         const newParsed = helpers.qs.removeValueFromQsParam({
           field,

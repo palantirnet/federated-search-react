@@ -31,9 +31,13 @@ const filterFieldsWithQsState = [
 ];
 
 const qs = {
-  // Get the qs params, break into array of [key,value] pairs.
-  // Params with multiple values (i.e. federated terms) use the following syntax:
-  // ...&sm_federated_terms[]=value1&sm_federated_terms[]=value2
+  /**
+   * Gets the qs params as an object and broken into array of [key,value] pairs.
+   * Params with multiple values (i.e. federated terms) use the following syntax:
+   * ...&sm_federated_terms[]=value1&sm_federated_terms[]=value2
+   *
+   * @returns {{parsed: (*|*|*), params: [string, any][]}}
+   */
   getParsedQsAndParams: () => {
     const parsed = queryString.parse(window.location.search, { arrayFormat: 'bracket' });
     return {
@@ -41,7 +45,25 @@ const qs = {
       params: Object.entries(parsed),
     };
   },
+  /**
+   * Determines information related this search field, its value, and state.
+   *
+   * @param field
+   *   this.props.query.searchField.field (i.e. the solr field name)
+   * @param values
+   *   this.props.query.searchField.value (i.e. the current value for the field)
+   * @param value
+   *   The value of the field with which interaction has happened.
+   * @returns object
+   *   An object with:
+   *     foundIdx: the position of the field value in question found in this field's state,
+   *     parsed: an object with parsed qs params and their values,
+   *     isQsParamField: whether or not the field in question should track state in the qs,
+   *     param: an object with the as param and value for this field, if it exists
+   */
   getFieldQsInfo: ({ field, values, value }) => {
+    // Determine if the field value in question exists in this search field's state.
+    // i.e. was it toggled on or off?
     const foundIdx = values.indexOf(value);
     // Get existing querystring params.
     const { parsed, params } = qs.getParsedQsAndParams();
@@ -59,6 +81,20 @@ const qs = {
       param,
     };
   },
+  /**
+   * Updates the parsed object by adding the field value in question to its param key.
+   *
+   * @param field
+   *   this.props.query.searchField.field (i.e. the solr field name)
+   * @param value
+   *   The value of the field with which interaction has happened.
+   * @param param
+   *   An object with the as param and value for this field, if it exists.
+   * @param parsed
+   *   An object with parsed qs params and their values.
+   * @returns Object
+   *   An updated parsed object with the field value in question added.
+   */
   addValueToQsParam: ({
     field,
     value,
@@ -80,6 +116,21 @@ const qs = {
     }
     return newParsed;
   },
+  /**
+   * Updates the parsed object by adding the field and its value to the
+   *   current object of params and their values.
+   *
+   * @param field
+   *   this.props.query.searchField.field (i.e. the solr field name)
+   * @param value
+   *   The value of the field with which interaction has happened.
+   * @param param
+   *   An object with the as param and value for this field, if it exists.
+   * @param parsed
+   *   An object with parsed qs params and their values.
+   * @returns Object
+   *   An updated parsed object with the field + value added.
+   */
   addQsParam: ({
     field,
     value,
@@ -101,6 +152,20 @@ const qs = {
     }
     return newParsed;
   },
+  /**
+   * Updates the parsed object by removing the field value in question to its param key.
+   *
+   * @param field
+   *   this.props.query.searchField.field (i.e. the solr field name)
+   * @param value
+   *   The value of the field with which interaction has happened.
+   * @param param
+   *   An object with the as param and value for this field, if it exists.
+   * @param parsed
+   *   An object with parsed qs params and their values.
+   * @returns Object
+   *   An updated parsed object with the field value in question removed.
+   */
   removeValueFromQsParam: ({
     field,
     value,
@@ -122,6 +187,12 @@ const qs = {
 
     return newParsed;
   },
+  /**
+   * Updates the browser window.history with an entry based on the new parsed qs params and values.
+   *
+   * @param parsed
+   *   An object with parsed qs params and their values.
+   */
   addNewUrlToBrowserHistory: (parsed) => {
     // Update the search querystring param with the value from the search field.
     const stringified = queryString.stringify(parsed, { arrayFormat: 'bracket' });
@@ -134,6 +205,17 @@ const qs = {
       window.location.search = stringified;
     }
   },
+  /**
+   * Sets query.searchFields state based on the state of the qs.
+   * Allows searches to be executed on app load based on URL.
+   *
+   * @param params
+   *   QS params broken into array of [key,value] pairs.
+   * @param searchField
+   *   Search field in question. (this.props.query.searchField)
+   * @returns Object
+   *   Updated this.props.query.searchField based on qs param values.
+   */
   setFieldStateFromQs: ({
     params,
     searchField,
@@ -141,7 +223,7 @@ const qs = {
     // Make a copy of the searchField arg.
     const newSearchField = searchField;
     // Check if the filter field exists in qs params.
-    const param = params.find((item) => item[0] === searchField.field);
+    const param = params.find(item => item[0] === searchField.field);
     // If searchField has corresponding qs param present.
     if (param) {
       // Ensure we can push to searchField value.
