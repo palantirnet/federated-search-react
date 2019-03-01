@@ -138,7 +138,7 @@ const qs = {
   }) => {
     const newParsed = parsed;
     const fieldType = field.split('_')[0];
-    const isMultiple = fieldType.charAt(fieldType.length - 1);
+    const isMultiple = fieldType.charAt(fieldType.length - 1) === 'm';
 
     // Handle single value params.
     if (!isMultiple) {
@@ -150,6 +150,7 @@ const qs = {
       // Set the new param value.
       newParsed[field] = [value];
     }
+    console.log(newParsed);
     return newParsed;
   },
   /**
