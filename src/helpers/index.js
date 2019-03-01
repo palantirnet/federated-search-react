@@ -150,7 +150,6 @@ const qs = {
       // Set the new param value.
       newParsed[field] = [value];
     }
-    console.log(newParsed);
     return newParsed;
   },
   /**
@@ -225,8 +224,13 @@ const qs = {
     const newSearchField = searchField;
     // Check if the filter field exists in qs params.
     const param = params.find(item => item[0] === searchField.field);
+    // Check if the filter field is sm_federated_terms.
     // If searchField has corresponding qs param present.
     if (param) {
+      // Since there is a param for this search field, set it's toggle group to be open.
+      // Note: sm_federated_terms needs to list active "parents".
+      // See below in logic for multivalue fields.
+      newSearchField.collapse = false;
       // Ensure we can push to searchField value.
       newSearchField.value = searchField.value || [];
       // Don't add qs param values if they're already set in app state.
@@ -236,6 +240,16 @@ const qs = {
       }
       // Concatenate existing searchField.value array with multivalue param array..
       if (typeof param[1] === 'object' && searchField.value !== param[1]) {
+        const isFederatedTerms = searchField.field === 'sm_federated_terms';
+        if (isFederatedTerms) {
+          const expandedHierarchies = [];
+          param[1].forEach((item) => {
+            // Add the first part of the term to indicate it's toggle should be open.
+            expandedHierarchies.push(item.split('>')[0]);
+          });
+          // Set tm_federated_terms expanded hierarchies.
+          newSearchField.expandedHierarchies = expandedHierarchies;
+        }
         // Decode param values.
         const decodedParam = param[1].map(item => decodeURI(item));
         // Set the searchField.value to the new decoded param values.
@@ -244,6 +258,8 @@ const qs = {
     } else {
       // If the searchField does not have qs param present, clear its value in state.
       delete newSearchField.value;
+      // Set its sidebar toggle group to be closed.
+      newSearchField.collapse = true;
     }
 
     return newSearchField;
