@@ -13,16 +13,22 @@ const getFacetValues = (type, results, field, lowerBound, upperBound) => {
 };
 
 class FederatedSolrFacetedSearch extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.resetFilters = this.resetFilters.bind(this);
+  }
+
   resetFilters() {
-    let {query} = this.props;
+    let { query } = this.props;
     // Keep only the value of the main search field.
-    for (let field of query.searchFields) {
+    for (const field of query.searchFields) {
       if (field.field !== query.mainQueryField) {
         delete(field.value);
       }
     }
     // Update state to remove the filter field values.
-    this.setState({query});
+    this.setState({ query });
     // Execute search.
     this.props.onSearchFieldChange();
   }
@@ -79,7 +85,7 @@ class FederatedSolrFacetedSearch extends React.Component {
           <aside className="l-25-75--1">
             <SearchFieldContainerComponent
               bootstrapCss={bootstrapCss}
-              onNewSearch={this.resetFilters.bind(this)}
+              onNewSearch={this.resetFilters}
               resultsCount={this.props.results.numFound}
             >
               {/* Only render the visible facets / filters.
