@@ -7410,7 +7410,7 @@ sockjs@0.3.18:
 
 "solr-faceted-search-react@git+ssh://git@github.com:palantirnet/solr-faceted-search-react#root-138-autocomplete":
   version "0.12.1"
-  resolved "git+ssh://git@github.com:palantirnet/solr-faceted-search-react#82eb9366e0650b43be57565139da296ffc62e565"
+  resolved "git+ssh://git@github.com:palantirnet/solr-faceted-search-react#f0df9079a3a0e56d866ff2640c780decc645617a"
   dependencies:
     classnames "^2.2.5"
     prop-types "^15.6.1"

@@ -178,14 +178,14 @@ class FederatedTextSearchAsYouType extends React.Component {
       ? this.props.autocomplete.result.titleText
       : 'What are you looking for?';
     const resultShowDirectionsText = hasResultModeConfig
-      && this.props.autocomplete.result.showDirectionsText
+      && Object.hasOwnProperty.call(this.props.autocomplete.result, 'showDirectionsText')
       ? this.props.autocomplete.result.showDirectionsText
       : true;
     const termTitleText = hasTermModeConfig && this.props.autocomplete.term.titleText
       ? this.props.autocomplete.term.titleText
       : 'Suggested search terms';
     const termShowDirectionsText = hasTermModeConfig
-      && this.props.autocomplete.term.showDirectionsText
+      && Object.hasOwnProperty.call(this.props.autocomplete.term, 'showDirectionsText')
       ? this.props.autocomplete.term.showDirectionsText
       : true;
 
