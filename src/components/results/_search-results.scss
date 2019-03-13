@@ -12,12 +12,6 @@
     margin-bottom: rhythm(1);
     display: flex;
   }
-
-  em {
-    font-style: normal;
-    font-weight: 700;
-    background-color: transparentize($c-secondary, .7);
-  }
 }
 
 .search-results__container--left {
@@ -34,19 +28,14 @@
 }
 
 .search-results__label {
-  @include adjust-font-size-to($label, .7);
-  font-weight: 500;
   color: $gray-medium;
   display: block;
 }
 
 .search-results__heading {
-  font-weight: 700;
-  @include trailer(.25, $h3-font-size);
   margin-bottom: .33333em;
   margin-top: .25em;
   padding: 0;
-  line-height: calc(100% + 50%);
 }
 
 .search-results__heading-link {
@@ -54,8 +43,6 @@
  * 1. Remove the gray background on active links in IE 10.
  * 2. Remove gaps in links underline in iOS 8+ and Safari 8+.
  */
-  @include trans();
-  background-color: transparent; /* 1 */
   /* stylelint-disable property-no-vendor-prefix */
   -webkit-text-decoration-skip: objects; /* 2 */
   /* stylelint-enable */
@@ -70,8 +57,6 @@
   &:hover {
     outline-width: 0;
     color: $link-hover;
-    background-color: $gray-light;
-    border-bottom: 2px solid $link-hover;
   }
 }
 
@@ -80,7 +65,6 @@
 }
 
 .search-results__meta {
-  @include adjust-font-size-to($label, .8);
   margin-bottom: rhythm(.5);
   color: $gray-medium;
   display: block;

@@ -1386,11 +1386,6 @@ aside {
   margin-bottom: 1.46667em;
   display: flex; }
 
-.search-results em {
-  font-style: normal;
-  font-weight: 700;
-  background-color: rgba(0, 0, 255, 0.3); }
-
 .search-results__container--left {
   flex: 1 0 0;
   margin-right: 3%; }
@@ -1399,28 +1394,19 @@ aside {
   flex: 3 0 0; }
 
 .search-results__label {
-  font-size: 0.8em;
-  line-height: 1.28333em;
-  font-weight: 500;
   color: #555;
   display: block; }
 
 .search-results__heading {
-  font-weight: 700;
-  margin-bottom: 0.36667em;
   margin-bottom: .33333em;
   margin-top: .25em;
-  padding: 0;
-  line-height: calc(100% + 50%); }
+  padding: 0; }
 
 .search-results__heading-link {
   /**
  * 1. Remove the gray background on active links in IE 10.
  * 2. Remove gaps in links underline in iOS 8+ and Safari 8+.
  */
-  transition: all 0.3s ease;
-  background-color: transparent;
-  /* 1 */
   /* stylelint-disable property-no-vendor-prefix */
   -webkit-text-decoration-skip: objects;
   /* 2 */
@@ -1433,16 +1419,12 @@ aside {
    */ }
   .search-results__heading-link:active, .search-results__heading-link:hover {
     outline-width: 0;
-    color: black;
-    background-color: #e5e5e5;
-    border-bottom: 2px solid black; }
+    color: black; }
 
 .search-results__teaser {
   margin-bottom: 0.73333em; }
 
 .search-results__meta {
-  font-size: 0.8em;
-  line-height: 1.46667em;
   margin-bottom: 0.73333em;
   color: #555;
   display: block; }
@@ -1557,8 +1539,6 @@ aside {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  border-radius: 3px;
-  background-color: #eff0f1;
   padding: 0 2.93333em;
   margin: 4.4em 0; }
   @media (min-width: 450px) {
@@ -1577,62 +1557,26 @@ aside {
   @media (min-width: 900px) {
     .search-pager__item {
       margin-right: 0.36667em; } }
-
-.search-pager__item.is-active .search-pager__item-link {
-  font-size: 1em;
-  line-height: 1.46667em; }
-  @media (min-width: 450px) {
-    .search-pager__item.is-active .search-pager__item-link {
-      background-color: #737373;
-      color: #fff; }
-      .search-pager__item.is-active .search-pager__item-link:hover, .search-pager__item.is-active .search-pager__item-link:active {
-        background-color: black; } }
-
-.search-pager__item.not-active .search-pager__item-link {
-  display: none; }
-  @media (min-width: 450px) {
-    .search-pager__item.not-active .search-pager__item-link {
-      display: inline-block; } }
+  .search-pager__item.is-active .search-pager__item-link {
+    font-weight: bold; }
+  .search-pager__item.not-active .search-pager__item-link {
+    display: none; }
+    @media (min-width: 450px) {
+      .search-pager__item.not-active .search-pager__item-link {
+        display: inline-block; } }
 
 .search-pager__item-link {
-  transition: all 0.3s ease;
-  font-size: 0.9em;
-  line-height: 1.62963em;
-  font-weight: 700;
   display: flex;
   justify-content: center;
   align-items: center;
   border: 0;
   text-align: center;
   padding: 0.36667em; }
-  @media (min-width: 450px) {
-    .search-pager__item-link {
-      background-color: #0000ff;
-      color: #fff;
-      border-radius: 3px;
-      width: 2.2em;
-      height: 2.2em;
-      padding: 0; } }
-  @media (min-width: 900px) {
-    .search-pager__item-link {
-      font-size: 0.8em;
-      line-height: 1.65em;
-      width: 1.76em;
-      height: 1.76em; } }
-  .search-pager__item-link:hover, .search-pager__item-link:active {
-    text-decoration: underline;
-    color: #fff;
-    background-color: #0000ff; }
-    @media (min-width: 450px) {
-      .search-pager__item-link:hover, .search-pager__item-link:active {
-        font-size: 1em;
-        line-height: 1.46667em;
-        background-color: navy; } }
-    .search-pager__item-link:hover svg, .search-pager__item-link:active svg {
-      fill: black; }
+  .search-pager__item-link:hover svg, .search-pager__item-link:active svg {
+    fill: black; }
   .search-pager__item-link svg {
     height: 1.3em;
-    fill: #fff;
+    fill: #222;
     display: block; }
     @media (min-width: 450px) {
       .search-pager__item-link svg {
@@ -1645,8 +1589,6 @@ aside {
  * @copyright Copyright (c) 2017 Palantir.net
  */
 .search-results-stat {
-  font-size: 0.9em;
-  line-height: 1.62963em;
   color: #555; }
   .search-results-stat:focus {
     outline: 0; }

@@ -13,8 +13,6 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  border-radius: 3px;
-  background-color: $gray-pale;
   padding: 0 rhythm(2);
   margin: rhythm(3) 0;
 
@@ -38,36 +36,22 @@
   @include breakpoint($bp2) {
     margin-right: rhythm(.25);
   }
-}
 
-// Active page
-.search-pager__item.is-active .search-pager__item-link {
-  @include adjust-font-size-to($text, 1);
-
-  @include breakpoint($bp0) {
-    background-color: $link-color;
-    color: $white;
-
-    &:hover,
-    &:active {
-      background-color: $c-primary-dark;
-    }
+  &.is-active .search-pager__item-link {
+    font-weight: bold;
   }
-}
 
-.search-pager__item.not-active .search-pager__item-link {
-  display: none;
+  &.not-active .search-pager__item-link {
+    display: none;
 
-  @include breakpoint($bp0) {
-    display: inline-block;
+    @include breakpoint($bp0) {
+      display: inline-block;
+    }
   }
 }
 
 // Link styles
 .search-pager__item-link {
-  @include trans();
-  @include adjust-font-size-to(.9em, 1);
-  font-weight: 700;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -75,32 +59,8 @@
   text-align: center;
   padding: rhythm(.25);
 
-  @include breakpoint($bp0) {
-    background-color: $c-secondary;
-    color: $white;
-    border-radius: 3px;
-    width: rhythm(1.5);
-    height: rhythm(1.5);
-    padding: 0;
-  }
-
-  @include breakpoint($bp2) {
-    @include adjust-font-size-to($label, .9);
-    width: rhythm(1.2);
-    height: rhythm(1.2);
-  }
-
   &:hover,
   &:active {
-    text-decoration: underline;
-    color: $white;
-    background-color: $c-secondary;
-
-    @include breakpoint($bp0) {
-      @include adjust-font-size-to($text, 1);
-      background-color: $c-secondary-dark;
-    }
-
     svg {
       fill: $c-primary-dark;
     }
@@ -108,7 +68,7 @@
 
   svg {
     height: 1.3em;
-    fill: $white;
+    fill: $black;
     display: block;
 
     @include breakpoint($bp0) {
