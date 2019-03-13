@@ -2,7 +2,7 @@
  * search-form.scss
  * Define search results styles.
  *
- * @copyright Copyright (c) 2017 Palantir.net
+ * @copyright Copyright (c) 2019 Palantir.net
  */
 
 .search-results {
@@ -47,33 +47,32 @@
   margin-top: .25em;
   padding: 0;
   line-height: calc(100% + 50%);
+}
 
-  a {
-    /**
-   * 1. Remove the gray background on active links in IE 10.
-   * 2. Remove gaps in links underline in iOS 8+ and Safari 8+.
+.search-results__heading-link {
+  /**
+ * 1. Remove the gray background on active links in IE 10.
+ * 2. Remove gaps in links underline in iOS 8+ and Safari 8+.
+ */
+  @include trans();
+  background-color: transparent; /* 1 */
+  /* stylelint-disable property-no-vendor-prefix */
+  -webkit-text-decoration-skip: objects; /* 2 */
+  /* stylelint-enable */
+  color: $link-color;
+  text-decoration: none;
+
+  /**
+   * Remove the outline on focused links when they are also active or hovered
+   * in all browsers (opinionated).
    */
-    @include trans();
-    background-color: transparent; /* 1 */
-    /* stylelint-disable property-no-vendor-prefix */
-    -webkit-text-decoration-skip: objects; /* 2 */
-    /* stylelint-enable */
-    color: $link-color;
-    text-decoration: none;
-    border-bottom: 2px dashed $link-color;
 
-    /**
-     * Remove the outline on focused links when they are also active or hovered
-     * in all browsers (opinionated).
-     */
-
-    &:active,
-    &:hover {
-      outline-width: 0;
-      color: $link-hover;
-      background-color: $gray-light;
-      border-bottom: 2px solid $link-hover;
-    }
+  &:active,
+  &:hover {
+    outline-width: 0;
+    color: $link-hover;
+    background-color: $gray-light;
+    border-bottom: 2px solid $link-hover;
   }
 }
 

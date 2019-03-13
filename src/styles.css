@@ -1380,7 +1380,7 @@ aside {
  * search-form.scss
  * Define search results styles.
  *
- * @copyright Copyright (c) 2017 Palantir.net
+ * @copyright Copyright (c) 2019 Palantir.net
  */
 .search-results li {
   margin-bottom: 1.46667em;
@@ -1412,30 +1412,30 @@ aside {
   margin-top: .25em;
   padding: 0;
   line-height: calc(100% + 50%); }
-  .search-results__heading a {
-    /**
-   * 1. Remove the gray background on active links in IE 10.
-   * 2. Remove gaps in links underline in iOS 8+ and Safari 8+.
-   */
-    transition: all 0.3s ease;
-    background-color: transparent;
-    /* 1 */
-    /* stylelint-disable property-no-vendor-prefix */
-    -webkit-text-decoration-skip: objects;
-    /* 2 */
-    /* stylelint-enable */
-    color: #737373;
-    text-decoration: none;
-    border-bottom: 2px dashed #737373;
-    /**
-     * Remove the outline on focused links when they are also active or hovered
-     * in all browsers (opinionated).
-     */ }
-    .search-results__heading a:active, .search-results__heading a:hover {
-      outline-width: 0;
-      color: black;
-      background-color: #e5e5e5;
-      border-bottom: 2px solid black; }
+
+.search-results__heading-link {
+  /**
+ * 1. Remove the gray background on active links in IE 10.
+ * 2. Remove gaps in links underline in iOS 8+ and Safari 8+.
+ */
+  transition: all 0.3s ease;
+  background-color: transparent;
+  /* 1 */
+  /* stylelint-disable property-no-vendor-prefix */
+  -webkit-text-decoration-skip: objects;
+  /* 2 */
+  /* stylelint-enable */
+  color: #737373;
+  text-decoration: none;
+  /**
+   * Remove the outline on focused links when they are also active or hovered
+   * in all browsers (opinionated).
+   */ }
+  .search-results__heading-link:active, .search-results__heading-link:hover {
+    outline-width: 0;
+    color: black;
+    background-color: #e5e5e5;
+    border-bottom: 2px solid black; }
 
 .search-results__teaser {
   margin-bottom: 0.73333em; }
@@ -1577,63 +1577,66 @@ aside {
   @media (min-width: 900px) {
     .search-pager__item {
       margin-right: 0.36667em; } }
-  .search-pager__item a {
-    transition: all 0.3s ease;
-    font-size: 0.9em;
-    line-height: 1.62963em;
-    font-weight: 700;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border: 0;
-    text-align: center;
-    padding: 0.36667em; }
-    @media (min-width: 450px) {
-      .search-pager__item a {
-        background-color: #0000ff;
-        color: #fff;
-        border-radius: 3px;
-        width: 2.2em;
-        height: 2.2em;
-        padding: 0; } }
-    @media (min-width: 900px) {
-      .search-pager__item a {
-        font-size: 0.8em;
-        line-height: 1.65em;
-        width: 1.76em;
-        height: 1.76em; } }
-    .search-pager__item a:hover, .search-pager__item a:active {
-      text-decoration: underline;
+
+.search-pager__item.is-active .search-pager__item-link {
+  font-size: 1em;
+  line-height: 1.46667em; }
+  @media (min-width: 450px) {
+    .search-pager__item.is-active .search-pager__item-link {
+      background-color: #737373;
+      color: #fff; }
+      .search-pager__item.is-active .search-pager__item-link:hover, .search-pager__item.is-active .search-pager__item-link:active {
+        background-color: black; } }
+
+.search-pager__item.not-active .search-pager__item-link {
+  display: none; }
+  @media (min-width: 450px) {
+    .search-pager__item.not-active .search-pager__item-link {
+      display: inline-block; } }
+
+.search-pager__item-link {
+  transition: all 0.3s ease;
+  font-size: 0.9em;
+  line-height: 1.62963em;
+  font-weight: 700;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 0;
+  text-align: center;
+  padding: 0.36667em; }
+  @media (min-width: 450px) {
+    .search-pager__item-link {
+      background-color: #0000ff;
       color: #fff;
-      background-color: #0000ff; }
-      @media (min-width: 450px) {
-        .search-pager__item a:hover, .search-pager__item a:active {
-          font-size: 1em;
-          line-height: 1.46667em;
-          background-color: navy; } }
-      .search-pager__item a:hover svg, .search-pager__item a:active svg {
-        fill: black; }
-    .search-pager__item a svg {
-      height: 1.3em;
-      fill: #fff;
-      display: block; }
-      @media (min-width: 450px) {
-        .search-pager__item a svg {
-          height: 1em; } }
-  .search-pager__item.is-active a {
-    font-size: 1em;
-    line-height: 1.46667em; }
+      border-radius: 3px;
+      width: 2.2em;
+      height: 2.2em;
+      padding: 0; } }
+  @media (min-width: 900px) {
+    .search-pager__item-link {
+      font-size: 0.8em;
+      line-height: 1.65em;
+      width: 1.76em;
+      height: 1.76em; } }
+  .search-pager__item-link:hover, .search-pager__item-link:active {
+    text-decoration: underline;
+    color: #fff;
+    background-color: #0000ff; }
     @media (min-width: 450px) {
-      .search-pager__item.is-active a {
-        background-color: #737373;
-        color: #fff; }
-        .search-pager__item.is-active a:hover, .search-pager__item.is-active a:active {
-          background-color: black; } }
-  .search-pager__item.not-active {
-    display: none; }
+      .search-pager__item-link:hover, .search-pager__item-link:active {
+        font-size: 1em;
+        line-height: 1.46667em;
+        background-color: navy; } }
+    .search-pager__item-link:hover svg, .search-pager__item-link:active svg {
+      fill: black; }
+  .search-pager__item-link svg {
+    height: 1.3em;
+    fill: #fff;
+    display: block; }
     @media (min-width: 450px) {
-      .search-pager__item.not-active {
-        display: inline-block; } }
+      .search-pager__item-link svg {
+        height: 1em; } }
 
 /**
  * search-results-stat.scss
