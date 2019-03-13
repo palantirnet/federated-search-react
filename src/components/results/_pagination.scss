@@ -55,7 +55,7 @@
   }
 }
 
-.search-pager__item.not-active .search-pager__item-link{
+.search-pager__item.not-active .search-pager__item-link {
   display: none;
 
   @include breakpoint($bp0) {
