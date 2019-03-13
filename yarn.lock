@@ -7408,9 +7408,9 @@ sockjs@0.3.18:
     faye-websocket "^0.10.0"
     uuid "^2.0.2"
 
-"solr-faceted-search-react@git+ssh://git@github.com:palantirnet/solr-faceted-search-react#root-138-autocomplete":
+"solr-faceted-search-react@https://github.com/palantirnet/solr-faceted-search-react":
   version "0.12.1"
-  resolved "git+ssh://git@github.com:palantirnet/solr-faceted-search-react#f0df9079a3a0e56d866ff2640c780decc645617a"
+  resolved "https://github.com/palantirnet/solr-faceted-search-react#18f30924d689ffbdd36e7074630cf3bc637abeac"
   dependencies:
     classnames "^2.2.5"
     prop-types "^15.6.1"
