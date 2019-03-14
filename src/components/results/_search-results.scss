@@ -2,7 +2,7 @@
  * search-form.scss
  * Define search results styles.
  *
- * @copyright Copyright (c) 2017 Palantir.net
+ * @copyright Copyright (c) 2017-2019 Palantir.net
  */
 
 .search-results {
@@ -11,12 +11,6 @@
   li {
     margin-bottom: rhythm(1);
     display: flex;
-  }
-
-  em {
-    font-style: normal;
-    font-weight: 700;
-    background-color: transparentize($c-secondary, .7);
   }
 }
 
@@ -34,46 +28,35 @@
 }
 
 .search-results__label {
-  @include adjust-font-size-to($label, .7);
-  font-weight: 500;
   color: $gray-medium;
   display: block;
 }
 
 .search-results__heading {
-  font-weight: 700;
-  @include trailer(.25, $h3-font-size);
   margin-bottom: .33333em;
   margin-top: .25em;
   padding: 0;
-  line-height: calc(100% + 50%);
+}
 
-  a {
-    /**
-   * 1. Remove the gray background on active links in IE 10.
-   * 2. Remove gaps in links underline in iOS 8+ and Safari 8+.
+.search-results__heading-link {
+  /**
+ * 1. Remove the gray background on active links in IE 10.
+ * 2. Remove gaps in links underline in iOS 8+ and Safari 8+.
+ */
+  /* stylelint-disable property-no-vendor-prefix */
+  -webkit-text-decoration-skip: objects; /* 2 */
+  /* stylelint-enable */
+  color: $blue;
+  text-decoration: none;
+
+  /**
+   * Remove the outline on focused links when they are also active or hovered
+   * in all browsers (opinionated).
    */
-    @include trans();
-    background-color: transparent; /* 1 */
-    /* stylelint-disable property-no-vendor-prefix */
-    -webkit-text-decoration-skip: objects; /* 2 */
-    /* stylelint-enable */
-    color: $link-color;
-    text-decoration: none;
-    border-bottom: 2px dashed $link-color;
-
-    /**
-     * Remove the outline on focused links when they are also active or hovered
-     * in all browsers (opinionated).
-     */
-
-    &:active,
-    &:hover {
-      outline-width: 0;
-      color: $link-hover;
-      background-color: $gray-light;
-      border-bottom: 2px solid $link-hover;
-    }
+  &:active,
+  &:hover {
+    outline-width: 0;
+    text-decoration: underline;
   }
 }
 
@@ -82,12 +65,17 @@
 }
 
 .search-results__meta {
-  @include adjust-font-size-to($label, .8);
   margin-bottom: rhythm(.5);
   color: $gray-medium;
   display: block;
 }
 
-.search-results__citation {
+.search-results__citation a {
   font-style: normal;
+  color: $gray-medium;
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
 }

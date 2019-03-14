@@ -1117,7 +1117,7 @@ textarea {
  * search-form.scss
  * Define search form styles.
  *
- * @copyright Copyright (c) 2017 Palantir.net
+ * @copyright Copyright (c) 2017-2019 Palantir.net
  */
 .search-form {
   margin-bottom: 2.93333em; }
@@ -1154,6 +1154,9 @@ textarea {
   @media (min-width: 900px) {
     .search-form__input {
       padding: .35rem; } }
+  .search-form__input:focus {
+    border-color: #333;
+    outline: none; }
 
 .search-form__submit {
   padding: .5rem .7rem;
@@ -1176,10 +1179,122 @@ textarea {
     fill: #fff; }
 
 /**
+ * autocomplete.scss
+ * Define autocomplete input + suggestion styles.
+ * @see: https://github.com/moroshko/react-autosuggest#theme-optional
+ *
+ * @copyright Copyright (c) 2017-2019 Palantir.net
+ */
+.search-form__autocomplete-container {
+  display: flex; }
+  @media (min-width: 600px) {
+    .search-form__autocomplete-container {
+      width: 75%; } }
+  @media (min-width: 1100px) {
+    .search-form__autocomplete-container {
+      width: 50%; } }
+  .search-form__autocomplete-container .search-form__input-wrapper {
+    width: 100%; }
+
+.react-autosuggest__container {
+  position: relative;
+  flex: 1; }
+
+.react-autosuggest__input {
+  font-size: 0.8em;
+  line-height: 1.46667em;
+  flex: 1;
+  border: 1px solid #e5e5e5;
+  border-top-left-radius: 4px;
+  border-bottom-left-radius: 4px;
+  height: 34px;
+  padding: .5rem; }
+  .react-autosuggest__input:focus {
+    border-color: #333;
+    outline: none; }
+  .react-autosuggest__container--open .react-autosuggest__input {
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0; }
+
+.react-autosuggest__suggestions-container {
+  display: none; }
+
+.react-autosuggest__container-title {
+  font-size: 0.8em;
+  line-height: 1.46667em;
+  position: relative;
+  font-weight: bold;
+  padding: 10px 20px;
+  border-bottom: 1px dashed #ccc; }
+
+.react-autosuggest__container-close-button {
+  font-size: 0.8em;
+  line-height: 1.46667em;
+  font-style: normal;
+  padding: 3px 7px;
+  border-color: #ccc;
+  color: #333;
+  cursor: pointer;
+  position: absolute;
+  right: 5px; }
+  .react-autosuggest__container-close-button:hover {
+    border-color: #b5b5b5;
+    background-color: #f6f6f6; }
+
+.react-autosuggest__container-directions {
+  padding: 10px 20px; }
+  .react-autosuggest__container-directions-item {
+    font-size: 0.8em;
+    line-height: 1.46667em;
+    display: block; }
+
+.react-autosuggest__suggestions-container--open {
+  display: block;
+  position: absolute;
+  top: 33px;
+  width: 100%;
+  border: 1px solid #333;
+  background-color: #fff;
+  border-bottom-left-radius: 4px;
+  border-bottom-right-radius: 4px;
+  z-index: 2; }
+
+.react-autosuggest__suggestions-itemslist-wrapper--with-directions .react-autosuggest__suggestion:last-child {
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+  border-bottom-color: #ccc; }
+
+.react-autosuggest__suggestions-list {
+  margin: 0;
+  padding: 0;
+  list-style-type: none; }
+
+.react-autosuggest__suggestion {
+  font-size: 0.8em;
+  line-height: 1.46667em;
+  cursor: pointer;
+  padding: 15px 20px;
+  background-color: #fff;
+  border: 1px solid #fff;
+  border-bottom-color: #ccc; }
+  .react-autosuggest__suggestion:last-child {
+    border-bottom-left-radius: 4px;
+    border-bottom-right-radius: 4px;
+    border-bottom-color: #fff; }
+
+.react-autosuggest__suggestion-link {
+  color: #737373; }
+
+.react-autosuggest__suggestion--highlighted {
+  background-color: #f6f6f6;
+  border: 1px solid #f6f6f6;
+  border-bottom-color: #ccc; }
+
+/**
  * search-form.scss
  * Define search form styles.
  *
- * @copyright Copyright (c) 2017 Palantir.net
+ * @copyright Copyright (c) 2017-2019 Palantir.net
  */
 .search-filters__trigger,
 .search-accordion__title {
@@ -1367,7 +1482,7 @@ textarea {
  * aside.scss
  * Define aside styles.
  *
- * @copyright Copyright (c) 2017 Palantir.net
+ * @copyright Copyright (c) 2017-2019 Palantir.net
  */
 aside {
   margin-bottom: 1.46667em;
@@ -1380,16 +1495,11 @@ aside {
  * search-form.scss
  * Define search results styles.
  *
- * @copyright Copyright (c) 2017 Palantir.net
+ * @copyright Copyright (c) 2017-2019 Palantir.net
  */
 .search-results li {
   margin-bottom: 1.46667em;
   display: flex; }
-
-.search-results em {
-  font-style: normal;
-  font-weight: 700;
-  background-color: rgba(0, 0, 255, 0.3); }
 
 .search-results__container--left {
   flex: 1 0 0;
@@ -1399,62 +1509,53 @@ aside {
   flex: 3 0 0; }
 
 .search-results__label {
-  font-size: 0.8em;
-  line-height: 1.28333em;
-  font-weight: 500;
   color: #555;
   display: block; }
 
 .search-results__heading {
-  font-weight: 700;
-  margin-bottom: 0.36667em;
   margin-bottom: .33333em;
   margin-top: .25em;
-  padding: 0;
-  line-height: calc(100% + 50%); }
-  .search-results__heading a {
-    /**
-   * 1. Remove the gray background on active links in IE 10.
-   * 2. Remove gaps in links underline in iOS 8+ and Safari 8+.
-   */
-    transition: all 0.3s ease;
-    background-color: transparent;
-    /* 1 */
-    /* stylelint-disable property-no-vendor-prefix */
-    -webkit-text-decoration-skip: objects;
-    /* 2 */
-    /* stylelint-enable */
-    color: #737373;
-    text-decoration: none;
-    border-bottom: 2px dashed #737373;
-    /**
-     * Remove the outline on focused links when they are also active or hovered
-     * in all browsers (opinionated).
-     */ }
-    .search-results__heading a:active, .search-results__heading a:hover {
-      outline-width: 0;
-      color: black;
-      background-color: #e5e5e5;
-      border-bottom: 2px solid black; }
+  padding: 0; }
+
+.search-results__heading-link {
+  /**
+ * 1. Remove the gray background on active links in IE 10.
+ * 2. Remove gaps in links underline in iOS 8+ and Safari 8+.
+ */
+  /* stylelint-disable property-no-vendor-prefix */
+  -webkit-text-decoration-skip: objects;
+  /* 2 */
+  /* stylelint-enable */
+  color: #0000ff;
+  text-decoration: none;
+  /**
+   * Remove the outline on focused links when they are also active or hovered
+   * in all browsers (opinionated).
+   */ }
+  .search-results__heading-link:active, .search-results__heading-link:hover {
+    outline-width: 0;
+    text-decoration: underline; }
 
 .search-results__teaser {
   margin-bottom: 0.73333em; }
 
 .search-results__meta {
-  font-size: 0.8em;
-  line-height: 1.46667em;
   margin-bottom: 0.73333em;
   color: #555;
   display: block; }
 
-.search-results__citation {
-  font-style: normal; }
+.search-results__citation a {
+  font-style: normal;
+  color: #555;
+  text-decoration: none; }
+  .search-results__citation a:hover {
+    text-decoration: underline; }
 
 /**
  * search-scope.scss
  * Define search scope styles.
  *
- * @copyright Copyright (c) 2017 Palantir.net
+ * @copyright Copyright (c) 2017-2019 Palantir.net
  */
 .search-scope {
   margin: 1.46667em 0; }
@@ -1548,17 +1649,12 @@ aside {
  * pagination.scss
  * Define pagination styles.
  *
- * @copyright Copyright (c) 2017 Palantir.net
+ * @copyright Copyright (c) 2017-2019 Palantir.net
  */
-.search-pager {
-  background-color: transparent; }
-
 .search-pager__items {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  border-radius: 3px;
-  background-color: #eff0f1;
   padding: 0 2.93333em;
   margin: 4.4em 0; }
   @media (min-width: 450px) {
@@ -1577,73 +1673,42 @@ aside {
   @media (min-width: 900px) {
     .search-pager__item {
       margin-right: 0.36667em; } }
-  .search-pager__item a {
-    transition: all 0.3s ease;
-    font-size: 0.9em;
-    line-height: 1.62963em;
-    font-weight: 700;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border: 0;
-    text-align: center;
-    padding: 0.36667em; }
-    @media (min-width: 450px) {
-      .search-pager__item a {
-        background-color: #0000ff;
-        color: #fff;
-        border-radius: 3px;
-        width: 2.2em;
-        height: 2.2em;
-        padding: 0; } }
-    @media (min-width: 900px) {
-      .search-pager__item a {
-        font-size: 0.8em;
-        line-height: 1.65em;
-        width: 1.76em;
-        height: 1.76em; } }
-    .search-pager__item a:hover, .search-pager__item a:active {
-      text-decoration: underline;
-      color: #fff;
-      background-color: #0000ff; }
-      @media (min-width: 450px) {
-        .search-pager__item a:hover, .search-pager__item a:active {
-          font-size: 1em;
-          line-height: 1.46667em;
-          background-color: navy; } }
-      .search-pager__item a:hover svg, .search-pager__item a:active svg {
-        fill: black; }
-    .search-pager__item a svg {
-      height: 1.3em;
-      fill: #fff;
-      display: block; }
-      @media (min-width: 450px) {
-        .search-pager__item a svg {
-          height: 1em; } }
-  .search-pager__item.is-active a {
-    font-size: 1em;
-    line-height: 1.46667em; }
-    @media (min-width: 450px) {
-      .search-pager__item.is-active a {
-        background-color: #737373;
-        color: #fff; }
-        .search-pager__item.is-active a:hover, .search-pager__item.is-active a:active {
-          background-color: black; } }
-  .search-pager__item.not-active {
+  .search-pager__item.is-active .search-pager__item-link {
+    font-weight: bold; }
+  .search-pager__item.not-active .search-pager__item-link {
     display: none; }
     @media (min-width: 450px) {
-      .search-pager__item.not-active {
+      .search-pager__item.not-active .search-pager__item-link {
         display: inline-block; } }
+
+.search-pager__item-link {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 0;
+  text-align: center;
+  padding: 0.36667em; }
+  .search-pager__item-link:hover, .search-pager__item-link:active {
+    text-decoration: underline; }
+    .search-pager__item-link:hover svg, .search-pager__item-link:active svg {
+      fill: black;
+      border-bottom: 1px solid #222; }
+  .search-pager__item-link svg {
+    height: 1.3em;
+    fill: #222;
+    display: block;
+    border-bottom: 1px solid transparent; }
+    @media (min-width: 450px) {
+      .search-pager__item-link svg {
+        height: 1em; } }
 
 /**
  * search-results-stat.scss
  * Define search results statistic styles.
  *
- * @copyright Copyright (c) 2017 Palantir.net
+ * @copyright Copyright (c) 2017-2019 Palantir.net
  */
 .search-results-stat {
-  font-size: 0.9em;
-  line-height: 1.62963em;
   color: #555; }
   .search-results-stat:focus {
     outline: 0; }
@@ -1652,7 +1717,7 @@ aside {
  * applied-filters.scss
  * Define applied filters styles.
  *
- * @copyright Copyright (c) 2017 Palantir.net
+ * @copyright Copyright (c) 2017-2019 Palantir.net
  */
 .applied-filters {
   margin: 1.46667em 0;
@@ -1662,6 +1727,7 @@ aside {
   font-size: 0.8em;
   line-height: 1.46667em;
   padding-bottom: 0.29333em;
+  border: 0;
   border-bottom: solid 2px #0000ff;
   margin-right: 0.73333em;
   margin-bottom: 0.73333em;
