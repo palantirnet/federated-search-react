@@ -6,7 +6,6 @@
  */
 
 .search-results-stat {
-  @include adjust-font-size-to(.9em, 1);
   color: $gray-medium;
 
   &:focus {
