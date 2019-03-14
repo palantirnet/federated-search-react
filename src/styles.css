@@ -1411,7 +1411,7 @@ aside {
   -webkit-text-decoration-skip: objects;
   /* 2 */
   /* stylelint-enable */
-  color: #737373;
+  color: #0000ff;
   text-decoration: none;
   /**
    * Remove the outline on focused links when they are also active or hovered
@@ -1419,7 +1419,7 @@ aside {
    */ }
   .search-results__heading-link:active, .search-results__heading-link:hover {
     outline-width: 0;
-    color: black; }
+    text-decoration: underline; }
 
 .search-results__teaser {
   margin-bottom: 0.73333em; }
@@ -1429,8 +1429,12 @@ aside {
   color: #555;
   display: block; }
 
-.search-results__citation {
-  font-style: normal; }
+.search-results__citation a {
+  font-style: normal;
+  color: #555;
+  text-decoration: none; }
+  .search-results__citation a:hover {
+    text-decoration: underline; }
 
 /**
  * search-scope.scss
@@ -1532,9 +1536,6 @@ aside {
  *
  * @copyright Copyright (c) 2017 Palantir.net
  */
-.search-pager {
-  background-color: transparent; }
-
 .search-pager__items {
   display: flex;
   align-items: center;
@@ -1572,12 +1573,16 @@ aside {
   border: 0;
   text-align: center;
   padding: 0.36667em; }
-  .search-pager__item-link:hover svg, .search-pager__item-link:active svg {
-    fill: black; }
+  .search-pager__item-link:hover, .search-pager__item-link:active {
+    text-decoration: underline; }
+    .search-pager__item-link:hover svg, .search-pager__item-link:active svg {
+      fill: black;
+      border-bottom: 1px solid #222; }
   .search-pager__item-link svg {
     height: 1.3em;
     fill: #222;
-    display: block; }
+    display: block;
+    border-bottom: 1px solid transparent; }
     @media (min-width: 450px) {
       .search-pager__item-link svg {
         height: 1em; } }

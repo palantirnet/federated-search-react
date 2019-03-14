@@ -60,8 +60,10 @@
 
   &:hover,
   &:active {
+    text-decoration: underline;
     svg {
       fill: $c-primary-dark;
+      border-bottom: 1px solid $black;
     }
   }
 
@@ -69,6 +71,7 @@
     height: 1.3em;
     fill: $black;
     display: block;
+    border-bottom: 1px solid transparent;
 
     @include breakpoint($bp0) {
       height: 1em;
