@@ -84,6 +84,7 @@ class FederatedRangeFacet extends React.Component {
           className={cx("search-accordion__title", {"js-search-accordion-open": expanded})}
           id={label.replace(/\s+/g, '-').toLowerCase()}
           onClick={this.toggleExpand.bind(this)}
+          onKeyDown={(event)=>{if (event.keyCode === 13) {this.toggleExpand()}}}
         >{label}</a>
         <AnimateHeight
           duration={600}

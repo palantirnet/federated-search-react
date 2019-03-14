@@ -1,0 +1,140 @@
+/**
+ * autocomplete.scss
+ * Define autocomplete input + suggestion styles.
+ * @see: https://github.com/moroshko/react-autosuggest#theme-optional
+ *
+ * @copyright Copyright (c) 2017-2019 Palantir.net
+ */
+
+.search-form__autocomplete-container {
+  display: flex;
+
+  @include breakpoint($bp1) {
+    width: 75%;
+  }
+
+  @include breakpoint($bp3) {
+    width: 50%;
+  }
+
+  .search-form__input-wrapper {
+    width: 100%;
+  }
+}
+
+.react-autosuggest {
+  &__container {
+    position: relative;
+    flex: 1;
+  }
+
+  &__input {
+    @include adjust-font-size-to($label, .8);
+    flex: 1;
+    border: 1px solid $gray-light;
+    border-top-left-radius: 4px;
+    border-bottom-left-radius: 4px;
+    height: 34px;
+    padding: .5rem;
+
+    &:focus {
+      border-color: $gray-dark;
+      outline: none;
+    }
+
+    .react-autosuggest__container--open & {
+      border-bottom-left-radius: 0;
+      border-bottom-right-radius: 0;
+    }
+  }
+
+  &__suggestions-container {
+    display: none;
+  }
+
+  &__container-title {
+    @include adjust-font-size-to($label, .8);
+    position: relative;
+    font-weight: bold;
+    padding: 10px 20px;
+    border-bottom: 1px dashed $c-border-gray;
+  }
+
+  &__container-close-button {
+    @include adjust-font-size-to($label, .8);
+    font-style: normal;
+    padding: 3px 7px;
+    border-color: $c-border-gray;
+    color: $gray-dark;
+    cursor: pointer;
+    position: absolute;
+    right: 5px;
+
+    &:hover {
+      border-color: $c-border-gray-dark;
+      background-color: $c-bg-gray;
+    }
+  }
+
+  &__container-directions {
+    padding: 10px 20px;
+
+    &-item {
+      @include adjust-font-size-to($label, .8);
+      display: block;
+    }
+
+  }
+
+  &__suggestions-container--open {
+    display: block;
+    position: absolute;
+    top: 33px;
+    width: 100%;
+    border: 1px solid $gray-dark;
+    background-color: $white;
+    border-bottom-left-radius: 4px;
+    border-bottom-right-radius: 4px;
+    z-index: 2;
+  }
+  &__suggestions-itemslist-wrapper--with-directions {
+    .react-autosuggest__suggestion {
+      &:last-child {
+        border-bottom-left-radius: 0;
+        border-bottom-right-radius: 0;
+        border-bottom-color: $c-border-gray;
+      }
+    }
+  }
+
+  &__suggestions-list {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+  }
+
+  &__suggestion {
+    @include adjust-font-size-to($label, .8);
+    cursor: pointer;
+    padding: 15px 20px;
+    background-color: $white;
+    border: 1px solid $white;
+    border-bottom-color: $c-border-gray;
+
+    &:last-child {
+      border-bottom-left-radius: 4px;
+      border-bottom-right-radius: 4px;
+      border-bottom-color: $white;
+    }
+  }
+
+  &__suggestion-link {
+    color: $link-color;
+  }
+
+  &__suggestion--highlighted {
+    background-color: $c-bg-gray;
+    border: 1px solid $c-bg-gray;
+    border-bottom-color: $c-border-gray;
+  }
+}
