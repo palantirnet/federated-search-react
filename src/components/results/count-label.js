@@ -11,8 +11,7 @@ function searchResultsStat(currentPage, numFound, rows, pageAmt, noResultsText, 
     message = (
       <span>Showing page
         <b> {currentPage + 1}</b> of
-        <b> {pageAmt}</b>
-        (<b> {numFound}</b> results).
+        <b> {pageAmt}</b> (<b>{numFound}</b> results).
       </span>
     );
   } else if (numFound <= rows && numFound > 1) { // Single page
