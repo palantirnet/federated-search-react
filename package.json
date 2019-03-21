@@ -27,7 +27,7 @@
     "react-with-direction": "1.3.0",
     "replace-x": "1.5.0",
     "singularitygs": "^1.7.0",
-    "solr-faceted-search-react": "https://github.com/palantirnet/solr-faceted-search-react"
+    "solr-faceted-search-react": "git://github.com/palantirnet/solr-faceted-search-react.git#root-863-enable-proxy-for-solr"
   },
   "scripts": {
     "theme-styles": "node-sass-chokidar ./theme/search_theme_override.scss ./public/css/search_theme_override.css --watch",
