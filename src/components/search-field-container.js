@@ -54,7 +54,7 @@ class FederatedSearchFieldContainer extends React.Component {
             </section>
 
             { this.props.resultsCount > 0
-              ? <div className="search-filters__row"><button className="search-filters__reset" type="button" onClick={onNewSearch} />Clear All</button></div>
+              ? <div className="search-filters__row"><button className="search-filters__reset" type="button" onClick={onNewSearch}>Clear All</button></div>
               : null }
           </form>
         </AnimateHeight>
