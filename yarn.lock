@@ -7410,7 +7410,7 @@ sockjs@0.3.18:
 
 "solr-faceted-search-react@git://github.com/palantirnet/solr-faceted-search-react.git#root-863-enable-proxy-for-solr":
   version "0.12.1"
-  resolved "git://github.com/palantirnet/solr-faceted-search-react.git#b9145642c521752ea4f3d34e6f0758ca28947a68"
+  resolved "git://github.com/palantirnet/solr-faceted-search-react.git#48e7279fd2186302aefdb35cfd00df6b6ccd1d8b"
   dependencies:
     classnames "^2.2.5"
     prop-types "^15.6.1"
