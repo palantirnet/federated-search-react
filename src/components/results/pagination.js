@@ -24,7 +24,7 @@ class FederatedPagination extends React.Component {
     let isCurrentPage = page === currentPage;
     return (
       <li className={cx("search-pager__item", (isCurrentPage ? 'is-active' : 'not-active'))} key={key}>
-        <a className={cx("search-pager__item-link")} role="button" tabIndex="0" onClick={this.onPageChange.bind(this, page)} onKeyPress={this.buildHandleEnterKeyPress(this.onPageChange.bind(this, page))} title={isCurrentPage ? "Current page" : `Go to page ${page + 1}`} aria-current={isCurrentPage ? page + 1 : undefined}>
+        <a className={cx("search-pager__item-link search-pager__item-link--number")} role="button" tabIndex="0" onClick={this.onPageChange.bind(this, page)} onKeyPress={this.buildHandleEnterKeyPress(this.onPageChange.bind(this, page))} title={isCurrentPage ? "Current page" : `Go to page ${page + 1}`} aria-current={isCurrentPage ? page + 1 : undefined}>
           <span className="element-invisible">Page</span>{page + 1}
         </a>
       </li>
