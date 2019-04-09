@@ -25,27 +25,19 @@ class FederatedResult extends React.Component {
 
   // Pass both the mutivalue and the single value url as a backup.
   getCanonicalLink(urls, url) {
-    const { hostname } = this.props;
-
-    if (urls != null) {
-      // If one of our links matches the current site, use it.
-      for (let i = 0; i < urls.length; i++) {
-        const url = new URL(urls[i]);
-        if (url.hostname === hostname) {
-          return urls[i];
-        }
-      }
-      // Otherwise, use the first in the list, which is the canonical (or only).
+    if (Array.isArray(urls) && urls.length) {
+      // Use the first in the list, which is the canonical (or only).
       return urls[0];
     }
 
+    // Fall back to single value url.
     if (url != null) {
       return url;
     }
 
     // If no valid urls are passed, return nothing. This will result in an
     // unlinked title, but at least it won't crash.
-    return [];
+    return '';
   }
 
   intersperse(arr, sep) {
