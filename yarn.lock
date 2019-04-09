@@ -5690,7 +5690,12 @@ object-keys@^1.0.11:
   version "1.0.11"
   resolved "https://registry.yarnpkg.com/object-keys/-/object-keys-1.0.11.tgz#c54601778ad560f1142ce0e01bcca8b56d13426d"
 
-object-keys@^1.0.12, object-keys@^1.0.8:
+object-keys@^1.0.12:
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/object-keys/-/object-keys-1.1.1.tgz#1c47f272df277f3b1daf061677d9c82e2322c60e"
+  integrity sha512-NuAESUOUMrlIXOfHKzD6bpPu3tYt3xvjNdRIQ+FeT0lNb4K8WR70CaDxhuNguS2XG+GjkyMwOzsN5ZktImfhLA==
+
+object-keys@^1.0.8:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/object-keys/-/object-keys-1.1.0.tgz#11bd22348dd2e096a045ab06f6c85bcc340fa032"
   integrity sha512-6OO5X1+2tYkNyNEx6TsCxEqFfRWaqx6EtMiSbGrw8Ob8v9Ne+Hl8rBAgLBZn5wjEz3s/s6U1WXFUFOcxxAwUpg==
@@ -7408,9 +7413,9 @@ sockjs@0.3.18:
     faye-websocket "^0.10.0"
     uuid "^2.0.2"
 
-"solr-faceted-search-react@https://github.com/palantirnet/solr-faceted-search-react":
+"solr-faceted-search-react@https://github.com/palantirnet/solr-faceted-search-react#root-1002-d7-search-param":
   version "0.12.1"
-  resolved "https://github.com/palantirnet/solr-faceted-search-react#5315a3ebefcc084cf1abf39676b37e8f1b71f453"
+  resolved "https://github.com/palantirnet/solr-faceted-search-react#fd387c3b51dee9aedeab617225fe524825661cd9"
   dependencies:
     classnames "^2.2.5"
     prop-types "^15.6.1"
