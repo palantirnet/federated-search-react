@@ -1,7 +1,7 @@
 {
   "name": "@palantirnet/federated-search-react",
   "description": "A ReactJS front end for faceted Solr search.",
-  "version": "2.1.0",
+  "version": "1.0.11",
   "homepage": "https://github.com/palantirnet/federated-search-react",
   "license": "MIT",
   "private": false,
@@ -45,9 +45,6 @@
     "eject": "react-scripts eject"
   },
   "dependencies": {
-    "he": "1.2.0",
-    "intl": "^1.2.5",
-    "react-aria-live": "2.0.2",
-    "react-autosuggest": "9.4.3"
+    "intl": "^1.2.5"
   }
 }
