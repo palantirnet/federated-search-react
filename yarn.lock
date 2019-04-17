@@ -7413,9 +7413,9 @@ sockjs@0.3.18:
     faye-websocket "^0.10.0"
     uuid "^2.0.2"
 
-"solr-faceted-search-react@https://github.com/palantirnet/solr-faceted-search-react#root-1002-d7-search-param":
+"solr-faceted-search-react@https://github.com/palantirnet/solr-faceted-search-react":
   version "0.12.1"
-  resolved "https://github.com/palantirnet/solr-faceted-search-react#fd387c3b51dee9aedeab617225fe524825661cd9"
+  resolved "https://github.com/palantirnet/solr-faceted-search-react#70e884bcfc4c840557dbc6a3299500848dffef38"
   dependencies:
     classnames "^2.2.5"
     prop-types "^15.6.1"
