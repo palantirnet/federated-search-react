@@ -50,6 +50,7 @@ const searchFromQuerystring = (solrClient, options = {}) => {
 // Initialize the solr client + search app with settings.
 const init = (settings) => {
   const defaults = {
+    isD7: false,
     // Whether or not we should be querying the solr backend directly.
     proxyIsDisabled: false,
     // The query request endpoint url must be assigned in ./.env.local.js and by the search app settings in the module.
@@ -94,6 +95,7 @@ const init = (settings) => {
 
   // The client class.
   const solrClient = new SolrClient({
+    isD7: options.isD7,
     proxyIsDisabled: options.proxyIsDisabled,
     url: options.url,
     userpass: options.userpass,
