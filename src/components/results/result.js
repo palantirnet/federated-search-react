@@ -2,6 +2,7 @@ import PropTypes from 'prop-types';
 import React from "react";
 import 'intl';
 import 'intl/locale-data/jsonp/en';
+import url from 'url';
 
 // Custom class for the result component
 class FederatedResult extends React.Component {
@@ -47,8 +48,8 @@ class FederatedResult extends React.Component {
     if (Object.hasOwnProperty.call(doc, 'sm_urls') && Array.isArray(doc.sm_urls)) {
       // Attempt to find a url from the current host.
       const currentHostUrl = doc.sm_urls.find((item) => {
-        const url = new URL(item);
-        return url.hostname === hostname;
+        const myUrl = url.parse(item);
+        return myUrl.hostname === hostname;
       });
 
       // 2. Use the url from the current host.
