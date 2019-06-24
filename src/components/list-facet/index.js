@@ -99,17 +99,35 @@ class FederatedListFacet extends React.Component {
       value,
       collapse,
       hierarchy,
+      options,
     } = this.props;
     const { truncateFacetListsAt } = this.state;
 
+    const siteList = options.siteList;
     const facetCounts = facets.filter((facet, i) => i % 2 === 1);
     const facetValues = facets.filter((facet, i) => i % 2 === 0);
     // Create an object of facets {value: count} to keep consistent for inputs.
     const facetInputs = {};
-    facetValues.forEach((v, i) => {
-      const key = facetValues[i];
-      facetInputs[key] = facetCounts[i];
-    });
+
+    // Handle site name restrictions.
+    if (field === 'sm_site_name') {
+      facetValues.forEach((v, i) => {
+        const key = facetValues[i];
+        if (siteList.indexOf(v) > -1) {
+          facetInputs[key] = facetCounts[i];
+        }
+      });
+      // If only one option exists and nothing is selected, don't show it.
+      if (value.length < 1 && Object.keys(facetInputs).length < 2) {
+        return null;
+      }
+    }
+    else {
+      facetValues.forEach((v, i) => {
+        const key = facetValues[i];
+        facetInputs[key] = facetCounts[i];
+      });
+    }
 
     const expanded = !(collapse || false);
     const height = expanded ? 'auto' : 0;
