@@ -23,7 +23,7 @@ const searchFromQuerystring = (solrClient, options = {}) => {
   const { parsed, params } = helpers.qs.getParsedQsAndParams();
 
   let searchFieldsState = solrClient.state.query.searchFields;
-console.log(options);
+
   // Set the state for searchFields based on qs params.
   searchFieldsState.forEach((searchField) => {
     // Get the field machine name for the main query field.
