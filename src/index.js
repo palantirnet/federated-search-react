@@ -79,6 +79,8 @@ const init = (settings) => {
     // Hostname overridable in ./.env.local.js for testing purposes.
     hostname: window.location.hostname,
     autocomplete: false,
+    // Enable a fixed list of sites to search.
+    siteList: [],
   };
 
   const options = Object.assign(defaults, settings);
@@ -105,6 +107,7 @@ const init = (settings) => {
     rows: options.rows,
     hl: options.hl,
     mainQueryField: options.mainQueryField,
+    siteList: options.siteList,
 
     // The change handler passes the current query- and result state for render
     // as well as the default handlers for interaction with the search component
