@@ -31,7 +31,6 @@ const searchFromQuerystring = (solrClient, options = {}) => {
       // Set the state of the main query field to the value of the search qs param
       searchField.value = parsed.search;
     }
-
     // If the searchField is one for which we preserve state through qs.
     // @TODO handle discrepancy between config and qs params for initial state
     // IE site name values set in config but not present in querystring
@@ -40,6 +39,10 @@ const searchFromQuerystring = (solrClient, options = {}) => {
         params,
         searchField
       }) // this resets our initial state of search sites
+    }
+    // Account for default site search configuration.
+    if (searchField.field === 'sm_site_name' && searchField.value === undefined && options.siteList.length > 0) {
+      searchField.value = options.siteList;
     }
   });
 
