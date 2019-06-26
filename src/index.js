@@ -98,6 +98,7 @@ const init = (settings) => {
   // Set sm_site_name default values from config
   // @TODO honor this even when no param present in QS @~L#36
   const sm_site_name_value = settings.sm_site_name || false;
+  options.siteList = sm_site_name_value;
   if (sm_site_name_value) {
     options.searchFields.forEach(searchField => {
       if (searchField.field === 'sm_site_name') {

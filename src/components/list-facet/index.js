@@ -110,7 +110,7 @@ class FederatedListFacet extends React.Component {
     const facetInputs = {};
 
     // Handle site name restrictions.
-    if (field === 'sm_site_name') {
+    if (field === 'sm_site_name' && siteList.length > 0) {
       facetValues.forEach((v, i) => {
         const key = facetValues[i];
         if (siteList.indexOf(v) > -1) {
