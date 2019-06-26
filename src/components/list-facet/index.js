@@ -16,7 +16,7 @@ class FederatedListFacet extends React.Component {
     };
   }
 
-  handleClick(value) {
+  handleClick(value, options) {
     const {
       foundIdx,
       parsed,
@@ -27,6 +27,14 @@ class FederatedListFacet extends React.Component {
       values: this.props.value,
       value,
     });
+    // Remove hidden selection options.
+    var new_options = [];
+    options.hiddenFilterSelections.forEach(option => {
+      if (this.props.field !== option) {
+        new_options.push(option);
+      }
+    });
+    options.hiddenFilterSelections = new_options;
 
     // Define var for new parsed qs params object.
     let newParsed = parsed;
@@ -102,7 +110,6 @@ class FederatedListFacet extends React.Component {
       options,
     } = this.props;
     const { truncateFacetListsAt } = this.state;
-
     const siteList = options.siteList;
     const facetCounts = facets.filter((facet, i) => i % 2 === 1);
     const facetValues = facets.filter((facet, i) => i % 2 === 0);
@@ -190,8 +197,8 @@ class FederatedListFacet extends React.Component {
               type="checkbox"
               name={type}
               value={termObj.facetValue}
-              checked={value.indexOf(termObj.facetValue) > -1}
-              onChange={() => this.handleClick(termObj.facetValue)}
+              checked={value.indexOf(termObj.facetValue) > -1 && options.hiddenFilterSelections.indexOf(field) === -1}
+              onChange={() => this.handleClick(termObj.facetValue, options)}
             /> {termObj.term}
               <span className="facet-item-amount"> ({termObj.facetCount}
                 <span className="element-invisible">results</span>)
@@ -262,8 +269,8 @@ class FederatedListFacet extends React.Component {
                           type="checkbox"
                           name={field}
                           value={facetValue}
-                          checked={value.indexOf(facetValue) > -1}
-                          onChange={() => this.handleClick(facetValue)}
+                          checked={value.indexOf(facetValue) > -1 && options.hiddenFilterSelections.indexOf(field) === -1}
+                          onChange={() => this.handleClick(facetValue, options)}
                         /> {facetValue}
                         <span className="facet-item-amount"> ({facetInputs[facetValue]}
                           <span className="element-invisible">results</span>)

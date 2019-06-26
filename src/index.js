@@ -42,6 +42,8 @@ const searchFromQuerystring = (solrClient, options = {}) => {
     // has been selected.
     if (searchField.field === 'sm_site_name' && searchField.value === undefined && options.siteList.length > 0) {
       searchField.value = options.siteList;
+      searchField.hideFilterSelection = true;
+      options.hiddenFilterSelections.push(searchField.field);
     }
   });
 
@@ -61,11 +63,11 @@ const init = (settings) => {
     url: "",
     // The search fields and filterable facets.
     searchFields: [
-      {label: "Enter Search Term:", field: "tm_rendered_item", type: "text", isHidden: false},
-      {label: "Site Name", field: "sm_site_name", type: "list-facet", collapse: true, isHidden: false},
-      {label: "Type", field: "ss_federated_type", type: "list-facet", collapse: true, isHidden: false},
-      {label: "Date", field: "ds_federated_date", type: "range-facet", collapse: true, isHidden: false},
-      {label: "Federated Terms", field: "sm_federated_terms", type: "list-facet", hierarchy: true, expandedHierarchies: [], isHidden: false},
+      {label: "Enter Search Term:", field: "tm_rendered_item", type: "text", isHidden: false, hideFilterSelection: false},
+      {label: "Site Name", field: "sm_site_name", type: "list-facet", collapse: true, isHidden: false, hideFilterSelection: false},
+      {label: "Type", field: "ss_federated_type", type: "list-facet", collapse: true, isHidden: false, hideFilterSelection: false},
+      {label: "Date", field: "ds_federated_date", type: "range-facet", collapse: true, isHidden: false, hideFilterSelection: false},
+      {label: "Federated Terms", field: "sm_federated_terms", type: "list-facet", hierarchy: true, expandedHierarchies: [], isHidden: false, hideFilterSelection: false},
     ],
     // The solr field to use as the source for the main query param "q".
     mainQueryField: "tm_rendered_item",
@@ -83,6 +85,7 @@ const init = (settings) => {
     // Hostname overridable in ./.env.local.js for testing purposes.
     hostname: window.location.hostname,
     autocomplete: false,
+    hiddenFilterSelections: [],
   };
 
   const options = Object.assign(defaults, settings);
