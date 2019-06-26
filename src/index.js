@@ -33,11 +33,13 @@ const searchFromQuerystring = (solrClient, options = {}) => {
     }
 
     // If the searchField is one for which we preserve state through qs.
+    // @TODO handle discrepancy between config and qs params for initial state
+    // IE site name values set in config but not present in querystring
     if (helpers.filterFieldsWithQsState.find((filterField) => filterField === searchField.field )) {
       searchField = helpers.qs.setFieldStateFromQs({
         params,
         searchField
-      })
+      }) // this resets our initial state of search sites
     }
   });
 
@@ -79,8 +81,6 @@ const init = (settings) => {
     // Hostname overridable in ./.env.local.js for testing purposes.
     hostname: window.location.hostname,
     autocomplete: false,
-    // Enable a fixed list of sites to search.
-    siteList: ['Domain 1'],
   };
 
   const options = Object.assign(defaults, settings);
@@ -94,6 +94,17 @@ const init = (settings) => {
     }
     return searchField;
   });
+
+  // Set sm_site_name default values from config
+  // @TODO honor this even when no param present in QS @~L#36
+  const sm_site_name_value = settings.sm_site_name || false;
+  if (sm_site_name_value) {
+    options.searchFields.forEach(searchField => {
+      if (searchField.field === 'sm_site_name') {
+        searchField.value = sm_site_name_value;
+      }
+    });
+  }
 
   // The client class.
   const solrClient = new SolrClient({
