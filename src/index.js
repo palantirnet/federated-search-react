@@ -44,6 +44,7 @@ const searchFromQuerystring = (solrClient, options = {}) => {
       searchField.value = options.siteList;
     }
     // If restricted to the current site by configuration, enforce it here.
+    // @TODO: There doesn't seem an obvious way to pass this value.
     if (searchField.field === 'sm_site_name' && searchField.value === undefined && options.siteSearch !== undefined) {
       searchField.value = [options.siteSearch];
     }
@@ -102,7 +103,6 @@ const init = (settings) => {
   });
 
   // Set sm_site_name default values from config
-  // @TODO honor this even when no param present in QS @~L#36
   const sm_site_name_value = settings.sm_site_name || false;
   options.siteList = sm_site_name_value;
   if (sm_site_name_value) {
