@@ -43,6 +43,10 @@ const searchFromQuerystring = (solrClient, options = {}) => {
     if (searchField.field === 'sm_site_name' && searchField.value === undefined && options.siteList.length > 0) {
       searchField.value = options.siteList;
     }
+    // If restricted to the current site by configuration, enforce it here.
+    if (searchField.field === 'sm_site_name' && searchField.value === undefined && options.siteSearch !== undefined) {
+      searchField.value = [options.siteSearch];
+    }
   });
 
   // Ensure the initial query succeeds by setting a default start value.
