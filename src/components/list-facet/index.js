@@ -147,8 +147,8 @@ class FederatedListFacet extends React.Component {
           facetInputs[key] = facetCounts[i];
         }
       });
-      // If only one option exists and nothing is selected, don't show it.
-      if (value.length < 1 && Object.keys(facetInputs).length < 2) {
+      // If only one option exists, don't show it.
+      if (Object.keys(facetInputs).length < 2) {
         return null;
       }
     }
