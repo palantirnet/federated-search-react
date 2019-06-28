@@ -38,15 +38,15 @@ const searchFromQuerystring = (solrClient, options = {}) => {
         searchField
       }) // this resets our initial state of search sites
     }
+    // If restricted to the current site by configuration, enforce it here.
+    // This rule only applies if site has not been selected by the user.
+    if (searchField.field === 'sm_site_name' && searchField.value === undefined && options.siteSearch !== undefined) {
+      searchField.value = [options.siteSearch];
+    }
     // Account for default site search configuration, if present and no site
     // has been selected.
     if (searchField.field === 'sm_site_name' && searchField.value === undefined && options.siteList.length > 0) {
       searchField.value = options.siteList;
-    }
-    // If restricted to the current site by configuration, enforce it here.
-    // @TODO: There doesn't seem an obvious way to pass this value.
-    if (searchField.field === 'sm_site_name' && searchField.value === undefined && options.siteSearch !== undefined) {
-      searchField.value = [options.siteSearch];
     }
   });
 
