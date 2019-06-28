@@ -16,7 +16,7 @@ class FederatedListFacet extends React.Component {
     };
   }
 
-  handleClick(value) {
+  handleClick(value, options) {
     const {
       foundIdx,
       parsed,
@@ -56,16 +56,46 @@ class FederatedListFacet extends React.Component {
         // Send new query based on app state.
         this.props.onChange(this.props.field, this.props.value.concat(value));
       } else { // If the click is removing this field value.
-        // If their is already a qs param for this field value.
-        if (param) {
-          newParsed = helpers.qs.removeValueFromQsParam({
-            field: this.props.field,
-            value,
-            param,
-            parsed,
-          });
+          // Special case: if the sm_site_name setting is present and we enforce
+          // a default siteSearch value, unchecking the siteSearch enables
+          // results from all available sites.
+          // @TODO: We need to set the click state of each Filter to checked.
+          if (this.props.field === 'sm_site_name' &&
+              this.props.value.length === 1 &&
+              options.sm_site_name !== undefined)
+          {
+            options.sm_site_name.forEach((name) => {
+              value = name;
+              // Add new qs param for field + value.
+              if (param) {
+                newParsed = helpers.qs.addValueToQsParam({
+                  field: this.props.field,
+                  value,
+                  param,
+                  parsed,
+                });
+              }
+              // @TODO: This almost works but only sets one value.
+              else {
+                newParsed = helpers.qs.addQsParam({
+                  field: this.props.field,
+                  value,
+                  parsed,
+                });
+              }
+            });
+          }
+          else {
+            // If there is already a qs param for this field value.
+            if (param) {
+              newParsed = helpers.qs.removeValueFromQsParam({
+              field: this.props.field,
+              value,
+              param,
+              parsed,
+            });
+          }
         }
-
         // Send new query based on app state.
         this.props.onChange(this.props.field, this.props.value.filter((v, i) => i !== foundIdx));
       }
@@ -191,7 +221,7 @@ class FederatedListFacet extends React.Component {
               name={type}
               value={termObj.facetValue}
               checked={value.indexOf(termObj.facetValue) > -1}
-              onChange={() => this.handleClick(termObj.facetValue)}
+              onChange={() => this.handleClick(termObj.facetValue, options)}
             /> {termObj.term}
               <span className="facet-item-amount"> ({termObj.facetCount}
                 <span className="element-invisible">results</span>)
@@ -263,7 +293,7 @@ class FederatedListFacet extends React.Component {
                           name={field}
                           value={facetValue}
                           checked={value.indexOf(facetValue) > -1}
-                          onChange={() => this.handleClick(facetValue)}
+                          onChange={() => this.handleClick(facetValue, options)}
                         /> {facetValue}
                         <span className="facet-item-amount"> ({facetInputs[facetValue]}
                           <span className="element-invisible">results</span>)
