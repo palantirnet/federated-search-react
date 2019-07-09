@@ -97,7 +97,12 @@ class FederatedListFacet extends React.Component {
           }
         }
         // Send new query based on app state.
-        this.props.onChange(this.props.field, this.props.value.filter((v, i) => i !== foundIdx));
+        if (this.props.field === 'sm_site_name') {
+          this.props.onChange(this.props.field, newParsed.sm_site_name);
+        }
+        else {
+          this.props.onChange(this.props.field, this.props.value.filter((v, i) => i !== foundIdx));
+        }
       }
 
       helpers.qs.addNewUrlToBrowserHistory(newParsed);
