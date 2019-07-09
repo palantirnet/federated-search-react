@@ -59,7 +59,8 @@ class FederatedListFacet extends React.Component {
           // Special case: if the sm_site_name setting is present and we enforce
           // a default siteSearch value, unchecking the siteSearch enables
           // results from all available sites.
-          // @TODO: We need to set the click state of each Filter to checked.
+          // @TODO: We also use this logic in removeListFacetValue(), so we
+          // should likely move it to helpers/index.js.
           if (this.props.field === 'sm_site_name' &&
               this.props.value.length === 1 &&
               options.sm_site_name !== undefined)
@@ -75,7 +76,6 @@ class FederatedListFacet extends React.Component {
                   parsed,
                 });
               }
-              // @TODO: This almost works but only sets one value.
               else {
                 newParsed = helpers.qs.addQsParam({
                   field: this.props.field,
