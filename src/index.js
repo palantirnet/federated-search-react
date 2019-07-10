@@ -38,6 +38,11 @@ const searchFromQuerystring = (solrClient, options = {}) => {
         searchField
       }) // this resets our initial state of search sites
     }
+    // If restricted to the current site by configuration, enforce it here.
+    // This rule only applies if site has not been selected by the user.
+    if (searchField.field === 'sm_site_name' && searchField.value === undefined && options.siteSearch !== undefined) {
+      searchField.value = [options.siteSearch];
+    }
   });
   // Ensure the initial query succeeds by setting a default start value.
   solrClient.state.query.start = solrClient.state.query.start || 0;
@@ -94,9 +99,19 @@ const init = (settings) => {
   // Set sm_site_name default values from config
   const sm_site_name_value = settings.sm_site_name || false;
 
-  // @TODO logic for restricting site search based on config.
-  // @TODO: Update this logic.
-  options.siteList = sm_site_name_value;
+  // Logic for restricting site search based on config.
+  options.siteList = [];
+  if (settings.siteSearch !== undefined) {
+    options.searchFields.forEach((searchField) => {
+      if (searchField.field === 'sm_site_name' &&
+        (searchField.isHidden || sm_site_name_value.length < 2)) {
+        options.siteList = [settings.siteSearch];
+      }
+    });
+  }
+  else {
+    options.siteList = sm_site_name_value;
+  }
 
   // The client class.
   const solrClient = new SolrClient({
