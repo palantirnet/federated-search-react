@@ -32,39 +32,10 @@ class ListFacetType extends React.Component {
       value,
     });
 
-    // Define var for new parsed qs params object.
-    let newParsed = {};
-    let options = this.props.options;
-
     // Confirm the field value is set in state.
     if (foundIdx > -1) {
-      if (field === 'sm_site_name' &&
-          value.length === 1 &&
-          options.sm_site_name !== undefined)
-      {
-        // @TODO -- THIS IS THE LOGIC TO WORK ON.
-        options.sm_site_name.forEach((name) => {
-          value = name;
-          // Add new qs param for field + value.
-          if (param) {
-            newParsed = helpers.qs.addValueToQsParam({
-              field: field,
-              value,
-              param,
-              parsed,
-            });
-          }
-          else {
-            newParsed = helpers.qs.addQsParam({
-              field: field,
-              value,
-              parsed,
-            });
-          }
-        });
-      }
       // If the field is one whose state is tracked in qs and there is currently a param for it.
-      else if (isQsParamField && param) {
+      if (isQsParamField && param) {
         const newParsed = helpers.qs.removeValueFromQsParam({
           field,
           value,
@@ -75,14 +46,8 @@ class ListFacetType extends React.Component {
         helpers.qs.addNewUrlToBrowserHistory(newParsed);
       }
 
-      // Send new query based on app state.
-      if (field === 'sm_site_name') {
-        this.props.onChange(field, newParsed.sm_site_name);
-        helpers.qs.addNewUrlToBrowserHistory(newParsed);
-      }
-      else {
-        this.props.onChange(field, values.filter((v, i) => i !== foundIdx));
-      }
+      // Send query based on new state.
+      this.props.onChange(field, values.filter((v, i) => i !== foundIdx));
     }
   }
 
