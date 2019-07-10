@@ -16,7 +16,7 @@ class FederatedListFacet extends React.Component {
     };
   }
 
-  handleClick(value, options) {
+  handleClick(value) {
     const {
       foundIdx,
       parsed,
@@ -56,53 +56,18 @@ class FederatedListFacet extends React.Component {
         // Send new query based on app state.
         this.props.onChange(this.props.field, this.props.value.concat(value));
       } else { // If the click is removing this field value.
-          // Special case: if the sm_site_name setting is present and we enforce
-          // a default siteSearch value, unchecking the siteSearch enables
-          // results from all available sites.
-          // @TODO: We also use this logic in removeListFacetValue(), so we
-          // should likely move it to helpers/index.js.
-          if (this.props.field === 'sm_site_name' &&
-              this.props.value.length === 1 &&
-              options.sm_site_name !== undefined)
-          {
-            options.sm_site_name.forEach((name) => {
-              value = name;
-              // Add new qs param for field + value.
-              if (param) {
-                newParsed = helpers.qs.addValueToQsParam({
-                  field: this.props.field,
-                  value,
-                  param,
-                  parsed,
-                });
-              }
-              else {
-                newParsed = helpers.qs.addQsParam({
-                  field: this.props.field,
-                  value,
-                  parsed,
-                });
-              }
-            });
-          }
-          else {
-            // If there is already a qs param for this field value.
-            if (param) {
-              newParsed = helpers.qs.removeValueFromQsParam({
-              field: this.props.field,
-              value,
-              param,
-              parsed,
-            });
-          }
+        // If their is already a qs param for this field value.
+        if (param) {
+          newParsed = helpers.qs.removeValueFromQsParam({
+            field: this.props.field,
+            value,
+            param,
+            parsed,
+          });
         }
+
         // Send new query based on app state.
-        if (this.props.field === 'sm_site_name') {
-          this.props.onChange(this.props.field, newParsed.sm_site_name);
-        }
-        else {
-          this.props.onChange(this.props.field, this.props.value.filter((v, i) => i !== foundIdx));
-        }
+        this.props.onChange(this.props.field, this.props.value.filter((v, i) => i !== foundIdx));
       }
 
       helpers.qs.addNewUrlToBrowserHistory(newParsed);
@@ -134,35 +99,17 @@ class FederatedListFacet extends React.Component {
       value,
       collapse,
       hierarchy,
-      options,
     } = this.props;
     const { truncateFacetListsAt } = this.state;
 
-    const siteList = options.siteList;
     const facetCounts = facets.filter((facet, i) => i % 2 === 1);
     const facetValues = facets.filter((facet, i) => i % 2 === 0);
     // Create an object of facets {value: count} to keep consistent for inputs.
     const facetInputs = {};
-
-    // Handle site name restrictions.
-    if (field === 'sm_site_name' && siteList.length > 0) {
-      facetValues.forEach((v, i) => {
-        const key = facetValues[i];
-        if (siteList.indexOf(v) > -1) {
-          facetInputs[key] = facetCounts[i];
-        }
-      });
-      // If only one option exists, don't show it.
-      if (Object.keys(facetInputs).length < 2) {
-        return null;
-      }
-    }
-    else {
-      facetValues.forEach((v, i) => {
-        const key = facetValues[i];
-        facetInputs[key] = facetCounts[i];
-      });
-    }
+    facetValues.forEach((v, i) => {
+      const key = facetValues[i];
+      facetInputs[key] = facetCounts[i];
+    });
 
     const expanded = !(collapse || false);
     const height = expanded ? 'auto' : 0;
@@ -226,7 +173,7 @@ class FederatedListFacet extends React.Component {
               name={type}
               value={termObj.facetValue}
               checked={value.indexOf(termObj.facetValue) > -1}
-              onChange={() => this.handleClick(termObj.facetValue, options)}
+              onChange={() => this.handleClick(termObj.facetValue)}
             /> {termObj.term}
               <span className="facet-item-amount"> ({termObj.facetCount}
                 <span className="element-invisible">results</span>)
@@ -298,7 +245,7 @@ class FederatedListFacet extends React.Component {
                           name={field}
                           value={facetValue}
                           checked={value.indexOf(facetValue) > -1}
-                          onChange={() => this.handleClick(facetValue, options)}
+                          onChange={() => this.handleClick(facetValue)}
                         /> {facetValue}
                         <span className="facet-item-amount"> ({facetInputs[facetValue]}
                           <span className="element-invisible">results</span>)
