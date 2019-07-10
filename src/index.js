@@ -38,18 +38,7 @@ const searchFromQuerystring = (solrClient, options = {}) => {
         searchField
       }) // this resets our initial state of search sites
     }
-    // If restricted to the current site by configuration, enforce it here.
-    // This rule only applies if site has not been selected by the user.
-    if (searchField.field === 'sm_site_name' && searchField.value === undefined && options.siteSearch !== undefined) {
-      searchField.value = [options.siteSearch];
-    }
-    // Account for default site search configuration, if present and no site
-    // has been selected.
-    if (searchField.field === 'sm_site_name' && searchField.value === undefined && options.siteList.length > 0) {
-      searchField.value = options.siteList;
-    }
   });
-
   // Ensure the initial query succeeds by setting a default start value.
   solrClient.state.query.start = solrClient.state.query.start || 0;
   // Send query based on state derived from querystring.
@@ -104,14 +93,10 @@ const init = (settings) => {
 
   // Set sm_site_name default values from config
   const sm_site_name_value = settings.sm_site_name || false;
+
+  // @TODO logic for restricting site search based on config.
+  // @TODO: Update this logic.
   options.siteList = sm_site_name_value;
-  if (sm_site_name_value) {
-    options.searchFields.forEach(searchField => {
-      if (searchField.field === 'sm_site_name') {
-        searchField.value = sm_site_name_value;
-      }
-    });
-  }
 
   // The client class.
   const solrClient = new SolrClient({
@@ -126,6 +111,7 @@ const init = (settings) => {
     hl: options.hl,
     mainQueryField: options.mainQueryField,
     siteList: options.siteList,
+    filters: [{field: "sm_site_name", type: "list-facet", value: options.siteList}],
 
     // The change handler passes the current query- and result state for render
     // as well as the default handlers for interaction with the search component
