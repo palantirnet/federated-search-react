@@ -125,7 +125,6 @@ const init = (settings) => {
     rows: options.rows,
     hl: options.hl,
     mainQueryField: options.mainQueryField,
-    siteList: options.siteList,
     filters: [{field: "sm_site_name", type: "list-facet", value: options.siteList}],
 
     // The change handler passes the current query- and result state for render
