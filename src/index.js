@@ -31,16 +31,19 @@ const searchFromQuerystring = (solrClient, options = {}) => {
       // Set the state of the main query field to the value of the search qs param
       searchField.value = parsed.search;
     }
-
     // If the searchField is one for which we preserve state through qs.
     if (helpers.filterFieldsWithQsState.find((filterField) => filterField === searchField.field )) {
       searchField = helpers.qs.setFieldStateFromQs({
         params,
         searchField
-      })
+      }) // this resets our initial state of search sites
+    }
+    // If restricted to the current site by configuration, enforce it here.
+    // This rule only applies if site has not been selected by the user.
+    if (searchField.field === 'sm_site_name' && searchField.value === undefined && options.siteSearch !== undefined) {
+      searchField.value = [options.siteSearch];
     }
   });
-
   // Ensure the initial query succeeds by setting a default start value.
   solrClient.state.query.start = solrClient.state.query.start || 0;
   // Send query based on state derived from querystring.
@@ -93,6 +96,23 @@ const init = (settings) => {
     return searchField;
   });
 
+  // Set sm_site_name default values from config
+  const sm_site_name_value = settings.sm_site_name || false;
+
+  // Logic for restricting site search based on config.
+  options.siteList = [];
+  if (settings.siteSearch !== undefined) {
+    options.searchFields.forEach((searchField) => {
+      if (searchField.field === 'sm_site_name' &&
+        (searchField.isHidden || sm_site_name_value.length < 2)) {
+        options.siteList = [settings.siteSearch];
+      }
+    });
+  }
+  else {
+    options.siteList = sm_site_name_value;
+  }
+
   // The client class.
   const solrClient = new SolrClient({
     isD7: options.isD7,
@@ -105,6 +125,7 @@ const init = (settings) => {
     rows: options.rows,
     hl: options.hl,
     mainQueryField: options.mainQueryField,
+    filters: [{field: "sm_site_name", type: "list-facet", value: options.siteList}],
 
     // The change handler passes the current query- and result state for render
     // as well as the default handlers for interaction with the search component

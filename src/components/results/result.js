@@ -126,9 +126,9 @@ class FederatedResult extends React.Component {
 }
 
 FederatedResult.propTypes = {
-	doc: PropTypes.object,
-	fields: PropTypes.array,
-	onSelect: PropTypes.func.isRequired,
+  doc: PropTypes.object,
+  fields: PropTypes.array,
+  onSelect: PropTypes.func.isRequired,
     hostname: PropTypes.string,
 };
 
