@@ -86,19 +86,18 @@ TODO
 
 Deploying this package produces production-ready JS and CSS files that can be referenced in a project as external dependencies.
 
-- CSS: `https://cdn.jsdelivr.net/gh/palantirnet/federated-search-react@v<version>/css/main.<hash>.css`
-- JS: `https://cdn.jsdelivr.net/gh/palantirnet/federated-search-react@v<version>/js/main.<hash>.js`
+- CSS: `https://cdn.jsdelivr.net/gh/palantirnet/federated-search-react@[VERSION]/css/[FILENAME].css`
+- JS: `https://cdn.jsdelivr.net/gh/palantirnet/federated-search-react@[VERSION]/js/[FILENAME].js`
 
 To update the package, replace the the version number AND hash for each file based on the current release.  For example, if you just released `v2.1.3`:
 
-1. Browse to the tag that was made in github as a result of running `yarn deploy tag`
-  1. In this example: https://github.com/palantirnet/federated-search-react/tree/v2.1.3
+1. Browse to the tag that was made in github as a result of running `yarn deploy tag` (in this example: https://github.com/palantirnet/federated-search-react/tree/v2.1.3)
 1. Browse to the `js/` directory in the release you've just created
-  1. Observe the hash in the filename ([in this example](https://github.com/palantirnet/federated-search-react/tree/v2.1.3/js): where the filename is `main.3dcebe99.js` the hash is `3dcebe99`)
-  1. Note: if the js has not been updated since the last release which has been deployed, the hash will likely be the same.
+    1. Observe the filename for the compiled js ([in this example](https://github.com/palantirnet/federated-search-react/tree/v2.1.3/js): `main.3dcebe99.js`)
+    1. Note: if the js has not been updated since the last release which has been deployed, the filename hash will likely be the same.
 1. Browse to the `css/` directory in the release you've just created
-  1. Observe the hash in the filename ([in this example](https://github.com/palantirnet/federated-search-react/tree/v2.1.3/css): where the filename is `main.ec684809.css` the hash is `ec684809`)
-  1. Note: if the css has not been updated since the last release which has been deployed, the hash will likely be the same.
+    1. Observe the filename for the compiled css ([in this example](https://github.com/palantirnet/federated-search-react/tree/v2.1.3/css): `main.ec684809.css`)
+    1. Note: if the css has not been updated since the last release which has been deployed, the filename hash will likely be the same.
 
 The corresponding CDN urls for the css and js assets for this example should be:
 - CSS: `https://cdn.jsdelivr.net/gh/palantirnet/federated-search-react@v2.1.3/css/main.ec684809.css`
