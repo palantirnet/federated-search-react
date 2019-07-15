@@ -43,7 +43,7 @@ Run `yarn start` from the repo root to run the app in development mode.
 It should automatically open http://localhost:3000 in a browser.
 
 The page will automatically reload if you make changes to the code.
-                                      
+
 You will see the build errors and lint warnings in the console.
 
 ## Local testing
@@ -78,9 +78,9 @@ TODO
 
 ## Publishing releases
 
-- Run `yarn build` to build the static assets and copy the `package.json` file into the `build/static` directory
-- Run `yarn deploy` to push the contents of `build/static` to the `master` branch of this repository 
-- Run `yarn deploy tag` to push the contents of `build/static` to the `master` branch and tag it with the version listed in `package.json` (be sure to bump as you see fit and commit that change before running this)
+1. Ensure that `package.json` reflects the version number you would like to release
+1. Run `yarn build` which builds the static assets and copies the `package.json` file into the `build/static` directory.
+1. Run `yarn deploy tag` which pushes the contents of `build/static` to the `master` branch and tags it with the version listed in `package.json`.
 
 ### Requiring this project as a dependency
 
