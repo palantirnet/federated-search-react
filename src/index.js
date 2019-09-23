@@ -40,7 +40,7 @@ const searchFromQuerystring = (solrClient, options = {}) => {
     }
     // If restricted to the current site by configuration, enforce it here.
     // This rule only applies if site has not been selected by the user.
-    if (searchField.field === 'sm_site_name' && searchField.value === undefined && options.siteSearch !== undefined) {
+    if (options.siteSearch !== undefined && searchField.field === 'sm_site_name' && searchField.value === undefined && searchField.isHidden === false) {
       searchField.value = [options.siteSearch];
     }
   });
