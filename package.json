@@ -1,7 +1,7 @@
 {
   "name": "@palantirnet/federated-search-react",
   "description": "A ReactJS front end for faceted Solr search.",
-  "version": "2.1.3",
+  "version": "2.1.4",
   "homepage": "https://github.com/palantirnet/federated-search-react",
   "license": "MIT",
   "private": false,
