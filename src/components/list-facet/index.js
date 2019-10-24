@@ -4,7 +4,6 @@ import cx from 'classnames';
 import AnimateHeight from 'react-animate-height';
 import helpers from '../../helpers';
 
-
 class FederatedListFacet extends React.Component {
 
   constructor(props) {
