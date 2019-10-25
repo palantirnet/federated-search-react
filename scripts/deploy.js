@@ -12,7 +12,7 @@ console.log(`Preparing version ${version} for deployment.`);
 // Define options for publish method.
 let options = {
   branch: 'master',
-  message: `Auto-generated commit during deploy: ${version}`,
+  message: `Auto-generated commit during deploy: ${version}`
 };
 // Ensure that we are not loading files from a stale git cache.
 // The git directory is node_modules/gh-pages/.cache
