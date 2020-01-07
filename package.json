@@ -6,10 +6,9 @@
   "license": "MIT",
   "private": false,
   "devDependencies": {
-    "@palantirnet/react-scripts": "1.1.4",
     "babel-polyfill": "^6.26.0",
     "breakpoint-sass": "^2.7.0",
-    "eslint": "^4.9.0",
+    "create-react-app": ">=3.3.0",
     "eslint-config-airbnb": "^16.1.0",
     "eslint-plugin-import": "^2.7.0",
     "eslint-plugin-jsx-a11y": "^6.0.2",
@@ -49,6 +48,19 @@
     "intl": "^1.2.5",
     "react-aria-live": "2.0.2",
     "react-autosuggest": "9.4.3",
+    "react-scripts": "^3.3.0",
     "url": "0.11.0"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
   }
 }
