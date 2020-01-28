@@ -1,12 +1,12 @@
 /**
- * search-form.scss
+ * fs-search-form.scss
  * Define search results styles.
  *
  * @copyright Copyright (c) 2017-2019 Palantir.net
  */
 
-.search-results {
-  @extend %list--simple;  
+.fs-search-results {
+  @extend %list--simple;
 
   li {
     margin-bottom: rhythm(1);
@@ -14,31 +14,31 @@
   }
 }
 
-.search-results__container--left {
+.fs-search-results__container--left {
   flex: 1 0 0;
   margin-right: 3%;
 }
 
-.search-results__container--right {
+.fs-search-results__container--right {
   flex: 3 0 0;
 }
 
-.search-results__image {
+.fs-search-results__image {
   // Styles specific to the search results image.
 }
 
-.search-results__label {
+.fs-search-results__label {
   color: $gray-medium;
   display: block;
 }
 
-.search-results__heading {
+.fs-search-results__heading {
   margin-bottom: .33333em;
   margin-top: .25em;
   padding: 0;
 }
 
-.search-results__heading-link {
+.fs-search-results__heading-link {
   /**
  * 1. Remove the gray background on active links in IE 10.
  * 2. Remove gaps in links underline in iOS 8+ and Safari 8+.
@@ -60,17 +60,17 @@
   }
 }
 
-.search-results__teaser {
+.fs-search-results__teaser {
   margin-bottom: rhythm(.5);
 }
 
-.search-results__meta {
+.fs-search-results__meta {
   margin-bottom: rhythm(.5);
   color: $gray-medium;
   display: block;
 }
 
-.search-results__citation a {
+.fs-search-results__citation a {
   font-style: normal;
   color: $gray-medium;
   text-decoration: none;
