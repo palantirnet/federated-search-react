@@ -11,8 +11,8 @@
 // Debug mode: Set to true for background grid overlay.
 @include sgs-change('debug', true);
 
-// If you want/need to use fixed width gutters, you must add 
-// split and fixed gutter styles so that singularity uses the 
+// If you want/need to use fixed width gutters, you must add
+// split and fixed gutter styles so that singularity uses the
 // right maths.
 // @include add-gutter-style('split' 'fixed');
 
@@ -28,9 +28,9 @@
 // Singularity: Centered container
 //////////////////////////////////////////
 
-.container {
+.fs-container {
   // @include background-grid($color: rgba(blue, .2));
-  @extend %clearfix;
+  @extend %fs-clearfix;
   width: 100%;
   min-width: 260px; /* enforces a min-width in FF. */
   padding: 0 rhythm(1);

@@ -56,7 +56,7 @@
 }
 
 .fs-search-filters__form {
-  @extend %clearfix;
+  @extend %fs-clearfix;
   padding-bottom: rhythm(1);
 
   fieldset {

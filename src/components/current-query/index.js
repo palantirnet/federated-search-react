@@ -9,7 +9,7 @@ import helpers from '../../helpers';
 // Create dumb component which can be configured by props.
 const FacetType = props => (
   <button className="fs-applied-filters__filter" key={props.id} onClick={props.onClick}>
-    <span className="element-invisible">
+    <span className="fs-element-invisible">
       Remove filter
     </span>
     {props.children}
@@ -156,10 +156,10 @@ class FederatedCurrentQuery extends React.Component {
           <React.Fragment>
             {fields.length > 0 && // Only render this if there are filters applied.
               <div className="fs-applied-filters">
-                <h2 className="element-invisible">
+                <h2 className="fs-element-invisible">
                   Currently Applied Search Filters.
                 </h2>
-                <p className="element-invisible">
+                <p className="fs-element-invisible">
                   Click a filter to remove it from your search query.
                 </p>
                 {/* Only render the values for visible facets / filters */}

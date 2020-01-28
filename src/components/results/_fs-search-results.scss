@@ -6,7 +6,7 @@
  */
 
 .fs-search-results {
-  @extend %list--simple;
+  @extend %fs-list--simple;
 
   li {
     margin-bottom: rhythm(1);

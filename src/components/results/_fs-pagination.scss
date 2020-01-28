@@ -8,7 +8,7 @@
 }
 
 .fs-search-pager__items {
-  @extend %list--simple;
+  @extend %fs-list--simple;
   display: flex;
   align-items: center;
   justify-content: space-between;

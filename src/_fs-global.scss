@@ -178,7 +178,7 @@
    * 2. Correct the odd `em` font sizing in all browsers.
    */
 
-  %monospace,
+  %fs-monospace,
   code,
   kbd,
   samp {
@@ -203,7 +203,7 @@
    */
 
   h1 {
-    @extend %display-type;
+    @extend %fs-display-type;
     // Set the font-size and line-height while keeping a proper vertical rhythm.
     @include adjust-font-size-to($h1-font-size, 1.3);
     // Set 1 unit of vertical rhythm on the top and bottom margins.
@@ -221,7 +221,7 @@
   }
 
   h3 {
-    @extend %display-type;
+    @extend %fs-display-type;
     @include adjust-font-size-to($h3-font-size, 1.25);
     @include leader(1, $h3-font-size);
     @include trailer(.5, $h3-font-size);
@@ -234,14 +234,14 @@
   }
 
   h5 {
-    @extend %allcaps;
+    @extend %fs-allcaps;
     @include adjust-font-size-to($h5-font-size, 1);
     @include leader(.75, $h5-font-size);
     @include trailer(.25, $h5-font-size);
   }
 
   h6 {
-    @extend %allcaps;
+    @extend %fs-allcaps;
     @include adjust-font-size-to($h6-font-size, 1);
     @include leader(.75, $h6-font-size);
     @include trailer(.25, $h6-font-size);
@@ -408,7 +408,7 @@
 
 
   pre {
-    @extend %monospace;
+    @extend %fs-monospace;
   }
 
   /* Forms

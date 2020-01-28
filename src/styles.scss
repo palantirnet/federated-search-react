@@ -18,15 +18,15 @@
 @import "fs-global";
 
 /* Layout rules */
-@import "grid-layouts/_l-singularity";
-@import "grid-layouts/_l-1up";
-@import "grid-layouts/_l-2up";
-@import "grid-layouts/_l-3up";
-@import "grid-layouts/_l-4up";
-@import "grid-layouts/_l-6up";
-@import "grid-layouts/_l-33-66";
-@import "grid-layouts/_l-66-33";
-@import "grid-layouts/_l-25-75";
+@import "grid-layouts/_fs-l-singularity";
+@import "grid-layouts/_fs-l-1up";
+@import "grid-layouts/_fs-l-2up";
+@import "grid-layouts/_fs-l-3up";
+@import "grid-layouts/_fs-l-4up";
+@import "grid-layouts/_fs-l-6up";
+@import "grid-layouts/_fs-l-33-66";
+@import "grid-layouts/_fs-l-66-33";
+@import "grid-layouts/_fs-l-25-75";
 
 /* Component (SMACSS module) rules */
 @import "components/text-search/fs-search-form";

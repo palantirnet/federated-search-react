@@ -75,7 +75,7 @@ class FederatedTextSearchNoAutocomplete extends React.Component {
             type="submit"
             className="fs-search-form__submit"
             onClick={this.handleSubmit}>
-            <span className="element-invisible">Perform Search</span>
+            <span className="fs-element-invisible">Perform Search</span>
             <SearchIcon />
           </button>
         </div>

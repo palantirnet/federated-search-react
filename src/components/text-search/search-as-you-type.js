@@ -260,7 +260,7 @@ class FederatedTextSearchAsYouType extends React.Component {
         href={suggestion.sm_urls[0]}
       >
         {highlightedTitle}
-        <span className="element-invisible">
+        <span className="fs-element-invisible">
           {` (${currentHumanIndex} of ${suggestionsLength})`}
         </span>
       </a>
@@ -316,7 +316,7 @@ class FederatedTextSearchAsYouType extends React.Component {
             className="fs-search-form__submit"
             onClick={this.handleSubmit}
           >
-            <span className="element-invisible">Perform Search</span>
+            <span className="fs-element-invisible">Perform Search</span>
             <SearchIcon />
           </button>
         </div>

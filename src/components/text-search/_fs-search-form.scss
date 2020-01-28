@@ -14,7 +14,7 @@
   @include adjust-font-size-to($label);
   display: block;
   margin-bottom: .1em;
-  @extend %track-out;
+  @extend %fs-track-out;
 }
 
 .fs-search-form__input-wrapper {
