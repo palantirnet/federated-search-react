@@ -5,8 +5,8 @@
  * @copyright Copyright (c) 2017-2019 Palantir.net
  */
 
-.search-filters__trigger,
-.search-accordion__title {
+.fs-search-filters__trigger,
+.fs-search-accordion__title {
   @include adjust-font-size-to($sm-heading, 1);
   display: block;
   padding-right: 1.25rem;
@@ -25,7 +25,7 @@
   }
 }
 
-.search-filters__trigger {
+.fs-search-filters__trigger {
   width: 100%;
   background-color: transparent;
   border-radius: 0;
@@ -37,13 +37,13 @@
     display: none;
   }
 
-  &.js-search-filters-open {
+  &.js-fs-search-filters-open {
     background-color: $gray-dark;
     color: $gray-pale;
   }
 
   // Replace plus symbol with en dash when search-filters is open
-  &.js-search-filters-open:after {
+  &.js-fs-search-filters-open:after {
     content: "–";
   }
 
@@ -55,7 +55,7 @@
   }
 }
 
-.search-filters__form {
+.fs-search-filters__form {
   @extend %clearfix;
   padding-bottom: rhythm(1);
 
@@ -71,11 +71,11 @@
   }
 }
 
-.search-filters__row {
+.fs-search-filters__row {
   padding: 0 1.25rem;
 }
 
-.search-filters__title {
+.fs-search-filters__title {
   display: none;
   @include breakpoint($bp2) {
     display: block;
@@ -86,14 +86,14 @@
   }
 }
 
-.search-filters__label,
-%search-filters__label {
+.fs-search-filters__label,
+%fs-search-filters__label {
   @extend %search-form__label;
   @include adjust-font-size-to($crumb, .6);
   margin-bottom: .2em;
 }
 
-.search-filters__reset {
+.fs-search-filters__reset {
   @include adjust-font-size-to($label);
   padding: .2em .75em;
   border-radius: 3px;
@@ -116,7 +116,7 @@
   }
 }
 
-.search-filters__no-results {
+.fs-search-filters__no-results {
   @include adjust-font-size-to($label, .8);
   display: block;
   padding-right: 1.25rem;
@@ -127,13 +127,13 @@
 // search-accordion styles
 ///////////////////////////////
 
-.search-accordion {
+.fs-search-accordion {
   margin-bottom: rhythm(1);
   color: $gray-dark;
   padding: 0;
 }
 
-.search-accordion__checkbox-label {
+.fs-search-accordion__checkbox-label {
   cursor: pointer;
   display: block;
   padding: rhythm(.5) 0;
@@ -144,7 +144,7 @@
   }
 }
 
-.search-accordion__content {
+.fs-search-accordion__content {
   margin: 0;
   padding: rhythm(.5) 1.25rem;
 
@@ -169,8 +169,8 @@
   }
 }
 
-.search-accordion__group,
-.search-accordion__subgroup {
+.fs-search-accordion__group,
+.fs-search-accordion__subgroup {
   list-style: none;
   padding: 0;
 
@@ -189,15 +189,15 @@
   }
 }
 
-.search-accordion__group {
+.fs-search-accordion__group {
   margin: 0;
 }
 
-.search-accordion__subgroup {
+.fs-search-accordion__subgroup {
   margin: 0 0 0 rhythm(.5);
 }
 
-.search-accordion__title {
+.fs-search-accordion__title {
   border-bottom: solid 1px $gray-light;
   padding-top: rhythm(.75);
   padding-bottom: rhythm(.75);
@@ -214,13 +214,13 @@
     border-bottom: solid 1px darken($gray-light, 10);
     outline: 0;
   }
-  
+
   &:hover {
     cursor: pointer;
   }
 
   // Replace plus symbol with en dash when search-accordion is open
-  &.js-search-accordion-open:after {
+  &.js-fs-search-accordion-open:after {
     content: "–";
   }
 }

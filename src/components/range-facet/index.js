@@ -81,7 +81,7 @@ class FederatedRangeFacet extends React.Component {
       <li id={`solr-list-facet-${field}`}>
         <a
           tabIndex="0"
-          className={cx("search-accordion__title", {"js-search-accordion-open": expanded})}
+          className={cx("fs-search-accordion__title", {"js-fs-search-accordion-open": expanded})}
           id={label.replace(/\s+/g, '-').toLowerCase()}
           onClick={this.toggleExpand.bind(this)}
           onKeyDown={(event)=>{if (event.keyCode === 13) {this.toggleExpand()}}}
@@ -90,7 +90,7 @@ class FederatedRangeFacet extends React.Component {
           duration={600}
           height={height}
         >
-          <ul className="search-accordion__content">
+          <ul className="fs-search-accordion__content">
             <li>
               {/* See: https://github.com/airbnb/react-dates#daterangepicker */}
               <DateRangePicker
