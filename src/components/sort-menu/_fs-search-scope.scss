@@ -1,16 +1,16 @@
 /**
- * search-scope.scss
+ * fs-search-scope.scss
  * Define search scope styles.
  *
  * @copyright Copyright (c) 2017-2019 Palantir.net
  */
 
-.search-scope {
+.fs-search-scope {
   @extend %clearfix;
   margin: rhythm(1) 0;
 }
 
-.search-scope__filter {
+.fs-search-scope__filter {
   @include float-span(6);
 
   @include breakpoint($bp1) {
@@ -42,7 +42,7 @@
   }
 }
 
-.search-scope__select {
+.fs-search-scope__select {
   @include adjust-font-size-to($label, .8);
   border-radius: 3px;
   border: 1px solid $gray-light;
@@ -68,6 +68,6 @@
   }
 }
 
-.search-scope__label {
+.fs-search-scope__label {
   @extend %fs-search-filters__label;
 }
