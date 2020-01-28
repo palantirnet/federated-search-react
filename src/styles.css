@@ -21,7 +21,7 @@
   letter-spacing: -.0125em; }
 
 /* Open tracking */
-#fs-root h5, #fs-root h6, .search-form__label, .search-filters__label, .search-scope__label {
+#fs-root h5, #fs-root h6, .fs-search-form__label, .fs-search-filters__label, .fs-search-scope__label {
   letter-spacing: .04em; }
 
 /* Style larger text with a tighter tracking, change weight, etc.  */
@@ -30,7 +30,7 @@
   text-transform: uppercase; }
 
 /* Unstyle a list */
-.search-results, .search-pager__items {
+.fs-search-results, .fs-search-pager__items {
   margin: 0;
   padding: 0;
   list-style: none; }
@@ -43,10 +43,10 @@
  * do not get compiled uless they are called - removing the nesting issues that
  * can otherwise occur with extends.
  */
-.clearfix:after,
-.container:after,
-.search-filters__form:after,
-.search-scope:after {
+.fs-clearfix:after,
+.fs-container:after,
+.fs-search-filters__form:after,
+.fs-search-scope:after {
   content: '';
   display: table;
   clear: both; }
@@ -58,8 +58,8 @@
  * Element-invisible as defined by snook.ca
  * @see http://snook.ca/archives/html_and_css/hiding-content-for-accessibility
  */
-.element-invisible,
-.element-focusable {
+.fs-element-invisible,
+.fs-element-focusable {
   position: absolute !important;
   height: 1px;
   width: 1px;
@@ -68,7 +68,7 @@
   clip: rect(1px, 1px, 1px, 1px); }
 
 /* Turns off the element-invisible effect. */
-.element-focusable:active, .element-focusable:focus {
+.fs-element-focusable:active, .fs-element-focusable:focus {
   position: static !important;
   clip: auto;
   height: auto;
@@ -544,25 +544,25 @@
  * Define singularity gs base settings here.
  * @see https://github.com/at-import/Singularity
  */
-.container {
+.fs-container {
   width: 100%;
   min-width: 260px;
   /* enforces a min-width in FF. */
   padding: 0 1.46667em;
   margin: 0 auto; }
   @media (min-width: 900px) {
-    .container {
+    .fs-container {
       width: 90%;
       padding: 0; } }
   @media (min-width: 1100px) {
-    .container {
+    .fs-container {
       max-width: 1400px; } }
 
 /**
  * @file
  * Layout rules for full-width content
  */
-.l-1up {
+.fs-l-1up {
   -sgs-span-settings: ("span": 12, "location": 1, "grid": 12, "gutter": 0.5, "style": "opposite", "start row": true, "end row": true, "fixed gutter": false, "split gutter": null, "gutter property": "margin", "options": ("clear": both));
   width: 100%;
   float: right;
@@ -574,7 +574,7 @@
  * @file
  * Layout rules for 2-up content
  */
-.l-2up {
+.fs-l-2up {
   -sgs-span-settings: ("span": 12, "location": 1, "grid": 12, "gutter": 0.5, "style": "opposite", "start row": true, "end row": true, "fixed gutter": false, "split gutter": null, "gutter property": "margin", "options": ("clear": both));
   width: 100%;
   float: right;
@@ -582,7 +582,7 @@
   margin-right: 0;
   clear: both; }
   @media (min-width: 600px) {
-    .l-2up {
+    .fs-l-2up {
       -sgs-span-settings: ("span": 6, "location": 1, "grid": 12, "gutter": 0.5, "style": "opposite", "start row": true, "end row": false, "fixed gutter": false, "split gutter": null, "gutter property": "margin", "options": (null: null));
       width: 48.57143%;
       clear: right;
@@ -590,7 +590,7 @@
       margin-left: 0;
       margin-right: 2.85714%; } }
   @media (min-width: 600px) {
-    .l-2up:nth-of-type(2n+1) {
+    .fs-l-2up:nth-of-type(2n+1) {
       -sgs-span-settings: ("span": 6, "location": 1, "grid": 12, "gutter": 0.5, "style": "opposite", "start row": true, "end row": false, "fixed gutter": false, "split gutter": null, "gutter property": "margin", "options": (null: null));
       width: 48.57143%;
       clear: right;
@@ -599,14 +599,14 @@
       margin-right: 2.85714%;
       clear: both; } }
   @media (min-width: 600px) {
-    .l-2up:nth-of-type(2n) {
+    .fs-l-2up:nth-of-type(2n) {
       -sgs-span-settings: ("span": 6, "location": 7, "grid": 12, "gutter": 0.5, "style": "opposite", "start row": false, "end row": true, "fixed gutter": false, "split gutter": null, "gutter property": "margin", "options": (null: null));
       width: 48.57143%;
       clear: right;
       float: right;
       margin-right: 0; } }
 
-.l-2up--1 {
+.fs-l-2up--1 {
   -sgs-span-settings: ("span": 12, "location": 1, "grid": 12, "gutter": 0.5, "style": "opposite", "start row": true, "end row": true, "fixed gutter": false, "split gutter": null, "gutter property": "margin", "options": ("clear": both));
   width: 100%;
   float: right;
@@ -614,7 +614,7 @@
   margin-right: 0;
   clear: both; }
   @media (min-width: 600px) {
-    .l-2up--1 {
+    .fs-l-2up--1 {
       -sgs-span-settings: ("span": 6, "location": 1, "grid": 12, "gutter": 0.5, "style": "opposite", "start row": true, "end row": false, "fixed gutter": false, "split gutter": null, "gutter property": "margin", "options": ("clear": both));
       width: 48.57143%;
       float: left;
@@ -622,7 +622,7 @@
       margin-left: 0;
       clear: both; } }
 
-.l-2up--2 {
+.fs-l-2up--2 {
   -sgs-span-settings: ("span": 12, "location": 1, "grid": 12, "gutter": 0.5, "style": "opposite", "start row": true, "end row": true, "fixed gutter": false, "split gutter": null, "gutter property": "margin", "options": ("clear": both));
   width: 100%;
   float: right;
@@ -630,7 +630,7 @@
   margin-right: 0;
   clear: both; }
   @media (min-width: 600px) {
-    .l-2up--2 {
+    .fs-l-2up--2 {
       -sgs-span-settings: ("span": 6, "location": 7, "grid": 12, "gutter": 0.5, "style": "opposite", "start row": false, "end row": true, "fixed gutter": false, "split gutter": null, "gutter property": "margin", "options": ("clear": none));
       width: 48.57143%;
       float: right;
@@ -642,7 +642,7 @@
  * @file
  * Layout rules for 3-up content
  */
-.l-3up {
+.fs-l-3up {
   -sgs-span-settings: ("span": 12, "location": 1, "grid": 12, "gutter": 0.5, "style": "opposite", "start row": true, "end row": true, "fixed gutter": false, "split gutter": null, "gutter property": "margin", "options": ("clear": both));
   width: 100%;
   float: right;
@@ -650,7 +650,7 @@
   margin-right: 0;
   clear: both; }
   @media (min-width: 600px) {
-    .l-3up {
+    .fs-l-3up {
       -sgs-span-settings: ("span": 4, "location": 1, "grid": 12, "gutter": 0.5, "style": "opposite", "start row": true, "end row": false, "fixed gutter": false, "split gutter": null, "gutter property": "margin", "options": (null: null));
       width: 31.42857%;
       clear: right;
@@ -658,7 +658,7 @@
       margin-left: 0;
       margin-right: 2.85714%; } }
   @media (min-width: 600px) {
-    .l-3up:nth-of-type(3n+1) {
+    .fs-l-3up:nth-of-type(3n+1) {
       -sgs-span-settings: ("span": 4, "location": 1, "grid": 12, "gutter": 0.5, "style": "opposite", "start row": true, "end row": false, "fixed gutter": false, "split gutter": null, "gutter property": "margin", "options": (null: null));
       width: 31.42857%;
       clear: right;
@@ -667,14 +667,14 @@
       margin-right: 2.85714%;
       clear: both; } }
   @media (min-width: 600px) {
-    .l-3up:nth-of-type(3n) {
+    .fs-l-3up:nth-of-type(3n) {
       -sgs-span-settings: ("span": 4, "location": 9, "grid": 12, "gutter": 0.5, "style": "opposite", "start row": false, "end row": true, "fixed gutter": false, "split gutter": null, "gutter property": "margin", "options": (null: null));
       width: 31.42857%;
       clear: right;
       float: right;
       margin-right: 0; } }
 
-.l-3up--1 {
+.fs-l-3up--1 {
   -sgs-span-settings: ("span": 12, "location": 1, "grid": 12, "gutter": 0.5, "style": "opposite", "start row": true, "end row": true, "fixed gutter": false, "split gutter": null, "gutter property": "margin", "options": ("clear": both));
   width: 100%;
   float: right;
@@ -682,7 +682,7 @@
   margin-right: 0;
   clear: both; }
   @media (min-width: 600px) {
-    .l-3up--1 {
+    .fs-l-3up--1 {
       -sgs-span-settings: ("span": 4, "location": 1, "grid": 12, "gutter": 0.5, "style": "opposite", "start row": true, "end row": false, "fixed gutter": false, "split gutter": null, "gutter property": "margin", "options": ("clear": both));
       width: 31.42857%;
       float: left;
@@ -690,7 +690,7 @@
       margin-left: 0;
       clear: both; } }
 
-.l-3up--2 {
+.fs-l-3up--2 {
   -sgs-span-settings: ("span": 12, "location": 1, "grid": 12, "gutter": 0.5, "style": "opposite", "start row": true, "end row": true, "fixed gutter": false, "split gutter": null, "gutter property": "margin", "options": ("clear": both));
   width: 100%;
   float: right;
@@ -698,7 +698,7 @@
   margin-right: 0;
   clear: both; }
   @media (min-width: 600px) {
-    .l-3up--2 {
+    .fs-l-3up--2 {
       -sgs-span-settings: ("span": 4, "location": 5, "grid": 12, "gutter": 0.5, "style": "opposite", "start row": false, "end row": false, "fixed gutter": false, "split gutter": null, "gutter property": "margin", "options": ("clear": none));
       width: 31.42857%;
       float: left;
@@ -706,7 +706,7 @@
       margin-left: 34.28571%;
       clear: none; } }
 
-.l-3up--3 {
+.fs-l-3up--3 {
   -sgs-span-settings: ("span": 12, "location": 1, "grid": 12, "gutter": 0.5, "style": "opposite", "start row": true, "end row": true, "fixed gutter": false, "split gutter": null, "gutter property": "margin", "options": ("clear": both));
   width: 100%;
   float: right;
@@ -714,7 +714,7 @@
   margin-right: 0;
   clear: both; }
   @media (min-width: 600px) {
-    .l-3up--3 {
+    .fs-l-3up--3 {
       -sgs-span-settings: ("span": 4, "location": 9, "grid": 12, "gutter": 0.5, "style": "opposite", "start row": false, "end row": true, "fixed gutter": false, "split gutter": null, "gutter property": "margin", "options": ("clear": none));
       width: 31.42857%;
       float: right;
@@ -726,7 +726,7 @@
  * @file
  * Layout rules for 4-up content
  */
-.l-4up {
+.fs-l-4up {
   -sgs-span-settings: ("span": 12, "location": 1, "grid": 12, "gutter": 0.5, "style": "opposite", "start row": true, "end row": true, "fixed gutter": false, "split gutter": null, "gutter property": "margin", "options": ("clear": both));
   width: 100%;
   float: right;
@@ -734,7 +734,7 @@
   margin-right: 0;
   clear: both; }
   @media (min-width: 600px) {
-    .l-4up {
+    .fs-l-4up {
       -sgs-span-settings: ("span": 3, "location": 1, "grid": 12, "gutter": 0.5, "style": "opposite", "start row": true, "end row": false, "fixed gutter": false, "split gutter": null, "gutter property": "margin", "options": (null: null));
       width: 22.85714%;
       clear: right;
@@ -742,7 +742,7 @@
       margin-left: 0;
       margin-right: 2.85714%; } }
   @media (min-width: 600px) {
-    .l-4up:nth-of-type(4n+1) {
+    .fs-l-4up:nth-of-type(4n+1) {
       -sgs-span-settings: ("span": 3, "location": 1, "grid": 12, "gutter": 0.5, "style": "opposite", "start row": true, "end row": false, "fixed gutter": false, "split gutter": null, "gutter property": "margin", "options": (null: null));
       width: 22.85714%;
       clear: right;
@@ -751,14 +751,14 @@
       margin-right: 2.85714%;
       clear: both; } }
   @media (min-width: 600px) {
-    .l-4up:nth-of-type(4n) {
+    .fs-l-4up:nth-of-type(4n) {
       -sgs-span-settings: ("span": 3, "location": 10, "grid": 12, "gutter": 0.5, "style": "opposite", "start row": false, "end row": true, "fixed gutter": false, "split gutter": null, "gutter property": "margin", "options": (null: null));
       width: 22.85714%;
       clear: right;
       float: right;
       margin-right: 0; } }
 
-.l-4up--1 {
+.fs-l-4up--1 {
   -sgs-span-settings: ("span": 12, "location": 1, "grid": 12, "gutter": 0.5, "style": "opposite", "start row": true, "end row": true, "fixed gutter": false, "split gutter": null, "gutter property": "margin", "options": ("clear": both));
   width: 100%;
   float: right;
@@ -766,7 +766,7 @@
   margin-right: 0;
   clear: both; }
   @media (min-width: 600px) {
-    .l-4up--1 {
+    .fs-l-4up--1 {
       -sgs-span-settings: ("span": 3, "location": 1, "grid": 12, "gutter": 0.5, "style": "opposite", "start row": true, "end row": false, "fixed gutter": false, "split gutter": null, "gutter property": "margin", "options": ("clear": both));
       width: 22.85714%;
       float: left;
@@ -774,7 +774,7 @@
       margin-left: 0;
       clear: both; } }
 
-.l-4up--2 {
+.fs-l-4up--2 {
   -sgs-span-settings: ("span": 12, "location": 1, "grid": 12, "gutter": 0.5, "style": "opposite", "start row": true, "end row": true, "fixed gutter": false, "split gutter": null, "gutter property": "margin", "options": ("clear": both));
   width: 100%;
   float: right;
@@ -782,7 +782,7 @@
   margin-right: 0;
   clear: both; }
   @media (min-width: 600px) {
-    .l-4up--2 {
+    .fs-l-4up--2 {
       -sgs-span-settings: ("span": 3, "location": 4, "grid": 12, "gutter": 0.5, "style": "opposite", "start row": false, "end row": false, "fixed gutter": false, "split gutter": null, "gutter property": "margin", "options": ("clear": none));
       width: 22.85714%;
       float: left;
@@ -790,7 +790,7 @@
       margin-left: 25.71429%;
       clear: none; } }
 
-.l-4up--3 {
+.fs-l-4up--3 {
   -sgs-span-settings: ("span": 12, "location": 1, "grid": 12, "gutter": 0.5, "style": "opposite", "start row": true, "end row": true, "fixed gutter": false, "split gutter": null, "gutter property": "margin", "options": ("clear": both));
   width: 100%;
   float: right;
@@ -798,7 +798,7 @@
   margin-right: 0;
   clear: both; }
   @media (min-width: 600px) {
-    .l-4up--3 {
+    .fs-l-4up--3 {
       -sgs-span-settings: ("span": 3, "location": 7, "grid": 12, "gutter": 0.5, "style": "opposite", "start row": false, "end row": false, "fixed gutter": false, "split gutter": null, "gutter property": "margin", "options": ("clear": none));
       width: 22.85714%;
       float: left;
@@ -806,7 +806,7 @@
       margin-left: 51.42857%;
       clear: none; } }
 
-.l-4up--4 {
+.fs-l-4up--4 {
   -sgs-span-settings: ("span": 12, "location": 1, "grid": 12, "gutter": 0.5, "style": "opposite", "start row": true, "end row": true, "fixed gutter": false, "split gutter": null, "gutter property": "margin", "options": ("clear": both));
   width: 100%;
   float: right;
@@ -814,7 +814,7 @@
   margin-right: 0;
   clear: both; }
   @media (min-width: 600px) {
-    .l-4up--4 {
+    .fs-l-4up--4 {
       -sgs-span-settings: ("span": 3, "location": 10, "grid": 12, "gutter": 0.5, "style": "opposite", "start row": false, "end row": true, "fixed gutter": false, "split gutter": null, "gutter property": "margin", "options": ("clear": none));
       width: 22.85714%;
       float: right;
@@ -826,7 +826,7 @@
  * @file
  * Layout rules for 6-up content
  */
-.l-6up {
+.fs-l-6up {
   -sgs-span-settings: ("span": 12, "location": 1, "grid": 12, "gutter": 0.5, "style": "opposite", "start row": true, "end row": true, "fixed gutter": false, "split gutter": null, "gutter property": "margin", "options": ("clear": both));
   width: 100%;
   float: right;
@@ -834,7 +834,7 @@
   margin-right: 0;
   clear: both; }
   @media (min-width: 600px) {
-    .l-6up {
+    .fs-l-6up {
       -sgs-span-settings: ("span": 2, "location": 1, "grid": 12, "gutter": 0.5, "style": "opposite", "start row": true, "end row": false, "fixed gutter": false, "split gutter": null, "gutter property": "margin", "options": (null: null));
       width: 14.28571%;
       clear: right;
@@ -842,7 +842,7 @@
       margin-left: 0;
       margin-right: 2.85714%; } }
   @media (min-width: 600px) {
-    .l-6up:nth-of-type(6n+1) {
+    .fs-l-6up:nth-of-type(6n+1) {
       -sgs-span-settings: ("span": 2, "location": 1, "grid": 12, "gutter": 0.5, "style": "opposite", "start row": true, "end row": false, "fixed gutter": false, "split gutter": null, "gutter property": "margin", "options": (null: null));
       width: 14.28571%;
       clear: right;
@@ -851,14 +851,14 @@
       margin-right: 2.85714%;
       clear: both; } }
   @media (min-width: 600px) {
-    .l-6up:nth-of-type(6n) {
+    .fs-l-6up:nth-of-type(6n) {
       -sgs-span-settings: ("span": 2, "location": 11, "grid": 12, "gutter": 0.5, "style": "opposite", "start row": false, "end row": true, "fixed gutter": false, "split gutter": null, "gutter property": "margin", "options": (null: null));
       width: 14.28571%;
       clear: right;
       float: right;
       margin-right: 0; } }
 
-.l-6up--1 {
+.fs-l-6up--1 {
   -sgs-span-settings: ("span": 12, "location": 1, "grid": 12, "gutter": 0.5, "style": "opposite", "start row": true, "end row": true, "fixed gutter": false, "split gutter": null, "gutter property": "margin", "options": ("clear": both));
   width: 100%;
   float: right;
@@ -866,7 +866,7 @@
   margin-right: 0;
   clear: both; }
   @media (min-width: 600px) {
-    .l-6up--1 {
+    .fs-l-6up--1 {
       -sgs-span-settings: ("span": 2, "location": 1, "grid": 12, "gutter": 0.5, "style": "opposite", "start row": true, "end row": false, "fixed gutter": false, "split gutter": null, "gutter property": "margin", "options": ("clear": both));
       width: 14.28571%;
       float: left;
@@ -874,7 +874,7 @@
       margin-left: 0;
       clear: both; } }
 
-.l-6up--2 {
+.fs-l-6up--2 {
   -sgs-span-settings: ("span": 12, "location": 1, "grid": 12, "gutter": 0.5, "style": "opposite", "start row": true, "end row": true, "fixed gutter": false, "split gutter": null, "gutter property": "margin", "options": ("clear": both));
   width: 100%;
   float: right;
@@ -882,7 +882,7 @@
   margin-right: 0;
   clear: both; }
   @media (min-width: 600px) {
-    .l-6up--2 {
+    .fs-l-6up--2 {
       -sgs-span-settings: ("span": 2, "location": 3, "grid": 12, "gutter": 0.5, "style": "opposite", "start row": false, "end row": false, "fixed gutter": false, "split gutter": null, "gutter property": "margin", "options": ("clear": none));
       width: 14.28571%;
       float: left;
@@ -890,7 +890,7 @@
       margin-left: 17.14286%;
       clear: none; } }
 
-.l-6up--3 {
+.fs-l-6up--3 {
   -sgs-span-settings: ("span": 12, "location": 1, "grid": 12, "gutter": 0.5, "style": "opposite", "start row": true, "end row": true, "fixed gutter": false, "split gutter": null, "gutter property": "margin", "options": ("clear": both));
   width: 100%;
   float: right;
@@ -898,7 +898,7 @@
   margin-right: 0;
   clear: both; }
   @media (min-width: 600px) {
-    .l-6up--3 {
+    .fs-l-6up--3 {
       -sgs-span-settings: ("span": 2, "location": 5, "grid": 12, "gutter": 0.5, "style": "opposite", "start row": false, "end row": false, "fixed gutter": false, "split gutter": null, "gutter property": "margin", "options": ("clear": none));
       width: 14.28571%;
       float: left;
@@ -906,7 +906,7 @@
       margin-left: 34.28571%;
       clear: none; } }
 
-.l-6up--4 {
+.fs-l-6up--4 {
   -sgs-span-settings: ("span": 12, "location": 1, "grid": 12, "gutter": 0.5, "style": "opposite", "start row": true, "end row": true, "fixed gutter": false, "split gutter": null, "gutter property": "margin", "options": ("clear": both));
   width: 100%;
   float: right;
@@ -914,7 +914,7 @@
   margin-right: 0;
   clear: both; }
   @media (min-width: 600px) {
-    .l-6up--4 {
+    .fs-l-6up--4 {
       -sgs-span-settings: ("span": 2, "location": 7, "grid": 12, "gutter": 0.5, "style": "opposite", "start row": false, "end row": false, "fixed gutter": false, "split gutter": null, "gutter property": "margin", "options": ("clear": none));
       width: 14.28571%;
       float: left;
@@ -922,7 +922,7 @@
       margin-left: 51.42857%;
       clear: none; } }
 
-.l-6up--5 {
+.fs-l-6up--5 {
   -sgs-span-settings: ("span": 12, "location": 1, "grid": 12, "gutter": 0.5, "style": "opposite", "start row": true, "end row": true, "fixed gutter": false, "split gutter": null, "gutter property": "margin", "options": ("clear": both));
   width: 100%;
   float: right;
@@ -930,7 +930,7 @@
   margin-right: 0;
   clear: both; }
   @media (min-width: 600px) {
-    .l-6up--5 {
+    .fs-l-6up--5 {
       -sgs-span-settings: ("span": 2, "location": 9, "grid": 12, "gutter": 0.5, "style": "opposite", "start row": false, "end row": false, "fixed gutter": false, "split gutter": null, "gutter property": "margin", "options": ("clear": none));
       width: 14.28571%;
       float: left;
@@ -938,7 +938,7 @@
       margin-left: 68.57143%;
       clear: none; } }
 
-.l-6up--6 {
+.fs-l-6up--6 {
   -sgs-span-settings: ("span": 12, "location": 1, "grid": 12, "gutter": 0.5, "style": "opposite", "start row": true, "end row": true, "fixed gutter": false, "split gutter": null, "gutter property": "margin", "options": ("clear": both));
   width: 100%;
   float: right;
@@ -946,7 +946,7 @@
   margin-right: 0;
   clear: both; }
   @media (min-width: 600px) {
-    .l-6up--6 {
+    .fs-l-6up--6 {
       -sgs-span-settings: ("span": 2, "location": 11, "grid": 12, "gutter": 0.5, "style": "opposite", "start row": false, "end row": true, "fixed gutter": false, "split gutter": null, "gutter property": "margin", "options": ("clear": none));
       width: 14.28571%;
       float: right;
@@ -958,7 +958,7 @@
  * @file
  * Layout rules for one third / two thirds (33/66) content
  */
-.l-33-66--1 {
+.fs-l-33-66--1 {
   -sgs-span-settings: ("span": 12, "location": 1, "grid": 12, "gutter": 0.5, "style": "opposite", "start row": true, "end row": true, "fixed gutter": false, "split gutter": null, "gutter property": "margin", "options": ("clear": both));
   width: 100%;
   float: right;
@@ -966,7 +966,7 @@
   margin-right: 0;
   clear: both; }
   @media (min-width: 600px) {
-    .l-33-66--1 {
+    .fs-l-33-66--1 {
       -sgs-span-settings: ("span": 4, "location": 1, "grid": 12, "gutter": 0.5, "style": "opposite", "start row": true, "end row": false, "fixed gutter": false, "split gutter": null, "gutter property": "margin", "options": ("clear": both));
       width: 31.42857%;
       float: left;
@@ -974,7 +974,7 @@
       margin-left: 0;
       clear: both; } }
 
-.l-33-66--2 {
+.fs-l-33-66--2 {
   -sgs-span-settings: ("span": 12, "location": 1, "grid": 12, "gutter": 0.5, "style": "opposite", "start row": true, "end row": true, "fixed gutter": false, "split gutter": null, "gutter property": "margin", "options": ("clear": both));
   width: 100%;
   float: right;
@@ -982,7 +982,7 @@
   margin-right: 0;
   clear: both; }
   @media (min-width: 600px) {
-    .l-33-66--2 {
+    .fs-l-33-66--2 {
       -sgs-span-settings: ("span": 8, "location": 5, "grid": 12, "gutter": 0.5, "style": "opposite", "start row": false, "end row": true, "fixed gutter": false, "split gutter": null, "gutter property": "margin", "options": ("clear": none));
       width: 65.71429%;
       float: right;
@@ -994,7 +994,7 @@
  * @file
  * Layout rules for two thirds / one third (66/33) content
  */
-.l-66-33--1 {
+.fs-l-66-33--1 {
   -sgs-span-settings: ("span": 12, "location": 1, "grid": 12, "gutter": 0.5, "style": "opposite", "start row": true, "end row": true, "fixed gutter": false, "split gutter": null, "gutter property": "margin", "options": ("clear": both));
   width: 100%;
   float: right;
@@ -1002,7 +1002,7 @@
   margin-right: 0;
   clear: both; }
   @media (min-width: 600px) {
-    .l-66-33--1 {
+    .fs-l-66-33--1 {
       -sgs-span-settings: ("span": 8, "location": 1, "grid": 12, "gutter": 0.5, "style": "opposite", "start row": true, "end row": false, "fixed gutter": false, "split gutter": null, "gutter property": "margin", "options": ("clear": both));
       width: 65.71429%;
       float: left;
@@ -1010,7 +1010,7 @@
       margin-left: 0;
       clear: both; } }
 
-.l-66-33--2 {
+.fs-l-66-33--2 {
   -sgs-span-settings: ("span": 12, "location": 1, "grid": 12, "gutter": 0.5, "style": "opposite", "start row": true, "end row": true, "fixed gutter": false, "split gutter": null, "gutter property": "margin", "options": ("clear": both));
   width: 100%;
   float: right;
@@ -1018,7 +1018,7 @@
   margin-right: 0;
   clear: both; }
   @media (min-width: 600px) {
-    .l-66-33--2 {
+    .fs-l-66-33--2 {
       -sgs-span-settings: ("span": 4, "location": 9, "grid": 12, "gutter": 0.5, "style": "opposite", "start row": false, "end row": true, "fixed gutter": false, "split gutter": null, "gutter property": "margin", "options": ("clear": none));
       width: 31.42857%;
       float: right;
@@ -1030,7 +1030,7 @@
  * @file
  * Layout rules for 4-up content
  */
-.l-25-75--1 {
+.fs-l-25-75--1 {
   -sgs-span-settings: ("span": 12, "location": 1, "grid": 12, "gutter": 0.5, "style": "opposite", "start row": true, "end row": true, "fixed gutter": false, "split gutter": null, "gutter property": "margin", "options": ("clear": both));
   width: 100%;
   float: right;
@@ -1038,7 +1038,7 @@
   margin-right: 0;
   clear: both; }
   @media (min-width: 900px) {
-    .l-25-75--1 {
+    .fs-l-25-75--1 {
       -sgs-span-settings: ("span": 3, "location": 1, "grid": 12, "gutter": 0.5, "style": "opposite", "start row": true, "end row": false, "fixed gutter": false, "split gutter": null, "gutter property": "margin", "options": ("clear": both));
       width: 22.85714%;
       float: left;
@@ -1046,7 +1046,7 @@
       margin-left: 0;
       clear: both; } }
 
-.l-25-75--2 {
+.fs-l-25-75--2 {
   -sgs-span-settings: ("span": 12, "location": 1, "grid": 12, "gutter": 0.5, "style": "opposite", "start row": true, "end row": true, "fixed gutter": false, "split gutter": null, "gutter property": "margin", "options": ("clear": both));
   width: 100%;
   float: right;
@@ -1054,7 +1054,7 @@
   margin-right: 0;
   clear: both; }
   @media (min-width: 900px) {
-    .l-25-75--2 {
+    .fs-l-25-75--2 {
       -sgs-span-settings: ("span": 9, "location": 4, "grid": 12, "gutter": 0.5, "style": "opposite", "start row": false, "end row": true, "fixed gutter": false, "split gutter": null, "gutter property": "margin", "options": ("clear": none));
       width: 74.28571%;
       float: right;
@@ -1064,34 +1064,34 @@
 
 /* Component (SMACSS module) rules */
 /**
- * search-form.scss
+ * fs-search-form.scss
  * Define search form styles.
  *
  * @copyright Copyright (c) 2017-2019 Palantir.net
  */
-.search-form {
+.fs-search-form {
   margin-bottom: 2.93333em; }
 
-.search-form__label,
-.search-filters__label,
-.search-scope__label {
+.fs-search-form__label,
+.fs-search-filters__label,
+.fs-search-scope__label {
   font-size: 0.8em;
   line-height: 1.83333em;
   display: block;
   margin-bottom: .1em; }
 
-.search-form__input-wrapper {
+.fs-search-form__input-wrapper {
   border-radius: 3px;
   display: flex;
   justify-content: space-between; }
   @media (min-width: 600px) {
-    .search-form__input-wrapper {
+    .fs-search-form__input-wrapper {
       width: 75%; } }
   @media (min-width: 1100px) {
-    .search-form__input-wrapper {
+    .fs-search-form__input-wrapper {
       width: 50%; } }
 
-.search-form__input {
+.fs-search-form__input {
   font-size: 0.8em;
   line-height: 1.46667em;
   /* stylelint-disable property-no-vendor-prefix */
@@ -1102,13 +1102,13 @@
   border: 1px solid #e5e5e5;
   padding: .5rem; }
   @media (min-width: 900px) {
-    .search-form__input {
+    .fs-search-form__input {
       padding: .35rem; } }
-  .search-form__input:focus {
+  .fs-search-form__input:focus {
     border-color: #333;
     outline: none; }
 
-.search-form__submit {
+.fs-search-form__submit {
   padding: .5rem .7rem;
   background-color: #0000ff;
   border-radius: 0 3px 3px 0;
@@ -1119,38 +1119,38 @@
   justify-content: center;
   cursor: pointer; }
   @media (min-width: 900px) {
-    .search-form__submit {
+    .fs-search-form__submit {
       padding: .35rem .6rem; } }
-  .search-form__submit:active, .search-form__submit:hover, .search-form__submit:focus {
+  .fs-search-form__submit:active, .fs-search-form__submit:hover, .fs-search-form__submit:focus {
     background-color: navy; }
-  .search-form__submit svg {
+  .fs-search-form__submit svg {
     height: 1em;
     width: 1em;
     fill: #fff; }
 
 /**
- * autocomplete.scss
+ * fs-autocomplete.scss
  * Define autocomplete input + suggestion styles.
  * @see: https://github.com/moroshko/react-autosuggest#theme-optional
  *
  * @copyright Copyright (c) 2017-2019 Palantir.net
  */
-.search-form__autocomplete-container {
+.fs-search-form__autocomplete-container {
   display: flex; }
   @media (min-width: 600px) {
-    .search-form__autocomplete-container {
+    .fs-search-form__autocomplete-container {
       width: 75%; } }
   @media (min-width: 1100px) {
-    .search-form__autocomplete-container {
+    .fs-search-form__autocomplete-container {
       width: 50%; } }
-  .search-form__autocomplete-container .search-form__input-wrapper {
+  .fs-search-form__autocomplete-container .fs-search-form__input-wrapper {
     width: 100%; }
 
-.react-autosuggest__container {
+.fs-react-autosuggest__container {
   position: relative;
   flex: 1; }
 
-.react-autosuggest__input {
+.fs-react-autosuggest__input {
   font-size: 0.8em;
   line-height: 1.46667em;
   flex: 1;
@@ -1159,17 +1159,17 @@
   border-bottom-left-radius: 4px;
   height: 34px;
   padding: .5rem; }
-  .react-autosuggest__input:focus {
+  .fs-react-autosuggest__input:focus {
     border-color: #333;
     outline: none; }
-  .react-autosuggest__container--open .react-autosuggest__input {
+  .react-autosuggest__container--open .fs-react-autosuggest__input {
     border-bottom-left-radius: 0;
     border-bottom-right-radius: 0; }
 
-.react-autosuggest__suggestions-container {
+.fs-react-autosuggest__suggestions-container {
   display: none; }
 
-.react-autosuggest__container-title {
+.fs-react-autosuggest__container-title {
   font-size: 0.8em;
   line-height: 1.46667em;
   position: relative;
@@ -1177,7 +1177,7 @@
   padding: 10px 20px;
   border-bottom: 1px dashed #ccc; }
 
-.react-autosuggest__container-close-button {
+.fs-react-autosuggest__container-close-button {
   font-size: 0.8em;
   line-height: 1.46667em;
   font-style: normal;
@@ -1187,18 +1187,18 @@
   cursor: pointer;
   position: absolute;
   right: 5px; }
-  .react-autosuggest__container-close-button:hover {
+  .fs-react-autosuggest__container-close-button:hover {
     border-color: #b5b5b5;
     background-color: #f6f6f6; }
 
-.react-autosuggest__container-directions {
+.fs-react-autosuggest__container-directions {
   padding: 10px 20px; }
-  .react-autosuggest__container-directions-item {
+  .fs-react-autosuggest__container-directions-item {
     font-size: 0.8em;
     line-height: 1.46667em;
     display: block; }
 
-.react-autosuggest__suggestions-container--open {
+.fs-react-autosuggest__suggestions-container--open {
   display: block;
   position: absolute;
   top: 33px;
@@ -1209,17 +1209,17 @@
   border-bottom-right-radius: 4px;
   z-index: 2; }
 
-.react-autosuggest__suggestions-itemslist-wrapper--with-directions .react-autosuggest__suggestion:last-child {
+.fs-react-autosuggest__suggestions-itemslist-wrapper--with-directions .react-autosuggest__suggestion:last-child {
   border-bottom-left-radius: 0;
   border-bottom-right-radius: 0;
   border-bottom-color: #ccc; }
 
-.react-autosuggest__suggestions-list {
+.fs-react-autosuggest__suggestions-list {
   margin: 0;
   padding: 0;
   list-style-type: none; }
 
-.react-autosuggest__suggestion {
+.fs-react-autosuggest__suggestion {
   font-size: 0.8em;
   line-height: 1.46667em;
   cursor: pointer;
@@ -1227,15 +1227,15 @@
   background-color: #fff;
   border: 1px solid #fff;
   border-bottom-color: #ccc; }
-  .react-autosuggest__suggestion:last-child {
+  .fs-react-autosuggest__suggestion:last-child {
     border-bottom-left-radius: 4px;
     border-bottom-right-radius: 4px;
     border-bottom-color: #fff; }
 
-.react-autosuggest__suggestion-link {
+.fs-react-autosuggest__suggestion-link {
   color: #737373; }
 
-.react-autosuggest__suggestion--highlighted {
+.fs-react-autosuggest__suggestion--highlighted {
   background-color: #f6f6f6;
   border: 1px solid #f6f6f6;
   border-bottom-color: #ccc; }
@@ -1246,24 +1246,24 @@
  *
  * @copyright Copyright (c) 2017-2019 Palantir.net
  */
-.search-filters__trigger,
-.search-accordion__title {
+.fs-search-filters__trigger,
+.fs-search-accordion__title {
   font-size: 1em;
   line-height: 1.46667em;
   display: block;
   padding-right: 1.25rem;
   padding-left: 1.25rem; }
-  .search-filters__trigger:hover, .search-filters__trigger:focus, .search-filters__trigger:active,
-  .search-accordion__title:hover,
-  .search-accordion__title:focus,
-  .search-accordion__title:active {
+  .fs-search-filters__trigger:hover, .fs-search-filters__trigger:focus, .fs-search-filters__trigger:active,
+  .fs-search-accordion__title:hover,
+  .fs-search-accordion__title:focus,
+  .fs-search-accordion__title:active {
     text-decoration: none; }
-  .search-filters__trigger:after,
-  .search-accordion__title:after {
+  .fs-search-filters__trigger:after,
+  .fs-search-accordion__title:after {
     content: "+";
     float: right; }
 
-.search-filters__trigger {
+.fs-search-filters__trigger {
   width: 100%;
   background-color: transparent;
   border-radius: 0;
@@ -1271,35 +1271,35 @@
   padding-top: 0.73333em;
   padding-bottom: 0.73333em; }
   @media (min-width: 900px) {
-    .search-filters__trigger {
+    .fs-search-filters__trigger {
       display: none; } }
-  .search-filters__trigger.js-search-filters-open {
+  .fs-search-filters__trigger.js-fs-search-filters-open {
     background-color: #333;
     color: #eff0f1; }
-  .search-filters__trigger.js-search-filters-open:after {
+  .fs-search-filters__trigger.js-fs-search-filters-open:after {
     content: "–"; }
-  .search-filters__trigger:hover, .search-filters__trigger:active, .search-filters__trigger:focus {
+  .fs-search-filters__trigger:hover, .fs-search-filters__trigger:active, .fs-search-filters__trigger:focus {
     background-color: #e5e5e5;
     color: #333; }
 
-.search-filters__form {
+.fs-search-filters__form {
   padding-bottom: 1.46667em; }
-  .search-filters__form fieldset {
+  .fs-search-filters__form fieldset {
     padding: 0;
     margin: 0;
     border: 0; }
     @media (min-width: 900px) {
-      .search-filters__form fieldset {
+      .fs-search-filters__form fieldset {
         margin-bottom: 0.73333em;
         padding: 1.46667em 0; } }
 
-.search-filters__row {
+.fs-search-filters__row {
   padding: 0 1.25rem; }
 
-.search-filters__title {
+.fs-search-filters__title {
   display: none; }
   @media (min-width: 900px) {
-    .search-filters__title {
+    .fs-search-filters__title {
       display: block;
       padding: 0;
       font-size: 1.1em;
@@ -1307,13 +1307,13 @@
       margin-top: 0em;
       margin-bottom: 0.66667em; } }
 
-.search-filters__label,
-.search-scope__label {
+.fs-search-filters__label,
+.fs-search-scope__label {
   font-size: 0.7em;
   line-height: 1.25714em;
   margin-bottom: .2em; }
 
-.search-filters__reset {
+.fs-search-filters__reset {
   font-size: 0.8em;
   line-height: 1.83333em;
   padding: .2em .75em;
@@ -1324,86 +1324,86 @@
   background-color: #e5e5e5;
   border: 1px solid #cccccc; }
   @media (min-width: 600px) and (max-width: 900px) {
-    .search-filters__reset {
+    .fs-search-filters__reset {
       width: auto; } }
-  .search-filters__reset:active, .search-filters__reset:hover, .search-filters__reset:focus {
+  .fs-search-filters__reset:active, .fs-search-filters__reset:hover, .fs-search-filters__reset:focus {
     background-color: #d8d8d8;
     border: 1px solid #bfbfbf;
     text-decoration: underline; }
 
-.search-filters__no-results {
+.fs-search-filters__no-results {
   font-size: 0.8em;
   line-height: 1.46667em;
   display: block;
   padding-right: 1.25rem;
   padding-left: 1.25rem; }
 
-.search-accordion {
+.fs-search-accordion {
   margin-bottom: 1.46667em;
   color: #333;
   padding: 0; }
 
-.search-accordion__checkbox-label {
+.fs-search-accordion__checkbox-label {
   cursor: pointer;
   display: block;
   padding: 0.73333em 0; }
   @media (min-width: 900px) {
-    .search-accordion__checkbox-label {
+    .fs-search-accordion__checkbox-label {
       font-size: 0.8em;
       line-height: 1.46667em;
       padding: 0.51333em 0; } }
 
-.search-accordion__content {
+.fs-search-accordion__content {
   margin: 0;
   padding: 0.73333em 1.25rem; }
   @media only screen and (min-width: 1025px) {
-    #solr-list-facet-ds_federated_date .search-accordion__content {
+    #solr-list-facet-ds_federated_date .fs-search-accordion__content {
       text-align: center; } }
   @media only screen and (max-width: 425px) {
-    #solr-list-facet-ds_federated_date .search-accordion__content {
+    #solr-list-facet-ds_federated_date .fs-search-accordion__content {
       text-align: center; } }
   @media only screen and (max-width: 1350px) and (min-width: 768px) {
-    #solr-list-facet-ds_federated_date .search-accordion__content {
+    #solr-list-facet-ds_federated_date .fs-search-accordion__content {
       padding: 0.73333em 0.5rem; } }
 
-.search-accordion__group,
-.search-accordion__subgroup {
+.fs-search-accordion__group,
+.fs-search-accordion__subgroup {
   list-style: none;
   padding: 0; }
-  .search-accordion__group li,
-  .search-accordion__subgroup li {
+  .fs-search-accordion__group li,
+  .fs-search-accordion__subgroup li {
     display: block;
     margin: 0;
     overflow: hidden; }
-    .search-accordion__group li#solr-list-facet-ds_federated_date,
-    .search-accordion__subgroup li#solr-list-facet-ds_federated_date {
+    .fs-search-accordion__group li#solr-list-facet-ds_federated_date,
+    .fs-search-accordion__subgroup li#solr-list-facet-ds_federated_date {
       overflow: visible; }
-      .search-accordion__group li#solr-list-facet-ds_federated_date li,
-      .search-accordion__subgroup li#solr-list-facet-ds_federated_date li {
+      .fs-search-accordion__group li#solr-list-facet-ds_federated_date li,
+      .fs-search-accordion__subgroup li#solr-list-facet-ds_federated_date li {
         overflow: visible; }
 
-.search-accordion__group {
+.fs-search-accordion__group {
   margin: 0; }
 
-.search-accordion__subgroup {
+.fs-search-accordion__subgroup {
   margin: 0 0 0 0.73333em; }
 
-.search-accordion__title {
+.fs-search-accordion__title {
   border-bottom: solid 1px #e5e5e5;
   padding-top: 1.1em;
   padding-bottom: 1.1em; }
   @media (min-width: 900px) {
-    .search-accordion__title {
+    .fs-search-accordion__title {
       font-size: 0.8em;
       line-height: 1.46667em;
       padding-top: 0.44em;
       padding-bottom: 0.44em; } }
-  .search-accordion__title:active, .search-accordion__title:hover, .search-accordion__title:focus {
+  .fs-search-accordion__title:active, .fs-search-accordion__title:hover, .fs-search-accordion__title:focus {
     border-bottom: solid 1px #cccccc;
     outline: 0; }
-  .search-accordion__title:hover {
+  .fs-search-accordion__title:hover {
     cursor: pointer; }
-  .search-accordion__title.js-search-accordion-open:after {
+  .fs-search-accordion__title.js-fs-search-accordion-open:after {
     content: "–"; }
 
 .slide-appear {
@@ -1434,40 +1434,40 @@
  *
  * @copyright Copyright (c) 2017-2019 Palantir.net
  */
-aside {
+aside.fs-aside {
   margin-bottom: 1.46667em;
   background-color: #f6f6f6; }
   @media (min-width: 900px) {
-    aside {
+    aside.fs-aside {
       padding-top: 1.46667em; } }
 
 /**
- * search-form.scss
+ * fs-search-results.scss
  * Define search results styles.
  *
  * @copyright Copyright (c) 2017-2019 Palantir.net
  */
-.search-results li {
+.fs-search-results li {
   margin-bottom: 1.46667em;
   display: flex; }
 
-.search-results__container--left {
+.fs-search-results__container--left {
   flex: 1 0 0;
   margin-right: 3%; }
 
-.search-results__container--right {
+.fs-search-results__container--right {
   flex: 3 0 0; }
 
-.search-results__label {
+.fs-search-results__label {
   color: #555;
   display: block; }
 
-.search-results__heading {
+.fs-search-results__heading {
   margin-bottom: .33333em;
   margin-top: .25em;
   padding: 0; }
 
-.search-results__heading-link {
+.fs-search-results__heading-link {
   /**
  * 1. Remove the gray background on active links in IE 10.
  * 2. Remove gaps in links underline in iOS 8+ and Safari 8+.
@@ -1482,35 +1482,35 @@ aside {
    * Remove the outline on focused links when they are also active or hovered
    * in all browsers (opinionated).
    */ }
-  .search-results__heading-link:active, .search-results__heading-link:hover {
+  .fs-search-results__heading-link:active, .fs-search-results__heading-link:hover {
     outline-width: 0;
     text-decoration: underline; }
 
-.search-results__teaser {
+.fs-search-results__teaser {
   margin-bottom: 0.73333em; }
 
-.search-results__meta {
+.fs-search-results__meta {
   margin-bottom: 0.73333em;
   color: #555;
   display: block; }
 
-.search-results__citation a {
+.fs-search-results__citation a {
   font-style: normal;
   color: #555;
   text-decoration: none; }
-  .search-results__citation a:hover {
+  .fs-search-results__citation a:hover {
     text-decoration: underline; }
 
 /**
- * search-scope.scss
+ * fs-search-scope.scss
  * Define search scope styles.
  *
  * @copyright Copyright (c) 2017-2019 Palantir.net
  */
-.search-scope {
+.fs-search-scope {
   margin: 1.46667em 0; }
 
-.search-scope__filter {
+.fs-search-scope__filter {
   -sgs-span-settings: ("span": 6, "location": 1, "grid": 12, "gutter": 0.5, "style": "opposite", "start row": true, "end row": false, "fixed gutter": false, "split gutter": null, "gutter property": "margin", "options": (null: null));
   width: 48.57143%;
   clear: right;
@@ -1518,14 +1518,14 @@ aside {
   margin-left: 0;
   margin-right: 2.85714%; }
   @media (min-width: 600px) {
-    .search-scope__filter {
+    .fs-search-scope__filter {
       -sgs-span-settings: ("span": 4, "location": 1, "grid": 12, "gutter": 0.5, "style": "opposite", "start row": true, "end row": false, "fixed gutter": false, "split gutter": null, "gutter property": "margin", "options": (null: null));
       width: 31.42857%;
       clear: right;
       float: left;
       margin-left: 0;
       margin-right: 2.85714%; } }
-  .search-scope__filter:nth-of-type(3n+1) {
+  .fs-search-scope__filter:nth-of-type(3n+1) {
     -sgs-span-settings: ("span": 6, "location": 1, "grid": 12, "gutter": 0.5, "style": "opposite", "start row": true, "end row": false, "fixed gutter": false, "split gutter": null, "gutter property": "margin", "options": (null: null));
     width: 48.57143%;
     clear: right;
@@ -1534,28 +1534,28 @@ aside {
     margin-right: 2.85714%;
     clear: both; }
     @media (min-width: 600px) {
-      .search-scope__filter:nth-of-type(3n+1) {
+      .fs-search-scope__filter:nth-of-type(3n+1) {
         -sgs-span-settings: ("span": 4, "location": 1, "grid": 12, "gutter": 0.5, "style": "opposite", "start row": true, "end row": false, "fixed gutter": false, "split gutter": null, "gutter property": "margin", "options": ("clear": both));
         width: 31.42857%;
         float: left;
         margin-right: -100%;
         margin-left: 0;
         clear: both; } }
-  .search-scope__filter:nth-of-type(3n+2) {
+  .fs-search-scope__filter:nth-of-type(3n+2) {
     -sgs-span-settings: ("span": 6, "location": 7, "grid": 12, "gutter": 0.5, "style": "opposite", "start row": false, "end row": true, "fixed gutter": false, "split gutter": null, "gutter property": "margin", "options": (null: null));
     width: 48.57143%;
     clear: right;
     float: right;
     margin-right: 0; }
     @media (min-width: 600px) {
-      .search-scope__filter:nth-of-type(3n+2) {
+      .fs-search-scope__filter:nth-of-type(3n+2) {
         -sgs-span-settings: ("span": 4, "location": 5, "grid": 12, "gutter": 0.5, "style": "opposite", "start row": false, "end row": false, "fixed gutter": false, "split gutter": null, "gutter property": "margin", "options": ("clear": none));
         width: 31.42857%;
         float: left;
         margin-right: -100%;
         margin-left: 34.28571%;
         clear: none; } }
-  .search-scope__filter:nth-of-type(3n+3) {
+  .fs-search-scope__filter:nth-of-type(3n+3) {
     -sgs-span-settings: ("span": 6, "location": 1, "grid": 12, "gutter": 0.5, "style": "opposite", "start row": true, "end row": false, "fixed gutter": false, "split gutter": null, "gutter property": "margin", "options": (null: null));
     width: 48.57143%;
     clear: right;
@@ -1564,7 +1564,7 @@ aside {
     margin-right: 2.85714%;
     clear: both; }
     @media (min-width: 600px) {
-      .search-scope__filter:nth-of-type(3n+3) {
+      .fs-search-scope__filter:nth-of-type(3n+3) {
         -sgs-span-settings: ("span": 4, "location": 9, "grid": 12, "gutter": 0.5, "style": "opposite", "start row": false, "end row": true, "fixed gutter": false, "split gutter": null, "gutter property": "margin", "options": ("clear": none));
         width: 31.42857%;
         float: right;
@@ -1572,7 +1572,7 @@ aside {
         margin-right: 0;
         clear: none; } }
 
-.search-scope__select {
+.fs-search-scope__select {
   font-size: 0.8em;
   line-height: 1.46667em;
   border-radius: 3px;
@@ -1588,92 +1588,92 @@ aside {
   background-color: #fff;
   padding: .7rem 1.5rem .7rem .7rem; }
   @media (min-width: 900px) {
-    .search-scope__select {
+    .fs-search-scope__select {
       padding: .35rem 1rem .35rem .35rem;
       margin-bottom: 0.73333em;
       background-position: 97% 50%; } }
-  .search-scope__select::-ms-expand {
+  .fs-search-scope__select::-ms-expand {
     display: none; }
 
 /**
- * pagination.scss
+ * fs-pagination.scss
  * Define pagination styles.
  *
  * @copyright Copyright (c) 2017-2019 Palantir.net
  */
-.search-pager__items {
+.fs-search-pager__items {
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 0 2.93333em;
   margin: 4.4em 0; }
   @media (min-width: 450px) {
-    .search-pager__items {
+    .fs-search-pager__items {
       justify-content: flex-start;
       border-radius: 0;
       background-color: transparent;
       padding: 0; } }
 
-.search-pager__item {
+.fs-search-pager__item {
   display: inline-block;
   cursor: pointer; }
   @media (min-width: 450px) {
-    .search-pager__item {
+    .fs-search-pager__item {
       margin-right: 0.51333em; } }
   @media (min-width: 900px) {
-    .search-pager__item {
+    .fs-search-pager__item {
       margin-right: 0.36667em; } }
-  .search-pager__item.is-active .search-pager__item-link {
+  .fs-search-pager__item.is-active .fs-search-pager__item-link {
     font-weight: bold; }
-  .search-pager__item.not-active .search-pager__item-link {
+  .fs-search-pager__item.not-active .fs-search-pager__item-link {
     display: none; }
     @media (min-width: 450px) {
-      .search-pager__item.not-active .search-pager__item-link {
+      .fs-search-pager__item.not-active .fs-search-pager__item-link {
         display: inline-block; } }
 
-.search-pager__item-link {
+.fs-search-pager__item-link {
   display: flex;
   justify-content: center;
   align-items: center;
   border: 0;
   text-align: center;
   padding: 0.36667em; }
-  .search-pager__item-link:hover, .search-pager__item-link:active {
+  .fs-search-pager__item-link:hover, .fs-search-pager__item-link:active {
     text-decoration: underline; }
-    .search-pager__item-link:hover svg, .search-pager__item-link:active svg {
+    .fs-search-pager__item-link:hover svg, .fs-search-pager__item-link:active svg {
       fill: black;
       border-bottom: 1px solid #222; }
-  .search-pager__item-link svg {
+  .fs-search-pager__item-link svg {
     height: 1.3em;
     fill: #222;
     display: block;
     border-bottom: 1px solid transparent; }
     @media (min-width: 450px) {
-      .search-pager__item-link svg {
+      .fs-search-pager__item-link svg {
         height: 1em; } }
 
 /**
- * search-results-stat.scss
+ * fs-search-results-stat.scss
  * Define search results statistic styles.
  *
  * @copyright Copyright (c) 2017-2019 Palantir.net
  */
-.search-results-stat {
+.fs-search-results-stat {
   color: #555; }
-  .search-results-stat:focus {
+  .fs-search-results-stat:focus {
     outline: 0; }
 
 /**
- * applied-filters.scss
+ * fs-applied-filters.scss
  * Define applied filters styles.
  *
  * @copyright Copyright (c) 2017-2019 Palantir.net
  */
-.applied-filters {
+.fs-applied-filters {
   margin: 1.46667em 0;
   display: block; }
 
-.applied-filters__filter {
+.fs-applied-filters__filter {
   font-size: 0.8em;
   line-height: 1.46667em;
   padding-bottom: 0.29333em;
@@ -1683,7 +1683,7 @@ aside {
   margin-bottom: 0.73333em;
   display: inline-block;
   cursor: pointer; }
-  .applied-filters__filter:after {
+  .fs-applied-filters__filter:after {
     font-size: 1.2em;
     line-height: 1.22222em;
     content: "\D7";

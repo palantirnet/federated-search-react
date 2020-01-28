@@ -7,7 +7,7 @@ class FederatedResultList extends React.Component {
 		return (
 			<React.Fragment>
 				<h2 className="fs-element-invisible">Search results</h2>
-				<ul className="search-results">
+				<ul className="fs-search-results">
 					{this.props.children}
 				</ul>
 			</React.Fragment>
