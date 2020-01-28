@@ -29,8 +29,8 @@
 @import "grid-layouts/_l-25-75";
 
 /* Component (SMACSS module) rules */
-@import "components/text-search/search-form";
-@import "components/text-search/autocomplete";
+@import "components/text-search/fs-search-form";
+@import "components/text-search/fs-autocomplete";
 @import "components/fs-search-filters";
 @import "components/fs-aside";
 @import "components/results/fs-search-results";

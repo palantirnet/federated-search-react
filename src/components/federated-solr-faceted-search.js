@@ -139,7 +139,7 @@ class FederatedSolrFacetedSearch extends React.Component {
           </aside>
           <div className="l-25-75--2">
             {pageTitle}
-            <div className="search-form" autoComplete="on">
+            <div className="fs-search-form" autoComplete="on">
               <FederatedTextSearch
                 {...this.props}
                 autocomplete={options.autocomplete}
