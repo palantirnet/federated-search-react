@@ -142,7 +142,7 @@ const init = (settings) => {
           truncateFacetListsAt={-1}
           options={options}
         />,
-        document.getElementById("root")
+        document.getElementById("fs-root")
       )
   });
 
@@ -160,7 +160,7 @@ const init = (settings) => {
 // @see https://github.com/facebook/create-react-app/blob/master/packages/react-scripts/template/README.md#adding-custom-environment-variables
 if (process.env.NODE_ENV === 'production') {
   // Get the root element where the app will be rendered.
-  const root = document.getElementById("root");
+  const root = document.getElementById("fs-root");
 
   if (root) {
     // Get the data attribute which has the stringified configuration data json object.
@@ -169,11 +169,11 @@ if (process.env.NODE_ENV === 'production') {
       init(settings);
     }
     else {
-      console.error('Federated Search React | Could not find a data-federated-search-app-config attribute on div#root.  Please populate data-federated-search-app-config with search app configuration data.');
+      console.error('Federated Search React | Could not find a data-federated-search-app-config attribute on div#fs-root.  Please populate data-federated-search-app-config with search app configuration data.');
     }
   }
   else {
-    console.error('Federated Search React | Could not find div#root in which to load the search app.');
+    console.error('Federated Search React | Could not find div#fs-root in which to load the search app.');
   }
 }
 // This is not production (i.e. not using the build compiled js)
