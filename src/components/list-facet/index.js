@@ -184,7 +184,7 @@ class FederatedListFacet extends React.Component {
         listFacetHierarchyTermsLis[type] = [];
         terms[type].items.forEach((termObj, i) => termObj.facetCount
           && listFacetHierarchyTermsLis[type].push(<li key={`${termObj.term}_${termObj.facetValue}_${i}`}>
-            <label className="search-accordion__checkbox-label">
+            <label className="fs-search-accordion__checkbox-label">
             <input
               type="checkbox"
               name={type}
@@ -193,7 +193,7 @@ class FederatedListFacet extends React.Component {
               onChange={() => this.handleClick(termObj.facetValue)}
             /> {termObj.term}
               <span className="facet-item-amount"> ({termObj.facetCount}
-                <span className="element-invisible">results</span>)
+                <span className="fs-element-invisible">results</span>)
               </span>
             </label>
           </li>));
@@ -203,7 +203,7 @@ class FederatedListFacet extends React.Component {
           <li id={`solr-list-facet-${type}`} key={`solr-list-facet-${type}-${i}`}>
             <a
               tabIndex="0"
-              className={cx('search-accordion__title', { 'js-search-accordion-open': terms[type].expanded })}
+              className={cx('fs-search-accordion__title', { 'js-fs-search-accordion-open': terms[type].expanded })}
               id={label.replace(/\s+/g, '-').toLowerCase()}
               onClick={this.toggleExpand.bind(this, type)}
               onKeyDown={(event) => {
@@ -212,13 +212,13 @@ class FederatedListFacet extends React.Component {
                 }
               }}
             >
-              <span className="element-invisible">Toggle filter group for</span> {type}
+              <span className="fs-element-invisible">Toggle filter group for</span> {type}
             </a>
             <AnimateHeight
               duration={600}
               height={terms[type].height}
             >
-              <ul className="search-accordion__content" key={`solr-list-facet-${type}-ul`}>
+              <ul className="fs-search-accordion__content" key={`solr-list-facet-${type}-ul`}>
                 {listFacetHierarchyTermsLis[type]}
               </ul>
             </AnimateHeight>
@@ -233,7 +233,7 @@ class FederatedListFacet extends React.Component {
       <li id={`solr-list-facet-${field}`}>
         <a
           tabIndex="0"
-          className={cx('search-accordion__title', { 'js-search-accordion-open': expanded })}
+          className={cx('fs-search-accordion__title', { 'js-fs-search-accordion-open': expanded })}
           id={label.replace(/\s+/g, '-').toLowerCase()}
           onClick={this.toggleExpand.bind(this)}
           onKeyDown={(event) => {
@@ -242,13 +242,13 @@ class FederatedListFacet extends React.Component {
             }
           }}
         >
-          <span className="element-invisible">Toggle filter group for</span> {label}
+          <span className="fs-element-invisible">Toggle filter group for</span> {label}
         </a>
         <AnimateHeight
           duration={600}
           height={height}
         >
-          <ul className="search-accordion__content" key={`solr-list-facet-${field}-ul`}>
+          <ul className="fs-search-accordion__content" key={`solr-list-facet-${field}-ul`}>
             {facetValues.filter((facetValue, i) => facetInputs[facetValue] > 0
                 && (truncateFacetListsAt < 0 || i < truncateFacetListsAt))
               .map((facetValue, i) => {
@@ -256,7 +256,7 @@ class FederatedListFacet extends React.Component {
                   || facetValue.toLowerCase().indexOf(this.state.filter.toLowerCase()) > -1) {
                   return (
                     <li key={`${facetValue}_${facetInputs[facetValue]}`}>
-                      <label className="search-accordion__checkbox-label">
+                      <label className="fs-search-accordion__checkbox-label">
                         <input
                           type="checkbox"
                           name={field}
@@ -265,7 +265,7 @@ class FederatedListFacet extends React.Component {
                           onChange={() => this.handleClick(facetValue)}
                         /> {facetValue}
                         <span className="facet-item-amount"> ({facetInputs[facetValue]}
-                          <span className="element-invisible">results</span>)
+                          <span className="fs-element-invisible">results</span>)
                         </span>
                       </label>
                     </li>

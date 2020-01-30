@@ -100,8 +100,8 @@ class FederatedSolrFacetedSearch extends React.Component {
 
     return (
       <LiveAnnouncer>
-        <div className="container">
-          <aside className="l-25-75--1">
+        <div className="fs-container">
+          <aside className="fs-aside fs-l-25-75--1">
             <SearchFieldContainerComponent
               bootstrapCss={bootstrapCss}
               onNewSearch={this.resetFilters}
@@ -137,9 +137,9 @@ class FederatedSolrFacetedSearch extends React.Component {
               }
             </SearchFieldContainerComponent>
           </aside>
-          <div className="l-25-75--2">
+          <div className="fs-l-25-75--2">
             {pageTitle}
-            <div className="search-form" autoComplete="on">
+            <div className="fs-search-form" autoComplete="on">
               <FederatedTextSearch
                 {...this.props}
                 autocomplete={options.autocomplete}
@@ -159,8 +159,8 @@ class FederatedSolrFacetedSearch extends React.Component {
                 sortFields={sortFields}
               />
             </div>
-            <p className={(searchFields.find(sf => sf.field === 'tm_rendered_item').value || this.props.options.showEmptySearchResults) ? 'solr-search-results-container__prompt element-invisible' : 'solr-search-results-container__prompt'}>{this.props.options.searchPrompt || 'Please enter a search term.'}</p>
-            <div className={(searchFields.find(sf => sf.field === 'tm_rendered_item').value || this.props.options.showEmptySearchResults) ? 'solr-search-results-container__wrapper' : 'solr-search-results-container__wrapper element-invisible'}>
+            <p className={(searchFields.find(sf => sf.field === 'tm_rendered_item').value || this.props.options.showEmptySearchResults) ? 'solr-search-results-container__prompt fs-element-invisible' : 'solr-search-results-container__prompt'}>{this.props.options.searchPrompt || 'Please enter a search term.'}</p>
+            <div className={(searchFields.find(sf => sf.field === 'tm_rendered_item').value || this.props.options.showEmptySearchResults) ? 'solr-search-results-container__wrapper' : 'solr-search-results-container__wrapper fs-element-invisible'}>
               <ResultContainerComponent bootstrapCss={bootstrapCss}>
                 <ResultHeaderComponent bootstrapCss={bootstrapCss}>
                   <ResultCount

@@ -23,9 +23,9 @@ class FederatedPagination extends React.Component {
   renderPage(page, currentPage, key) {
     let isCurrentPage = page === currentPage;
     return (
-      <li className={cx("search-pager__item", (isCurrentPage ? 'is-active' : 'not-active'))} key={key}>
-        <a className={cx("search-pager__item-link search-pager__item-link--number")} role="button" tabIndex="0" onClick={this.onPageChange.bind(this, page)} onKeyPress={this.buildHandleEnterKeyPress(this.onPageChange.bind(this, page))} title={isCurrentPage ? "Current page" : `Go to page ${page + 1}`} aria-current={isCurrentPage ? page + 1 : undefined}>
-          <span className="element-invisible">Page</span>{page + 1}
+      <li className={cx("fs-search-pager__item", (isCurrentPage ? 'is-active' : 'not-active'))} key={key}>
+        <a className={cx("fs-search-pager__item-link fs-search-pager__item-link--number")} role="button" tabIndex="0" onClick={this.onPageChange.bind(this, page)} onKeyPress={this.buildHandleEnterKeyPress(this.onPageChange.bind(this, page))} title={isCurrentPage ? "Current page" : `Go to page ${page + 1}`} aria-current={isCurrentPage ? page + 1 : undefined}>
+          <span className="fs-element-invisible">Page</span>{page + 1}
         </a>
       </li>
     );
@@ -60,37 +60,37 @@ class FederatedPagination extends React.Component {
     let lastPageHidden = (pageAmt === 0 || currentPage === pageAmt - 1);
 
     return (
-      <nav className="search-pager" aria-labelledby="pagination-heading">
-        <h4 id="pagination-heading" className="element-invisible">Pagination</h4>
-        <ul className="search-pager__items">
-          <li className={cx("search-pager__item search-pager__item--first", {"element-invisible": firstPageHidden})} key="start">
-            <a className={cx("search-pager__item-link")} role="button" tabIndex={firstPageHidden ? "-1" : "0"} onClick={this.onPageChange.bind(this, 0)} onKeyPress={ this.buildHandleEnterKeyPress(this.onPageChange.bind(this, 0)) } title="Go to first page">
-              <span className="element-invisible">First page</span>
+      <nav className="fs-search-pager" aria-labelledby="fs-pagination-heading">
+        <h4 id="fs-pagination-heading" className="fs-element-invisible">Pagination</h4>
+        <ul className="fs-search-pager__items">
+          <li className={cx("fs-search-pager__item fs-search-pager__item--first", {"fs-element-invisible": firstPageHidden})} key="start">
+            <a className={cx("fs-search-pager__item-link")} role="button" tabIndex={firstPageHidden ? "-1" : "0"} onClick={this.onPageChange.bind(this, 0)} onKeyPress={ this.buildHandleEnterKeyPress(this.onPageChange.bind(this, 0)) } title="Go to first page">
+              <span className="fs-element-invisible">First page</span>
               <span aria-hidden={firstPageHidden ? "true" : "false"}>
                 <DoubleChevronLeft/>
               </span>
             </a>
           </li>
-          <li className={cx("search-pager__item search-pager__item--previous", {"element-invisible": prevPageHidden})} key="prev">
-            <a className={cx("search-pager__item-link")} role="button" tabIndex={prevPageHidden ? "-1" : "0"} onClick={this.onPageChange.bind(this, currentPage - 1)} onKeyPress={ this.buildHandleEnterKeyPress(this.onPageChange.bind(this, currentPage - 1)) }title="Go to previous page" rel="next">
-              <span className="element-invisible">Previous page</span>
+          <li className={cx("fs-search-pager__item search-pager__item--previous", {"fs-element-invisible": prevPageHidden})} key="prev">
+            <a className={cx("fs-search-pager__item-link")} role="button" tabIndex={prevPageHidden ? "-1" : "0"} onClick={this.onPageChange.bind(this, currentPage - 1)} onKeyPress={ this.buildHandleEnterKeyPress(this.onPageChange.bind(this, currentPage - 1)) }title="Go to previous page" rel="next">
+              <span className="fs-element-invisible">Previous page</span>
               <span aria-hidden={prevPageHidden  ? "true" : "false"}>
                 <ChevronLeft/>
               </span>
             </a>
           </li>
           {pages.map((page, idx) => this.renderPage(page, currentPage, idx))}
-          <li className={cx("search-pager__item search-pager__item--next", {"element-invisible": nextPageHidden})} key="next">
-            <a className={cx("search-pager__item-link")} role="button" tabIndex={nextPageHidden ? "-1" : "0"} onClick={this.onPageChange.bind(this, currentPage + 1, pageAmt)} onKeyPress={ this.buildHandleEnterKeyPress(this.onPageChange.bind(this, currentPage + 1, pageAmt)) } title="Go to next page" rel="next">
-              <span className="element-invisible">Next page</span>
+          <li className={cx("fs-search-pager__item fs-search-pager__item--next", {"fs-element-invisible": nextPageHidden})} key="next">
+            <a className={cx("fs-search-pager__item-link")} role="button" tabIndex={nextPageHidden ? "-1" : "0"} onClick={this.onPageChange.bind(this, currentPage + 1, pageAmt)} onKeyPress={ this.buildHandleEnterKeyPress(this.onPageChange.bind(this, currentPage + 1, pageAmt)) } title="Go to next page" rel="next">
+              <span className="fs-element-invisible">Next page</span>
               <span aria-hidden={nextPageHidden ? "true" : "false"}>
                 <ChevronRight/>
               </span>
             </a>
           </li>
-          <li className={cx("search-pager__item search-pager__item--last", {"element-invisible": lastPageHidden})} key="end">
-            <a className={cx("search-pager__item-link")} role="button" tabIndex={lastPageHidden ? "-1" : "0"} onClick={this.onPageChange.bind(this, pageAmt - 1)} onKeyPress={ this.buildHandleEnterKeyPress(this.onPageChange.bind(this, pageAmt - 1)) } title="Go to last page">
-              <span className="element-invisible">Last page</span>
+          <li className={cx("fs-search-pager__item search-pager__item--last", {"fs-element-invisible": lastPageHidden})} key="end">
+            <a className={cx("fs-search-pager__item-link")} role="button" tabIndex={lastPageHidden ? "-1" : "0"} onClick={this.onPageChange.bind(this, pageAmt - 1)} onKeyPress={ this.buildHandleEnterKeyPress(this.onPageChange.bind(this, pageAmt - 1)) } title="Go to last page">
+              <span className="fs-element-invisible">Last page</span>
               <span aria-hidden={lastPageHidden ? "true" : "false"}>
                 <DoubleChevronRight/>
               </span>

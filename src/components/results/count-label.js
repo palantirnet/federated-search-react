@@ -29,7 +29,7 @@ function searchResultsStat(currentPage, numFound, rows, pageAmt, noResultsText, 
   return (
     <React.Fragment>
       <LiveMessage message={a11yMessage} aria-live="polite" />
-      <p id="stat" tabIndex="-1" className="search-results-stat">{message}</p>
+      <p id="stat" tabIndex="-1" className="fs-search-results-stat">{message}</p>
     </React.Fragment>
   );
 }

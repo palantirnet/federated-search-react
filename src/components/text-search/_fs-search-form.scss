@@ -1,23 +1,23 @@
 /**
- * search-form.scss
+ * fs-search-form.scss
  * Define search form styles.
  *
  * @copyright Copyright (c) 2017-2019 Palantir.net
  */
 
-.search-form {
+.fs-search-form {
   margin-bottom: rhythm(2);
 }
 
-.search-form__label,
-%search-form__label {
+.fs-search-form__label,
+%fs-search-form__label {
   @include adjust-font-size-to($label);
   display: block;
   margin-bottom: .1em;
-  @extend %track-out;
+  @extend %fs-track-out;
 }
 
-.search-form__input-wrapper {
+.fs-search-form__input-wrapper {
   border-radius: 3px;
   display: flex;
   justify-content: space-between;
@@ -31,7 +31,7 @@
   }
 }
 
-.search-form__input {
+.fs-search-form__input {
   @include adjust-font-size-to($label, .8);
   /* stylelint-disable property-no-vendor-prefix */
   -webkit-appearance: none;
@@ -51,7 +51,7 @@
   }
 }
 
-.search-form__submit {
+.fs-search-form__submit {
   padding: .5rem .7rem;
   background-color: $c-secondary;
   border-radius: 0 3px 3px 0;

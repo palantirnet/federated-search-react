@@ -28,10 +28,10 @@ class FederatedSortMenu extends React.Component {
 		if (sortFields.length === 0) { return null; }
 
 		return (
-			<div className="search-scope">
-        <div className="search-scope__filter">
-          <label className="search-scope__label" htmlFor="sort-by">Sort By</label>
-          <select className="search-scope__select" id="sort-by" name="sort-by" onChange={this.onSelect} value={this.state.sort}>
+			<div className="fs-search-scope">
+        <div className="fs-search-scope__filter">
+          <label className="fs-search-scope__label" htmlFor="sort-by">Sort By</label>
+          <select className="fs-search-scope__select" id="sort-by" name="sort-by" onChange={this.onSelect} value={this.state.sort}>
 						{sortFields.map((sortField, i) => (
                 <option value={sortField.field} key={i}>{sortField.label}</option>
 						))}

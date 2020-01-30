@@ -1,12 +1,12 @@
 /**
- * autocomplete.scss
+ * fs-autocomplete.scss
  * Define autocomplete input + suggestion styles.
  * @see: https://github.com/moroshko/react-autosuggest#theme-optional
  *
  * @copyright Copyright (c) 2017-2019 Palantir.net
  */
 
-.search-form__autocomplete-container {
+.fs-search-form__autocomplete-container {
   display: flex;
 
   @include breakpoint($bp1) {
@@ -17,12 +17,12 @@
     width: 50%;
   }
 
-  .search-form__input-wrapper {
+  .fs-search-form__input-wrapper {
     width: 100%;
   }
 }
 
-.react-autosuggest {
+.fs-react-autosuggest {
   &__container {
     position: relative;
     flex: 1;
