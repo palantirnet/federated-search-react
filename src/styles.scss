@@ -6,16 +6,16 @@
  */
 
 /* Import Sass mixins, variables, Compass modules, etc. */
-@import "helpers/init";
+@import "scss/helpers/init";
 
 /* Set browser support */
-@import "helpers/support-for";
+@import "scss/helpers/support-for";
 
 /* Set the vertical rhythm */
 @import "scss/vertical-rhythm/vertical_rhythm";
 
 /* HTML element (SMACSS base) rules */
-@import "helpers/fs-global";
+@import "scss/helpers/fs-global";
 
 /* Layout rules */
 @import "scss/grid-layouts/_fs-l-singularity";
