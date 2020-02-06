@@ -50,6 +50,7 @@
   },
   "dependencies": {
     "@jesconstantine/react-scripts": "palantirnet/create-react-app#df8e7ff41a831da6ae8de091de5dcd500fec30b3",
+    "babel-polyfill": "^6.26.0",
     "core-js": "^3.6.4",
     "he": "1.2.0",
     "intl": "^1.2.5",
