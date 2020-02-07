@@ -9,7 +9,6 @@
     "@babel/core": "^7.8.4",
     "@babel/preset-env": "^7.8.4",
     "@babel/preset-react": "^7.8.3",
-    "@palantirnet/react-scripts": "^1.1.4",
     "babel-cli": "^6.26.0",
     "babel-loader": "^8.0.6",
     "babel-plugin-transform-class-properties": "^6.24.1",
@@ -49,7 +48,7 @@
     "eject": "react-scripts eject"
   },
   "dependencies": {
-    "@jesconstantine/react-scripts": "palantirnet/create-react-app#df8e7ff41a831da6ae8de091de5dcd500fec30b3",
+    "@palantirnet/react-scripts": "^1.1.4",
     "babel-polyfill": "^6.26.0",
     "core-js": "^3.6.4",
     "eslint": "^6.8.0",
