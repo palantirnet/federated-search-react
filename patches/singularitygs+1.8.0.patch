@@ -1,0 +1,18 @@
+diff --git a/node_modules/singularitygs/stylesheets/singularitygs/_api.scss b/node_modules/singularitygs/stylesheets/singularitygs/_api.scss
+index 18f5940..c05db85 100644
+--- a/node_modules/singularitygs/stylesheets/singularitygs/_api.scss
++++ b/node_modules/singularitygs/stylesheets/singularitygs/_api.scss
+@@ -56,11 +56,11 @@
+     $Right: ();
+ 
+     @if $Direction == 'both' or $From == 'left' or ($Direction == 'rtl' and $From == 'opposite') {
+-      $Left: call('output-#{$output-style}', map-merge($Span-Map, ('direction': left)));
++      $Left: call(get-function('output-#{$output-style}'), map-merge($Span-Map, ('direction': left)));
+     }
+ 
+     @if $Direction == 'both' or $From == 'right' or ($Direction == 'ltr' and $From == 'opposite') {
+-      $Right: call('output-#{$output-style}', map-merge($Span-Map, ('direction': right)));
++      $Right: call(get-function('output-#{$output-style}'), map-merge($Span-Map, ('direction': right)));
+     }
+ 
+     $Left-Keys: map-keys($Left);
