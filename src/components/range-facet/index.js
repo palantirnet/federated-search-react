@@ -79,13 +79,13 @@ class FederatedRangeFacet extends React.Component {
 
     return (
       <li id={`solr-list-facet-${field}`}>
-        <a
+        <div
           tabIndex="0"
           className={cx("search-accordion__title", {"js-search-accordion-open": expanded})}
           id={label.replace(/\s+/g, '-').toLowerCase()}
           onClick={this.toggleExpand.bind(this)}
           onKeyDown={(event)=>{if (event.keyCode === 13) {this.toggleExpand()}}}
-        >{label}</a>
+        >{label}</div>
         <AnimateHeight
           duration={600}
           height={height}
