@@ -1,0 +1,13 @@
+diff --git a/node_modules/react-dates/lib/components/DateInput.js b/node_modules/react-dates/lib/components/DateInput.js
+index 2723010..5641060 100644
+--- a/node_modules/react-dates/lib/components/DateInput.js
++++ b/node_modules/react-dates/lib/components/DateInput.js
+@@ -129,7 +129,7 @@ function (_ref) {
+     });
+   };
+ 
+-  _proto.componentWillReceiveProps = function componentWillReceiveProps(nextProps) {
++  _proto.UNSAFE_componentWillReceiveProps = function UNSAFE_componentWillReceiveProps(nextProps) {
+     var dateString = this.state.dateString;
+ 
+     if (dateString && nextProps.displayValue) {
