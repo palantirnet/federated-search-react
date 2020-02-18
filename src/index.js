@@ -79,6 +79,7 @@ const init = (settings) => {
     },
     pageStrategy: "paginate",
     rows: 20,
+    df: "tm_rendered_item",
     // Hostname overridable in ./.env.local.js for testing purposes.
     hostname: window.location.hostname,
     autocomplete: false,
@@ -125,6 +126,7 @@ const init = (settings) => {
     rows: options.rows,
     hl: options.hl,
     mainQueryField: options.mainQueryField,
+    df: options.mainQueryField,
     filters: [{field: "sm_site_name", type: "list-facet", value: options.siteList}],
 
     // The change handler passes the current query- and result state for render
