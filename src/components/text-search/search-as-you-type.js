@@ -31,7 +31,7 @@ class FederatedTextSearchAsYouType extends React.Component {
     this.shouldRenderSuggestions = this.shouldRenderSuggestions.bind(this);
   }
 
-  componentWillReceiveProps(nextProps) {
+  UNSAFE_componentWillReceiveProps(nextProps) {
     this.setState({
       value: nextProps.suggestQuery && nextProps.suggestQuery.value
         ? nextProps.suggestQuery.value
@@ -342,14 +342,14 @@ FederatedTextSearchAsYouType.propTypes = {
       queryField: PropTypes.string,
       suggestionRows: PropTypes.number,
       numChars: PropTypes.number,
-      result: {
+      result: PropTypes.shape({
         titleText: PropTypes.string,
         showDirectionsText: PropTypes.bool,
-      },
-      term: {
+      }),
+      term: PropTypes.shape({
         titleText: PropTypes.string,
         showDirectionsText: PropTypes.bool,
-      },
+      }),
     }),
     PropTypes.bool,
   ]).isRequired,
