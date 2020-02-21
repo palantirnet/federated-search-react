@@ -19,7 +19,7 @@ class FederatedTextSearchNoAutocomplete extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  componentWillReceiveProps(nextProps) {
+  componentDidUpdate(nextProps) {
     this.setState({
       value: nextProps.value,
     });

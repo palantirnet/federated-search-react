@@ -1,0 +1,41 @@
+diff --git a/node_modules/react-autosuggest/dist/Autosuggest.js b/node_modules/react-autosuggest/dist/Autosuggest.js
+index eaac8a7..8f21e5b 100644
+--- a/node_modules/react-autosuggest/dist/Autosuggest.js
++++ b/node_modules/react-autosuggest/dist/Autosuggest.js
+@@ -88,8 +88,8 @@ var Autosuggest = function (_Component) {
+       this.suggestionsContainer = this.autowhatever.itemsContainer;
+     }
+   }, {
+-    key: 'componentWillReceiveProps',
+-    value: function componentWillReceiveProps(nextProps) {
++    key: 'UNSAFE_componentWillReceiveProps',
++    value: function UNSAFE_componentWillReceiveProps(nextProps) {
+       if ((0, _arrays2.default)(nextProps.suggestions, this.props.suggestions)) {
+         if (nextProps.highlightFirstSuggestion && nextProps.suggestions.length > 0 && this.justPressedUpDown === false && this.justMouseEntered === false) {
+           this.highlightFirstSuggestion();
+diff --git a/node_modules/react-autosuggest/dist/standalone/autosuggest.js b/node_modules/react-autosuggest/dist/standalone/autosuggest.js
+index 02f7a55..8a74b2e 100644
+--- a/node_modules/react-autosuggest/dist/standalone/autosuggest.js
++++ b/node_modules/react-autosuggest/dist/standalone/autosuggest.js
+@@ -152,8 +152,8 @@ return /******/ (function(modules) { // webpackBootstrap
+ 	      this.suggestionsContainer = this.autowhatever.itemsContainer;
+ 	    }
+ 	  }, {
+-	    key: 'componentWillReceiveProps',
+-	    value: function componentWillReceiveProps(nextProps) {
++	    key: 'UNSAFE_componentWillReceiveProps',
++	    value: function UNSAFE_componentWillReceiveProps(nextProps) {
+ 	      if ((0, _arrays2.default)(nextProps.suggestions, this.props.suggestions)) {
+ 	        if (nextProps.highlightFirstSuggestion && nextProps.suggestions.length > 0 && this.justPressedUpDown === false && this.justMouseEntered === false) {
+ 	          this.highlightFirstSuggestion();
+@@ -2281,8 +2281,8 @@ return /******/ (function(modules) { // webpackBootstrap
+ 	      this.ensureHighlightedItemIsVisible();
+ 	    }
+ 	  }, {
+-	    key: 'componentWillReceiveProps',
+-	    value: function componentWillReceiveProps(nextProps) {
++	    key: 'UNSAFE_componentWillReceiveProps',
++	    value: function UNSAFE_componentWillReceiveProps(nextProps) {
+ 	      if (nextProps.items !== this.props.items) {
+ 	        this.setSectionsItems(nextProps);
+ 	      }

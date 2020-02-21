@@ -44,7 +44,7 @@ class FederatedRangeFacet extends React.Component {
   }
 
   // See: https://reactjs.org/docs/react-component.html#the-component-lifecycle
-  componentWillReceiveProps(nextProps) {
+  componentDidUpdate(nextProps) {
     // Clear component inputs when rangeFacet value transitions from populated->empty.
     if (this.props.value.length && !nextProps.value.length) {
       this.setState({
