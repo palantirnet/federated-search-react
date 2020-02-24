@@ -10,7 +10,6 @@
     "@babel/preset-env": "^7.8.4",
     "@babel/preset-react": "^7.8.3",
     "@babel/runtime": "^7.8.4",
-    "@palantirnet/react-scripts": "^1.1.4",
     "babel-cli": "^6.26.0",
     "babel-loader": "^8.0.6",
     "babel-plugin-transform-class-properties": "^6.24.1",
@@ -19,6 +18,7 @@
     "core-js": "^3.6.4",
     "eslint": "^6.8.0",
     "eslint-config-airbnb": "^18.0.1",
+    "eslint-plugin-flowtype": "3.x",
     "eslint-plugin-import": "^2.7.0",
     "eslint-plugin-jsx-a11y": "^6.0.2",
     "eslint-plugin-react": "^7.4.0",
@@ -37,6 +37,7 @@
     "replace-x": "1.5.0",
     "singularitygs": "^1.7.0",
     "solr-faceted-search-react": "https://github.com/palantirnet/solr-faceted-search-react",
+    "typescript": "^3.8.2",
     "webpack": "^4.41.5"
   },
   "scripts": {
@@ -61,6 +62,19 @@
     "patch-package": "^6.2.0",
     "react-aria-live": "2.0.5",
     "react-autosuggest": "9.4.3",
+    "react-scripts": "^3.3.1",
     "url": "0.11.0"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
   }
 }
