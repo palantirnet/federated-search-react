@@ -160,7 +160,7 @@ const init = (settings) => {
 // @see https://github.com/facebook/create-react-app/blob/master/packages/react-scripts/template/README.md#adding-custom-environment-variables
 if (process.env.NODE_ENV === 'production') {
   // Get the root element where the app will be rendered.
-  const root = document.getElementById("fs-root");
+  const root = document.getElementById("root");
 
   if (root) {
     // Get the data attribute which has the stringified configuration data json object.
