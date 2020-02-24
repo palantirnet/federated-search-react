@@ -698,7 +698,8 @@
     border-bottom-left-radius: 0;
     border-bottom-right-radius: 0; }
 
-.fs-react-autosuggest__suggestions-container {
+/* This namespace is outside our control */
+.react-autosuggest__suggestions-container {
   display: none; }
 
 .fs-react-autosuggest__container-title {
