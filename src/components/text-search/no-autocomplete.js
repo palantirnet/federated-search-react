@@ -19,15 +19,10 @@ class FederatedTextSearchNoAutocomplete extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  componentDidUpdate(nextProps) {
-    if (nextProps.value === "" && (nextProps.value !== this.state.value && this.state.value === "")) {
-      this.setState({
-        value: nextProps.value,
-      });
-    }
-    // TODO: This does not clear the field if the filter is removed.
-    //console.log(nextProps.value + '+')
-    //console.log(this.state.value)
+  UNSAFE_componentWillReceiveProps(nextProps) {
+    this.setState({
+      value: nextProps.value,
+    });
   }
 
   handleInputChange(ev) {
