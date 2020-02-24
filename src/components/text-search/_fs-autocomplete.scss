@@ -22,7 +22,9 @@
   }
 }
 
-.fs-react-autosuggest {
+/** These classes are outside of Federated Search app namespace. **/
+
+.react-autosuggest {
   &__container {
     position: relative;
     flex: 1;
