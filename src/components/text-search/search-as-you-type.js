@@ -193,23 +193,23 @@ class FederatedTextSearchAsYouType extends React.Component {
     const directionsText = mode === 'term' ? termShowDirectionsText : resultShowDirectionsText;
 
     const suggestionsWrapperClasses = directionsText
-      ? 'fs-react-autosuggest__suggestions-itemslist-wrapper fs-react-autosuggest__suggestions-itemslist-wrapper--with-directions'
-      : 'fs-react-autosuggest__suggestions-itemslist-wrapper';
+      ? 'react-autosuggest__suggestions-itemslist-wrapper react-autosuggest__suggestions-itemslist-wrapper--with-directions'
+      : 'react-autosuggest__suggestions-itemslist-wrapper';
 
     return (
       <div {... containerProps}>
-        <div className="fs-react-autosuggest__container-title">
+        <div className="react-autosuggest__container-title">
           {titleText}
-          <button className="fs-react-autosuggest__container-close-button" onClick={this.onSuggestionsClearRequested}>x</button>
+          <button className="react-autosuggest__container-close-button" onClick={this.onSuggestionsClearRequested}>x</button>
         </div>
         <div className={suggestionsWrapperClasses}>
           {children}
         </div>
         {/* @todo add logic for suggestion mode and alter directionsText accordingly */}
         {directionsText &&
-          <div className="fs-react-autosuggest__container-directions">
-            <span className="fs-react-autosuggest__container-directions-item">Press <code>ENTER</code> to search for <strong>{query}</strong> or <code>ESC</code> to close.</span>
-            <span className="fs-react-autosuggest__container-directions-item">Press ↑ and ↓ to highlight a suggestion then <code>ENTER</code> to be redirected to that suggestion.</span>
+          <div className="react-autosuggest__container-directions">
+            <span className="react-autosuggest__container-directions-item">Press <code>ENTER</code> to search for <strong>{query}</strong> or <code>ESC</code> to close.</span>
+            <span className="react-autosuggest__container-directions-item">Press ↑ and ↓ to highlight a suggestion then <code>ENTER</code> to be redirected to that suggestion.</span>
           </div>
         }
       </div>
@@ -256,7 +256,7 @@ class FederatedTextSearchAsYouType extends React.Component {
     // Render a link for search result suggestions.
     return (
       <a
-        className="fs-react-autosuggest__suggestion-link"
+        className="react-autosuggest__suggestion-link"
         href={suggestion.sm_urls[0]}
       >
         {highlightedTitle}
@@ -284,7 +284,7 @@ class FederatedTextSearchAsYouType extends React.Component {
       type: 'search',
       name: 'search',
       id: 'search',
-      className: 'fs-react-autosuggest__input',
+      className: 'react-autosuggest__input',
       onChange: this.onChange,
       onKeyDown: this.handleInputKeyDown,
       value: value || '',
