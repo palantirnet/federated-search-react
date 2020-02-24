@@ -7,7 +7,7 @@
 // Basic 4-up Float layout
 // =============================================================================
 
-.l-4up {
+.fs-l-4up {
   @include isolation-span(12, 1, 'both');
 
   @include breakpoint($bp1) {
@@ -32,7 +32,7 @@
 // Basic 4-up Isolation layout
 // =============================================================================
 
-.l-4up--1 {
+.fs-l-4up--1 {
   @include isolation-span(12, 1, 'both');
 
   @include breakpoint($bp1) {
@@ -40,7 +40,7 @@
   }
 }
 
-.l-4up--2 {
+.fs-l-4up--2 {
   @include isolation-span(12, 1, 'both');
 
   @include breakpoint($bp1) {
@@ -48,7 +48,7 @@
   }
 }
 
-.l-4up--3 {
+.fs-l-4up--3 {
   @include isolation-span(12, 1, 'both');
 
   @include breakpoint($bp1) {
@@ -56,7 +56,7 @@
   }
 }
 
-.l-4up--4 {
+.fs-l-4up--4 {
   @include isolation-span(12, 1, 'both');
 
   @include breakpoint($bp1) {

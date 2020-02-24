@@ -1,14 +1,14 @@
 /**
- * pagination.scss
+ * fs-pagination.scss
  * Define pagination styles.
  *
  * @copyright Copyright (c) 2017-2019 Palantir.net
  */
-.search-pager {
+.fs-search-pager {
 }
 
-.search-pager__items {
-  @extend %list--simple;
+.fs-search-pager__items {
+  @extend %fs-list--simple;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -24,7 +24,7 @@
 }
 
 // Pager list item styles
-.search-pager__item {
+.fs-search-pager__item {
   display: inline-block;
   cursor: pointer;
 
@@ -36,11 +36,11 @@
     margin-right: rhythm(.25);
   }
 
-  &.is-active .search-pager__item-link {
+  &.is-active .fs-search-pager__item-link {
     font-weight: bold;
   }
 
-  &.not-active .search-pager__item-link {
+  &.not-active .fs-search-pager__item-link {
     display: none;
 
     @include breakpoint($bp0) {
@@ -50,7 +50,7 @@
 }
 
 // Link styles
-.search-pager__item-link {
+.fs-search-pager__item-link {
   display: flex;
   justify-content: center;
   align-items: center;

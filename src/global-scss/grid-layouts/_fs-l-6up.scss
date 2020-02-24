@@ -7,7 +7,7 @@
 // Basic 6-up Float layout
 // =============================================================================
 
-.l-6up {
+.fs-l-6up {
   @include isolation-span(12, 1, 'both');
 
   @include breakpoint($bp1) {
@@ -32,7 +32,7 @@
 // Basic 6-up Isolation layout
 // =============================================================================
 
-.l-6up--1 {
+.fs-l-6up--1 {
   @include isolation-span(12, 1, 'both');
 
   @include breakpoint($bp1) {
@@ -40,7 +40,7 @@
   }
 }
 
-.l-6up--2 {
+.fs-l-6up--2 {
   @include isolation-span(12, 1, 'both');
 
   @include breakpoint($bp1) {
@@ -48,7 +48,7 @@
   }
 }
 
-.l-6up--3 {
+.fs-l-6up--3 {
   @include isolation-span(12, 1, 'both');
 
   @include breakpoint($bp1) {
@@ -56,7 +56,7 @@
   }
 }
 
-.l-6up--4 {
+.fs-l-6up--4 {
   @include isolation-span(12, 1, 'both');
 
   @include breakpoint($bp1) {
@@ -64,7 +64,7 @@
   }
 }
 
-.l-6up--5 {
+.fs-l-6up--5 {
   @include isolation-span(12, 1, 'both');
 
   @include breakpoint($bp1) {
@@ -72,7 +72,7 @@
   }
 }
 
-.l-6up--6 {
+.fs-l-6up--6 {
   @include isolation-span(12, 1, 'both');
 
   @include breakpoint($bp1) {

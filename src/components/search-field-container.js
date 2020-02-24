@@ -30,10 +30,10 @@ class FederatedSearchFieldContainer extends React.Component {
     const height = this.state.expanded ? 'auto' : 0;
 
     return (
-      <div className="search-filters">
+      <div className="fs-search-filters">
         <button
-          className={cx('search-filters__trigger', {
-            'js-search-filters-open': this.state.expanded,
+          className={cx('fs-search-filters__trigger', {
+            'js-fs-search-filters-open': this.state.expanded,
           })}
           onClick={this.handleClick}
         >
@@ -43,18 +43,18 @@ class FederatedSearchFieldContainer extends React.Component {
           duration={450}
           height={height}
         >
-          <form className="search-filters__form">
-            <section className="search-accordion" aria-labelledby="section-title">
-              <div className="search-filters__row">
-                <h2 className="search-filters__title" id="section-title">Filter Results</h2>
+          <form className="fs-search-filters__form">
+            <section className="fs-search-accordion" aria-labelledby="fs-section-title">
+              <div className="fs-search-filters__row">
+                <h2 className="fs-search-filters__title" id="fs-section-title">Filter Results</h2>
               </div>
               { this.props.resultsCount > 0
-                ? (<ul className="search-accordion__group">{this.props.children}</ul>)
-                : <div className="search-filters__no-results">There are no results to filter.</div> }
+                ? (<ul className="fs-search-accordion__group">{this.props.children}</ul>)
+                : <div className="fs-search-filters__no-results">There are no results to filter.</div> }
             </section>
 
             { this.props.resultsCount > 0
-              ? <div className="search-filters__row"><button className="search-filters__reset" type="button" onClick={onNewSearch}>Clear All</button></div>
+              ? <div className="fs-search-filters__row"><button className="fs-search-filters__reset" type="button" onClick={onNewSearch}>Clear All</button></div>
               : null }
           </form>
         </AnimateHeight>

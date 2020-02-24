@@ -7,7 +7,7 @@
 // Basic 66-33 Isolation layout
 // =============================================================================
 
-.l-66-33--1 {
+.fs-l-66-33--1 {
   @include isolation-span(12, 1, 'both');
 
   @include breakpoint($bp1) {
@@ -15,7 +15,7 @@
   }
 }
 
-.l-66-33--2 {
+.fs-l-66-33--2 {
   @include isolation-span(12, 1, 'both');
 
   @include breakpoint($bp1) {

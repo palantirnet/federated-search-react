@@ -1,57 +1,49 @@
 /**
  * @file
- * Layout rules for 3-up content
+ * Layout rules for 2-up content
  */
 
 // =============================================================================
-// Basic 3-up Float layout
+// Basic 2-up Float layout
 // =============================================================================
 
-.l-3up {
+.fs-l-2up {
   @include isolation-span(12, 1, 'both');
 
   @include breakpoint($bp1) {
-    @include float-span(4);
+    @include float-span(6);
   }
 
-  &:nth-of-type(3n+1) {
+  &:nth-of-type(2n+1) {
     @include breakpoint($bp1) {
-      @include float-span(4, 'first');
+      @include float-span(6, 'first');
     }
   }
 
-  &:nth-of-type(3n) {
+  &:nth-of-type(2n) {
     @include breakpoint($bp1) {
-      @include float-span(4, 'last');
+      @include float-span(6, 'last');
     }
   }
 }
 
 
 // =============================================================================
-// Basic 3-up Isolation layout
+// Basic 2-up Isolation layout
 // =============================================================================
 
-.l-3up--1 {
+.fs-l-2up--1 {
   @include isolation-span(12, 1, 'both');
 
   @include breakpoint($bp1) {
-    @include isolation-span(4, 1, 'both');
+    @include isolation-span(6, 1, 'both');
   }
 }
 
-.l-3up--2 {
+.fs-l-2up--2 {
   @include isolation-span(12, 1, 'both');
 
   @include breakpoint($bp1) {
-    @include isolation-span(4, 5, 'none');
-  }
-}
-
-.l-3up--3 {
-  @include isolation-span(12, 1, 'both');
-
-  @include breakpoint($bp1) {
-    @include isolation-span(4, 9, 'none');
+    @include isolation-span(6, 7, 'none');
   }
 }
