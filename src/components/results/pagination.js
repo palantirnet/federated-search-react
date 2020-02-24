@@ -69,7 +69,7 @@ class FederatedPagination extends React.Component {
               <span aria-hidden={firstPageHidden ? "true" : "false"}>
                 <DoubleChevronLeft/>
               </span>
-            </a>
+            </div>
           </li>
           <li className={cx("fs-search-pager__item search-pager__item--previous", {"fs-element-invisible": prevPageHidden})} key="prev">
             <a className={cx("fs-search-pager__item-link")} role="button" tabIndex={prevPageHidden ? "-1" : "0"} onClick={this.onPageChange.bind(this, currentPage - 1)} onKeyPress={ this.buildHandleEnterKeyPress(this.onPageChange.bind(this, currentPage - 1)) }title="Go to previous page" rel="next">
@@ -77,7 +77,7 @@ class FederatedPagination extends React.Component {
               <span aria-hidden={prevPageHidden  ? "true" : "false"}>
                 <ChevronLeft/>
               </span>
-            </a>
+            </div>
           </li>
           {pages.map((page, idx) => this.renderPage(page, currentPage, idx))}
           <li className={cx("fs-search-pager__item fs-search-pager__item--next", {"fs-element-invisible": nextPageHidden})} key="next">
@@ -86,7 +86,7 @@ class FederatedPagination extends React.Component {
               <span aria-hidden={nextPageHidden ? "true" : "false"}>
                 <ChevronRight/>
               </span>
-            </a>
+            </div>
           </li>
           <li className={cx("fs-search-pager__item search-pager__item--last", {"fs-element-invisible": lastPageHidden})} key="end">
             <a className={cx("fs-search-pager__item-link")} role="button" tabIndex={lastPageHidden ? "-1" : "0"} onClick={this.onPageChange.bind(this, pageAmt - 1)} onKeyPress={ this.buildHandleEnterKeyPress(this.onPageChange.bind(this, pageAmt - 1)) } title="Go to last page">
@@ -94,7 +94,7 @@ class FederatedPagination extends React.Component {
               <span aria-hidden={lastPageHidden ? "true" : "false"}>
                 <DoubleChevronRight/>
               </span>
-            </a>
+            </div>
           </li>
         </ul>
       </nav>

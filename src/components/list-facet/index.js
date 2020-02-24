@@ -201,7 +201,7 @@ class FederatedListFacet extends React.Component {
         // Populate the accordion lis array with all of its checkboxes.
         listFacetHierarchyTermsLis[type].length && listFacetHierarchyLis.push(
           <li id={`solr-list-facet-${type}`} key={`solr-list-facet-${type}-${i}`}>
-            <a
+            <div
               tabIndex="0"
               className={cx('fs-search-accordion__title', { 'js-fs-search-accordion-open': terms[type].expanded })}
               id={label.replace(/\s+/g, '-').toLowerCase()}
@@ -213,7 +213,7 @@ class FederatedListFacet extends React.Component {
               }}
             >
               <span className="fs-element-invisible">Toggle filter group for</span> {type}
-            </a>
+            </div>
             <AnimateHeight
               duration={600}
               height={terms[type].height}
@@ -231,7 +231,7 @@ class FederatedListFacet extends React.Component {
     // just render the single list-facet accordion.
     return (
       <li id={`solr-list-facet-${field}`}>
-        <a
+        <div
           tabIndex="0"
           className={cx('fs-search-accordion__title', { 'js-fs-search-accordion-open': expanded })}
           id={label.replace(/\s+/g, '-').toLowerCase()}
@@ -243,7 +243,7 @@ class FederatedListFacet extends React.Component {
           }}
         >
           <span className="fs-element-invisible">Toggle filter group for</span> {label}
-        </a>
+        </div>
         <AnimateHeight
           duration={600}
           height={height}

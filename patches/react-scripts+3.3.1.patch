@@ -1,0 +1,13 @@
+diff --git a/node_modules/react-scripts/config/webpack.config.js b/node_modules/react-scripts/config/webpack.config.js
+index b7cf765..4c6977a 100644
+--- a/node_modules/react-scripts/config/webpack.config.js
++++ b/node_modules/react-scripts/config/webpack.config.js
+@@ -403,7 +403,7 @@ module.exports = function(webpackEnv) {
+             // The preset includes JSX, Flow, TypeScript, and some ESnext features.
+             {
+               test: /\.(js|mjs|jsx|ts|tsx)$/,
+-              include: paths.appSrc,
++              include: [paths.appSrc, fs.realpathSync(paths.appSrc+'/solr-faceted-search-react')],
+               loader: require.resolve('babel-loader'),
+               options: {
+                 customize: require.resolve(
