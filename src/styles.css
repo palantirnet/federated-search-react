@@ -1180,11 +1180,11 @@ aside.fs-aside {
  *
  * @copyright Copyright (c) 2017-2019 Palantir.net
  */
-.fs-applied-filters {
+#fs-root .fs-applied-filters {
   margin: 1.46667em 0;
   display: block; }
 
-.fs-applied-filters__filter {
+#fs-root .fs-applied-filters__filter {
   font-size: 0.8em;
   line-height: 1.46667em;
   padding-bottom: 0.29333em;
@@ -1194,7 +1194,7 @@ aside.fs-aside {
   margin-bottom: 0.73333em;
   display: inline-block;
   cursor: pointer; }
-  .fs-applied-filters__filter:after {
+  #fs-root .fs-applied-filters__filter:after {
     font-size: 1.2em;
     line-height: 1.22222em;
     content: "\D7";

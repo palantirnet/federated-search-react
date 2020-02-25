@@ -5,12 +5,12 @@
  * @copyright Copyright (c) 2017-2019 Palantir.net
  */
 
-.fs-applied-filters {
+#fs-root .fs-applied-filters {
   margin: rhythm(1) 0;
   display: block;
 }
 
-.fs-applied-filters__filter {
+#fs-root .fs-applied-filters__filter {
   @include adjust-font-size-to($label, .8);
   padding-bottom: rhythm(.2);
   border: 0;
