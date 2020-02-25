@@ -103,7 +103,8 @@ class RangeFacetType extends React.Component {
 class TextFacetType extends React.Component {
   removeTextValue(field) {
     this.props.announcePolite(`Removed search term ${field.value}.`);
-    this.props.onChange(field, '');
+    // Setting this to '' or "" throws a fatal error.
+    this.props.onChange(field, null);
     // Get current querystring params.
     const parsed = queryString.parse(window.location.search);
     // Remove the search term param, if it exists.
