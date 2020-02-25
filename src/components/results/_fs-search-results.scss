@@ -62,6 +62,7 @@
 }
 
 .fs-search-results__teaser {
+  @extend %p;
   margin-bottom: rhythm(.5);
 }
 

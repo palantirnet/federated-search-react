@@ -294,15 +294,6 @@
     overflow: visible; /* 2 */
   }
 
-  /**
-   * Set 1 unit of vertical rhythm on the top and bottom margin.
-   */
-
-  p,
-  pre {
-    margin: 0 0 rhythm(1);
-  }
-
 
   pre {
     @extend %fs-monospace;
@@ -652,4 +643,12 @@ samp {
   ul {
     margin: 0;
   }
+}
+
+/**
+* Combined normalize and base styles for p and pre elements.
+*/
+
+%p {
+  margin: 0 0 rhythm(1);
 }
