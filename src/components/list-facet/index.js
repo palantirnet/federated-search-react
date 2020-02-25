@@ -188,6 +188,7 @@ class FederatedListFacet extends React.Component {
             <input
               type="checkbox"
               name={type}
+              className="fs-search-accordion__checkbox-input"
               value={termObj.facetValue}
               checked={value.indexOf(termObj.facetValue) > -1}
               onChange={() => this.handleClick(termObj.facetValue)}

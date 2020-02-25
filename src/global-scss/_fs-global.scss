@@ -1,6 +1,6 @@
 /*! normalize-scss | MIT/GPLv2 License | bit.ly/normalize-scss */
 
-#fs-root {
+@mixin globals {
   // Correct text resizing oddly in IE 6/7 when body `font-size` is set using
   // `em` units.
   background: $background-color;
@@ -27,9 +27,7 @@
   @include breakpoint($bp3) {
     font-size: ($base-font-size / 16px) * 124%;
   }
-}
 
-@mixin globals {
   /**
  * 1. Change the default font family in all browsers (opinionated).
  * 2. Prevent adjustments of font size after orientation changes in IE and iOS.
@@ -371,18 +369,6 @@
   }
 
   /**
-   * Show the overflow in Edge.
-   */
-
-  input {
-    overflow: visible;
-    @if support-for(firefox, 29) {
-      // Firefox sets `line-height` using `!important` in the UA stylesheet.
-      line-height: normal;
-    }
-  }
-
-  /**
    * 1. Add the correct box sizing in IE <11.
    * 2. Remove the padding in IE <11.
    * 3. Remove excess padding in IE 7.
@@ -623,10 +609,17 @@ samp {
   }
 }
 
+%input {
+  overflow: visible;
+  @if support-for(firefox, 29) {
+    // Firefox sets `line-height` using `!important` in the UA stylesheet.
+    line-height: normal;
+  }
+}
+
 %select {
   text-transform: none;
 }
-
 
 %optgroup {
   font-weight: bold;

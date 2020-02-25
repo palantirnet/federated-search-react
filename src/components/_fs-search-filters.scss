@@ -134,6 +134,10 @@
   padding: 0;
 }
 
+.fs-search-accordion__checkbox-input {
+  @extend %input;
+}
+
 .fs-search-accordion__checkbox-label {
   cursor: pointer;
   display: block;
