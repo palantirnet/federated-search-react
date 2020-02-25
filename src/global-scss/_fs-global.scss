@@ -332,35 +332,7 @@
     }
   }
 
-  /**
-   * 1. Change font properties to `inherit` in all browsers (opinionated).
-   * 2. Remove the margin in Firefox and Safari.
-   * 3. Address `font-family` inconsistency between `textarea` and other form in IE 7
-   * 4. Improve appearance and consistency with IE 6/7.
-   */
 
-  input,
-  optgroup,
-  select,
-  textarea {
-    font: inherit; /* 1 */
-    margin: 0; /* 2 */
-    @if support-for(ie, 7) {
-      *font-family: $base-font-family; /* 3 */
-      *vertical-align: middle; /* 4 */
-    }
-  }
-
-
-
-  /**
-   * Remove the inheritance of text transform in Edge, Firefox, and IE.
-   * 1. Remove the inheritance of text transform in Firefox.
-   */
-
-  select { /* 1 */
-    text-transform: none;
-  }
 
   /**
    * 1. Prevent a WebKit bug where (2) destroys native `audio` and `video`
@@ -510,21 +482,7 @@
     }
   }
 
-  /**
-   * Restore the font weight unset by a previous rule.
-   */
 
-  optgroup {
-    font-weight: bold;
-  }
-
-  /**
-   * Remove the default vertical scrollbar in IE.
-   */
-
-  textarea {
-    overflow: auto;
-  }
 }
 
 #fs-root {
@@ -651,4 +609,29 @@ samp {
 
 %p {
   margin: 0 0 rhythm(1);
+}
+
+%input,
+%optgroup,
+%select,
+%textarea {
+  font: inherit; /* 1 */
+  margin: 0; /* 2 */
+  @if support-for(ie, 7) {
+    *font-family: $base-font-family; /* 3 */
+    *vertical-align: middle; /* 4 */
+  }
+}
+
+%select {
+  text-transform: none;
+}
+
+
+%optgroup {
+  font-weight: bold;
+}
+
+%textarea {
+  overflow: auto;
 }

@@ -607,6 +607,7 @@ samp {
       width: 50%; } }
 
 .fs-search-form__input {
+  @extend %input;
   font-size: 0.8em;
   line-height: 1.46667em;
   /* stylelint-disable property-no-vendor-prefix */

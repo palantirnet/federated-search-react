@@ -43,6 +43,7 @@
 }
 
 .fs-search-scope__select {
+  @extend %select;
   @include adjust-font-size-to($label, .8);
   border-radius: 3px;
   border: 1px solid $gray-light;
