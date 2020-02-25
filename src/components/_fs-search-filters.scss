@@ -26,6 +26,7 @@
 }
 
 .fs-search-filters__trigger {
+  @extend %button;
   width: 100%;
   background-color: transparent;
   border-radius: 0;
@@ -145,6 +146,7 @@
 }
 
 .fs-search-accordion__content {
+  @extend %list;
   margin: 0;
   padding: rhythm(.5) 1.25rem;
 
@@ -190,6 +192,7 @@
 }
 
 .fs-search-accordion__group {
+  @extend %list;
   margin: 0;
 }
 
@@ -198,6 +201,7 @@
 }
 
 .fs-search-accordion__title {
+  @extend %h2;
   border-bottom: solid 1px $gray-light;
   padding-top: rhythm(.75);
   padding-bottom: rhythm(.75);

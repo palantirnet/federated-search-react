@@ -17,18 +17,15 @@
    Typography grooming extends
    ========================================================================== */
 /* Tight tracking */
-#fs-root h1, #fs-root h3 {
+.fs-search-results__heading {
   letter-spacing: -.0125em; }
 
 /* Open tracking */
-#fs-root h5, #fs-root h6, .fs-search-form__label, .fs-search-filters__label, .fs-search-scope__label {
+.fs-search-form__label, .fs-search-filters__label, .fs-search-scope__label {
   letter-spacing: .04em; }
 
 /* Style larger text with a tighter tracking, change weight, etc.  */
 /* Style all caps with a slightly open tracking. */
-#fs-root h5, #fs-root h6 {
-  text-transform: uppercase; }
-
 /* Unstyle a list */
 .fs-search-results, .fs-search-pager__items {
   margin: 0;
@@ -96,15 +93,6 @@
 /* stylelint-enable */
 /* HTML element (SMACSS base) rules */
 /*! normalize-scss | MIT/GPLv2 License | bit.ly/normalize-scss */
-/**
- * 1. Change the default font family in all browsers (opinionated).
- * 2. Prevent adjustments of font size after orientation changes in IE and iOS.
- */
-*,
-*:before,
-*:after {
-  box-sizing: border-box; }
-
 #fs-root {
   background: #fff;
   color: #333;
@@ -129,6 +117,10 @@
       font-size: 116.25%; } }
 
 #fs-root {
+  /**
+ * 1. Change the default font family in all browsers (opinionated).
+ * 2. Prevent adjustments of font size after orientation changes in IE and iOS.
+ */
   /* HTML5 display definitions
      ========================================================================== */
   /**
@@ -172,15 +164,7 @@
    * Add the correct font weight in Chrome, Edge, and Safari.
    */
   /**
-   * 1. Correct the inheritance and scaling of font size in all browsers.
-   * 2. Correct the odd `em` font sizing in all browsers.
-   */
-  /**
    * Add the correct font style in Android <4.4.
-   */
-  /**
-   * Correct the font size and margin on `h1` elements within `section` and
-   * `article` contexts in Chrome, Firefox, and Safari.
    */
   /**
    * Add the correct background and color in IE <10.
@@ -204,15 +188,6 @@
      ========================================================================== */
   /**
    * Set 1 unit of vertical rhythm on the top and bottom margin.
-   */
-  /**
-   * Address margins set differently in IE 6/7.
-   */
-  /**
-   * Turn off margins on nested lists.
-   */
-  /**
-   * Address paddings set differently in IE 6/7.
    */
   /**
    * Add the correct margin in IE 8.
@@ -250,9 +225,6 @@
    * 2. Remove the margin in Firefox and Safari.
    * 3. Address `font-family` inconsistency between `textarea` and other form in IE 7
    * 4. Improve appearance and consistency with IE 6/7.
-   */
-  /**
-   * Show the overflow in IE.
    */
   /**
    * Remove the inheritance of text transform in Edge, Firefox, and IE.
@@ -302,6 +274,10 @@
   /**
    * Remove the default vertical scrollbar in IE.
    */ }
+  #fs-root *,
+  #fs-root *:before,
+  #fs-root *:after {
+    box-sizing: border-box; }
   #fs-root article,
   #fs-root aside,
   #fs-root details,
@@ -343,50 +319,8 @@
   #fs-root b,
   #fs-root strong {
     font-weight: bolder; }
-  #fs-root pre,
-  #fs-root code,
-  #fs-root kbd,
-  #fs-root samp {
-    font-family: monospace, monospace;
-    /* 1 */
-    font-size: 1em;
-    /* 2 */ }
   #fs-root dfn {
     font-style: italic; }
-  #fs-root h1 {
-    font-size: 1.5em;
-    line-height: 1.27111em;
-    margin-top: 0em;
-    margin-bottom: 0.48889em;
-    color: #333;
-    font-weight: 700; }
-  #fs-root h2 {
-    font-size: 1.1em;
-    line-height: 1.46667em;
-    margin-top: 0em;
-    margin-bottom: 0.66667em;
-    font-weight: 400; }
-  #fs-root h3 {
-    font-size: 1em;
-    line-height: 1.83333em;
-    margin-top: 1.46667em;
-    margin-bottom: 0.73333em; }
-  #fs-root h4 {
-    font-size: 1em;
-    line-height: 1.83333em;
-    margin-top: 1.46667em;
-    margin-bottom: 0.73333em; }
-  #fs-root h5 {
-    font-size: 0.8em;
-    line-height: 1.83333em;
-    margin-top: 1.375em;
-    margin-bottom: 0.45833em; }
-  #fs-root h6 {
-    font-size: 0.8em;
-    line-height: 1.83333em;
-    margin-top: 1.375em;
-    margin-bottom: 0.45833em;
-    font-weight: 400; }
   #fs-root mark {
     background-color: #ff0;
     color: #222; }
@@ -409,22 +343,8 @@
     overflow: hidden; }
   #fs-root blockquote {
     margin: 1.46667em; }
-  #fs-root dl,
-  #fs-root menu,
-  #fs-root ol,
-  #fs-root ul {
-    margin: 1.46667em 0; }
-  #fs-root ol ol,
-  #fs-root ol ul,
-  #fs-root ul ol,
-  #fs-root ul ul {
-    margin: 0; }
   #fs-root dd {
     margin: 0 0 0 1em; }
-  #fs-root menu,
-  #fs-root ol,
-  #fs-root ul {
-    padding: 0 0 0 1em; }
   #fs-root figure {
     margin: 1.46667em; }
   #fs-root hr {
@@ -437,7 +357,6 @@
   #fs-root p,
   #fs-root pre {
     margin: 0 0 1.46667em; }
-  #fs-root button,
   #fs-root input,
   #fs-root optgroup,
   #fs-root select,
@@ -446,13 +365,9 @@
     /* 1 */
     margin: 0;
     /* 2 */ }
-  #fs-root button {
-    overflow: visible; }
-  #fs-root button,
   #fs-root select {
     /* 1 */
     text-transform: none; }
-  #fs-root button,
   #fs-root html [type="button"],
   #fs-root [type="reset"],
   #fs-root [type="submit"] {
@@ -460,7 +375,6 @@
     -webkit-appearance: button;
     /* 2 */
     /* stylelint-enable */ }
-  #fs-root button,
   #fs-root [type="button"],
   #fs-root [type="reset"],
   #fs-root [type="submit"] {
@@ -470,13 +384,11 @@
     /**
      * Restore the focus styles unset by the previous rule.
      */ }
-    #fs-root button::-moz-focus-inner,
     #fs-root [type="button"]::-moz-focus-inner,
     #fs-root [type="reset"]::-moz-focus-inner,
     #fs-root [type="submit"]::-moz-focus-inner {
       border-style: none;
       padding: 0; }
-    #fs-root button:-moz-focusring,
     #fs-root [type="button"]:-moz-focusring,
     #fs-root [type="reset"]:-moz-focusring,
     #fs-root [type="submit"]:-moz-focusring {
@@ -537,6 +449,77 @@
     font-weight: bold; }
   #fs-root textarea {
     overflow: auto; }
+
+/**
+ * 1. Correct the inheritance and scaling of font size in all browsers.
+ * 2. Correct the odd `em` font sizing in all browsers.
+ */
+#fs-root pre,
+code,
+kbd,
+samp {
+  font-family: monospace, monospace;
+  /* 1 */
+  font-size: 1em;
+  /* 2 */ }
+
+/**
+ * Placeholders for default element styles.
+ */
+/**
+  * Correct the font size and margin on `h1` elements within `section` and
+  * `article` contexts in Chrome, Firefox, and Safari.
+  */
+.fs-search-accordion__title {
+  font-size: 1.1em;
+  line-height: 1.46667em;
+  margin-top: 0em;
+  margin-bottom: 0.66667em;
+  font-weight: 400; }
+
+.fs-search-results__heading {
+  font-size: 1em;
+  line-height: 1.83333em;
+  margin-top: 1.46667em;
+  margin-bottom: 0.73333em; }
+
+/**
+* Combined normalize and base styles for button element.
+*/
+.fs-search-form__submit, .react-autosuggest__container-close-button, .fs-search-filters__trigger, .fs-applied-filters__filter {
+  font: inherit;
+  /* 1 */
+  margin: 0;
+  /* 2 */
+  overflow: visible;
+  text-transform: none;
+  /* stylelint-disable property-no-vendor-prefix */
+  -webkit-appearance: button;
+  /* 2 */
+  /* stylelint-enable */ }
+  .fs-search-form__submit::-moz-focus-inner, .react-autosuggest__container-close-button::-moz-focus-inner, .fs-search-filters__trigger::-moz-focus-inner, .fs-applied-filters__filter::-moz-focus-inner {
+    border-style: none;
+    padding: 0; }
+  .fs-search-form__submit:-moz-focusring, .react-autosuggest__container-close-button:-moz-focusring, .fs-search-filters__trigger:-moz-focusring, .fs-applied-filters__filter:-moz-focusring {
+    outline: 1px dotted ButtonText; }
+
+/**
+* Combined normalize and base styles for menu and list elements.
+*/
+
+.fs-search-results,
+.fs-search-pager__items,
+.fs-search-accordion__content,
+.fs-search-accordion__group {
+  margin: 1.46667em 0;
+  padding: 0 0 0 1em; }
+
+.fs-search-results ol, .fs-search-pager__items ol, .fs-search-accordion__content ol, .fs-search-accordion__group ol,
+.fs-search-results ul,
+.fs-search-pager__items ul,
+.fs-search-accordion__content ul,
+.fs-search-accordion__group ul {
+  margin: 0; }
 
 /* Layout rules */
 /**
@@ -1180,11 +1163,11 @@ aside.fs-aside {
  *
  * @copyright Copyright (c) 2017-2019 Palantir.net
  */
-#fs-root .fs-applied-filters {
+.fs-applied-filters {
   margin: 1.46667em 0;
   display: block; }
 
-#fs-root .fs-applied-filters__filter {
+.fs-applied-filters__filter {
   font-size: 0.8em;
   line-height: 1.46667em;
   padding-bottom: 0.29333em;
@@ -1194,7 +1177,7 @@ aside.fs-aside {
   margin-bottom: 0.73333em;
   display: inline-block;
   cursor: pointer; }
-  #fs-root .fs-applied-filters__filter:after {
+  .fs-applied-filters__filter:after {
     font-size: 1.2em;
     line-height: 1.22222em;
     content: "\D7";
