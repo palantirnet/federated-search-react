@@ -77,6 +77,7 @@
 }
 
 .fs-search-filters__title {
+  @extend %h2;
   display: none;
   @include breakpoint($bp2) {
     display: block;

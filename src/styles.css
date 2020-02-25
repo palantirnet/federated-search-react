@@ -426,7 +426,7 @@ samp {
   * Correct the font size and margin on `h1` elements within `section` and
   * `article` contexts in Chrome, Firefox, and Safari.
   */
-.fs-search-accordion__title {
+.fs-search-filters__title, .fs-search-accordion__title {
   font-size: 1.1em;
   line-height: 1.46667em;
   margin-top: 0em;
