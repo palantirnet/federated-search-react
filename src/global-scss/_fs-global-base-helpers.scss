@@ -149,3 +149,21 @@
 %figure {
   margin: rhythm(1);
 }
+
+%fieldset {
+  border: 1px solid $white-60;
+  margin: 0 2px;
+  padding: .35em .625em .75em;
+}
+
+%legend {
+  box-sizing: border-box; /* 1 */
+  display: table; /* 1 */
+  max-width: 100%; /* 1 */
+  white-space: normal; /* 1 */
+  color: inherit; /* 2 */
+  padding: 0; /* 3 */
+  @if support-for(ie, 7) {
+    *margin-left: -7px; /* 4 */
+  }
+}
