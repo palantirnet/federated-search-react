@@ -1,0 +1,151 @@
+/*! Based on normalize-scss | MIT/GPLv2 License | bit.ly/normalize-scss */
+
+/**
+ * Placeholders for default normalize and base element styles.
+ */
+
+%h1 {
+  @extend %fs-display-type;
+  // Set the font-size and line-height while keeping a proper vertical rhythm.
+  @include adjust-font-size-to($h1-font-size, 1.3);
+  // Set 1 unit of vertical rhythm on the top and bottom margins.
+  @include leader(0);
+  @include trailer(.5, $h1-font-size);
+  color: $c-primary;
+  font-weight: 700;
+}
+
+%h2 {
+  @include adjust-font-size-to($h2-font-size, 1.1);
+  @include leader(0);
+  @include trailer(.5, $h2-font-size);
+  font-weight: 400;
+}
+
+%h3 {
+  @extend %fs-display-type;
+  @include adjust-font-size-to($h3-font-size, 1.25);
+  @include leader(1, $h3-font-size);
+  @include trailer(.5, $h3-font-size);
+}
+
+%h4 {
+  @include adjust-font-size-to($h4-font-size, 1.25);
+  @include leader(1, $h4-font-size);
+  @include trailer(.5, $h4-font-size);
+}
+
+%h5 {
+  @extend %fs-allcaps;
+  @include adjust-font-size-to($h5-font-size, 1);
+  @include leader(.75, $h5-font-size);
+  @include trailer(.25, $h5-font-size);
+}
+
+%h6 {
+  @extend %fs-allcaps;
+  @include adjust-font-size-to($h6-font-size, 1);
+  @include leader(.75, $h6-font-size);
+  @include trailer(.25, $h6-font-size);
+  font-weight: 400;
+}
+
+/**
+* Combined normalize and base styles for button element.
+*/
+
+%button {
+  font: inherit; /* 1 */
+  margin: 0; /* 2 */
+  overflow: visible;
+  text-transform: none;
+  /* stylelint-disable property-no-vendor-prefix */
+  -webkit-appearance: button; /* 2 */
+  /* stylelint-enable */
+  @if support-for(ie, 7) {
+    *font-family: $base-font-family; /* 3 */
+    *vertical-align: middle; /* 4 */
+  }
+  &::-moz-focus-inner {
+    border-style: none;
+    padding: 0;
+  }
+  &:-moz-focusring {
+    outline: 1px dotted ButtonText;
+  }
+}
+
+%menu,
+%list {
+  margin: rhythm(1) 0;
+  padding: 0 0 0 $indent-amount;
+}
+
+%list {
+  ol,
+  ul {
+    margin: 0;
+  }
+}
+
+
+%p {
+  margin: 0 0 rhythm(1);
+}
+
+%input,
+%optgroup,
+%select,
+%textarea {
+  font: inherit; /* 1 */
+  margin: 0; /* 2 */
+  @if support-for(ie, 7) {
+    *font-family: $base-font-family; /* 3 */
+    *vertical-align: middle; /* 4 */
+  }
+}
+
+%input {
+  overflow: visible;
+  @if support-for(firefox, 29) {
+    // Firefox sets `line-height` using `!important` in the UA stylesheet.
+    line-height: normal;
+  }
+}
+
+%select {
+  text-transform: none;
+}
+
+%optgroup {
+  font-weight: bold;
+}
+
+%textarea {
+  overflow: auto;
+}
+
+%img {
+  // Responsive images
+  max-width: 100%;
+  // Remove border when inside `a` element in IE 8/9.
+  border: 0;
+  @if support-for(ie, 7) {
+    /* Improve image quality when scaled in IE 7. */
+    /* stylelint-disable property-no-vendor-prefix */
+    -ms-interpolation-mode: bicubic;
+    /* stylelint-enable */
+  }
+}
+
+%blockquote {
+  margin: rhythm(1);
+}
+
+%dd {
+  margin: 0 0 0 $indent-amount;
+}
+
+%figure {
+  margin: rhythm(1);
+}

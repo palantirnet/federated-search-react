@@ -15,7 +15,8 @@
 @import "global-scss/vertical-rhythm/fs-vertical_rhythm";
 
 /* HTML element (SMACSS base) rules */
-@import "global-scss/fs-global";
+@import "global-scss/fs-global-normalize";
+@import "global-scss/fs-global-base-helpers";
 
 /* Layout rules */
 @import "global-scss/grid-layouts/_fs-l-singularity";
