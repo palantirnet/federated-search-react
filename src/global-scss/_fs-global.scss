@@ -1,4 +1,4 @@
-/*! normalize-scss | MIT/GPLv2 License | bit.ly/normalize-scss */
+/*! Based on normalize-scss | MIT/GPLv2 License | bit.ly/normalize-scss */
 
 @mixin globals {
   // Correct text resizing oddly in IE 6/7 when body `font-size` is set using
@@ -105,38 +105,6 @@
     display: none;
   }
 
-  /* Links
-     ========================================================================== */
-
-  /**
-   * 1. Remove the gray background on active links in IE 10.
-   * 2. Remove gaps in links underline in iOS 8+ and Safari 8+.
-   */
-
-  //a {
-  //  @include trans();
-  //  background-color: transparent; /* 1 */
-  //  /* stylelint-disable property-no-vendor-prefix */
-  //  -webkit-text-decoration-skip: objects; /* 2 */
-  //  /* stylelint-enable */
-  //  color: $link-color;
-  //  text-decoration: none;
-  //  border-bottom: 2px dashed $link-color;
-  //}
-
-  /**
-   * Remove the outline on focused links when they are also active or hovered
-   * in all browsers (opinionated).
-   */
-
-  //a:active,
-  //a:hover {
-  //  outline-width: 0;
-  //  color: $link-hover;
-  //  background-color: $gray-light;
-  //  border-bottom: 2px solid $link-hover;
-  //}
-
   /* Text-level semantics
      ========================================================================== */
 
@@ -169,6 +137,22 @@
   b,
   strong {
     font-weight: bolder;
+  }
+
+  /**
+ * 1. Correct the inheritance and scaling of font size in all browsers.
+ * 2. Correct the odd `em` font sizing in all browsers.
+ */
+
+  %fs-monospace,
+  code,
+  kbd,
+  samp {
+    font-family: monospace, monospace; /* 1 */
+    @if support-for(ie, 6) {
+      _font-family: 'courier new', monospace;
+    }
+    font-size: 1em; /* 2 */
   }
 
   /**
@@ -221,23 +205,6 @@
      ========================================================================== */
 
   /**
-   * Remove the border on images inside links in IE <11.
-   */
-
-  img {
-    // Responsive images
-    max-width: 100%;
-    // Remove border when inside `a` element in IE 8/9.
-    border: 0;
-    @if support-for(ie, 7) {
-      /* Improve image quality when scaled in IE 7. */
-      /* stylelint-disable property-no-vendor-prefix */
-      -ms-interpolation-mode: bicubic;
-      /* stylelint-enable */
-    }
-  }
-
-  /**
    * Hide the overflow in IE.
    */
 
@@ -249,18 +216,6 @@
      ========================================================================== */
 
 
-  /**
-   * Set 1 unit of vertical rhythm on the top and bottom margin.
-   */
-
-  blockquote {
-    margin: rhythm(1);
-  }
-
-  dd {
-    margin: 0 0 0 $indent-amount;
-  }
-
   @if support-for(ie, 7) {
     /**
      * Correct list images handled incorrectly in IE 7.
@@ -271,14 +226,6 @@
       list-style: none;
       list-style-image: none;
     }
-  }
-
-  /**
-   * Add the correct margin in IE 8.
-   */
-
-  figure {
-    margin: rhythm(1);
   }
 
   /**
@@ -476,22 +423,6 @@
 }
 
 /**
- * 1. Correct the inheritance and scaling of font size in all browsers.
- * 2. Correct the odd `em` font sizing in all browsers.
- */
-
-%fs-monospace,
-code,
-kbd,
-samp {
-  font-family: monospace, monospace; /* 1 */
-  @if support-for(ie, 6) {
-    _font-family: 'courier new', monospace;
-  }
-  font-size: 1em; /* 2 */
-}
-
-/**
  * Placeholders for default element styles.
  */
 
@@ -627,4 +558,29 @@ samp {
 
 %textarea {
   overflow: auto;
+}
+
+%img {
+  // Responsive images
+  max-width: 100%;
+  // Remove border when inside `a` element in IE 8/9.
+  border: 0;
+  @if support-for(ie, 7) {
+    /* Improve image quality when scaled in IE 7. */
+    /* stylelint-disable property-no-vendor-prefix */
+    -ms-interpolation-mode: bicubic;
+    /* stylelint-enable */
+  }
+}
+
+%blockquote {
+  margin: rhythm(1);
+}
+
+%dd {
+  margin: 0 0 0 $indent-amount;
+}
+
+%figure {
+  margin: rhythm(1);
 }

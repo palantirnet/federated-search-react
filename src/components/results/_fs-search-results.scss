@@ -24,6 +24,7 @@
 }
 
 .fs-search-results__image {
+  @extend %img;
   // Styles specific to the search results image.
 }
 
