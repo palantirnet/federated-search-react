@@ -1,5 +1,15 @@
 /*! Based on normalize-scss | MIT/GPLv2 License | bit.ly/normalize-scss */
 
+/*
+* This implementation of normalize-scss and base styles has been modified
+* in the following ways:
+* - All styles are scoped within the #fs-root ID of the app.
+* - Styles to standardize the appearance of elements across browsers are in the
+*   globals mixin.
+* - Specific base styles for elements including default margins, padding,
+*   and font sizes have been moved to global helper placeholders.
+*/
+
 @mixin globals {
   // Correct text resizing oddly in IE 6/7 when body `font-size` is set using
   // `em` units.
