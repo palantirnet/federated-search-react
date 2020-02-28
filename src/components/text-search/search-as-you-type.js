@@ -32,12 +32,25 @@ class FederatedTextSearchAsYouType extends React.Component {
   }
 
   UNSAFE_componentWillReceiveProps(nextProps) {
-    this.setState({
-      value: nextProps.suggestQuery && nextProps.suggestQuery.value
-        ? nextProps.suggestQuery.value
-        : nextProps.value,
-      suggestions: nextProps.suggestions ? nextProps.suggestions.docs : this.state.suggestions,
-    });
+    // nextProps.value will be null if the filter is reset.
+    //console.log(nextProps)
+    console.log(nextProps.value)
+    console.log(nextProps.suggestQuery.value)
+    console.log(this.state)
+    if (nextProps.value === null && nextProps.suggestQuery.value !== nextProps.value) {
+      this.setState({
+        value: "",
+        suggestions: [],
+      });
+    }
+    else {
+      this.setState({
+        value: nextProps.suggestQuery && nextProps.suggestQuery.value
+          ? nextProps.suggestQuery.value
+          : nextProps.value,
+          suggestions: nextProps.suggestions ? nextProps.suggestions.docs : this.state.suggestions,
+        });
+    }
   }
 
   /**
