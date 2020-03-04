@@ -1110,7 +1110,7 @@ aside.fs-aside {
  * fs-pagination.scss
  * Define pagination styles.
  *
- * @copyright Copyright (c) 2017-2019 Palantir.net
+ * @copyright Copyright (c) 2017-2020 Palantir.net
  */
 .fs-search-pager__items {
   display: flex;
@@ -1125,43 +1125,27 @@ aside.fs-aside {
       background-color: transparent;
       padding: 0; } }
 
-.fs-search-pager__item {
-  display: inline-block;
-  cursor: pointer; }
-  @media (min-width: 450px) {
-    .fs-search-pager__item {
-      margin-right: 0.51333em; } }
-  @media (min-width: 900px) {
-    .fs-search-pager__item {
-      margin-right: 0.36667em; } }
-  .fs-search-pager__item.is-active .fs-search-pager__item-link {
-    font-weight: bold; }
-  .fs-search-pager__item.not-active .fs-search-pager__item-link {
-    display: none; }
-    @media (min-width: 450px) {
-      .fs-search-pager__item.not-active .fs-search-pager__item-link {
-        display: inline-block; } }
+.fs-search-pager__item.is-active .fs-search-pager__item-button {
+  font-weight: bold; }
 
-.fs-search-pager__item-link {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border: 0;
-  text-align: center;
-  padding: 0.36667em; }
-  .fs-search-pager__item-link:hover, .fs-search-pager__item-link:active {
+.fs-search-pager__item.not-active .fs-search-pager__item-button {
+  display: none; }
+  @media (min-width: 450px) {
+    .fs-search-pager__item.not-active .fs-search-pager__item-button {
+      display: inline-block; } }
+
+.fs-search-pager__item-button {
+  cursor: pointer; }
+  .fs-search-pager__item-button:hover, .fs-search-pager__item-button:active {
     text-decoration: underline; }
-    .fs-search-pager__item-link:hover svg, .fs-search-pager__item-link:active svg {
+    .fs-search-pager__item-button:hover svg, .fs-search-pager__item-button:active svg {
       fill: black;
       border-bottom: 1px solid #222; }
-  .fs-search-pager__item-link svg {
+  .fs-search-pager__item-button svg {
     height: 1.3em;
     fill: #222;
     display: block;
     border-bottom: 1px solid transparent; }
-    @media (min-width: 450px) {
-      .fs-search-pager__item-link svg {
-        height: 1em; } }
 
 /**
  * fs-search-results-stat.scss
