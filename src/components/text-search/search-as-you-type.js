@@ -31,7 +31,7 @@ class FederatedTextSearchAsYouType extends React.Component {
     this.shouldRenderSuggestions = this.shouldRenderSuggestions.bind(this);
   }
 
-  componentWillReceiveProps(nextProps) {
+  UNSAFE_componentWillReceiveProps(nextProps) {
     this.setState({
       value: nextProps.suggestQuery && nextProps.suggestQuery.value
         ? nextProps.suggestQuery.value
@@ -260,7 +260,7 @@ class FederatedTextSearchAsYouType extends React.Component {
         href={suggestion.sm_urls[0]}
       >
         {highlightedTitle}
-        <span className="element-invisible">
+        <span className="fs-element-invisible">
           {` (${currentHumanIndex} of ${suggestionsLength})`}
         </span>
       </a>
@@ -270,7 +270,7 @@ class FederatedTextSearchAsYouType extends React.Component {
   // Wrap the input component with our expected wrapper.
   static renderInputComponent(inputProps) {
     return (
-      <div className="search-form__input-wrapper">
+      <div className="fs-search-form__input-wrapper">
         <input {...inputProps} />
       </div>
     );
@@ -294,8 +294,8 @@ class FederatedTextSearchAsYouType extends React.Component {
 
     return (
       <React.Fragment>
-        <label htmlFor="search" className="search-form__label">{label}</label>
-        <div className="search-form__autocomplete-container">
+        <label htmlFor="search" className="fs-search-form__label">{label}</label>
+        <div className="fs-search-form__autocomplete-container">
           {/* @see: https://github.com/moroshko/react-autosuggest#react-autosuggest */}
           <Autosuggest
             focusInputOnSuggestionClick={false}
@@ -313,10 +313,10 @@ class FederatedTextSearchAsYouType extends React.Component {
           />
           <button
             type="submit"
-            className="search-form__submit"
+            className="fs-search-form__submit"
             onClick={this.handleSubmit}
           >
-            <span className="element-invisible">Perform Search</span>
+            <span className="fs-element-invisible">Perform Search</span>
             <SearchIcon />
           </button>
         </div>
@@ -342,14 +342,14 @@ FederatedTextSearchAsYouType.propTypes = {
       queryField: PropTypes.string,
       suggestionRows: PropTypes.number,
       numChars: PropTypes.number,
-      result: {
+      result: PropTypes.shape({
         titleText: PropTypes.string,
         showDirectionsText: PropTypes.bool,
-      },
-      term: {
+      }),
+      term: PropTypes.shape({
         titleText: PropTypes.string,
         showDirectionsText: PropTypes.bool,
-      },
+      }),
     }),
     PropTypes.bool,
   ]).isRequired,

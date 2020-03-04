@@ -19,7 +19,7 @@ class FederatedTextSearchNoAutocomplete extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  componentWillReceiveProps(nextProps) {
+  UNSAFE_componentWillReceiveProps(nextProps) {
     this.setState({
       value: nextProps.value,
     });
@@ -59,13 +59,13 @@ class FederatedTextSearchNoAutocomplete extends React.Component {
 
     return (
       <React.Fragment>
-        <label htmlFor="search" className="search-form__label">{label}</label>
-        <div className="search-form__input-wrapper">
+        <label htmlFor="search" className="fs-search-form__label">{label}</label>
+        <div className="fs-search-form__input-wrapper">
           <input
             type="search"
             name="search"
             id="search"
-            className="search-form__input"
+            className="fs-search-form__input"
             autoFocus
             onChange={this.handleInputChange}
             onKeyDown={this.handleInputKeyDown}
@@ -73,9 +73,9 @@ class FederatedTextSearchNoAutocomplete extends React.Component {
           />
           <button
             type="submit"
-            className="search-form__submit"
+            className="fs-search-form__submit"
             onClick={this.handleSubmit}>
-            <span className="element-invisible">Perform Search</span>
+            <span className="fs-element-invisible">Perform Search</span>
             <SearchIcon />
           </button>
         </div>

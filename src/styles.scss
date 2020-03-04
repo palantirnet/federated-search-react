@@ -6,37 +6,30 @@
  */
 
 /* Import Sass mixins, variables, Compass modules, etc. */
-@import "init";
+@import "global-scss/fs-init";
 
 /* Set browser support */
-@import "support-for";
+@import "global-scss/fs-support-for";
 
 /* Set the vertical rhythm */
-@import "vertical-rhythm/vertical_rhythm";
+@import "global-scss/vertical-rhythm/fs-vertical_rhythm";
 
 /* HTML element (SMACSS base) rules */
-@import "normalize";
+@import "global-scss/fs-global";
 
 /* Layout rules */
-@import "grid-layouts/_l-singularity";
-@import "grid-layouts/_l-1up";
-@import "grid-layouts/_l-2up";
-@import "grid-layouts/_l-3up";
-@import "grid-layouts/_l-4up";
-@import "grid-layouts/_l-6up";
-@import "grid-layouts/_l-33-66";
-@import "grid-layouts/_l-66-33";
-@import "grid-layouts/_l-25-75";
+@import "global-scss/grid-layouts/_fs-l-singularity";
+@import "global-scss/grid-layouts/_fs-l-25-75";
 
 /* Component (SMACSS module) rules */
-@import "components/text-search/search-form";
-@import "components/text-search/autocomplete";
-@import "components/search-filters";
-@import "components/aside";
-@import "components/results/search-results";
-@import "components/sort-menu/search-scope";
-@import "components/results/pagination";
-@import "components/results/search-results-stat";
-@import "components/current-query/applied-filters";
+@import "components/text-search/fs-search-form";
+@import "components/text-search/fs-autocomplete";
+@import "components/fs-search-filters";
+@import "components/fs-aside";
+@import "components/results/fs-search-results";
+@import "components/sort-menu/fs-search-scope";
+@import "components/results/fs-pagination";
+@import "components/results/fs-search-results-stat";
+@import "components/current-query/fs-applied-filters";
 @import "components/range-facet/react-dates";
 @import "components/range-facet/react-dates-overrides";

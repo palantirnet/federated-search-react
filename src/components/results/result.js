@@ -86,7 +86,7 @@ class FederatedResult extends React.Component {
 
       var sites = [];
       for (var i = 0; i < sitenames.length; i++) {
-        sites.push(<a className="search-results__site-name" href={urls[i]} key={i}>{sitenames[i]}</a>);
+        sites.push(<a className="fs-search-results__site-name" href={urls[i]} key={i}>{sitenames[i]}</a>);
         if (i !== (sitenames.length - 1)) {
 
         }
@@ -107,18 +107,18 @@ class FederatedResult extends React.Component {
     return (
       <li onClick={() => this.props.onSelect(doc)}>
         {doc.ss_federated_image &&
-        <div className="search-results__container--left">
-          <img className="search-results__image" src={doc.ss_federated_image} alt=""/>
+        <div className="fs-search-results__container--left">
+          <img className="fs-search-results__image" src={doc.ss_federated_image} alt=""/>
         </div>
         }
-        <div className="search-results__container--right">
-          <span className="search-results__label">{doc.ss_federated_type}</span>
-          <h3 className="search-results__heading"><a href={this.getCanonicalLink(doc)} dangerouslySetInnerHTML={{__html: doc.ss_federated_title}} /></h3>
-          <div className="search-results__meta">
-            <cite className="search-results__citation">{this.renderSitenameLinks(doc.sm_site_name, doc.sm_urls, doc.ss_site_name)}</cite>
-            <span className="search-results__date">{this.dateFormat(doc.ds_federated_date)}</span>
+        <div className="fs-search-results__container--right">
+          <span className="fs-search-results__label">{doc.ss_federated_type}</span>
+          <h3 className="fs-search-results__heading"><a href={this.getCanonicalLink(doc)} dangerouslySetInnerHTML={{__html: doc.ss_federated_title}} /></h3>
+          <div className="fs-search-results__meta">
+            <cite className="fs-search-results__citation">{this.renderSitenameLinks(doc.sm_site_name, doc.sm_urls, doc.ss_site_name)}</cite>
+            <span className="fs-search-results__date">{this.dateFormat(doc.ds_federated_date)}</span>
           </div>
-          <p className="search-results__teaser" dangerouslySetInnerHTML={{__html: highlight.tm_rendered_item}} />
+          <p className="fs-search-results__teaser" dangerouslySetInnerHTML={{__html: highlight.tm_rendered_item}} />
         </div>
       </li>
     )

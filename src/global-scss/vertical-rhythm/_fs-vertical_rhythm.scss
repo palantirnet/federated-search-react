@@ -5,8 +5,8 @@
  * @see https://github.com/neoeno/libsass-compass-vertical-rhythm
  */
 
-@import "grid_background";
-@import "units";
+@import "fs-grid_background";
+@import "fs-units";
 
 // The default font size for all text in pixels
 $base-font-size: 15px !default;

@@ -1,24 +1,24 @@
 /**
  * @file
- * Layout rules for one third / two thirds (33/66) content
+ * Layout rules for 4-up content
  */
 
 // =============================================================================
-// Basic 33-66 Isolation layout
+// Basic 25-75 Isolation layout
 // =============================================================================
 
-.l-33-66--1 {
+.fs-l-25-75--1 {
   @include isolation-span(12, 1, 'both');
 
-  @include breakpoint($bp1) {
-    @include isolation-span(4, 1, 'both');
+  @include breakpoint($bp2) {
+    @include isolation-span(3, 1, 'both');
   }
 }
 
-.l-33-66--2 {
+.fs-l-25-75--2 {
   @include isolation-span(12, 1, 'both');
 
-  @include breakpoint($bp1) {
-    @include isolation-span(8, 5, 'none');
+  @include breakpoint($bp2) {
+    @include isolation-span(9, 4, 'none');
   }
 }
