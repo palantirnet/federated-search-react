@@ -16,6 +16,7 @@ class FederatedTextSearchAsYouType extends React.Component {
     this.state = {
       value: '',
       suggestions: [],
+      reset: false,
     };
 
     this.getSuggestionValue = this.getSuggestionValue.bind(this);
@@ -32,12 +33,36 @@ class FederatedTextSearchAsYouType extends React.Component {
   }
 
   UNSAFE_componentWillReceiveProps(nextProps) {
-    this.setState({
-      value: nextProps.suggestQuery && nextProps.suggestQuery.value
-        ? nextProps.suggestQuery.value
-        : nextProps.value,
-      suggestions: nextProps.suggestions ? nextProps.suggestions.docs : this.state.suggestions,
-    });
+    // nextProps.value will be null if the filter is reset.
+    // The logic here is rather tortured, which seemed a better option
+    // than trying to fix the iteration bug in the core react suite.
+    // See https://github.com/palantirnet/federated-search-react/pull/63.
+    // The 'reset' state indicates that we should reset the field. The
+    // 'active' variable indicates that we are clearing the field and
+    // should not act on the nextProps value.
+    var active = false;
+    if (nextProps.value !== null) {
+      this.setState({
+        reset: true,
+      });
+      active = false;
+    }
+    if (nextProps.value === null && this.state.reset === true) {
+      this.setState({
+        value: "",
+        suggestions: [],
+        reset: false,
+      });
+      active = true;
+    }
+    if ((this.state.value !== "" || this.props.value !== null) && active === false) {
+      this.setState({
+        value: nextProps.suggestQuery && nextProps.suggestQuery.value
+          ? nextProps.suggestQuery.value
+          : nextProps.value,
+        suggestions: nextProps.suggestions ? nextProps.suggestions.docs : this.state.suggestions,
+      });
+    }
   }
 
   /**
