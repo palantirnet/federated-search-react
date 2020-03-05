@@ -24,6 +24,7 @@
 }
 
 .fs-search-results__image {
+  @extend %img;
   // Styles specific to the search results image.
 }
 
@@ -33,6 +34,7 @@
 }
 
 .fs-search-results__heading {
+  @extend %h3;
   margin-bottom: .33333em;
   margin-top: .25em;
   padding: 0;
@@ -61,6 +63,7 @@
 }
 
 .fs-search-results__teaser {
+  @extend %p;
   margin-bottom: rhythm(.5);
 }
 

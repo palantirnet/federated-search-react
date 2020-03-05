@@ -6,6 +6,7 @@
  */
 
 .fs-search-results-stat {
+  @extend %p;
   color: $gray-medium;
 
   &:focus {
