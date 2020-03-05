@@ -46,6 +46,7 @@
   cursor: pointer;
   background: none;
   border: none;
+  padding: rhythm(.25);
 
   &:hover,
   &:active {
@@ -57,7 +58,6 @@
   }
 
   svg {
-    padding-top: 0.3em;
     height: 1.3em;
     fill: $black;
     display: block;

@@ -787,14 +787,14 @@ aside.fs-aside {
 .fs-search-pager__item-button {
   cursor: pointer;
   background: none;
-  border: none; }
+  border: none;
+  padding: 0.36667em; }
   .fs-search-pager__item-button:hover, .fs-search-pager__item-button:active {
     text-decoration: underline; }
     .fs-search-pager__item-button:hover svg, .fs-search-pager__item-button:active svg {
       fill: black;
       border-bottom: 1px solid #222; }
   .fs-search-pager__item-button svg {
-    padding-top: 0.3em;
     height: 1.3em;
     fill: #222;
     display: block;
