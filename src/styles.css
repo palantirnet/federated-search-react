@@ -552,17 +552,18 @@
 .fs-search-accordion__subgroup {
   list-style: none;
   padding: 0; }
-  .fs-search-accordion__group li,
-  .fs-search-accordion__subgroup li {
-    display: block;
-    margin: 0;
-    overflow: hidden; }
-    .fs-search-accordion__group li#solr-list-facet-ds_federated_date,
-    .fs-search-accordion__subgroup li#solr-list-facet-ds_federated_date {
+
+.fs-search-accordion__group-item,
+.fs-search-accordion__content-item {
+  display: block;
+  margin: 0;
+  overflow: hidden; }
+  .fs-search-accordion__group-item#solr-list-facet-ds_federated_date,
+  .fs-search-accordion__content-item#solr-list-facet-ds_federated_date {
+    overflow: visible; }
+    .fs-search-accordion__group-item#solr-list-facet-ds_federated_date .fs-search-accordion__content-item,
+    .fs-search-accordion__content-item#solr-list-facet-ds_federated_date .fs-search-accordion__content-item {
       overflow: visible; }
-      .fs-search-accordion__group li#solr-list-facet-ds_federated_date li,
-      .fs-search-accordion__subgroup li#solr-list-facet-ds_federated_date li {
-        overflow: visible; }
 
 .fs-search-accordion__group {
   margin: 0; }
