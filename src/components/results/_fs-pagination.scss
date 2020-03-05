@@ -2,11 +2,12 @@
  * fs-pagination.scss
  * Define pagination styles.
  *
- * @copyright Copyright (c) 2017-2019 Palantir.net
+ * @copyright Copyright (c) 2017-2020 Palantir.net
  */
 .fs-search-pager {
 }
 
+// UL
 .fs-search-pager__items {
   @extend %fs-list--simple;
   display: flex;
@@ -23,24 +24,14 @@
   }
 }
 
-// Pager list item styles
+// LI
 .fs-search-pager__item {
-  display: inline-block;
-  cursor: pointer;
 
-  @include breakpoint($bp0) {
-    margin-right: rhythm(.35);
-  }
-
-  @include breakpoint($bp2) {
-    margin-right: rhythm(.25);
-  }
-
-  &.is-active .fs-search-pager__item-link {
+  &.is-active .fs-search-pager__item-button {
     font-weight: bold;
   }
 
-  &.not-active .fs-search-pager__item-link {
+  &.not-active .fs-search-pager__item-button {
     display: none;
 
     @include breakpoint($bp0) {
@@ -49,13 +40,12 @@
   }
 }
 
-// Link styles
-.fs-search-pager__item-link {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border: 0;
-  text-align: center;
+// Button
+.fs-search-pager__item-button {
+  @extend %button;
+  cursor: pointer;
+  background: none;
+  border: none;
   padding: rhythm(.25);
 
   &:hover,
