@@ -134,7 +134,7 @@
 /**
 * Combined normalize and base styles for button element.
 */
-.fs-search-form__submit, .react-autosuggest__container-close-button, .fs-search-filters__trigger, .fs-applied-filters__filter {
+.fs-search-form__submit, .react-autosuggest__container-close-button, .fs-search-filters__trigger, .fs-search-pager__item-button, .fs-applied-filters__filter {
   font: inherit;
   /* 1 */
   margin: 0;
@@ -145,10 +145,10 @@
   -webkit-appearance: button;
   /* 2 */
   /* stylelint-enable */ }
-  .fs-search-form__submit::-moz-focus-inner, .react-autosuggest__container-close-button::-moz-focus-inner, .fs-search-filters__trigger::-moz-focus-inner, .fs-applied-filters__filter::-moz-focus-inner {
+  .fs-search-form__submit::-moz-focus-inner, .react-autosuggest__container-close-button::-moz-focus-inner, .fs-search-filters__trigger::-moz-focus-inner, .fs-search-pager__item-button::-moz-focus-inner, .fs-applied-filters__filter::-moz-focus-inner {
     border-style: none;
     padding: 0; }
-  .fs-search-form__submit:-moz-focusring, .react-autosuggest__container-close-button:-moz-focusring, .fs-search-filters__trigger:-moz-focusring, .fs-applied-filters__filter:-moz-focusring {
+  .fs-search-form__submit:-moz-focusring, .react-autosuggest__container-close-button:-moz-focusring, .fs-search-filters__trigger:-moz-focusring, .fs-search-pager__item-button:-moz-focusring, .fs-applied-filters__filter:-moz-focusring {
     outline: 1px dotted ButtonText; }
 
 
@@ -794,6 +794,7 @@ aside.fs-aside {
       fill: black;
       border-bottom: 1px solid #222; }
   .fs-search-pager__item-button svg {
+    padding-top: 0.2em;
     height: 1.3em;
     fill: #222;
     display: block;

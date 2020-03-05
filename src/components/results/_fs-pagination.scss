@@ -42,6 +42,7 @@
 
 // Button
 .fs-search-pager__item-button {
+  @extend %button;
   cursor: pointer;
   background: none;
   border: none;
@@ -56,6 +57,7 @@
   }
 
   svg {
+    padding-top: 0.2em;
     height: 1.3em;
     fill: $black;
     display: block;
