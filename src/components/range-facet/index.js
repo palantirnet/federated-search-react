@@ -78,7 +78,7 @@ class FederatedRangeFacet extends React.Component {
     }
 
     return (
-      <li id={`solr-list-facet-${field}`}>
+      <li className="fs-search-accordion__group-item" id={`solr-list-facet-${field}`}>
         <div
           tabIndex="0"
           className={cx("fs-search-accordion__title", {"js-fs-search-accordion-open": expanded})}
@@ -91,7 +91,7 @@ class FederatedRangeFacet extends React.Component {
           height={height}
         >
           <ul className="fs-search-accordion__content">
-            <li>
+            <li className="fs-search-accordion__content-item">
               {/* See: https://github.com/airbnb/react-dates#daterangepicker */}
               <DateRangePicker
                 startDate={this.state.startDate} // momentPropTypes.momentObj or null,

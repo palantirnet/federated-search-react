@@ -231,7 +231,7 @@ class FederatedListFacet extends React.Component {
     // This is not a hierarchy of accordion groups,
     // just render the single list-facet accordion.
     return (
-      <li id={`solr-list-facet-${field}`}>
+      <li className="fs-search-accordion__group-item" id={`solr-list-facet-${field}`}>
         <div
           tabIndex="0"
           className={cx('fs-search-accordion__title', { 'js-fs-search-accordion-open': expanded })}
@@ -256,7 +256,7 @@ class FederatedListFacet extends React.Component {
                 if (this.state.filter.length === 0
                   || facetValue.toLowerCase().indexOf(this.state.filter.toLowerCase()) > -1) {
                   return (
-                    <li key={`${facetValue}_${facetInputs[facetValue]}`}>
+                    <li className="fs-search-accordion__content-item" key={`${facetValue}_${facetInputs[facetValue]}`}>
                       <label className="fs-search-accordion__checkbox-label">
                         <input
                           type="checkbox"
