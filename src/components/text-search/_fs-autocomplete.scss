@@ -63,6 +63,7 @@
   }
 
   &__container-close-button {
+    @extend %button;
     @include adjust-font-size-to($label, .8);
     font-style: normal;
     padding: 3px 7px;
