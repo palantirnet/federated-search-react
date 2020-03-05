@@ -183,7 +183,7 @@ class FederatedListFacet extends React.Component {
         // Populate the checkbox lis react fragments for each type.
         listFacetHierarchyTermsLis[type] = [];
         terms[type].items.forEach((termObj, i) => termObj.facetCount
-          && listFacetHierarchyTermsLis[type].push(<li key={`${termObj.term}_${termObj.facetValue}_${i}`}>
+          && listFacetHierarchyTermsLis[type].push(<li className="fs-search-accordion__content-item" key={`${termObj.term}_${termObj.facetValue}_${i}`}>
             <label className="fs-search-accordion__checkbox-label">
             <input
               type="checkbox"
@@ -201,7 +201,7 @@ class FederatedListFacet extends React.Component {
 
         // Populate the accordion lis array with all of its checkboxes.
         listFacetHierarchyTermsLis[type].length && listFacetHierarchyLis.push(
-          <li id={`solr-list-facet-${type}`} key={`solr-list-facet-${type}-${i}`}>
+          <li className="fs-search-accordion__content-item" id={`solr-list-facet-${type}`} key={`solr-list-facet-${type}-${i}`}>
             <div
               tabIndex="0"
               className={cx('fs-search-accordion__title', { 'js-fs-search-accordion-open': terms[type].expanded })}
