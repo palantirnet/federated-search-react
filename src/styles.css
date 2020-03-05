@@ -1135,7 +1135,9 @@ aside.fs-aside {
       display: inline-block; } }
 
 .fs-search-pager__item-button {
-  cursor: pointer; }
+  cursor: pointer;
+  background: none;
+  border: none; }
   .fs-search-pager__item-button:hover, .fs-search-pager__item-button:active {
     text-decoration: underline; }
     .fs-search-pager__item-button:hover svg, .fs-search-pager__item-button:active svg {

@@ -43,6 +43,8 @@
 // Button
 .fs-search-pager__item-button {
   cursor: pointer;
+  background: none;
+  border: none;
 
   &:hover,
   &:active {
