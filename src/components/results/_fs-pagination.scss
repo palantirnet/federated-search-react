@@ -57,10 +57,14 @@
   }
 
   svg {
-    padding-top: 0.2em;
+    padding-top: 0.3em;
     height: 1.3em;
     fill: $black;
     display: block;
     border-bottom: 1px solid transparent;
+
+    @include breakpoint($bp0) {
+      height: 1em;
+    }
   }
 }

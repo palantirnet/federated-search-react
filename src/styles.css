@@ -794,11 +794,14 @@ aside.fs-aside {
       fill: black;
       border-bottom: 1px solid #222; }
   .fs-search-pager__item-button svg {
-    padding-top: 0.2em;
+    padding-top: 0.3em;
     height: 1.3em;
     fill: #222;
     display: block;
     border-bottom: 1px solid transparent; }
+    @media (min-width: 450px) {
+      .fs-search-pager__item-button svg {
+        height: 1em; } }
 
 /**
  * fs-search-results-stat.scss
