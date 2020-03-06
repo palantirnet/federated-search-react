@@ -7,11 +7,11 @@
 
 .fs-search-results {
   @extend %fs-list--simple;
+}
 
-  li {
-    margin-bottom: rhythm(1);
-    display: flex;
-  }
+.fs-search-results__item {
+  margin-bottom: rhythm(1);
+  display: flex;
 }
 
 .fs-search-results__container--left {

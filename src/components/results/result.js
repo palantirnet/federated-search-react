@@ -105,7 +105,7 @@ class FederatedResult extends React.Component {
     const { doc, highlight } = this.props;
 
     return (
-      <li onClick={() => this.props.onSelect(doc)}>
+      <li className="fs-search-results__item" onClick={() => this.props.onSelect(doc)}>
         {doc.ss_federated_image &&
         <div className="fs-search-results__container--left">
           <img className="fs-search-results__image" src={doc.ss_federated_image} alt=""/>
