@@ -7,6 +7,9 @@ import FederatedSolrComponentPack from './components/federated_solr_component_pa
 import FederatedSolrFacetedSearch from './components/federated-solr-faceted-search';
 import helpers from './helpers';
 
+// import search app boilerplate styles
+import './styles.css';
+
 /**
  * Executes search query based on the value of URL querystring params.
  *
