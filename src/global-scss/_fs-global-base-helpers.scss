@@ -1,39 +1,8 @@
+/*! Based on normalize-scss | MIT/GPLv2 License | bit.ly/normalize-scss */
+
 /**
  * Placeholders for default normalize and base element styles.
  */
-
-%globals {
-  // Correct text resizing oddly in IE 6/7 when body `font-size` is set using
-  // `em` units.
-  background: $background-color;
-  color: $text-color;
-  font-size: ($base-font-size / 16px) * 100%;
-  line-height: ($base-line-height / $base-font-size) * 1em;
-  font-family: $base-font-family; /* 1 */
-  font-weight: 400;
-  /* stylelint-disable property-no-vendor-prefix */
-  -ms-text-size-adjust: 100%; /* 2 */
-  -webkit-text-size-adjust: 100%; /* 2 */
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  /* stylelint-enable */
-
-  // Adjust font-size globally per breakpoint.
-  // As you adjust the percentage growth of font-size, translate
-  // to the value to the mixin adjust-font-size-to in the mixins
-  // file as a point value to maintain font-size across breakpoints.
-  @include breakpoint($bp2) {
-    font-size: ($base-font-size / 16px) * 112%;
-  }
-
-  @include breakpoint($bp3) {
-    font-size: ($base-font-size / 16px) * 124%;
-  }
-}
-
-#fs-root {
-  @extend %globals;
-}
 
 %h1 {
   @extend %fs-display-type;
