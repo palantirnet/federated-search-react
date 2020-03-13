@@ -608,7 +608,7 @@ aside.fs-aside {
  *
  * @copyright Copyright (c) 2017-2019 Palantir.net
  */
-.fs-search-results li {
+.fs-search-results__item {
   margin-bottom: 1.46667em;
   display: flex; }
 
