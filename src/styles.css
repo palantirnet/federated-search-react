@@ -655,11 +655,11 @@ aside.fs-aside {
   color: #555;
   display: block; }
 
-.fs-search-results__citation a {
+.fs-search-results__site-name {
   font-style: normal;
   color: #555;
   text-decoration: none; }
-  .fs-search-results__citation a:hover {
+  .fs-search-results__site-name:hover {
     text-decoration: underline; }
 
 /**
