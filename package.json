@@ -53,7 +53,7 @@
     "copy-package": "cp -rf package.json build/static",
     "fix-media-path": "replace-x '../../static/media/' '../media/' ./build/static/css/*",
     "deploy": "scripts/deploy.js",
-    "test": "react-scripts test --env=jsdom",
+    "cypress": "cypress open",
     "eject": "react-scripts eject",
     "postinstall": "patch-package"
   },

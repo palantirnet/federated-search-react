@@ -50,6 +50,8 @@ You will see the build errors and lint warnings in the console.
 
 When you run the start script `yarn start`, code quality (linting) tests are automatically run and feedback is provided in the terminal.
 
+Cypress is installed for end-to-end testing. 
+
 ## Code quality
 
 ### Linting
