@@ -101,7 +101,7 @@ class FederatedSolrFacetedSearch extends React.Component {
     return (
       <LiveAnnouncer>
         <div className="fs-container">
-          <aside className="fs-aside fs-l-25-75--1">
+          <aside className="fs-aside">
             <SearchFieldContainerComponent
               bootstrapCss={bootstrapCss}
               onNewSearch={this.resetFilters}
@@ -137,7 +137,7 @@ class FederatedSolrFacetedSearch extends React.Component {
               }
             </SearchFieldContainerComponent>
           </aside>
-          <div className="fs-l-25-75--2">
+          <div className="fs-main">
             {pageTitle}
             <div className="fs-search-form" autoComplete="on">
               <FederatedTextSearch

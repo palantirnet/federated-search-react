@@ -41,7 +41,6 @@
  * can otherwise occur with extends.
  */
 .fs-clearfix:after,
-.fs-container:after,
 .fs-search-filters__form:after,
 .fs-search-scope:after {
   content: '';
@@ -187,62 +186,6 @@
   max-width: 100%;
   border: 0; }
 
-/* Layout rules */
-/**
- * @file
- * Define singularity gs base settings here.
- * @see https://github.com/at-import/Singularity
- */
-.fs-container {
-  width: 100%;
-  min-width: 260px;
-  /* enforces a min-width in FF. */
-  padding: 0 1.46667em;
-  margin: 0 auto; }
-  @media (min-width: 900px) {
-    .fs-container {
-      width: 90%;
-      padding: 0; } }
-  @media (min-width: 1100px) {
-    .fs-container {
-      max-width: 1400px; } }
-
-/**
- * @file
- * Layout rules for 4-up content
- */
-.fs-l-25-75--1 {
-  -sgs-span-settings: ("span": 12, "location": 1, "grid": 12, "gutter": 0.5, "style": "opposite", "start row": true, "end row": true, "fixed gutter": false, "split gutter": null, "gutter property": "margin", "options": ("clear": both));
-  width: 100%;
-  float: right;
-  margin-left: 0;
-  margin-right: 0;
-  clear: both; }
-  @media (min-width: 900px) {
-    .fs-l-25-75--1 {
-      -sgs-span-settings: ("span": 3, "location": 1, "grid": 12, "gutter": 0.5, "style": "opposite", "start row": true, "end row": false, "fixed gutter": false, "split gutter": null, "gutter property": "margin", "options": ("clear": both));
-      width: 22.85714%;
-      float: left;
-      margin-right: -100%;
-      margin-left: 0;
-      clear: both; } }
-
-.fs-l-25-75--2 {
-  -sgs-span-settings: ("span": 12, "location": 1, "grid": 12, "gutter": 0.5, "style": "opposite", "start row": true, "end row": true, "fixed gutter": false, "split gutter": null, "gutter property": "margin", "options": ("clear": both));
-  width: 100%;
-  float: right;
-  margin-left: 0;
-  margin-right: 0;
-  clear: both; }
-  @media (min-width: 900px) {
-    .fs-l-25-75--2 {
-      -sgs-span-settings: ("span": 9, "location": 4, "grid": 12, "gutter": 0.5, "style": "opposite", "start row": false, "end row": true, "fixed gutter": false, "split gutter": null, "gutter property": "margin", "options": ("clear": none));
-      width: 74.28571%;
-      float: right;
-      margin-left: 0;
-      margin-right: 0;
-      clear: none; } }
-
 /* Component (SMACSS module) rules */
 /**
  * fs-search-form.scss
@@ -265,12 +208,6 @@
   border-radius: 3px;
   display: flex;
   justify-content: space-between; }
-  @media (min-width: 600px) {
-    .fs-search-form__input-wrapper {
-      width: 75%; } }
-  @media (min-width: 1100px) {
-    .fs-search-form__input-wrapper {
-      width: 50%; } }
 
 .fs-search-form__input {
   font-size: 0.8em;
@@ -318,14 +255,6 @@
  */
 .fs-search-form__autocomplete-container {
   display: flex; }
-  @media (min-width: 600px) {
-    .fs-search-form__autocomplete-container {
-      width: 75%; } }
-  @media (min-width: 1100px) {
-    .fs-search-form__autocomplete-container {
-      width: 50%; } }
-  .fs-search-form__autocomplete-container .fs-search-form__input-wrapper {
-    width: 100%; }
 
 /** These classes are outside of Federated Search app namespace. **/
 .react-autosuggest__container {
@@ -595,11 +524,33 @@
  *
  * @copyright Copyright (c) 2017-2019 Palantir.net
  */
-aside.fs-aside {
+.fs-aside {
+  width: 22.85714%;
+  float: left;
+  margin-right: -100%;
+  margin-left: 0;
+  clear: both;
   margin-bottom: 1.46667em;
   background-color: #f6f6f6; }
   @media (min-width: 900px) {
-    aside.fs-aside {
+    .fs-aside {
+      padding-top: 1.46667em; } }
+
+/**
+ * aside.scss
+ * Define aside styles.
+ *
+ * @copyright Copyright (c) 2017-2020 Palantir.net
+ */
+.fs-main {
+  width: 74.28571%;
+  float: right;
+  margin-left: 0;
+  margin-right: 0;
+  clear: none;
+  margin-bottom: 1.46667em; }
+  @media (min-width: 900px) {
+    .fs-main {
       padding-top: 1.46667em; } }
 
 /**
@@ -671,68 +622,6 @@ aside.fs-aside {
 .fs-search-scope {
   margin: 1.46667em 0; }
 
-.fs-search-scope__filter {
-  -sgs-span-settings: ("span": 6, "location": 1, "grid": 12, "gutter": 0.5, "style": "opposite", "start row": true, "end row": false, "fixed gutter": false, "split gutter": null, "gutter property": "margin", "options": (null: null));
-  width: 48.57143%;
-  clear: right;
-  float: left;
-  margin-left: 0;
-  margin-right: 2.85714%; }
-  @media (min-width: 600px) {
-    .fs-search-scope__filter {
-      -sgs-span-settings: ("span": 4, "location": 1, "grid": 12, "gutter": 0.5, "style": "opposite", "start row": true, "end row": false, "fixed gutter": false, "split gutter": null, "gutter property": "margin", "options": (null: null));
-      width: 31.42857%;
-      clear: right;
-      float: left;
-      margin-left: 0;
-      margin-right: 2.85714%; } }
-  .fs-search-scope__filter:nth-of-type(3n+1) {
-    -sgs-span-settings: ("span": 6, "location": 1, "grid": 12, "gutter": 0.5, "style": "opposite", "start row": true, "end row": false, "fixed gutter": false, "split gutter": null, "gutter property": "margin", "options": (null: null));
-    width: 48.57143%;
-    clear: right;
-    float: left;
-    margin-left: 0;
-    margin-right: 2.85714%;
-    clear: both; }
-    @media (min-width: 600px) {
-      .fs-search-scope__filter:nth-of-type(3n+1) {
-        -sgs-span-settings: ("span": 4, "location": 1, "grid": 12, "gutter": 0.5, "style": "opposite", "start row": true, "end row": false, "fixed gutter": false, "split gutter": null, "gutter property": "margin", "options": ("clear": both));
-        width: 31.42857%;
-        float: left;
-        margin-right: -100%;
-        margin-left: 0;
-        clear: both; } }
-  .fs-search-scope__filter:nth-of-type(3n+2) {
-    -sgs-span-settings: ("span": 6, "location": 7, "grid": 12, "gutter": 0.5, "style": "opposite", "start row": false, "end row": true, "fixed gutter": false, "split gutter": null, "gutter property": "margin", "options": (null: null));
-    width: 48.57143%;
-    clear: right;
-    float: right;
-    margin-right: 0; }
-    @media (min-width: 600px) {
-      .fs-search-scope__filter:nth-of-type(3n+2) {
-        -sgs-span-settings: ("span": 4, "location": 5, "grid": 12, "gutter": 0.5, "style": "opposite", "start row": false, "end row": false, "fixed gutter": false, "split gutter": null, "gutter property": "margin", "options": ("clear": none));
-        width: 31.42857%;
-        float: left;
-        margin-right: -100%;
-        margin-left: 34.28571%;
-        clear: none; } }
-  .fs-search-scope__filter:nth-of-type(3n+3) {
-    -sgs-span-settings: ("span": 6, "location": 1, "grid": 12, "gutter": 0.5, "style": "opposite", "start row": true, "end row": false, "fixed gutter": false, "split gutter": null, "gutter property": "margin", "options": (null: null));
-    width: 48.57143%;
-    clear: right;
-    float: left;
-    margin-left: 0;
-    margin-right: 2.85714%;
-    clear: both; }
-    @media (min-width: 600px) {
-      .fs-search-scope__filter:nth-of-type(3n+3) {
-        -sgs-span-settings: ("span": 4, "location": 9, "grid": 12, "gutter": 0.5, "style": "opposite", "start row": false, "end row": true, "fixed gutter": false, "split gutter": null, "gutter property": "margin", "options": ("clear": none));
-        width: 31.42857%;
-        float: right;
-        margin-left: 0;
-        margin-right: 0;
-        clear: none; } }
-
 .fs-search-scope__select {
   font-size: 0.8em;
   line-height: 1.46667em;
@@ -744,7 +633,7 @@ aside.fs-aside {
   width: 100% !important;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 10'%3E%3Cpath d='M8.3 2.8c.3-.3.7-.3 1 0 .3.3.3.7 0 1L5.4 7.6c-.3.3-.7.3-1 0L.5 3.7c-.3-.3-.3-.7 0-1 .3-.3.7-.3 1 0l3.4 3.1 3.4-3z'%3E%3C/path%3E%3C/svg%3E");
   background-repeat: no-repeat;
-  background-position: 90% 50%;
+  background-position: 96% 50%;
   background-size: .6em .6em;
   background-color: #fff;
   padding: .7rem 1.5rem .7rem .7rem; }
@@ -752,7 +641,7 @@ aside.fs-aside {
     .fs-search-scope__select {
       padding: .35rem 1rem .35rem .35rem;
       margin-bottom: 0.73333em;
-      background-position: 97% 50%; } }
+      background-position: 99% 50%; } }
   .fs-search-scope__select::-ms-expand {
     display: none; }
 

@@ -126,8 +126,6 @@ $indent-amount: 1em;
 // Partials to be shared with all .scss files.
 // =============================================================================
 
-// Add the Singularity Grids responsive layout mixins.
-@import '../node_modules/singularitygs/stylesheets/singularitygs';
 // Add the Breakpoint mixin.
 @import '../node_modules/breakpoint-sass/stylesheets/breakpoint';
 
