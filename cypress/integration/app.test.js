@@ -7,7 +7,7 @@ describe('App is loading', () => {
 
     // Text field search.
     cy.contains('Enter search term:');
-    cy.get('.fs-search-form__input');
+    cy.get('#fs-root #search');
     cy.get('.fs-search-form__submit');
 
     // Sort by field.
