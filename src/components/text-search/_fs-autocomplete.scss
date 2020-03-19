@@ -15,12 +15,16 @@
 .react-autosuggest {
   &__container {
     position: relative;
-    flex: 1;
+    flex-grow: 1;
+    flex-shrink: 1;
+    flex-basis: 0;
   }
 
   &__input {
     @include adjust-font-size-to($label, .8);
-    flex: 1;
+    flex-grow: 1;
+    flex-shrink: 1;
+    flex-basis: 0;
     border: 1px solid $gray-light;
     border-top-left-radius: 4px;
     border-bottom-left-radius: 4px;
