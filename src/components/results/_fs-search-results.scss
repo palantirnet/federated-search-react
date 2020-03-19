@@ -15,12 +15,16 @@
 }
 
 .fs-search-results__container--left {
-  flex: 1 0 0;
+  flex-grow: 1;
+  flex-shrink: 0;
+  flex-basis: 0;
   margin-right: 3%;
 }
 
 .fs-search-results__container--right {
-  flex: 3 0 0;
+  flex-grow: 3;
+  flex-shrink: 0;
+  flex-basis: 0;
 }
 
 .fs-search-results__image {
