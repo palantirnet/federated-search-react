@@ -29,7 +29,9 @@
   -webkit-appearance: none;
   /* stylelint-enable */
   border-radius: 3px 0 0 3px;
-  flex: 1;
+  flex-grow: 1;
+  flex-shrink: 1;
+  flex-basis: 0;
   border: 1px solid $gray-light;
   padding: .5rem;
 

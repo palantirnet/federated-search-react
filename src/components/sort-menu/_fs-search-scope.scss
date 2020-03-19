@@ -10,9 +10,6 @@
   margin: rhythm(1) 0;
 }
 
-.fs-search-scope__filter {
-}
-
 .fs-search-scope__select {
   @extend %select;
   @include adjust-font-size-to($label, .8);

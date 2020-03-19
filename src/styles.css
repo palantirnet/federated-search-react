@@ -216,7 +216,9 @@
   -webkit-appearance: none;
   /* stylelint-enable */
   border-radius: 3px 0 0 3px;
-  flex: 1;
+  flex-grow: 1;
+  flex-shrink: 1;
+  flex-basis: 0;
   border: 1px solid #e5e5e5;
   padding: .5rem; }
   @media (min-width: 900px) {
@@ -259,12 +261,16 @@
 /** These classes are outside of Federated Search app namespace. **/
 .react-autosuggest__container {
   position: relative;
-  flex: 1; }
+  flex-grow: 1;
+  flex-shrink: 1;
+  flex-basis: 0; }
 
 .react-autosuggest__input {
   font-size: 0.8em;
   line-height: 1.46667em;
-  flex: 1;
+  flex-grow: 1;
+  flex-shrink: 1;
+  flex-basis: 0;
   border: 1px solid #e5e5e5;
   border-top-left-radius: 4px;
   border-bottom-left-radius: 4px;
@@ -564,11 +570,15 @@
   display: flex; }
 
 .fs-search-results__container--left {
-  flex: 1 0 0;
+  flex-grow: 1;
+  flex-shrink: 0;
+  flex-basis: 0;
   margin-right: 3%; }
 
 .fs-search-results__container--right {
-  flex: 3 0 0; }
+  flex-grow: 3;
+  flex-shrink: 0;
+  flex-basis: 0; }
 
 .fs-search-results__label {
   color: #555;
