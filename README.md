@@ -54,6 +54,8 @@ Cypress is installed for end-to-end testing. You can run the tests by running `y
 
 **Note**: Cypress is testing the following path, to run the test suites: `http://localhost:3000`. This is set at `cypress.json` in the root folder.
 
+For more information on Cypress, see here: https://docs.cypress.io/guides/core-concepts/introduction-to-cypress.html#Cypress-Can-Be-Simple-Sometimes
+
 ## Code quality
 
 ### Linting
