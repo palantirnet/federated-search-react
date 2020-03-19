@@ -50,6 +50,12 @@ You will see the build errors and lint warnings in the console.
 
 When you run the start script `yarn start`, code quality (linting) tests are automatically run and feedback is provided in the terminal.
 
+Cypress is installed for end-to-end testing. You can run the tests by running `yarn cypress`. This will open an Electron binary to run end-to-end testing. See `cypress` folder to view tests. 
+
+**Note**: Cypress is testing the following path, to run the test suites: `http://localhost:3000`. This is set at `cypress.json` in the root folder.
+
+For more information on Cypress, see here: https://docs.cypress.io/guides/core-concepts/introduction-to-cypress.html#Cypress-Can-Be-Simple-Sometimes
+
 ## Code quality
 
 ### Linting
