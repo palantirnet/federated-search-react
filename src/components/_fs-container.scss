@@ -1,0 +1,14 @@
+/**
+ * container.scss
+ * Define container styles.
+ *
+ * @copyright Copyright (c) 2017-2020 Palantir.net
+ */
+
+.fs-container {
+  @include breakpoint($bp2) {
+    display: grid;
+    grid-column-gap: 1em;
+    grid-template-columns: 33% 66%;
+  }
+}

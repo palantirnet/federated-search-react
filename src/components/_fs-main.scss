@@ -6,14 +6,6 @@
  */
 
 .fs-main {
-  width: 74.28571%;
-  float: right;
-  margin-left: 0;
-  margin-right: 0;
-  clear: none;
-  margin-bottom: rhythm(1);
-
   @include breakpoint($bp2) {
-    padding-top: rhythm(1);
   }
 }
