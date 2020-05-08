@@ -6,15 +6,14 @@
  */
 
 .fs-aside {
-  width: 22.85714%;
-  float: left;
-  margin-right: -100%;
   margin-left: 0;
-  clear: both;
   margin-bottom: rhythm(1);
   background-color: $c-bg-gray;
 
   @include breakpoint($bp2) {
+    float: left;
+    clear: both;
+    width: 22.85714%;
     padding-top: rhythm(1);
   }
 }
