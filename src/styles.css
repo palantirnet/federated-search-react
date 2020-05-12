@@ -530,11 +530,14 @@
  *
  * @copyright Copyright (c) 2017-2020 Palantir.net
  */
-@media (min-width: 900px) {
-  .fs-container {
-    display: grid;
-    grid-column-gap: 1em;
-    grid-template-columns: 33% 66%; } }
+.fs-container {
+  display: flex;
+  flex-direction: column; }
+  @media (min-width: 900px) {
+    .fs-container {
+      display: grid;
+      grid-column-gap: 1em;
+      grid-template-columns: 33% 66%; } }
 
 /**
  * aside.scss
@@ -544,6 +547,13 @@
  */
 .fs-aside {
   background-color: #f6f6f6; }
+
+.fs-aside__mobile-reverse {
+  order: 2; }
+
+@media (min-width: 900px) {
+  .fs-aside__desktop-reverse {
+    order: 6; } }
 
 /**
  * aside.scss

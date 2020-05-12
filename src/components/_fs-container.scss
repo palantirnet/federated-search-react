@@ -6,6 +6,8 @@
  */
 
 .fs-container {
+  display: flex;
+  flex-direction: column;
   @include breakpoint($bp2) {
     display: grid;
     grid-column-gap: 1em;

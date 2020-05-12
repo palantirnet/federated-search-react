@@ -10,3 +10,14 @@
   @include breakpoint($bp2) {
   }
 }
+
+.fs-aside__mobile-reverse {
+  order: 2;
+}
+
+// Layout option to move aside to right on desktop
+.fs-aside__desktop-reverse {
+  @include breakpoint($bp2) {
+    order: 6; // Should be higher than all mobile orders.
+  }
+}
