@@ -9,7 +9,7 @@ class FederatedSearchFieldContainer extends React.Component {
     super(props);
 
     // This will return the width of the viewport.
-    const intFrameWidth = window.innerWidth;
+    let intFrameWidth = window.innerWidth;
 
     this.state = {
       // Filters are visible for large / hidden for small screens by default.
@@ -17,6 +17,18 @@ class FederatedSearchFieldContainer extends React.Component {
     };
 
     this.handleClick = this.handleClick.bind(this);
+
+    window.addEventListener('resize', () => {
+      // Desktop height.
+      let height = 'auto';
+      // In mobile view, when resized, lets close things.
+      if (window.innerWidth < 900) {
+        height = 0;
+      }
+      this.setState({
+        expanded: height,
+      });
+    });
   }
 
   handleClick() {
