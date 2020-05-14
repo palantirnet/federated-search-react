@@ -98,10 +98,17 @@ class FederatedSolrFacetedSearch extends React.Component {
       pageTitle = <h1>{this.props.options.pageTitle}</h1>;
     }
 
+    // Grab env vars.
+    const containerClass = this.props.options.layoutAndClasses.containerClass || null;
+    const asideClass = this.props.options.layoutAndClasses.asideClass || null;
+    const gridTemplateColumns = this.props.options.layoutAndClasses.layout || null;
+    const reverseDesktopColumns = this.props.options.layoutAndClasses.reverseDesktopColumns ? 'fs-aside__desktop-reverse' : '';
+    const reverseMobileOrder = this.props.options.layoutAndClasses.reverseMobileOrder ? 'fs-aside__mobile-reverse' : '';
+
     return (
       <LiveAnnouncer>
-        <div className={`fs-container ${this.props.options.layoutAndClasses.containerClass}`} style={{ gridTemplateColumns: this.props.options.layoutAndClasses.layout }}>
-          <aside className={`fs-aside ${this.props.options.layoutAndClasses.asideClass} ${this.props.options.layoutAndClasses.reverseDesktopColumns ? "fs-aside__desktop-reverse" : ""} ${this.props.options.layoutAndClasses.reverseMobileOrder ? "fs-aside__mobile-reverse" : ""}`}>
+        <div className={`fs-container ${containerClass}`} style={{ gridTemplateColumns: gridTemplateColumns }}>
+          <aside className={`fs-aside ${asideClass} ${reverseDesktopColumns} ${reverseMobileOrder}`}>
             <SearchFieldContainerComponent
               bootstrapCss={bootstrapCss}
               onNewSearch={this.resetFilters}
