@@ -104,14 +104,14 @@ class FederatedSolrFacetedSearch extends React.Component {
       asideClass = '',
       mainClass = '',
       gridTemplateColumns = '',
-      reverseDesktopColumns = '',
-      reverseMobileOrder = '',
+      reverseDesktopColumns = false,
+      reverseMobileOrder = false,
     } = this.props.options.layoutAndClasses || {};
 
     return (
       <LiveAnnouncer>
         <div className={`fs-container ${containerClass}`} style={{ gridTemplateColumns: gridTemplateColumns }}>
-          <aside className={`fs-aside ${asideClass} ${reverseDesktopColumns} ${reverseMobileOrder}`}>
+          <aside className={`fs-aside ${asideClass} ${reverseDesktopColumns ? 'fs-aside__desktop-reverse' : ''} ${reverseMobileOrder ? 'fs-aside__mobile-reverse' : ''}`}>
             <SearchFieldContainerComponent
               bootstrapCss={bootstrapCss}
               onNewSearch={this.resetFilters}
