@@ -2,7 +2,7 @@
 
 describe('Keyword search', () => {
   const keyword = 'Terrier';
-  const resultCount = 4;
+  const resultCount = 5;
   const pagerCount = 1;
 
   it(`Keyword search is ran using the word "${keyword}" to load "${resultCount}" search result items.`, () => {
