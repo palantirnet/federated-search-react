@@ -103,7 +103,7 @@ class FederatedSolrFacetedSearch extends React.Component {
       containerClass = '',
       asideClass = '',
       mainClass = '',
-      gridTemplateColumns = '',
+      gridTemplateColumns = '22.85714% 74.28571%',
       reverseDesktopColumns = false,
       reverseMobileOrder = false,
     } = this.props.options.layoutAndClasses || {};
