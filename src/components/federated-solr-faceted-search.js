@@ -99,11 +99,14 @@ class FederatedSolrFacetedSearch extends React.Component {
     }
 
     // Grab env vars.
-    const containerClass = this.props.options.layoutAndClasses.containerClass || null;
-    const asideClass = this.props.options.layoutAndClasses.asideClass || null;
-    const gridTemplateColumns = this.props.options.layoutAndClasses.layout || null;
-    const reverseDesktopColumns = this.props.options.layoutAndClasses.reverseDesktopColumns ? 'fs-aside__desktop-reverse' : '';
-    const reverseMobileOrder = this.props.options.layoutAndClasses.reverseMobileOrder ? 'fs-aside__mobile-reverse' : '';
+    const {
+      containerClass='',
+      asideClass='',
+      mainClass='',
+      gridTemplateColumns='',
+      reverseDesktopColumns='',
+      reverseMobileOrder=''
+    } = this.props.options.layoutAndClasses || {};
 
     return (
       <LiveAnnouncer>
@@ -145,7 +148,7 @@ class FederatedSolrFacetedSearch extends React.Component {
               }
             </SearchFieldContainerComponent>
           </aside>
-          <div className={`fs-main ${this.props.options.layoutAndClasses.mainClass}`}>
+          <div className={`fs-main ${mainClass}`}>
             {pageTitle}
             <div className="fs-search-form" autoComplete="on">
               <FederatedTextSearch

@@ -12,7 +12,7 @@ class FederatedSearchFieldContainer extends React.Component {
     let intFrameWidth = window.innerWidth;
 
     // Get our breakpoint option from env.
-    const breakpointDesktop = this.props.options.layoutAndClasses.breakpointDesktop || 900;
+    const {breakpointDesktop='900'} = this.props.options.layoutAndClasses || {};
 
     this.state = {
       // Filters are visible for large / hidden for small screens by default.
