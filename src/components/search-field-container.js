@@ -11,9 +11,12 @@ class FederatedSearchFieldContainer extends React.Component {
     // This will return the width of the viewport.
     let intFrameWidth = window.innerWidth;
 
+    // Get our breakpoint option from env.
+    const breakpointDesktop = this.props.options.layoutAndClasses.breakpointDesktop || 900;
+
     this.state = {
       // Filters are visible for large / hidden for small screens by default.
-      expanded: intFrameWidth > 900,
+      expanded: intFrameWidth > breakpointDesktop,
     };
 
     this.handleClick = this.handleClick.bind(this);
@@ -22,7 +25,7 @@ class FederatedSearchFieldContainer extends React.Component {
       // Desktop height.
       let height = 'auto';
       // In mobile view, when resized, lets close things.
-      if (window.innerWidth < 900) {
+      if (window.innerWidth < breakpointDesktop) {
         height = 0;
       }
       this.setState({
@@ -78,6 +81,7 @@ class FederatedSearchFieldContainer extends React.Component {
 FederatedSearchFieldContainer.propTypes = {
   children: PropTypes.array,
   onNewSearch: PropTypes.func,
+  options: PropTypes.object,
 };
 
 export default FederatedSearchFieldContainer;
