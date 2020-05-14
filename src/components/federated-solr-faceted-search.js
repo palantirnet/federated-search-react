@@ -100,12 +100,12 @@ class FederatedSolrFacetedSearch extends React.Component {
 
     // Grab env vars.
     const {
-      containerClass='',
-      asideClass='',
-      mainClass='',
-      gridTemplateColumns='',
-      reverseDesktopColumns='',
-      reverseMobileOrder=''
+      containerClass = '',
+      asideClass = '',
+      mainClass = '',
+      gridTemplateColumns = '',
+      reverseDesktopColumns = '',
+      reverseMobileOrder = '',
     } = this.props.options.layoutAndClasses || {};
 
     return (
