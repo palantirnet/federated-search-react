@@ -36,6 +36,25 @@ Create a `src/.env.local.js` configuration file.
 
 You can copy the [src/.env.local.js.example](src/.env.local.js.example) example and edit the values provided.
 
+If you are using this app with Drupal, enable CORS support in `services.yml`:
+```
+  cors.config:
+    enabled: true
+    # Specify allowed headers, like 'x-allowed-header'.
+    allowedHeaders: []
+    # Specify allowed request methods, specify ['*'] to allow all possible ones.
+    allowedMethods: []
+    # Configure requests allowed from specific origins.
+    allowedOrigins: ['http://localhost:3000']
+    # Sets the Access-Control-Expose-Headers header.
+    exposedHeaders: false
+    # Sets the Access-Control-Max-Age header.
+    maxAge: false
+    # Sets the Access-Control-Allow-Credentials header.
+    supportsCredentials: false
+ ```
+ 
+
 ### Start the development server
 
 Run `yarn start` from the repo root to run the app in development mode.
