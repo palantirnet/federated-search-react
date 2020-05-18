@@ -6,6 +6,9 @@
  */
 
 .fs-main {
+  margin-left: 0;
+  margin-right: 0;
+  margin-bottom: rhythm(1);
   @include breakpoint($bp2) {
     padding-left: 7.5%; //Default to match previous version padding.
   }
