@@ -7,5 +7,18 @@
 
 .fs-main {
   @include breakpoint($bp2) {
+    padding-left: 7.5%; //Default to match previous version padding.
+  }
+  &.fs-main__has-custom-columns {
+    @include breakpoint($bp2) {
+      padding-left: 2em;
+    }
+  }
+}
+
+.fs-main__desktop-reverse {
+  @include breakpoint($bp2) {
+    padding-left: 0;
+    padding-right: 2em;
   }
 }

@@ -103,7 +103,7 @@ class FederatedSolrFacetedSearch extends React.Component {
       containerClass = '',
       asideClass = '',
       mainClass = '',
-      gridTemplateColumns = '22.85714% 74.28571%',
+      gridTemplateColumns = '',
       reverseDesktopColumns = false,
       reverseMobileOrder = false,
     } = this.props.options.layoutAndClasses || {};
@@ -148,7 +148,7 @@ class FederatedSolrFacetedSearch extends React.Component {
               }
             </SearchFieldContainerComponent>
           </aside>
-          <div className={`fs-main ${mainClass}`}>
+          <div className={`fs-main ${mainClass} ${reverseDesktopColumns ? 'fs-main__desktop-reverse' : ''} ${reverseMobileOrder ? 'fs-main__mobile-reverse' : ''} ${gridTemplateColumns ? 'fs-main__has-custom-columns' : ''}`}>
             {pageTitle}
             <div className="fs-search-form" autoComplete="on">
               <FederatedTextSearch

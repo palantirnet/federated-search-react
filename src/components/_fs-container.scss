@@ -15,8 +15,8 @@
   margin: 0 auto;
   @include breakpoint($bp2) {
     display: grid;
-    grid-column-gap: 5%;
-    grid-template-columns: 33% 66%;
+    grid-column-gap: 0;
+    grid-template-columns: 25% 75%;
     width: 90%;
     padding: 0;
   }
