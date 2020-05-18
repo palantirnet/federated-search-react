@@ -531,6 +531,7 @@
  * @copyright Copyright (c) 2017-2020 Palantir.net
  */
 .fs-container {
+  box-sizing: border-box;
   display: flex;
   flex-direction: column;
   width: 100%;
