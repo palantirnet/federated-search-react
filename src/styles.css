@@ -532,12 +532,21 @@
  */
 .fs-container {
   display: flex;
-  flex-direction: column; }
+  flex-direction: column;
+  width: 100%;
+  min-width: 260px;
+  padding: 0 1.46667em;
+  margin: 0 auto; }
   @media (min-width: 900px) {
     .fs-container {
       display: grid;
-      grid-column-gap: 1em;
-      grid-template-columns: 33% 66%; } }
+      grid-column-gap: 5%;
+      grid-template-columns: 33% 66%;
+      width: 90%;
+      padding: 0; } }
+  @media (min-width: 900px) {
+    .fs-container {
+      max-width: 1400px; } }
 
 /**
  * aside.scss

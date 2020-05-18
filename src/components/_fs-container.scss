@@ -8,9 +8,18 @@
 .fs-container {
   display: flex;
   flex-direction: column;
+  width: 100%;
+  min-width: 260px;
+  padding: 0 1.46667em;
+  margin: 0 auto;
   @include breakpoint($bp2) {
     display: grid;
-    grid-column-gap: 1em;
+    grid-column-gap: 5%;
     grid-template-columns: 33% 66%;
+    width: 90%;
+    padding: 0;
+  }
+  @include breakpoint($bp2) {
+    max-width: 1400px;
   }
 }
