@@ -21,6 +21,13 @@
   border-radius: 3px;
   display: flex;
   justify-content: space-between;
+  @include breakpoint($bp1) {
+    width: 75%;
+  }
+
+  @include breakpoint($bp3) {
+    width: 50%;
+  }
 }
 
 .fs-search-form__input {
