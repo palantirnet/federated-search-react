@@ -34,7 +34,21 @@ Run `yarn install` from the repo root.
 
 Create a `src/.env.local.js` configuration file.
 
-You can copy the [src/.env.local.js.example](src/.env.local.js.example) example and edit the values provided.
+You can copy the [src/.env.local.js.example](src/.env.local.js.example) example and edit the values provided. 
+
+### Start the development server
+
+Run `yarn start` from the repo root to run the app in development mode.
+
+It should automatically open http://localhost:3000 in a browser.
+
+The page will automatically reload if you make changes to the code.
+
+You will see the build errors and lint warnings in the console.
+
+## Local testing
+
+When you run the start script `yarn start`, code quality (linting) tests are automatically run and feedback is provided in the terminal.
 
 If you are using this app with Drupal, enable CORS support in `services.yml`:
 ```
@@ -52,22 +66,7 @@ If you are using this app with Drupal, enable CORS support in `services.yml`:
     maxAge: false
     # Sets the Access-Control-Allow-Credentials header.
     supportsCredentials: false
- ```
- 
-
-### Start the development server
-
-Run `yarn start` from the repo root to run the app in development mode.
-
-It should automatically open http://localhost:3000 in a browser.
-
-The page will automatically reload if you make changes to the code.
-
-You will see the build errors and lint warnings in the console.
-
-## Local testing
-
-When you run the start script `yarn start`, code quality (linting) tests are automatically run and feedback is provided in the terminal.
+```
 
 Cypress is installed for end-to-end testing. You can run the tests by running `yarn cypress`. This will open an Electron
  binary to run the end-to-end testing. You can then run a specific test or run all tests using "Run all specs" link.
