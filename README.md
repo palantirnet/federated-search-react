@@ -34,7 +34,7 @@ Run `yarn install` from the repo root.
 
 Create a `src/.env.local.js` configuration file.
 
-You can copy the [src/.env.local.js.example](src/.env.local.js.example) example and edit the values provided. 
+You can copy the [src/.env.local.js.example](src/.env.local.js.example) example and edit the values provided.
 
 ### Start the development server
 
