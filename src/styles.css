@@ -556,7 +556,7 @@
     .fs-container {
       display: grid;
       grid-column-gap: 0;
-      grid-template-columns: 25% 75%;
+      grid-template-columns: 22.85714% 74.28571%;
       width: 90%;
       padding: 0; } }
   @media (min-width: 900px) {
@@ -596,7 +596,7 @@
   margin-bottom: 1.46667em; }
   @media (min-width: 900px) {
     .fs-main {
-      padding-left: 7.5%; } }
+      padding-left: 3.703713%; } }
   @media (min-width: 900px) {
     .fs-main.fs-main__has-custom-columns {
       padding-left: 2em; } }

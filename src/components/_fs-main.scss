@@ -10,7 +10,7 @@
   margin-right: 0;
   margin-bottom: rhythm(1);
   @include breakpoint($bp2) {
-    padding-left: 7.5%; //Default to match previous version padding.
+    padding-left: 3.703713%; //Default to match previous version 1.x padding.
   }
   &.fs-main__has-custom-columns {
     @include breakpoint($bp2) {
