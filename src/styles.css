@@ -377,6 +377,12 @@
  *
  * @copyright Copyright (c) 2017-2019 Palantir.net
  */
+.fs-search-filters {
+  background-color: #f6f6f6; }
+  @media (min-width: 900px) {
+    .fs-search-filters {
+      padding-top: 1.46667em; } }
+
 .fs-search-filters__trigger,
 .fs-search-accordion__title {
   font-size: 1em;
@@ -571,11 +577,7 @@
  */
 .fs-aside {
   margin-left: 0;
-  margin-bottom: 1.46667em;
-  background-color: #f6f6f6; }
-  @media (min-width: 900px) {
-    .fs-aside {
-      padding-top: 1.46667em; } }
+  margin-bottom: 1.46667em; }
 
 .fs-aside__mobile-reverse {
   order: 2; }

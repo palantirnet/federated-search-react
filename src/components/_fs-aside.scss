@@ -8,10 +8,6 @@
 .fs-aside {
   margin-left: 0;
   margin-bottom: rhythm(1);
-  background-color: $c-bg-gray;
-  @include breakpoint($bp2) {
-    padding-top: rhythm(1);
-  }
 }
 
 .fs-aside__mobile-reverse {
