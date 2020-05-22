@@ -215,6 +215,7 @@
 }
 
 .fs-search-accordion__title {
+  margin: 0;
   @extend %h2;
   border-bottom: solid 1px $gray-light;
   padding-top: rhythm(.75);
