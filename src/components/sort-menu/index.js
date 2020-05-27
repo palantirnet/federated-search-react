@@ -45,7 +45,7 @@ class FederatedSortMenu extends React.Component {
 FederatedSortMenu.propTypes = {
 	bootstrapCss: PropTypes.bool,
 	onChange: PropTypes.func,
-	sortFields: PropTypes.array
+	sortFields: PropTypes.array,
 };
 
 export default FederatedSortMenu;

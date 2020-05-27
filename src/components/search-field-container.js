@@ -3,7 +3,6 @@ import React from 'react';
 import cx from 'classnames';
 import AnimateHeight from 'react-animate-height';
 
-
 class FederatedSearchFieldContainer extends React.Component {
   constructor(props) {
     super(props);
@@ -41,8 +40,15 @@ class FederatedSearchFieldContainer extends React.Component {
   }
 
   render() {
-    const { onNewSearch } = this.props;
+    const { onNewSearch, customComponents, bootstrapCss, onSortFieldChange, sortFields, options } = this.props;
+    // Grab env vars.
+    const {
+      sortFilterInAccordion = false,
+    } = this.props.options.layoutAndClasses || {};
+
     const height = this.state.expanded ? 'auto' : 0;
+    const SortComponent = customComponents.sortFields.menu;
+    console.log(customComponents);
 
     return (
       <div className="fs-search-filters">
@@ -64,7 +70,19 @@ class FederatedSearchFieldContainer extends React.Component {
                 <h2 className="fs-search-filters__title" id="fs-section-title">Filter Results</h2>
               </div>
               { this.props.resultsCount > 0
-                ? (<ul className="fs-search-accordion__group">{this.props.children}</ul>)
+                ? (<ul className="fs-search-accordion__group">{this.props.children}
+
+                  {sortFilterInAccordion
+                    ? <li className={'fs-search-accordion__content-item'}>
+                      <SortComponent
+                        bootstrapCss={bootstrapCss}
+                        onChange={onSortFieldChange}
+                        sortFields={sortFields}
+                      />
+                    </li>
+                    : ''
+                  }
+                 </ul>)
                 : <div className="fs-search-filters__no-results">There are no results to filter.</div> }
             </section>
 
@@ -78,10 +96,15 @@ class FederatedSearchFieldContainer extends React.Component {
   }
 }
 
+
 FederatedSearchFieldContainer.propTypes = {
   children: PropTypes.array,
+  customComponents: PropTypes.object,
   onNewSearch: PropTypes.func,
+  onSortFieldChange: PropTypes.func,
   options: PropTypes.object,
+  bootstrapCss: PropTypes.bool,
+  sortFields: PropTypes.array,
 };
 
 export default FederatedSearchFieldContainer;
