@@ -17,17 +17,16 @@ class FederatedListFacet extends React.Component {
     this.onSelect = this.onSelect.bind(this);
   }
 
-  onSelect(sortField) {
-    console.log(sortField);
-    this.setState({sort: sortField});
+  onSelect(event) {
+    this.setState({sort: event.target.value});
 
+    const sortField = event.target.value;
     const foundIdx = this.props.sortFields.indexOf(sortField);
 
-    console.log(foundIdx);
     if (foundIdx < 0) {
-      this.props.onChange(sortField, "desc");
+      this.props.onSortFieldChange(sortField, "desc");
     } else {
-      this.props.onChange(sortField, null);
+      this.props.onSortFieldChange(sortField, null);
     }
   }
 
@@ -255,21 +254,15 @@ class FederatedListFacet extends React.Component {
             <AnimateHeight
                 duration={600}
                 height={height}
-            >
-              <ul className="fs-search-accordion__content">
-                {sortFields.map((sortField, i) => (
-                    <li className="fs-search-accordion__content-item" key={`solr-list-facet-Sort-item-${i}`}>
-                      <label className="fs-search-accordion__checkbox-label">
-                        <input
-                            type="checkbox"
-                            name={sortField.field}
-                            className="fs-search-accordion__checkbox-input"
-                            value={sortField.field}
-                            onChange={() => this.onSelect(sortField.field)}
-                        /> {sortField.label}
-                      </label>
-                    </li>
-                ))}
+            >{ console.log(sortFields) }
+              <ul className={"fs-search-accordion__content"}>
+                  <li className={"fs-search-accordion__content-item" }>
+                    <select className="fs-search-scope__select" id="sort-by" name="sort-by" onChange={this.onSelect} value={this.state.sort}>
+                      {sortFields.map((sortField, i) => (
+                        <option value={sortField.field} key={i}>{sortField.label}</option>
+                      ))}
+                    </select>
+                  </li>
               </ul>
             </AnimateHeight>
           </li>);

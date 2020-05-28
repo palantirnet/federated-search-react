@@ -153,6 +153,7 @@ class FederatedSolrFacetedSearch extends React.Component {
                       sortFields={sortFields}
                       truncateFacetListsAt={truncateFacetListsAt}
                       onChange={onSearchFieldChange}
+                      onSortFieldChange={onSortFieldChange}
                     />
                   );
                 })
