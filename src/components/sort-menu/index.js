@@ -29,16 +29,20 @@ class FederatedSortMenu extends React.Component {
   }
 
   render() {
-    const { sortFields} = this.props;
+    const { sortFields } = this.props;
     if (sortFields.length === 0) { return null; }
 
     return (
-          <div className="fs-search-scope">
-            <div className="fs-search-scope__filter">
-              <label className="fs-search-scope__label" htmlFor="sort-by">Sort By</label>
-              <input className="fs-search-scope__select" id="sort" name="sort" type="checkbox" value="ds_federated_date" onChange={this.onSelect.bind(this)} />
-            </div>
-          </div>
+      <div className="fs-search-scope">
+        <div className="fs-search-scope__filter">
+          <label className="fs-search-scope__label" htmlFor="sort-by">Sort By</label>
+          <select className="fs-search-scope__select" id="sort-by" name="sort-by" onChange={this.onSelect} value={this.state.sort}>
+            {sortFields.map((sortField, i) => (
+              <option value={sortField.field} key={i}>{sortField.label}</option>
+            ))}
+          </select>
+        </div>
+      </div>
     );
   }
 }
