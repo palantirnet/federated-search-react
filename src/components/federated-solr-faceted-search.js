@@ -126,7 +126,6 @@ class FederatedSolrFacetedSearch extends React.Component {
               onNewSearch={this.resetFilters}
               resultsCount={this.props.results.numFound}
               options={this.props.options}
-              sortFilterComponent={sortFilterComponent}
             >
               {/* Only render the visible facets / filters.
                   Note: their values may still be used in the query, if they were pre-set. */}
@@ -154,6 +153,7 @@ class FederatedSolrFacetedSearch extends React.Component {
                       truncateFacetListsAt={truncateFacetListsAt}
                       onChange={onSearchFieldChange}
                       onSortFieldChange={onSortFieldChange}
+                      sortFilterInAccordion={sortFilterInAccordion}
                     />
                   );
                 })

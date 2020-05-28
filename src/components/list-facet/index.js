@@ -243,7 +243,9 @@ class FederatedListFacet extends React.Component {
 
       });
       listFacetHierarchyLis.push(
-          <li className={'fs-search-accordion__group-item'} id={`solr-list-facet-Sort`} key={`solr-list-facet-Sort-1234`}>
+        sortFilterInAccordion
+          ? (
+            <li className={'fs-search-accordion__group-item'} id={`solr-list-facet-Sort`} key={`solr-list-facet-Sort-1234`}>
             <div
                 tabIndex="0"
                 className={cx("fs-search-accordion__title", {"js-fs-search-accordion-open": expanded})}
@@ -265,7 +267,10 @@ class FederatedListFacet extends React.Component {
                   </li>
               </ul>
             </AnimateHeight>
-          </li>);
+          </li>
+          )
+          : '',
+      );
       // Render the group of accordion lis with their facet value checkbox lists.
       return listFacetHierarchyLis;
     }
