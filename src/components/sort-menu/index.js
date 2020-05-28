@@ -1,7 +1,5 @@
-import cx from "classnames";
 import PropTypes from 'prop-types';
 import React from "react";
-import AnimateHeight from 'react-animate-height';
 
 class FederatedSortMenu extends React.Component {
   constructor(props) {
@@ -50,9 +48,7 @@ class FederatedSortMenu extends React.Component {
 FederatedSortMenu.propTypes = {
   bootstrapCss: PropTypes.bool,
   onChange: PropTypes.func,
-  onSetCollapse: PropTypes.func,
   sortFields: PropTypes.array,
-  collapse: PropTypes.bool,
 };
 
 export default FederatedSortMenu;
