@@ -12,7 +12,23 @@ class FederatedListFacet extends React.Component {
     this.state = {
       filter: '',
       truncateFacetListsAt: props.truncateFacetListsAt,
+      sort: 'score',
     };
+    this.onSelect = this.onSelect.bind(this);
+  }
+
+  onSelect(sortField) {
+    console.log(sortField);
+    this.setState({sort: sortField});
+
+    const foundIdx = this.props.sortFields.indexOf(sortField);
+
+    console.log(foundIdx);
+    if (foundIdx < 0) {
+      this.props.onChange(sortField, "desc");
+    } else {
+      this.props.onChange(sortField, null);
+    }
   }
 
   handleClick(value) {
@@ -99,9 +115,10 @@ class FederatedListFacet extends React.Component {
       collapse,
       hierarchy,
       options,
+      sortFields,
+      sortFilterInAccordion,
     } = this.props;
     const { truncateFacetListsAt } = this.state;
-
     const siteList = options.siteList;
     const facetCounts = facets.filter((facet, i) => i % 2 === 1);
     const facetValues = facets.filter((facet, i) => i % 2 === 0);
@@ -224,7 +241,38 @@ class FederatedListFacet extends React.Component {
               </ul>
             </AnimateHeight>
           </li>);
+
       });
+      listFacetHierarchyLis.push(
+          <li className={'fs-search-accordion__group-item'} id={`solr-list-facet-Sort`} key={`solr-list-facet-Sort-1234`}>
+            <div
+                tabIndex="0"
+                className={cx("fs-search-accordion__title", {"js-fs-search-accordion-open": expanded})}
+                id={'sort-by'}
+                onClick={this.toggleExpand.bind(this)}
+                onKeyDown={(event)=>{if (event.keyCode === 13) {this.toggleExpand()}}}
+            >Sort</div>
+            <AnimateHeight
+                duration={600}
+                height={height}
+            >
+              <ul className="fs-search-accordion__content">
+                {sortFields.map((sortField, i) => (
+                    <li className="fs-search-accordion__content-item" key={`solr-list-facet-Sort-item-${i}`}>
+                      <label className="fs-search-accordion__checkbox-label">
+                        <input
+                            type="checkbox"
+                            name={sortField.field}
+                            className="fs-search-accordion__checkbox-input"
+                            value={sortField.field}
+                            onChange={() => this.onSelect(sortField.field)}
+                        /> {sortField.label}
+                      </label>
+                    </li>
+                ))}
+              </ul>
+            </AnimateHeight>
+          </li>);
       // Render the group of accordion lis with their facet value checkbox lists.
       return listFacetHierarchyLis;
     }
@@ -300,6 +348,8 @@ FederatedListFacet.propTypes = {
   onChange: PropTypes.func,
   onFacetSortChange: PropTypes.func,
   onSetCollapse: PropTypes.func,
+  sortFields: PropTypes.array,
+  sortFilterInAccordion: PropTypes.bool,
   query: PropTypes.object,
   truncateFacetListsAt: PropTypes.number,
   value: PropTypes.array,

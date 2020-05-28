@@ -11,16 +11,20 @@ class FederatedSortMenu extends React.Component {
       sort: 'score',
     };
     this.onSelect = this.onSelect.bind(this);
+    this.toggleExpand = this.toggleExpand.bind(this);
   }
   toggleExpand() {
     this.props.onSetCollapse(this.props.field, !(this.props.collapse || false));
   }
 
   onSelect(event) {
+    console.log(event.target.value);
     this.setState({sort: event.target.value});
 
     const sortField = event.target.value;
     const foundIdx = this.props.sortFields.indexOf(sortField);
+
+    console.log(foundIdx);
     if (foundIdx < 0) {
       this.props.onChange(sortField, "desc");
     } else {
@@ -37,7 +41,7 @@ class FederatedSortMenu extends React.Component {
     return (
       sortFilterInAccordion
         ? (
-          <li className={'fs-search-accordion__group-item'}>
+          <li className={'fs-search-accordion__group-item'} id={`solr-list-facet-sort-by`}>
             <div
               tabIndex="0"
               className={cx("fs-search-accordion__title", {"js-fs-search-accordion-open": expanded})}
@@ -49,16 +53,17 @@ class FederatedSortMenu extends React.Component {
               duration={600}
               height={height}
             >
-              <div className="fs-search-scope">
+            <ul className="fs-search-accordion__content">
+              <li className="fs-search-accordion__content-item">
               <div className="fs-search-scope__filter">
-                <label className="fs-search-scope__label" htmlFor="sort-by">Sort By</label>
                 <select className="fs-search-scope__select" id="sort-by" name="sort-by" onChange={this.onSelect} value={this.state.sort}>
                   {sortFields.map((sortField, i) => (
                     <option value={sortField.field} key={i}>{sortField.label}</option>
                   ))}
                 </select>
               </div>
-            </div>
+              </li>
+            </ul>
             </AnimateHeight>
           </li>
         )
@@ -66,11 +71,7 @@ class FederatedSortMenu extends React.Component {
           <div className="fs-search-scope">
             <div className="fs-search-scope__filter">
               <label className="fs-search-scope__label" htmlFor="sort-by">Sort By</label>
-              <select className="fs-search-scope__select" id="sort-by" name="sort-by" onChange={this.onSelect} value={this.state.sort}>
-                {sortFields.map((sortField, i) => (
-                  <option value={sortField.field} key={i}>{sortField.label}</option>
-                ))}
-              </select>
+              <input className="fs-search-scope__select" id="sort" name="sort" type="checkbox" value="ds_federated_date" onChange={this.onSelect.bind(this)} />
             </div>
           </div>
         )
