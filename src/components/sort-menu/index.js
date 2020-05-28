@@ -29,9 +29,7 @@ class FederatedSortMenu extends React.Component {
   }
 
   render() {
-    const { sortFields, collapse } = this.props;
-    const expanded = !(collapse || false);
-    const height = expanded ? 'auto' : 0;
+    const { sortFields} = this.props;
     if (sortFields.length === 0) { return null; }
 
     return (
