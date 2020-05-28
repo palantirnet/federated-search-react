@@ -79,7 +79,6 @@ class FederatedSolrFacetedSearch extends React.Component {
     const CurrentQueryComponent = customComponents.searchFields.currentQuery;
     const SortComponent = customComponents.sortFields.menu;
     const FederatedTextSearch = FederatedSolrComponentPack.searchFields.text;
-    console.log(customComponents);
 
     const resultPending = results.pending
       ? (<ResultPendingComponent bootstrapCss={bootstrapCss} />)
@@ -109,6 +108,14 @@ class FederatedSolrFacetedSearch extends React.Component {
       reverseMobileOrder = false,
       sortFilterInAccordion = false,
     } = this.props.options.layoutAndClasses || {};
+    const sortFilterComponent = (
+      <SortComponent
+      bootstrapCss={bootstrapCss}
+      onChange={onSortFieldChange}
+      sortFields={sortFields}
+      sortFilterInAccordion={sortFilterInAccordion}
+      />
+    );
 
     return (
       <LiveAnnouncer>
@@ -119,9 +126,7 @@ class FederatedSolrFacetedSearch extends React.Component {
               onNewSearch={this.resetFilters}
               resultsCount={this.props.results.numFound}
               options={this.props.options}
-              onSortFieldChange={onSortFieldChange}
-              sortFields={sortFields}
-              customComponents={customComponents}
+              sortFilterComponent={sortFilterComponent}
             >
               {/* Only render the visible facets / filters.
                   Note: their values may still be used in the query, if they were pre-set. */}
@@ -147,8 +152,6 @@ class FederatedSolrFacetedSearch extends React.Component {
                       facets={facets}
                       truncateFacetListsAt={truncateFacetListsAt}
                       onChange={onSearchFieldChange}
-                      onSortFieldChange={onSortFieldChange}
-                      sortFields={sortFields}
                     />
                   );
                 })
@@ -171,14 +174,7 @@ class FederatedSolrFacetedSearch extends React.Component {
                 {...this.props}
                 onChange={onSearchFieldChange}
               />
-              {sortFilterInAccordion
-                ? ''
-                : <SortComponent
-                  bootstrapCss={bootstrapCss}
-                  onChange={onSortFieldChange}
-                  sortFields={sortFields}
-                  />
-              }
+              {sortFilterInAccordion ? '' : sortFilterComponent}
             </div>
             <p className={(searchFields.find(sf => sf.field === 'tm_rendered_item').value || this.props.options.showEmptySearchResults) ? 'solr-search-results-container__prompt fs-element-invisible' : 'solr-search-results-container__prompt'}>{this.props.options.searchPrompt || 'Please enter a search term.'}</p>
             <div className={(searchFields.find(sf => sf.field === 'tm_rendered_item').value || this.props.options.showEmptySearchResults) ? 'solr-search-results-container__wrapper' : 'solr-search-results-container__wrapper fs-element-invisible'}>
