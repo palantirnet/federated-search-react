@@ -256,7 +256,7 @@ class FederatedListFacet extends React.Component {
             <AnimateHeight
                 duration={600}
                 height={height}
-            >{ console.log(sortFields) }
+            >
               <ul className={"fs-search-accordion__content"}>
                   <li className={"fs-search-accordion__content-item" }>
                     <select className="fs-search-scope__select" id="sort-by" name="sort-by" onChange={this.onSelect} value={this.state.sort}>
