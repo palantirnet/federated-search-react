@@ -106,7 +106,16 @@ class FederatedSolrFacetedSearch extends React.Component {
       gridTemplateColumns = '',
       reverseDesktopColumns = false,
       reverseMobileOrder = false,
+      sortFilterInAccordion = false,
     } = this.props.options.layoutAndClasses || {};
+    const sortFilterComponent = (
+      <SortComponent
+      bootstrapCss={bootstrapCss}
+      onChange={onSortFieldChange}
+      sortFields={sortFields}
+      sortFilterInAccordion={sortFilterInAccordion}
+      />
+    );
 
     return (
       <LiveAnnouncer>
@@ -140,8 +149,11 @@ class FederatedSolrFacetedSearch extends React.Component {
                       {...searchField}
                       bootstrapCss={bootstrapCss}
                       facets={facets}
+                      sortFields={sortFields}
                       truncateFacetListsAt={truncateFacetListsAt}
                       onChange={onSearchFieldChange}
+                      onSortFieldChange={onSortFieldChange}
+                      sortFilterInAccordion={sortFilterInAccordion}
                     />
                   );
                 })
@@ -164,11 +176,7 @@ class FederatedSolrFacetedSearch extends React.Component {
                 {...this.props}
                 onChange={onSearchFieldChange}
               />
-              <SortComponent
-                bootstrapCss={bootstrapCss}
-                onChange={onSortFieldChange}
-                sortFields={sortFields}
-              />
+              {sortFilterInAccordion ? '' : sortFilterComponent}
             </div>
             <p className={(searchFields.find(sf => sf.field === 'tm_rendered_item').value || this.props.options.showEmptySearchResults) ? 'solr-search-results-container__prompt fs-element-invisible' : 'solr-search-results-container__prompt'}>{this.props.options.searchPrompt || 'Please enter a search term.'}</p>
             <div className={(searchFields.find(sf => sf.field === 'tm_rendered_item').value || this.props.options.showEmptySearchResults) ? 'solr-search-results-container__wrapper' : 'solr-search-results-container__wrapper fs-element-invisible'}>

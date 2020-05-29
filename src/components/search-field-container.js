@@ -3,7 +3,6 @@ import React from 'react';
 import cx from 'classnames';
 import AnimateHeight from 'react-animate-height';
 
-
 class FederatedSearchFieldContainer extends React.Component {
   constructor(props) {
     super(props);
@@ -41,7 +40,12 @@ class FederatedSearchFieldContainer extends React.Component {
   }
 
   render() {
-    const { onNewSearch } = this.props;
+    const { onNewSearch, sortFilterComponent } = this.props;
+    // Grab env vars.
+    const {
+      sortFilterInAccordion = false,
+    } = this.props.options.layoutAndClasses || {};
+
     const height = this.state.expanded ? 'auto' : 0;
 
     return (
@@ -64,7 +68,12 @@ class FederatedSearchFieldContainer extends React.Component {
                 <h2 className="fs-search-filters__title" id="fs-section-title">Filter Results</h2>
               </div>
               { this.props.resultsCount > 0
-                ? (<ul className="fs-search-accordion__group">{this.props.children}</ul>)
+                ? (
+                  <ul className="fs-search-accordion__group">
+                    {this.props.children}
+                    {sortFilterInAccordion ? sortFilterComponent : ''}
+                  </ul>
+                )
                 : <div className="fs-search-filters__no-results">There are no results to filter.</div> }
             </section>
 
@@ -78,10 +87,12 @@ class FederatedSearchFieldContainer extends React.Component {
   }
 }
 
+
 FederatedSearchFieldContainer.propTypes = {
   children: PropTypes.array,
   onNewSearch: PropTypes.func,
   options: PropTypes.object,
+  sortFilterComponent: PropTypes.object,
 };
 
 export default FederatedSearchFieldContainer;

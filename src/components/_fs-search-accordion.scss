@@ -1,0 +1,132 @@
+/**
+ * search-accordion.scss
+ * Define search accordion styles.
+ *
+ * @copyright Copyright (c) 2017-2020 Palantir.net
+ */
+
+.fs-search-accordion {
+  margin-bottom: rhythm(1);
+  color: $gray-dark;
+  padding: 0;
+}
+
+.fs-search-accordion__title {
+  @include adjust-font-size-to($sm-heading, 1);
+  display: block;
+  padding-right: 1.25rem;
+  padding-left: 1.25rem;
+
+  &:hover,
+  &:focus,
+  &:active {
+    text-decoration: none;
+  }
+
+  // Display plus symbol at initial state
+  &:after {
+    content: "+";
+    float: right;
+  }
+}
+
+.fs-search-accordion__checkbox-input {
+  @extend %input;
+}
+
+.fs-search-accordion__checkbox-label {
+  cursor: pointer;
+  display: block;
+  padding: rhythm(.5) 0;
+
+  @include breakpoint($bp2) {
+    @include adjust-font-size-to($label, .8);
+    padding: rhythm(.35) 0;
+  }
+}
+
+.fs-search-accordion__content {
+  @extend %list;
+  margin: 0;
+  padding: rhythm(.5) 1.25rem;
+
+  @media only screen and (min-width: 1025px) {
+    // Center date-picker which we can't set to display:block.
+    #solr-list-facet-ds_federated_date & {
+      text-align: center;
+    }
+  }
+
+  @media only screen and (max-width: 425px) {
+    // Center date-picker which we can't set to display:block.
+    #solr-list-facet-ds_federated_date & {
+      text-align: center;
+    }
+  }
+
+  @media only screen and (max-width: 1350px) and (min-width: 768px)  {
+    #solr-list-facet-ds_federated_date & {
+      padding: rhythm(.5) .5rem;
+    }
+  }
+}
+
+.fs-search-accordion__group,
+.fs-search-accordion__subgroup {
+  list-style: none;
+  padding: 0;
+}
+
+.fs-search-accordion__group-item,
+.fs-search-accordion__content-item {
+  display: block;
+  margin: 0;
+  overflow: hidden;
+
+  // Date widget overflow fix.
+  &#solr-list-facet-ds_federated_date {
+    overflow: visible;
+
+    .fs-search-accordion__content-item {
+      overflow: visible;
+    }
+  }
+}
+
+.fs-search-accordion__group {
+  @extend %list;
+  margin: 0;
+}
+
+.fs-search-accordion__subgroup {
+  margin: 0 0 0 rhythm(.5);
+}
+
+.fs-search-accordion__title {
+  @extend %h2;
+  border-bottom: solid 1px $gray-light;
+  padding-top: rhythm(.75);
+  padding-bottom: rhythm(.75);
+
+  @include breakpoint($bp2) {
+    @include adjust-font-size-to($label, .8);
+    padding-top: rhythm(.3);
+    padding-bottom: rhythm(.3);
+  }
+
+  &:active,
+  &:hover,
+  &:focus {
+    border-bottom: solid 1px darken($gray-light, 10);
+    outline: 0;
+  }
+
+  &:hover {
+    cursor: pointer;
+  }
+
+  // Replace plus symbol with en dash when search-accordion is open
+  &.js-fs-search-accordion-open:after {
+    content: "–";
+  }
+}
