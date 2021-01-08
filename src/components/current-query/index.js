@@ -55,10 +55,10 @@ const ListFacetType = function ({ searchField, announcePolite, onChange }) {
     }
   }
 
-  return (searchField.value.map((val, i) => (
+  return (searchField.value.map((val) => (
     <FacetType
-      key={i}
-      id={i}
+      key={searchField.field}
+      id={searchField.field}
       onClick={() => removeListFacetValue(searchField.field, searchField.value, val)}
     >
       {/* Add spacing to hierarchical facet values: Type>Term = Type > Term. */}
@@ -114,7 +114,7 @@ RangeFacetType.propTypes = {
 };
 
 // Configure and render the FacetType component to render as text facet type.
-const TextFacetType = function({ searchField, announcePolite, onChange}) {
+const TextFacetType = function ({ searchField, announcePolite, onChange }) {
   function removeTextValue(field) {
     announcePolite(`Removed search term ${field.value}.`);
     // Setting this to '' or "" throws a fatal error.
@@ -183,12 +183,12 @@ const FederatedCurrentQuery = (props) => {
                 Click a filter to remove it from your search query.
               </p>
               {/* Only render the values for visible facets / filters */}
-              {fields.filter((searchField) => !searchField.isHidden).map((searchField, i) => {
+              {fields.filter((searchField) => !searchField.isHidden).map((searchField) => {
                 // Determine which child component to render.
                 const MyFacetType = facetTypes[searchField.type];
                 return (
                   <MyFacetType
-                    key={i}
+                    key={searchField.field}
                     searchField={searchField}
                     announcePolite={announcePolite}
                     onChange={onChange}
