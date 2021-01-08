@@ -21,10 +21,8 @@ FacetType.propTypes = {
 };
 
 // Configure and render the FacetType component to render as list facet type.
-const ListFacetType = function (props) {
+const ListFacetType = function ({ searchField, announcePolite, onChange }) {
   function removeListFacetValue(field, values, value) {
-    const { announcePolite, onChange } = props;
-
     announcePolite(`Removed ${field.value} filter.`);
 
     const {
@@ -57,7 +55,6 @@ const ListFacetType = function (props) {
     }
   }
 
-  const { searchField } = props;
   return (searchField.value.map((val, i) => (
     <FacetType
       key={i}
@@ -79,14 +76,12 @@ ListFacetType.propTypes = {
 };
 
 // Configure and render the FacetType component to render as range facet type.
-const RangeFacetType = function (props) {
+const RangeFacetType = function ({ searchField, announcePolite, onChange }) {
   function removeRangeFacetValue(field) {
-    const { announcePolite, onChange } = props;
     announcePolite(`Removed ${field.value} filter.`);
     onChange(field, []);
   }
 
-  const { searchField } = props;
   // Create a moment from the search start date.
   const start = moment(searchField.value[0]);
   // Use UTC.
@@ -119,9 +114,8 @@ RangeFacetType.propTypes = {
 };
 
 // Configure and render the FacetType component to render as text facet type.
-class TextFacetType extends React.Component {
-  removeTextValue(field) {
-    const { announcePolite, onChange } = this.props;
+const TextFacetType = function({ searchField, announcePolite, onChange}) {
+  function removeTextValue(field) {
     announcePolite(`Removed search term ${field.value}.`);
     // Setting this to '' or "" throws a fatal error.
     onChange(field, null);
@@ -147,15 +141,12 @@ class TextFacetType extends React.Component {
     }
   }
 
-  render() {
-    const { searchField } = this.props;
-    return (
-      <FacetType onClick={() => this.removeTextValue(searchField.field)}>
-        {searchField.value}
-      </FacetType>
-    );
-  }
-}
+  return (
+    <FacetType onClick={() => removeTextValue(searchField.field)}>
+      {searchField.value}
+    </FacetType>
+  );
+};
 TextFacetType.propTypes = {
   announcePolite: PropTypes.func.isRequired,
   onChange: PropTypes.func.isRequired,
