@@ -5,21 +5,27 @@ import moment from 'moment';
 import { LiveMessenger } from 'react-aria-live';
 import helpers from '../../helpers';
 
-
 // Create dumb component which can be configured by props.
-const FacetType = props => (
-  <button className="fs-applied-filters__filter" key={props.id} onClick={props.onClick}>
+const FacetType = ({ id, onClick, children }) => (
+  <button className="fs-applied-filters__filter" key={id} onClick={onClick} type="submit">
     <span className="fs-element-invisible">
       Remove filter
     </span>
-    {props.children}
+    {children}
   </button>
 );
+FacetType.propTypes = {
+  id: PropTypes.string.isRequired,
+  onClick: PropTypes.string.isRequired,
+  children: PropTypes.node.isRequired,
+};
 
 // Configure and render the FacetType component to render as list facet type.
-class ListFacetType extends React.Component {
-  removeListFacetValue(field, values, value) {
-    this.props.announcePolite(`Removed ${field.value} filter.`);
+const ListFacetType = function (props) {
+  function removeListFacetValue(field, values, value) {
+    const { announcePolite, onChange } = props;
+
+    announcePolite(`Removed ${field.value} filter.`);
 
     const {
       foundIdx,
@@ -47,64 +53,78 @@ class ListFacetType extends React.Component {
       }
 
       // Send query based on new state.
-      this.props.onChange(field, values.filter((v, i) => i !== foundIdx));
+      onChange(field, values.filter((v, i) => i !== foundIdx));
     }
   }
 
-  render() {
-    const { searchField } = this.props;
-    return (searchField.value.map((val, i) => (
-      <FacetType
-        key={i}
-        id={i}
-        onClick={() => this.removeListFacetValue(searchField.field, searchField.value, val)}
-      >
-        {/* Add spacing to hierarchical facet values: Type>Term = Type > Term. */}
-        {val.replace('>', ' > ')}
-      </FacetType>
-    )));
-  }
-}
+  const { searchField } = props;
+  return (searchField.value.map((val, i) => (
+    <FacetType
+      key={i}
+      id={i}
+      onClick={() => removeListFacetValue(searchField.field, searchField.value, val)}
+    >
+      {/* Add spacing to hierarchical facet values: Type>Term = Type > Term. */}
+      {val.replace('>', ' > ')}
+    </FacetType>
+  )));
+};
+ListFacetType.propTypes = {
+  announcePolite: PropTypes.func.isRequired,
+  onChange: PropTypes.func.isRequired,
+  searchField: PropTypes.shape({
+    field: PropTypes.string.isRequired,
+    value: PropTypes.string.isRequired,
+  }).isRequired,
+};
 
 // Configure and render the FacetType component to render as range facet type.
-class RangeFacetType extends React.Component {
-  removeRangeFacetValue(field) {
-    this.props.announcePolite(`Removed ${field.value} filter.`);
-    this.props.onChange(field, []);
+const RangeFacetType = function (props) {
+  function removeRangeFacetValue(field) {
+    const { announcePolite, onChange } = props;
+    announcePolite(`Removed ${field.value} filter.`);
+    onChange(field, []);
   }
 
-  render() {
-    const { searchField } = this.props;
-    // Create a moment from the search start date.
-    const start = moment(searchField.value[0]);
-    // Use UTC.
-    start.utc();
-    // Create a formatted string from start date.
-    const startFormatted = start.format('MM/DD/YYYY');
-    // Create a moment from search end date.
-    const end = moment(searchField.value[1]);
-    // Use utc.
-    end.utc();
-    // Create a formatted string from end date.
-    const endFormatted = end.format('MM/DD/YYYY');
-    // Determine if we chose the same or different start / end dates.
-    const diff = start.diff(end, 'days');
-    // Only show the start date if the same date were chosen, otherwise: start - end.
-    const filterValue = diff ? `${startFormatted} - ${endFormatted}` : startFormatted;
-    return (
-      <FacetType onClick={() => this.removeRangeFacetValue(searchField.field)}>
-        {filterValue}
-      </FacetType>
-    );
-  }
-}
+  const { searchField } = props;
+  // Create a moment from the search start date.
+  const start = moment(searchField.value[0]);
+  // Use UTC.
+  start.utc();
+  // Create a formatted string from start date.
+  const startFormatted = start.format('MM/DD/YYYY');
+  // Create a moment from search end date.
+  const end = moment(searchField.value[1]);
+  // Use utc.
+  end.utc();
+  // Create a formatted string from end date.
+  const endFormatted = end.format('MM/DD/YYYY');
+  // Determine if we chose the same or different start / end dates.
+  const diff = start.diff(end, 'days');
+  // Only show the start date if the same date were chosen, otherwise: start - end.
+  const filterValue = diff ? `${startFormatted} - ${endFormatted}` : startFormatted;
+  return (
+    <FacetType onClick={() => removeRangeFacetValue(searchField.field)}>
+      {filterValue}
+    </FacetType>
+  );
+};
+RangeFacetType.propTypes = {
+  announcePolite: PropTypes.func.isRequired,
+  onChange: PropTypes.func.isRequired,
+  searchField: PropTypes.shape({
+    value: PropTypes.arrayOf(PropTypes.string).isRequired,
+    field: PropTypes.string.isRequired,
+  }).isRequired,
+};
 
 // Configure and render the FacetType component to render as text facet type.
 class TextFacetType extends React.Component {
   removeTextValue(field) {
-    this.props.announcePolite(`Removed search term ${field.value}.`);
+    const { announcePolite, onChange } = this.props;
+    announcePolite(`Removed search term ${field.value}.`);
     // Setting this to '' or "" throws a fatal error.
-    this.props.onChange(field, null);
+    onChange(field, null);
     // Get current querystring params.
     const parsed = queryString.parse(window.location.search);
     // Remove the search term param, if it exists.
@@ -136,58 +156,66 @@ class TextFacetType extends React.Component {
     );
   }
 }
+TextFacetType.propTypes = {
+  announcePolite: PropTypes.func.isRequired,
+  onChange: PropTypes.func.isRequired,
+  searchField: PropTypes.shape({
+    field: PropTypes.string.isRequired,
+    value: PropTypes.string.isRequired,
+  }).isRequired,
+};
 
-class FederatedCurrentQuery extends React.Component {
-  render() {
-    const { query } = this.props;
+const FederatedCurrentQuery = (props) => {
+  const { onChange, query } = props;
 
-    const fields = query.searchFields.filter(searchField => searchField.value
-      && searchField.value.length > 0);
+  const fields = query.searchFields.filter((searchField) => searchField.value
+    && searchField.value.length > 0);
 
-    // Create a map of known facet type child components which can be rendered dynamically.
-    const facetTypes = {
-      'list-facet': ListFacetType,
-      'range-facet': RangeFacetType,
-      text: TextFacetType,
-    };
+  // Create a map of known facet type child components which can be rendered dynamically.
+  const facetTypes = {
+    'list-facet': ListFacetType,
+    'range-facet': RangeFacetType,
+    text: TextFacetType,
+  };
 
-    return (
-      <LiveMessenger>
-        {({ announcePolite }) => (
-          <React.Fragment>
-            {fields.length > 0 && // Only render this if there are filters applied.
-              <div className="fs-applied-filters">
-                <h2 className="fs-element-invisible">
-                  Currently Applied Search Filters.
-                </h2>
-                <p className="fs-element-invisible">
-                  Click a filter to remove it from your search query.
-                </p>
-                {/* Only render the values for visible facets / filters */}
-                {fields.filter(searchField => !searchField.isHidden).map((searchField, i) => {
-                  // Determine which child component to render.
-                  const MyFacetType = facetTypes[searchField.type];
-                  return (
-                    <MyFacetType
-                      {...this.props}
-                      key={i}
-                      searchField={searchField}
-                      announcePolite={announcePolite}
-                    />
-                  );
-                })}
-              </div>
-            }
-          </React.Fragment>
-        )}
-      </LiveMessenger>
-    );
-  }
-}
-
+  return (
+    <LiveMessenger>
+      {({ announcePolite }) => (
+        <>
+          {fields.length > 0 // Only render this if there are filters applied.
+            && (
+            <div className="fs-applied-filters">
+              <h2 className="fs-element-invisible">
+                Currently Applied Search Filters.
+              </h2>
+              <p className="fs-element-invisible">
+                Click a filter to remove it from your search query.
+              </p>
+              {/* Only render the values for visible facets / filters */}
+              {fields.filter((searchField) => !searchField.isHidden).map((searchField, i) => {
+                // Determine which child component to render.
+                const MyFacetType = facetTypes[searchField.type];
+                return (
+                  <MyFacetType
+                    key={i}
+                    searchField={searchField}
+                    announcePolite={announcePolite}
+                    onChange={onChange}
+                  />
+                );
+              })}
+            </div>
+            )}
+        </>
+      )}
+    </LiveMessenger>
+  );
+};
 FederatedCurrentQuery.propTypes = {
-  onChange: PropTypes.func,
-  query: PropTypes.object,
+  onChange: PropTypes.func.isRequired,
+  query: PropTypes.shape({
+    searchFields: PropTypes.arrayOf(PropTypes.object),
+  }).isRequired,
 };
 
 export default FederatedCurrentQuery;
