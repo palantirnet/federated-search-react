@@ -5,7 +5,6 @@ import AnimateHeight from 'react-animate-height';
 import helpers from '../../helpers';
 
 class FederatedListFacet extends React.Component {
-
   constructor(props) {
     super(props);
 
@@ -15,16 +14,18 @@ class FederatedListFacet extends React.Component {
     };
   }
 
-  handleClick(value) {
+  handleClick(clickValue) {
+    const { field, value, onChange } = this.props;
+
     const {
       foundIdx,
       parsed,
       isQsParamField,
       param,
     } = helpers.qs.getFieldQsInfo({
-      field: this.props.field,
-      values: this.props.value,
-      value,
+      field,
+      values: value,
+      value: clickValue,
     });
 
     // Define var for new parsed qs params object.
@@ -38,35 +39,35 @@ class FederatedListFacet extends React.Component {
         if (param) {
           // Add value to parsed qs params.
           newParsed = helpers.qs.addValueToQsParam({
-            field: this.props.field,
-            value,
+            field,
+            value: clickValue,
             param,
             parsed,
           });
         } else { // If there is not already a qs param for this field value.
           // Add new qs param for field + value.
           newParsed = helpers.qs.addQsParam({
-            field: this.props.field,
-            value,
+            field,
+            value: clickValue,
             parsed,
           });
         }
 
         // Send new query based on app state.
-        this.props.onChange(this.props.field, this.props.value.concat(value));
+        onChange(field, value.concat(clickValue));
       } else { // If the click is removing this field value.
         // If their is already a qs param for this field value.
         if (param) {
           newParsed = helpers.qs.removeValueFromQsParam({
-            field: this.props.field,
-            value,
+            field,
+            value: clickValue,
             param,
             parsed,
           });
         }
 
         // Send new query based on app state.
-        this.props.onChange(this.props.field, this.props.value.filter((v, i) => i !== foundIdx));
+        onChange(field, value.filter((v, i) => i !== foundIdx));
       }
 
       helpers.qs.addNewUrlToBrowserHistory(newParsed);
@@ -74,18 +75,25 @@ class FederatedListFacet extends React.Component {
   }
 
   toggleExpand(hierarchyFacetValue) {
-    this.props.onSetCollapse(this.props.field, !(this.props.collapse || false));
+    const {
+      onSetCollapse,
+      field,
+      collapse,
+      expandedHierarchies,
+    } = this.props;
+
+    onSetCollapse(field, !collapse);
     // If this is a hierarchical list facet.
     if (hierarchyFacetValue) {
       // Determine the current state of the expanded hierarchical list facets.
-      const indexOfExpandedHierarchyFacetValue = this.props.expandedHierarchies
+      const indexOfExpandedHierarchyFacetValue = expandedHierarchies
         .indexOf(hierarchyFacetValue);
       if (indexOfExpandedHierarchyFacetValue > -1) {
         // This accordion is currently expanded, so collapse it.
-        this.props.expandedHierarchies.splice(indexOfExpandedHierarchyFacetValue,1);
+        expandedHierarchies.splice(indexOfExpandedHierarchyFacetValue, 1);
       } else {
         // This accordion is currently collapsed, so expand it.
-        this.props.expandedHierarchies.push(hierarchyFacetValue);
+        expandedHierarchies.push(hierarchyFacetValue);
       }
     }
   }
@@ -100,9 +108,9 @@ class FederatedListFacet extends React.Component {
       hierarchy,
       options,
     } = this.props;
-    const { truncateFacetListsAt } = this.state;
+    const { truncateFacetListsAt, filter } = this.state;
 
-    const siteList = options.siteList;
+    const { siteList } = options;
     const facetCounts = facets.filter((facet, i) => i % 2 === 1);
     const facetValues = facets.filter((facet, i) => i % 2 === 0);
     // Create an object of facets {value: count} to keep consistent for inputs.
@@ -120,15 +128,14 @@ class FederatedListFacet extends React.Component {
       if (value.length < 1 && Object.keys(facetInputs).length < 2) {
         return null;
       }
-    }
-    else {
+    } else {
       facetValues.forEach((v, i) => {
         const key = facetValues[i];
         facetInputs[key] = facetCounts[i];
       });
     }
 
-    const expanded = !(collapse || false);
+    const expanded = !collapse;
     const height = expanded ? 'auto' : 0;
 
     // If we need to generate multiple list-fact accordion groups
@@ -151,6 +158,8 @@ class FederatedListFacet extends React.Component {
       // }
       const terms = {};
       facetValues.forEach((facetValue, i) => {
+        const { expandedHierarchies } = this.props;
+
         // Create array of [Type, Term] from Type>Term.
         const pieces = facetValue.split('>');
         types.push(pieces[0]);
@@ -158,7 +167,7 @@ class FederatedListFacet extends React.Component {
         if (!Object.hasOwnProperty.call(terms, pieces[0])) {
           terms[pieces[0]] = {};
           terms[pieces[0]].items = [];
-          terms[pieces[0]].expanded = (this.props.expandedHierarchies.indexOf(pieces[0]) > -1);
+          terms[pieces[0]].expanded = (expandedHierarchies.indexOf(pieces[0]) > -1);
           terms[pieces[0]].height = terms[pieces[0]].expanded ? 'auto' : 0;
         }
         // Add the object for this facet value to the array of terms for this type.
@@ -178,31 +187,41 @@ class FederatedListFacet extends React.Component {
       const listFacetHierarchyLis = [];
       // Define array of checkbox Lis which we'll populate with react fragments, per type.
       const listFacetHierarchyTermsLis = [];
+
+      /* eslint-disable react/no-array-index-key */
+
       // Iterate through types (accordion lis).
       uniqueTypes.forEach((type, i) => {
         // Populate the checkbox lis react fragments for each type.
         listFacetHierarchyTermsLis[type] = [];
-        terms[type].items.forEach((termObj, i) => termObj.facetCount
-          && listFacetHierarchyTermsLis[type].push(<li className="fs-search-accordion__content-item" key={`${termObj.term}_${termObj.facetValue}_${i}`}>
-            <label className="fs-search-accordion__checkbox-label">
-            <input
-              type="checkbox"
-              name={type}
-              className="fs-search-accordion__checkbox-input"
-              value={termObj.facetValue}
-              checked={value.indexOf(termObj.facetValue) > -1}
-              onChange={() => this.handleClick(termObj.facetValue)}
-            /> {termObj.term}
-              <span className="facet-item-amount"> ({termObj.facetCount}
-                <span className="fs-element-invisible">results</span>)
-              </span>
-            </label>
-          </li>));
+        terms[type].items.forEach((termObj, j) => termObj.facetCount
+          && listFacetHierarchyTermsLis[type].push(
+            <li className="fs-search-accordion__content-item" key={`${termObj.term}_${termObj.facetValue}_${j}`}>
+              {/* eslint jsx-a11y/label-has-associated-control: ["error", { assert: "either" } ] */}
+              <label className="fs-search-accordion__checkbox-label">
+                <input
+                  type="checkbox"
+                  name={type}
+                  className="fs-search-accordion__checkbox-input"
+                  value={termObj.facetValue}
+                  checked={value.indexOf(termObj.facetValue) > -1}
+                  onChange={() => this.handleClick(termObj.facetValue)}
+                />
+                {` ${termObj.term}`}
+                <span className="facet-item-amount">
+                  {` (${termObj.facetCount})`}
+                  <span className="fs-element-invisible">results</span>
+                </span>
+              </label>
+            </li>,
+          ));
 
         // Populate the accordion lis array with all of its checkboxes.
+        /* eslint no-unused-expressions: [2, { allowShortCircuit: true }] */
         listFacetHierarchyTermsLis[type].length && listFacetHierarchyLis.push(
           <li className="fs-search-accordion__content-item" id={`solr-list-facet-${type}`} key={`solr-list-facet-${type}-${i}`}>
             <div
+              role="button"
               tabIndex="0"
               className={cx('fs-search-accordion__title', { 'js-fs-search-accordion-open': terms[type].expanded })}
               id={label.replace(/\s+/g, '-').toLowerCase()}
@@ -213,7 +232,8 @@ class FederatedListFacet extends React.Component {
                 }
               }}
             >
-              <span className="fs-element-invisible">Toggle filter group for</span> {type}
+              <span className="fs-element-invisible">Toggle filter group for</span>
+              {type}
             </div>
             <AnimateHeight
               duration={600}
@@ -223,8 +243,12 @@ class FederatedListFacet extends React.Component {
                 {listFacetHierarchyTermsLis[type]}
               </ul>
             </AnimateHeight>
-          </li>);
+          </li>,
+        );
       });
+
+      /* eslint-enable react/no-array-index-key */
+
       // Render the group of accordion lis with their facet value checkbox lists.
       return listFacetHierarchyLis;
     }
@@ -233,6 +257,7 @@ class FederatedListFacet extends React.Component {
     return (
       <li className="fs-search-accordion__group-item" id={`solr-list-facet-${field}`}>
         <div
+          role="button"
           tabIndex="0"
           className={cx('fs-search-accordion__title', { 'js-fs-search-accordion-open': expanded })}
           id={label.replace(/\s+/g, '-').toLowerCase()}
@@ -243,7 +268,8 @@ class FederatedListFacet extends React.Component {
             }
           }}
         >
-          <span className="fs-element-invisible">Toggle filter group for</span> {label}
+          <span className="fs-element-invisible">Toggle filter group for</span>
+          {label}
         </div>
         <AnimateHeight
           duration={600}
@@ -252,9 +278,9 @@ class FederatedListFacet extends React.Component {
           <ul className="fs-search-accordion__content" key={`solr-list-facet-${field}-ul`}>
             {facetValues.filter((facetValue, i) => facetInputs[facetValue] > 0
                 && (truncateFacetListsAt < 0 || i < truncateFacetListsAt))
-              .map((facetValue, i) => {
-                if (this.state.filter.length === 0
-                  || facetValue.toLowerCase().indexOf(this.state.filter.toLowerCase()) > -1) {
+              .map((facetValue) => {
+                if (filter.length === 0
+                  || facetValue.toLowerCase().indexOf(filter.toLowerCase()) > -1) {
                   return (
                     <li className="fs-search-accordion__content-item" key={`${facetValue}_${facetInputs[facetValue]}`}>
                       <label className="fs-search-accordion__checkbox-label">
@@ -264,9 +290,11 @@ class FederatedListFacet extends React.Component {
                           value={facetValue}
                           checked={value.indexOf(facetValue) > -1}
                           onChange={() => this.handleClick(facetValue)}
-                        /> {facetValue}
-                        <span className="facet-item-amount"> ({facetInputs[facetValue]}
-                          <span className="fs-element-invisible">results</span>)
+                        />
+                        {` ${facetValue}`}
+                        <span className="facet-item-amount">
+                          {` (${facetInputs[facetValue]})`}
+                          <span className="fs-element-invisible">results</span>
                         </span>
                       </label>
                     </li>
@@ -285,24 +313,28 @@ FederatedListFacet.defaultProps = {
   hierarchy: false,
   expandedHierarchies: [],
   value: [],
+  collapse: false,
 };
 
 FederatedListFacet.propTypes = {
-  bootstrapCss: PropTypes.bool,
-  children: PropTypes.array,
   collapse: PropTypes.bool,
-  expandedHierarchies: PropTypes.array,
-  facetSort: PropTypes.string,
-  facets: PropTypes.array.isRequired,
+  expandedHierarchies: PropTypes.arrayOf(PropTypes.string),
+  facets: PropTypes.arrayOf(
+    PropTypes.arrayOf(PropTypes.number),
+  ).isRequired,
   field: PropTypes.string.isRequired,
   hierarchy: PropTypes.bool,
-  label: PropTypes.string,
-  onChange: PropTypes.func,
-  onFacetSortChange: PropTypes.func,
-  onSetCollapse: PropTypes.func,
-  query: PropTypes.object,
-  truncateFacetListsAt: PropTypes.number,
-  value: PropTypes.array,
+  label: PropTypes.string.isRequired,
+  onChange: PropTypes.func.isRequired,
+  onSetCollapse: PropTypes.func.isRequired,
+  truncateFacetListsAt: PropTypes.number.isRequired,
+  value: PropTypes.arrayOf(PropTypes.number),
+  options: PropTypes.shape({
+    siteList: PropTypes.shape({
+      length: PropTypes.number,
+      indexOf: PropTypes.func,
+    }),
+  }).isRequired,
 };
 
 export default FederatedListFacet;
