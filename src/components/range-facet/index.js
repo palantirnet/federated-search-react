@@ -54,7 +54,7 @@ class FederatedRangeFacet extends React.Component {
 
   toggleExpand() {
     const { onSetCollapse, field, collapse } = this.props;
-    onSetCollapse(field, collapse);
+    onSetCollapse(field, !collapse);
   }
 
   render() {
@@ -64,7 +64,7 @@ class FederatedRangeFacet extends React.Component {
 
     const { startDate, endDate, focusedInput } = this.state;
 
-    const expanded = collapse;
+    const expanded = !collapse;
     const height = expanded ? 'auto' : 0;
 
     // Set better react date props for responsive behavior.
@@ -108,7 +108,13 @@ class FederatedRangeFacet extends React.Component {
                 startDateId="solr-start-date" // PropTypes.string.isRequired,
                 endDate={endDate} // momentPropTypes.momentObj or null,
                 endDateId="solr-end-date" // PropTypes.string.isRequired,
-                onDatesChange={({ newStartDate, newEndDate }) => this.handleDatesChange(
+                // We need to rename the destructured date variables, because they are already used
+                // in the outer scope.
+                // See https://wesbos.com/destructuring-renaming
+                onDatesChange={({
+                  startDate: newStartDate,
+                  endDate: newEndDate,
+                }) => this.handleDatesChange(
                   newStartDate,
                   newEndDate,
                 )} // PropTypes.func.isRequired,
@@ -177,9 +183,7 @@ FederatedRangeFacet.defaultProps = {
 
 FederatedRangeFacet.propTypes = {
   collapse: PropTypes.bool,
-  facets: PropTypes.arrayOf(
-    PropTypes.arrayOf(PropTypes.number),
-  ).isRequired,
+  facets: PropTypes.arrayOf(PropTypes.string).isRequired,
   field: PropTypes.string.isRequired,
   label: PropTypes.string.isRequired,
   onChange: PropTypes.func.isRequired,
