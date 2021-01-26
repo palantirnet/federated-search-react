@@ -1,27 +1,31 @@
 import PropTypes from 'prop-types';
-import React from "react";
+import React from 'react';
 import 'intl';
 import 'intl/locale-data/jsonp/en';
 import url from 'url';
 
 // Custom class for the result component
 class FederatedResult extends React.Component {
-  renderValue(field, doc) {
-    const value = [].concat(doc[field] || null).filter((v) => v !== null);
-
-    return value.join(", ");
-  }
-
-  dateFormat(date){
+  static dateFormat(date) {
     if (typeof date !== 'undefined') {
-      const prettyDate =  new Intl.DateTimeFormat('en-US', {
+      const prettyDate = new Intl.DateTimeFormat('en-US', {
         year: 'numeric',
         month: 'long',
-        day: 'numeric'
+        day: 'numeric',
       }).format(Date.parse(date));
-      const separator = "  ·  ";
+      const separator = '  ·  ';
       return separator + prettyDate;
     }
+
+    return null;
+  }
+
+  static intersperse(arr, sep) {
+    if (arr.length === 0) {
+      return [];
+    }
+
+    return arr.slice(1).reduce((xs, x) => xs.concat([sep, x]), [arr[0]]);
   }
 
   /**
@@ -71,27 +75,19 @@ class FederatedResult extends React.Component {
     return '';
   }
 
-  intersperse(arr, sep) {
-    if (arr.length === 0) {
-      return [];
-    }
+  static renderValue(field, doc) {
+    const value = [].concat(doc[field] || null).filter((v) => v !== null);
 
-    return arr.slice(1).reduce(function(xs, x, i) {
-      return xs.concat([sep, x]);
-    }, [arr[0]]);
+    return value.join(', ');
   }
 
-  renderSitenameLinks(sitenames, urls, originalSitename) {
+  static renderSitenameLinks(sitenames, urls, originalSitename) {
     if (sitenames != null && urls != null) {
-
-      var sites = [];
-      for (var i = 0; i < sitenames.length; i++) {
+      const sites = [];
+      for (let i = 0; i < sitenames.length; i += 1) {
         sites.push(<a className="fs-search-results__site-name" href={urls[i]} key={i}>{sitenames[i]}</a>);
-        if (i !== (sitenames.length - 1)) {
-
-        }
       }
-      return this.intersperse(sites, " | ");
+      return FederatedResult.intersperse(sites, ' | ');
     }
 
     if (originalSitename != null) {
@@ -102,34 +98,52 @@ class FederatedResult extends React.Component {
   }
 
   render() {
-    const { doc, highlight } = this.props;
+    const { doc, highlight, onSelect } = this.props;
 
+    // The link text in the returned result gets set by React.
+    // TODO: move onClick to interactive element and add key event.
+    /* eslint-disable jsx-a11y/control-has-associated-label, jsx-a11y/click-events-have-key-events,
+       jsx-a11y/no-noninteractive-element-interactions */
     return (
-      <li className="fs-search-results__item" onClick={() => this.props.onSelect(doc)}>
-        {doc.ss_federated_image &&
+      <li className="fs-search-results__item" onClick={() => onSelect(doc)}>
+        {doc.ss_federated_image
+        && (
         <div className="fs-search-results__container--left">
-          <img className="fs-search-results__image" src={doc.ss_federated_image} alt=""/>
+          <img className="fs-search-results__image" src={doc.ss_federated_image} alt="" />
         </div>
-        }
+        )}
         <div className="fs-search-results__container--right">
           <span className="fs-search-results__label">{doc.ss_federated_type}</span>
-          <h3 className="fs-search-results__heading"><a href={this.getCanonicalLink(doc)} dangerouslySetInnerHTML={{__html: doc.ss_federated_title}} /></h3>
+          <h3 className="fs-search-results__heading"><a href={this.getCanonicalLink(doc)} dangerouslySetInnerHTML={{ __html: doc.ss_federated_title }} /></h3>
           <div className="fs-search-results__meta">
-            <cite className="fs-search-results__citation">{this.renderSitenameLinks(doc.sm_site_name, doc.sm_urls, doc.ss_site_name)}</cite>
-            <span className="fs-search-results__date">{this.dateFormat(doc.ds_federated_date)}</span>
+            <cite className="fs-search-results__citation">{FederatedResult.renderSitenameLinks(doc.sm_site_name, doc.sm_urls, doc.ss_site_name)}</cite>
+            <span className="fs-search-results__date">{FederatedResult.dateFormat(doc.ds_federated_date)}</span>
           </div>
-          <p className="fs-search-results__teaser" dangerouslySetInnerHTML={{__html: highlight.tm_rendered_item}} />
+          <p className="fs-search-results__teaser" dangerouslySetInnerHTML={{ __html: highlight.tm_rendered_item }} />
         </div>
       </li>
-    )
+    );
+    /* eslint-enable jsx-a11y/control-has-associated-label */
   }
 }
 
 FederatedResult.propTypes = {
-  doc: PropTypes.object,
-  fields: PropTypes.array,
+  doc: PropTypes.shape({
+    ss_canonical_url: PropTypes.string,
+    sm_urls: PropTypes.arrayOf(PropTypes.string),
+    ss_url: PropTypes.string,
+    ss_federated_image: PropTypes.string,
+    ss_federated_type: PropTypes.string,
+    ss_federated_title: PropTypes.string,
+    sm_site_name: PropTypes.arrayOf(PropTypes.string),
+    ss_site_name: PropTypes.string,
+    ds_federated_date: PropTypes.string,
+  }).isRequired,
   onSelect: PropTypes.func.isRequired,
-    hostname: PropTypes.string,
+  hostname: PropTypes.string.isRequired,
+  highlight: PropTypes.shape({
+    tm_rendered_item: PropTypes.string,
+  }).isRequired,
 };
 
 export default FederatedResult;
