@@ -32,7 +32,7 @@ function searchResultsStat(currentPage, numFound, rows, pageAmt, noResultsText, 
     a11yMessage = `Showing ${numFound} results.`;
     message = (
       <span>
-        Showing
+        {'Showing '}
         <b>{numFound}</b>
         {' '}
         results.
@@ -42,7 +42,7 @@ function searchResultsStat(currentPage, numFound, rows, pageAmt, noResultsText, 
     a11yMessage = `Showing ${numFound} result.`;
     message = (
       <span>
-        Showing
+        {'Showing '}
         <b>{numFound}</b>
         {' '}
         result.
