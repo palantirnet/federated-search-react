@@ -32,6 +32,7 @@ class FederatedTextSearchAsYouType extends React.Component {
     this.shouldRenderSuggestions = this.shouldRenderSuggestions.bind(this);
   }
 
+  /* eslint-disable-next-line camelcase */
   UNSAFE_componentWillReceiveProps(nextProps) {
     // nextProps.value will be null if the filter is reset.
     // The logic here is rather tortured, which seemed a better option
@@ -40,28 +41,66 @@ class FederatedTextSearchAsYouType extends React.Component {
     // The 'reset' state indicates that we should reset the field. The
     // 'active' variable indicates that we are clearing the field and
     // should not act on the nextProps value.
-    var active = false;
+    const { value } = this.props;
+    const { reset, suggestions } = this.state;
+    let active = false;
     if (nextProps.value !== null) {
       this.setState({
         reset: true,
       });
       active = false;
     }
-    if (nextProps.value === null && this.state.reset === true) {
+    if (nextProps.value === null && reset === true) {
       this.setState({
-        value: "",
+        value: '',
         suggestions: [],
         reset: false,
       });
       active = true;
     }
-    if ((this.state.value !== "" || this.props.value !== null) && active === false) {
+    const { value: stateValue } = this.state;
+    if ((stateValue !== '' || value !== null) && active === false) {
       this.setState({
         value: nextProps.suggestQuery && nextProps.suggestQuery.value
           ? nextProps.suggestQuery.value
           : nextProps.value,
-        suggestions: nextProps.suggestions ? nextProps.suggestions.docs : this.state.suggestions,
+        suggestions: nextProps.suggestions ? nextProps.suggestions.docs : suggestions,
       });
+    }
+  }
+
+  handleInputKeyDown(event) {
+    // Call submit handler when enter is pressed while text input
+    // has focused.  This functionality is prevented by the
+    // onSuggestionSelected method.
+    if (event.keyCode === 13 && !event.defaultPrevented) {
+      this.handleSubmit();
+    }
+
+    // Clear and close suggetsions.
+    if (event.keyCode === 27) {
+      this.onSuggestionsClearRequested();
+    }
+  }
+
+  // Trigger search query execution by updating the current URL based
+  // on current state.
+  handleSubmit() {
+    const { onChange, field } = this.props;
+    const { value } = this.state;
+    onChange(field, value);
+    // Get existing querystring params.
+    const parsed = queryString.parse(window.location.search);
+    // Update the search querystring param with the value from the search field.
+    parsed.search = value;
+    const stringified = queryString.stringify(parsed);
+    // Update the querystring params in the browser, add path to history.
+    // See: https://developer.mozilla.org/en-US/docs/Web/API/History_API#The_pushState()_method
+    if (window.history.pushState) {
+      const newUrl = `${window.location.protocol}//${window.location.host}${window.location.pathname}?${stringified}`;
+      window.history.pushState({ path: newUrl }, '', newUrl);
+    } else {
+      window.location.search = stringified;
     }
   }
 
@@ -83,19 +122,15 @@ class FederatedTextSearchAsYouType extends React.Component {
    *       but can also be that they pressed Backspace, pasted something into the input, etc.)
    */
   onChange(event, { newValue, method }) {
+    const { suggestQuery } = this.props;
     if (method === 'type') {
       this.setState({
         value: newValue,
       });
 
       // Ensure that the suggestQuery.value prop gets cleared on backspace / cut.
-      this.props.suggestQuery.value = newValue;
+      suggestQuery.value = newValue;
     }
-  }
-
-  // Called every time you need to recalculate suggestions.
-  onSuggestionsFetchRequested({ value }) {
-    this.loadSuggestions(value);
   }
 
   /**
@@ -119,13 +154,19 @@ class FederatedTextSearchAsYouType extends React.Component {
    *     'enter' - user selected the suggestion using Enter
    */
   onSuggestionSelected(event, { suggestion, method }) {
-    const { mode } = this.props.autocomplete;
+    const { autocomplete } = this.props;
+    const { mode } = autocomplete;
     // If results are rendered, redirect to the result url and prevent search execution.
     if (mode === 'result' && (event.keyCode === 13 || method === 'click')) {
       event.preventDefault(); // don't submit the search query
       event.stopPropagation(); // don't bubble up event
       window.location.assign(suggestion.sm_urls[0]); // redirect to the selected item
     }
+  }
+
+  // Called every time you need to recalculate suggestions.
+  onSuggestionsFetchRequested({ value }) {
+    this.loadSuggestions(value);
   }
 
   // Called every time you need to set suggestions to [].
@@ -139,7 +180,8 @@ class FederatedTextSearchAsYouType extends React.Component {
   // When user navigates the suggestions using the Up and Down keys,
   // the input value should be set according to the highlighted suggestion.
   getSuggestionValue(suggestion) {
-    const { mode } = this.props.autocomplete;
+    const { autocomplete } = this.props;
+    const { mode } = autocomplete;
     if (mode === 'result') return false;
     if (mode === 'term') {
       return suggestion.ss_federated_title; // @todo get the value of the term
@@ -150,68 +192,38 @@ class FederatedTextSearchAsYouType extends React.Component {
   // Gets search suggestions based on input.
   // @todo support different modes: term, results
   loadSuggestions(value) {
+    const { onSuggest, query, autocomplete } = this.props;
     // Run typeahead search query based on the autocomplete config and current value.
-    this.props.onSuggest(this.props.query, this.props.autocomplete, value);
-  }
-
-  handleInputKeyDown(event) {
-    // Call submit handler when enter is pressed while text input
-    // has focused.  This functionality is prevented by the
-    // onSuggestionSelected method.
-    if (event.keyCode === 13 && !event.defaultPrevented) {
-      this.handleSubmit();
-    }
-
-    // Clear and close suggetsions.
-    if (event.keyCode === 27) {
-      this.onSuggestionsClearRequested();
-    }
-  }
-
-  // Trigger search query execution by updating the current URL based
-  // on current state.
-  handleSubmit() {
-    this.props.onChange(this.props.field, this.state.value);
-    // Get existing querystring params.
-    const parsed = queryString.parse(window.location.search);
-    // Update the search querystring param with the value from the search field.
-    parsed.search = this.state.value;
-    const stringified = queryString.stringify(parsed);
-    // Update the querystring params in the browser, add path to history.
-    // See: https://developer.mozilla.org/en-US/docs/Web/API/History_API#The_pushState()_method
-    if (window.history.pushState) {
-      const newUrl = `${window.location.protocol}//${window.location.host}${window.location.pathname}?${stringified}`;
-      window.history.pushState({ path: newUrl }, '', newUrl);
-    } else {
-      window.location.search = stringified;
-    }
+    onSuggest(query, autocomplete, value);
   }
 
   // When the input is focused, Autosuggest will consult this function
   // when to render suggestions. Use it, for example, if you want to
   // display suggestions when input value is at least 2 characters long.
   shouldRenderSuggestions(value) {
-    const numChars = this.props.autocomplete.numChars || 2;
+    const { autocomplete } = this.props;
+    const numChars = autocomplete.numChars || 2;
     return value.trim().length > numChars;
   }
 
   renderSuggestionsContainer({ containerProps, children, query }) {
-    const { mode } = this.props.autocomplete;
-    const hasResultModeConfig = Object.hasOwnProperty.call(this.props.autocomplete, 'result');
-    const hasTermModeConfig = Object.hasOwnProperty.call(this.props.autocomplete, 'term');
-    const resultTitleText = hasResultModeConfig && this.props.autocomplete.result.titleText
-      ? this.props.autocomplete.result.titleText
+    const { autocomplete } = this.props;
+    const { mode } = autocomplete;
+    const hasResultModeConfig = Object.hasOwnProperty.call(autocomplete, 'result');
+    const hasTermModeConfig = Object.hasOwnProperty.call(autocomplete, 'term');
+    const resultTitleText = hasResultModeConfig && autocomplete.result.titleText
+      ? autocomplete.result.titleText
       : 'What are you looking for?';
     const resultShowDirectionsText = hasResultModeConfig
-      && Object.hasOwnProperty.call(this.props.autocomplete.result, 'showDirectionsText')
-      ? this.props.autocomplete.result.showDirectionsText
+      && Object.hasOwnProperty.call(autocomplete.result, 'showDirectionsText')
+      ? autocomplete.result.showDirectionsText
       : true;
-    const termTitleText = hasTermModeConfig && this.props.autocomplete.term.titleText
-      ? this.props.autocomplete.term.titleText
+    const termTitleText = hasTermModeConfig && autocomplete.term.titleText
+      ? autocomplete.term.titleText
       : 'Suggested search terms';
     const termShowDirectionsText = hasTermModeConfig
-      && Object.hasOwnProperty.call(this.props.autocomplete.term, 'showDirectionsText')
-      ? this.props.autocomplete.term.showDirectionsText
+      && Object.hasOwnProperty.call(autocomplete.term, 'showDirectionsText')
+      ? autocomplete.term.showDirectionsText
       : true;
 
     const titleText = mode === 'term' ? termTitleText : resultTitleText;
@@ -222,21 +234,39 @@ class FederatedTextSearchAsYouType extends React.Component {
       : 'react-autosuggest__suggestions-itemslist-wrapper';
 
     return (
+      /* eslint-disable-next-line react/jsx-props-no-spreading */
       <div {... containerProps}>
         <div className="react-autosuggest__container-title">
           {titleText}
-          <button className="react-autosuggest__container-close-button" onClick={this.onSuggestionsClearRequested}>x</button>
+          <button type="submit" className="react-autosuggest__container-close-button" onClick={this.onSuggestionsClearRequested}>x</button>
         </div>
         <div className={suggestionsWrapperClasses}>
           {children}
         </div>
         {/* @todo add logic for suggestion mode and alter directionsText accordingly */}
-        {directionsText &&
+        {directionsText
+          && (
           <div className="react-autosuggest__container-directions">
-            <span className="react-autosuggest__container-directions-item">Press <code>ENTER</code> to search for <strong>{query}</strong> or <code>ESC</code> to close.</span>
-            <span className="react-autosuggest__container-directions-item">Press ↑ and ↓ to highlight a suggestion then <code>ENTER</code> to be redirected to that suggestion.</span>
+            <span className="react-autosuggest__container-directions-item">
+              Press
+              <code>ENTER</code>
+              {' '}
+              to search for
+              <strong>{query}</strong>
+              {' '}
+              or
+              <code>ESC</code>
+              {' '}
+              to close.
+            </span>
+            <span className="react-autosuggest__container-directions-item">
+              Press ↑ and ↓ to highlight a suggestion then
+              <code>ENTER</code>
+              {' '}
+              to be redirected to that suggestion.
+            </span>
           </div>
-        }
+          )}
       </div>
     );
   }
@@ -261,15 +291,17 @@ class FederatedTextSearchAsYouType extends React.Component {
    * @return a ReactElement
    */
   renderSuggestion(suggestion, { query }) {
+    const { autocomplete } = this.props;
+    const { suggestions } = this.state;
     // Determine if we are returning results or terms. @todo or both
-    const { mode } = this.props.autocomplete;
+    const { mode } = autocomplete;
     // Decode any html entities that come from title.
     const decodedTitle = he.decode(suggestion.ss_federated_title);
     // Wrap the query partial string in <b>.
     const highlightedTitle = helpers.highlightText(decodedTitle, query);
     // Define a11y message i.e. (1 of 3) to append to suggestion text.
-    const currentHumanIndex = this.state.suggestions.indexOf(suggestion) + 1;
-    const suggestionsLength = this.state.suggestions.length;
+    const currentHumanIndex = suggestions.indexOf(suggestion) + 1;
+    const suggestionsLength = suggestions.length;
 
     // Render plain text for search term suggestions.
     // @todo update this when we have a return structure for terms.
@@ -296,6 +328,7 @@ class FederatedTextSearchAsYouType extends React.Component {
   static renderInputComponent(inputProps) {
     return (
       <div className="fs-search-form__input-wrapper">
+        {/* eslint-disable-next-line react/jsx-props-no-spreading */}
         <input {...inputProps} />
       </div>
     );
@@ -318,7 +351,7 @@ class FederatedTextSearchAsYouType extends React.Component {
     };
 
     return (
-      <React.Fragment>
+      <>
         <label htmlFor="search" className="fs-search-form__label">{label}</label>
         <div className="fs-search-form__autocomplete-container">
           {/* @see: https://github.com/moroshko/react-autosuggest#react-autosuggest */}
@@ -345,7 +378,7 @@ class FederatedTextSearchAsYouType extends React.Component {
             <SearchIcon />
           </button>
         </div>
-      </React.Fragment>
+      </>
     );
   }
 }
@@ -356,6 +389,11 @@ FederatedTextSearchAsYouType.defaultProps = {
   suggestQuery: {
     value: '',
   },
+};
+
+FederatedTextSearchAsYouType.defaultProps = {
+  suggestions: [],
+  query: '',
 };
 
 FederatedTextSearchAsYouType.propTypes = {
@@ -386,6 +424,8 @@ FederatedTextSearchAsYouType.propTypes = {
     value: PropTypes.string,
   }),
   value: PropTypes.string,
+  suggestions: PropTypes.arrayOf(PropTypes.string),
+  query: PropTypes.string,
 };
 
 export default FederatedTextSearchAsYouType;
