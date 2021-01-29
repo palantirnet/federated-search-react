@@ -64,6 +64,7 @@ class FederatedTextSearchAsYouType extends React.Component {
         value: nextProps.suggestQuery && nextProps.suggestQuery.value
           ? nextProps.suggestQuery.value
           : nextProps.value,
+        /* eslint-disable-next-line react/prop-types */
         suggestions: nextProps.suggestions ? nextProps.suggestions.docs : suggestions,
       });
     }
@@ -389,10 +390,6 @@ FederatedTextSearchAsYouType.defaultProps = {
   suggestQuery: {
     value: '',
   },
-};
-
-FederatedTextSearchAsYouType.defaultProps = {
-  suggestions: [],
   query: '',
 };
 
@@ -424,7 +421,6 @@ FederatedTextSearchAsYouType.propTypes = {
     value: PropTypes.string,
   }),
   value: PropTypes.string,
-  suggestions: PropTypes.arrayOf(PropTypes.string),
   query: PropTypes.string,
 };
 
