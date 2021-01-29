@@ -19,6 +19,7 @@ class FederatedTextSearchNoAutocomplete extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
+  /* eslint-disable-next-line camelcase */
   UNSAFE_componentWillReceiveProps(nextProps) {
     this.setState({
       value: nextProps.value,
@@ -38,11 +39,14 @@ class FederatedTextSearchNoAutocomplete extends React.Component {
   }
 
   handleSubmit() {
-    this.props.onChange(this.props.field, this.state.value);
+    const { onChange, field } = this.props;
+    const { value } = this.state;
+
+    onChange(field, value);
     // Get existing querystring params.
     const parsed = queryString.parse(window.location.search);
     // Update the search querystring param with the value from the search field.
-    parsed.search = this.state.value;
+    parsed.search = value;
     const stringified = queryString.stringify(parsed);
     // Update the querystring params in the browser, add path to history.
     // See: https://developer.mozilla.org/en-US/docs/Web/API/History_API#The_pushState()_method
@@ -56,9 +60,10 @@ class FederatedTextSearchNoAutocomplete extends React.Component {
 
   render() {
     const { label } = this.props;
+    const { value } = this.state;
 
     return (
-      <React.Fragment>
+      <>
         <label htmlFor="search" className="fs-search-form__label">{label}</label>
         <div className="fs-search-form__input-wrapper">
           <input
@@ -66,20 +71,22 @@ class FederatedTextSearchNoAutocomplete extends React.Component {
             name="search"
             id="search"
             className="fs-search-form__input"
+            /* eslint-disable-next-line jsx-a11y/no-autofocus */
             autoFocus
             onChange={this.handleInputChange}
             onKeyDown={this.handleInputKeyDown}
-            value={this.state.value || ''}
+            value={value || ''}
           />
           <button
             type="submit"
             className="fs-search-form__submit"
-            onClick={this.handleSubmit}>
+            onClick={this.handleSubmit}
+          >
             <span className="fs-element-invisible">Perform Search</span>
             <SearchIcon />
           </button>
         </div>
-      </React.Fragment>
+      </>
     );
   }
 }
