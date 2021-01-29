@@ -10,6 +10,11 @@ import helpers from './helpers';
 // import search app boilerplate styles
 import './styles.css';
 
+/* eslint no-param-reassign: [
+  "error",
+  { "props": true, "ignorePropertyModificationsFor": ["searchField"] }
+] */
+
 /**
  * Executes search query based on the value of URL querystring params.
  *
@@ -22,21 +27,22 @@ const searchFromQuerystring = (solrClient, options = {}) => {
   // Get existing querystring params.
   const { parsed, params } = helpers.qs.getParsedQsAndParams();
 
-  let searchFieldsState = solrClient.state.query.searchFields;
+  const searchFieldsState = solrClient.state.query.searchFields;
 
   // Set the state for searchFields based on qs params.
   searchFieldsState.forEach((searchField) => {
     // Get the field machine name for the main query field.
-    if (Object.prototype.hasOwnProperty.call(options,'mainQueryField') && searchField.field === options.mainQueryField) {
+    if (Object.prototype.hasOwnProperty.call(options, 'mainQueryField') && searchField.field === options.mainQueryField) {
       // Set the state of the main query field to the value of the search qs param
       searchField.value = parsed.search;
     }
     // If the searchField is one for which we preserve state through qs.
-    if (helpers.filterFieldsWithQsState.find((filterField) => filterField === searchField.field )) {
+    if (helpers.filterFieldsWithQsState.find((filterField) => filterField === searchField.field)) {
+      /* eslint-disable-next-line no-param-reassign */
       searchField = helpers.qs.setFieldStateFromQs({
         params,
-        searchField
-      }) // this resets our initial state of search sites
+        searchField,
+      }); // this resets our initial state of search sites
     }
     // If restricted to the current site by configuration, enforce it here.
     // This rule only applies if site has not been selected by the user.
@@ -45,6 +51,7 @@ const searchFromQuerystring = (solrClient, options = {}) => {
     }
   });
   // Ensure the initial query succeeds by setting a default start value.
+  /* eslint-disable-next-line no-param-reassign */
   solrClient.state.query.start = solrClient.state.query.start || 0;
   // Send query based on state derived from querystring.
   solrClient.sendQuery(solrClient.state.query);
@@ -56,28 +63,39 @@ const init = (settings) => {
     isD7: false,
     // Whether or not we should be querying the solr backend directly.
     proxyIsDisabled: false,
-    // The query request endpoint url must be assigned in ./.env.local.js and by the search app settings in the module.
-    url: "",
+    // The query request endpoint url must be assigned in ./.env.local.js and by the search app
+    // settings in the module.
+    url: '',
     // The search fields and filterable facets.
     searchFields: [
-      {label: "Enter Search Term:", field: "tm_rendered_item", type: "text", isHidden: false},
-      {label: "Site Name", field: "sm_site_name", type: "list-facet", collapse: true, isHidden: false},
-      {label: "Type", field: "ss_federated_type", type: "list-facet", collapse: true, isHidden: false},
-      {label: "Date", field: "ds_federated_date", type: "range-facet", collapse: true, isHidden: false},
-      {label: "Federated Terms", field: "sm_federated_terms", type: "list-facet", hierarchy: true, expandedHierarchies: [], isHidden: false},
+      {
+        label: 'Enter Search Term:', field: 'tm_rendered_item', type: 'text', isHidden: false,
+      },
+      {
+        label: 'Site Name', field: 'sm_site_name', type: 'list-facet', collapse: true, isHidden: false,
+      },
+      {
+        label: 'Type', field: 'ss_federated_type', type: 'list-facet', collapse: true, isHidden: false,
+      },
+      {
+        label: 'Date', field: 'ds_federated_date', type: 'range-facet', collapse: true, isHidden: false,
+      },
+      {
+        label: 'Federated Terms', field: 'sm_federated_terms', type: 'list-facet', hierarchy: true, expandedHierarchies: [], isHidden: false,
+      },
     ],
     // The solr field to use as the source for the main query param "q".
-    mainQueryField: "tm_rendered_item",
+    mainQueryField: 'tm_rendered_item',
     sortFields: [
-      {label: "Relevance", field: "score"},
-      {label: "Date", field: "ds_federated_date"}
+      { label: 'Relevance', field: 'score' },
+      { label: 'Date', field: 'ds_federated_date' },
     ],
     // Enable highlighting in search results snippets.
     hl: {
       fl: 'tm_rendered_item', // the highlight snippet source field(s)
-      usePhraseHighlighter: true // highlight phrase queries
+      usePhraseHighlighter: true, // highlight phrase queries
     },
-    pageStrategy: "paginate",
+    pageStrategy: 'paginate',
     rows: 20,
     // Hostname overridable in ./.env.local.js for testing purposes.
     hostname: window.location.hostname,
@@ -88,8 +106,9 @@ const init = (settings) => {
 
   // Update searchFields to indicate which facets or filters should be hidden in the UI.
   // Note: these facets and filters may still be used in the query.
+  /* eslint-disable-next-line no-param-reassign */
   settings.hiddenSearchFields = settings.hiddenSearchFields || [];
-  options.searchFields = options.searchFields.map(searchField => {
+  options.searchFields = options.searchFields.map((searchField) => {
     if (settings.hiddenSearchFields.includes(searchField.field)) {
       searchField.isHidden = true;
     }
@@ -97,20 +116,19 @@ const init = (settings) => {
   });
 
   // Set sm_site_name default values from config
-  const sm_site_name_value = settings.sm_site_name || false;
+  const smSiteNameValue = settings.sm_site_name || false;
 
   // Logic for restricting site search based on config.
   options.siteList = [];
   if (settings.siteSearch !== undefined) {
     options.searchFields.forEach((searchField) => {
-      if (searchField.field === 'sm_site_name' &&
-        (searchField.isHidden || sm_site_name_value.length < 2)) {
+      if (searchField.field === 'sm_site_name'
+        && (searchField.isHidden || smSiteNameValue.length < 2)) {
         options.siteList = [settings.siteSearch];
       }
     });
-  }
-  else {
-    options.siteList = sm_site_name_value;
+  } else {
+    options.siteList = smSiteNameValue;
   }
 
   // The client class.
@@ -125,25 +143,27 @@ const init = (settings) => {
     rows: options.rows,
     hl: options.hl,
     mainQueryField: options.mainQueryField,
-    filters: [{field: "sm_site_name", type: "list-facet", value: options.siteList}],
+    filters: [{ field: 'sm_site_name', type: 'list-facet', value: options.siteList }],
 
     // The change handler passes the current query- and result state for render
     // as well as the default handlers for interaction with the search component
-    onChange: (state, handlers) =>
+    /* eslint-disable-next-line react/no-render-return-value */
+    onChange: (state, handlers) => ReactDOM.render(
       // Render the faceted search component
-      ReactDOM.render(
-        <FederatedSolrFacetedSearch
-          {...state}
-          {...handlers}
-          customComponents={FederatedSolrComponentPack}
-          bootstrapCss={false}
-          //onSelectDoc={(doc) => console.log(doc)}
-          onSelectDoc={()=>{}}
-          truncateFacetListsAt={-1}
-          options={options}
-        />,
-        document.getElementById("fs-root")
-      )
+      <FederatedSolrFacetedSearch
+        /* eslint-disable react/jsx-props-no-spreading */
+        {...state}
+        {...handlers}
+        /* eslint-enable react/jsx-props-no-spreading */
+        customComponents={FederatedSolrComponentPack}
+        bootstrapCss={false}
+        // onSelectDoc={(doc) => console.log(doc)}
+        onSelectDoc={() => {}}
+        truncateFacetListsAt={-1}
+        options={options}
+      />,
+      document.getElementById('fs-root'),
+    ),
   });
 
   // Check if there is a querystring param search term and make initial query.
@@ -151,7 +171,7 @@ const init = (settings) => {
 
   // Listen for browser history changes / updated querystring, make new query.
   // See https://developer.mozilla.org/en-US/docs/Web/Events/popstate
-  window.onpopstate = function() {
+  window.onpopstate = function () {
     searchFromQuerystring(solrClient, options);
   };
 };
@@ -160,24 +180,21 @@ const init = (settings) => {
 // @see https://github.com/facebook/create-react-app/blob/master/packages/react-scripts/template/README.md#adding-custom-environment-variables
 if (process.env.NODE_ENV === 'production') {
   // Get the root element where the app will be rendered.
-  const root = document.getElementById("fs-root");
+  const root = document.getElementById('fs-root');
 
   if (root) {
     // Get the data attribute which has the stringified configuration data json object.
     if (Object.hasOwnProperty.call(root.dataset, 'federatedSearchAppConfig')) {
       const settings = JSON.parse(root.dataset.federatedSearchAppConfig);
       init(settings);
-    }
-    else {
+    } else {
       console.error('Federated Search React | Could not find a data-federated-search-app-config attribute on div#fs-root.  Please populate data-federated-search-app-config with search app configuration data.');
     }
-  }
-  else {
+  } else {
     console.error('Federated Search React | Could not find div#fs-root in which to load the search app.');
   }
-}
-// This is not production (i.e. not using the build compiled js)
-else {
+} else {
+  // This is not production (i.e. not using the build compiled js)
   // Get the local environment settings for the search app and initialize.
   import('./.env.local.js')
     .then(
@@ -186,6 +203,6 @@ else {
       },
       (error) => {
         console.error('Federated Search React | Could not load local configuration for search app: ', error);
-      }
+      },
     );
 }
