@@ -250,18 +250,22 @@ class FederatedTextSearchAsYouType extends React.Component {
           <div className="react-autosuggest__container-directions">
             <span className="react-autosuggest__container-directions-item">
               Press
+              {' '}
               <code>ENTER</code>
               {' '}
               to search for
+              {' '}
               <strong>{query}</strong>
               {' '}
               or
+              {' '}
               <code>ESC</code>
               {' '}
               to close.
             </span>
             <span className="react-autosuggest__container-directions-item">
               Press ↑ and ↓ to highlight a suggestion then
+              {' '}
               <code>ENTER</code>
               {' '}
               to be redirected to that suggestion.
