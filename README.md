@@ -50,6 +50,24 @@ You will see the build errors and lint warnings in the console.
 
 When you run the start script `yarn start`, code quality (linting) tests are automatically run and feedback is provided in the terminal.
 
+If you are using this app with Drupal, enable CORS support in `services.yml`:
+```
+  cors.config:
+    enabled: true
+    # Specify allowed headers, like 'x-allowed-header'.
+    allowedHeaders: []
+    # Specify allowed request methods, specify ['*'] to allow all possible ones.
+    allowedMethods: []
+    # Configure requests allowed from specific origins.
+    allowedOrigins: ['http://localhost:3000']
+    # Sets the Access-Control-Expose-Headers header.
+    exposedHeaders: false
+    # Sets the Access-Control-Max-Age header.
+    maxAge: false
+    # Sets the Access-Control-Allow-Credentials header.
+    supportsCredentials: false
+```
+
 Cypress is installed for end-to-end testing. You can run the tests by running `yarn cypress`. This will open an Electron
  binary to run the end-to-end testing. You can then run a specific test or run all tests using "Run all specs" link.
  See `cypress/integration` folder to view tests.
