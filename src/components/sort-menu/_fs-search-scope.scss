@@ -10,6 +10,70 @@
   margin: rhythm(1) 0;
 }
 
+.fs-search-scope__filter {
+  width: 48.57143%;
+  clear: right;
+  float: left;
+  margin-left: 0;
+  margin-right: 2.85714%;
+
+  @include breakpoint($bp1) {
+    width: 31.42857%;
+    clear: right;
+    float: left;
+    margin-left: 0;
+    margin-right: 2.85714%;
+  }
+
+  &:nth-of-type(3n+1) {
+    width: 48.57143%;
+    clear: right;
+    float: left;
+    margin-left: 0;
+    margin-right: 2.85714%;
+    clear: both;
+
+    @include breakpoint($bp1) {
+      width: 31.42857%;
+      float: left;
+      margin-right: -100%;
+      margin-left: 0;
+      clear: both;
+    }
+  }
+
+  &:nth-of-type(3n+2) {
+    width: 48.57143%;
+    clear: right;
+    float: right;
+    margin-right: 0;
+
+    @include breakpoint($bp1) {
+      width: 31.42857%;
+      float: left;
+      margin-right: -100%;
+      margin-left: 34.28571%;
+      clear: none;
+    }
+  }
+
+  &:nth-of-type(3n+3) {
+    width: 48.57143%;
+    clear: right;
+    float: left;
+    margin-left: 0;
+    margin-right: 2.85714%;
+    clear: both;
+
+    @include breakpoint($bp1) {
+      width: 31.42857%;
+      float: right;
+      margin-left: 0;
+      margin-right: 0;
+      clear: none;
+    }
+  }
+}
 .fs-search-scope__select {
   @extend %select;
   @include adjust-font-size-to($label, .8);

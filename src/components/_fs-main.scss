@@ -9,11 +9,19 @@
   margin-left: 0;
   margin-right: 0;
   margin-bottom: rhythm(1);
-
   @include breakpoint($bp2) {
-    float: right;
-    clear: none;
-    width: 74.28571%;
-    padding-top: rhythm(1);
+    padding-left: 3.703713%; //Default to match previous version 1.x padding.
+  }
+  &.fs-main__has-custom-columns {
+    @include breakpoint($bp2) {
+      padding-left: 2em;
+    }
+  }
+}
+
+.fs-main__desktop-reverse {
+  @include breakpoint($bp2) {
+    padding-left: 0;
+    padding-right: 2em;
   }
 }

@@ -8,6 +8,17 @@
 
 .fs-search-form__autocomplete-container {
   display: flex;
+  @include breakpoint($bp1) {
+    width: 75%;
+  }
+
+  @include breakpoint($bp3) {
+    width: 50%;
+  }
+
+  .fs-search-form__input-wrapper {
+    width: 100%;
+  }
 }
 
 /** These classes are outside of Federated Search app namespace. **/

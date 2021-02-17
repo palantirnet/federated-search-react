@@ -1,0 +1,26 @@
+/**
+ * container.scss
+ * Define container styles.
+ *
+ * @copyright Copyright (c) 2017-2020 Palantir.net
+ */
+
+.fs-container {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  min-width: 260px;
+  padding: 0 1.46667em;
+  margin: 0 auto;
+  @include breakpoint($bp2) {
+    display: grid;
+    grid-column-gap: 0;
+    grid-template-columns: 22.85714% 74.28571%;
+    width: 90%;
+    padding: 0;
+  }
+  @include breakpoint($bp2) {
+    max-width: 1400px;
+  }
+}

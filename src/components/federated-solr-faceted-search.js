@@ -98,14 +98,25 @@ class FederatedSolrFacetedSearch extends React.Component {
       pageTitle = <h1>{this.props.options.pageTitle}</h1>;
     }
 
+    // Grab env vars.
+    const {
+      containerClass = '',
+      asideClass = '',
+      mainClass = '',
+      gridTemplateColumns = '',
+      reverseDesktopColumns = false,
+      reverseMobileOrder = false,
+    } = this.props.options.layoutAndClasses || {};
+
     return (
       <LiveAnnouncer>
-        <div className="fs-container">
-          <aside className="fs-aside">
+        <div className={`fs-container ${containerClass}`} style={{ gridTemplateColumns: gridTemplateColumns }}>
+          <aside className={`fs-aside ${asideClass} ${reverseDesktopColumns ? 'fs-aside__desktop-reverse' : ''} ${reverseMobileOrder ? 'fs-aside__mobile-reverse' : ''}`}>
             <SearchFieldContainerComponent
               bootstrapCss={bootstrapCss}
               onNewSearch={this.resetFilters}
               resultsCount={this.props.results.numFound}
+              options={this.props.options}
             >
               {/* Only render the visible facets / filters.
                   Note: their values may still be used in the query, if they were pre-set. */}
@@ -137,7 +148,7 @@ class FederatedSolrFacetedSearch extends React.Component {
               }
             </SearchFieldContainerComponent>
           </aside>
-          <div className="fs-main">
+          <div className={`fs-main ${mainClass} ${reverseDesktopColumns ? 'fs-main__desktop-reverse' : ''} ${reverseMobileOrder ? 'fs-main__mobile-reverse' : ''} ${gridTemplateColumns ? 'fs-main__has-custom-columns' : ''}`}>
             {pageTitle}
             <div className="fs-search-form" autoComplete="on">
               <FederatedTextSearch

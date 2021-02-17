@@ -5,6 +5,13 @@
  * @copyright Copyright (c) 2017-2019 Palantir.net
  */
 
+.fs-search-filters {
+  background-color: $c-bg-gray;
+  @include breakpoint($bp2) {
+    padding-top: rhythm(1);
+  }
+}
+
 .fs-search-filters__trigger,
 .fs-search-accordion__title {
   @include adjust-font-size-to($sm-heading, 1);
@@ -208,6 +215,7 @@
 }
 
 .fs-search-accordion__title {
+  margin: 0;
   @extend %h2;
   border-bottom: solid 1px $gray-light;
   padding-top: rhythm(.75);
