@@ -103,7 +103,7 @@ class FederatedResult extends React.Component {
     // The link text in the returned result gets set by React.
     // TODO: move onClick to interactive element and add key event.
     /* eslint-disable jsx-a11y/control-has-associated-label, jsx-a11y/click-events-have-key-events,
-       jsx-a11y/no-noninteractive-element-interactions */
+       jsx-a11y/no-noninteractive-element-interactions, react/no-danger */
     return (
       <li className="fs-search-results__item" onClick={() => onSelect(doc)}>
         {doc.ss_federated_image
