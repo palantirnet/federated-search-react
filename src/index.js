@@ -188,9 +188,11 @@ if (process.env.NODE_ENV === 'production') {
       const settings = JSON.parse(root.dataset.federatedSearchAppConfig);
       init(settings);
     } else {
+      // eslint-disable-next-line
       console.error('Federated Search React | Could not find a data-federated-search-app-config attribute on div#fs-root.  Please populate data-federated-search-app-config with search app configuration data.');
     }
   } else {
+    // eslint-disable-next-line
     console.error('Federated Search React | Could not find div#fs-root in which to load the search app.');
   }
 } else {
@@ -202,6 +204,7 @@ if (process.env.NODE_ENV === 'production') {
         init(settings); // Load the app, passing in the ./.env.local.js config.
       },
       (error) => {
+        // eslint-disable-next-line
         console.error('Federated Search React | Could not load local configuration for search app: ', error);
       },
     );
