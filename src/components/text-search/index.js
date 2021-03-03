@@ -17,7 +17,7 @@ FederatedTextSearch.defaultProps = {
 };
 
 FederatedTextSearch.propTypes = {
-  autocomplete: PropTypes.bool,
+  autocomplete: PropTypes.oneOfType([PropTypes.bool, PropTypes.object]),
 };
 
 export default FederatedTextSearch;
