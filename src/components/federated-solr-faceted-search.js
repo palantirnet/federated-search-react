@@ -265,7 +265,7 @@ FederatedSolrFacetedSearch.propTypes = {
   truncateFacetListsAt: PropTypes.number,
   options: PropTypes.shape({
     pageTitle: PropTypes.string,
-    autocomplete: PropTypes.bool,
+    autocomplete: PropTypes.oneOfType([PropTypes.bool, PropTypes.object]),
     showEmptySearchResults: PropTypes.bool,
     searchPrompt: PropTypes.string,
     noResults: PropTypes.string,
