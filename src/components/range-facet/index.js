@@ -183,7 +183,9 @@ FederatedRangeFacet.defaultProps = {
 
 FederatedRangeFacet.propTypes = {
   collapse: PropTypes.bool,
-  facets: PropTypes.arrayOf(PropTypes.string).isRequired,
+  facets: PropTypes.arrayOf(
+    PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  ).isRequired,
   field: PropTypes.string.isRequired,
   label: PropTypes.string.isRequired,
   onChange: PropTypes.func.isRequired,

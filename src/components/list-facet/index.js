@@ -320,7 +320,7 @@ FederatedListFacet.propTypes = {
   collapse: PropTypes.bool,
   expandedHierarchies: PropTypes.arrayOf(PropTypes.string),
   facets: PropTypes.arrayOf(
-    PropTypes.arrayOf(PropTypes.number),
+    PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   ).isRequired,
   field: PropTypes.string.isRequired,
   hierarchy: PropTypes.bool,

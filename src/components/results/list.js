@@ -15,7 +15,7 @@ FederatedResultList.defaultProps = {
 };
 
 FederatedResultList.propTypes = {
-  children: PropTypes.arrayOf(PropTypes.object),
+  children: PropTypes.arrayOf(PropTypes.array),
 };
 
 export default FederatedResultList;
