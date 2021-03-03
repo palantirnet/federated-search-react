@@ -425,7 +425,18 @@ FederatedTextSearchAsYouType.propTypes = {
     value: PropTypes.string,
   }),
   value: PropTypes.string,
-  query: PropTypes.string,
+  query: PropTypes.shape({
+    searchField: PropTypes.arrayOf(PropTypes.object),
+    searchFields: PropTypes.arrayOf(PropTypes.object),
+    mainQueryField: PropTypes.string,
+    sortFields: PropTypes.arrayOf(PropTypes.shape({
+      label: PropTypes.string,
+      field: PropTypes.string,
+    })),
+    rows: PropTypes.number,
+    start: PropTypes.number,
+    pageStrategy: PropTypes.string,
+  }),
 };
 
 export default FederatedTextSearchAsYouType;
