@@ -3,14 +3,17 @@ import PropTypes from 'prop-types';
 import { LiveAnnouncer } from 'react-aria-live';
 import FederatedSolrComponentPack from './federated_solr_component_pack';
 import helpers from '../helpers';
-//import componentPack from "./component-pack";
 
-const getFacetValues = (type, results, field, lowerBound, upperBound) => {
-  return type === 'period-range-facet'
-    ? (results.facets[lowerBound] || []).concat(results.facets[upperBound] || [])
-    : type === 'list-facet' || type === 'range-facet'
-      ? results.facets[field] || []
-      : null;
+const getFacetValues = function (type, results, field, lowerBound, upperBound) {
+  let values = null;
+
+  if (type === 'period-range-facet') {
+    values = (results.facets[lowerBound] || []).concat(results.facets[upperBound] || []);
+  } else if (type === 'list-facet' || type === 'range-facet') {
+    values = results.facets[field] || [];
+  }
+
+  return values;
 };
 
 class FederatedSolrFacetedSearch extends React.Component {
@@ -21,24 +24,28 @@ class FederatedSolrFacetedSearch extends React.Component {
   }
 
   resetFilters() {
-    let { query } = this.props;
+    const { query, onSearchFieldChange } = this.props;
     let searchTerm = '';
     // Keep only the value of the main search field.
-    for (const field of query.searchFields) {
+    query.searchField.map((field) => {
+      const newField = field;
+
       if (field.field !== query.mainQueryField) {
         // Remove the field value.
-        delete (field.value);
+        delete (newField.value);
         // Collapse the sidebar filter toggle.
-        field.collapse = true;
+        newField.collapse = true;
         // Collapse the terms sidebar filter toggle.
         if (Object.hasOwnProperty.call(field, 'expandedHierarchies')) {
-          field.expandedHierarchies = [];
+          newField.expandedHierarchies = [];
         }
       } else {
         // Extract the value of the main search term to use when setting new URL for this state.
         searchTerm = field.value;
       }
-    }
+
+      return newField;
+    });
     // Set new parsed params based on only search term value.
     const parsed = {
       search: searchTerm,
@@ -46,10 +53,8 @@ class FederatedSolrFacetedSearch extends React.Component {
     // Add new url to browser window history.
     helpers.qs.addNewUrlToBrowserHistory(parsed);
 
-    // Update state to remove the filter field values.
-    this.setState({ query });
     // Execute search.
-    this.props.onSearchFieldChange();
+    onSearchFieldChange();
   }
 
   render() {
@@ -64,6 +69,8 @@ class FederatedSolrFacetedSearch extends React.Component {
       onTextInputChange,
       onSortFieldChange,
       onPageChange,
+      sidebarFilters,
+      onSelectDoc,
     } = this.props;
     const { searchFields, sortFields, rows } = query;
     const start = query.start ? query.start : 0;
@@ -84,9 +91,11 @@ class FederatedSolrFacetedSearch extends React.Component {
       ? (<ResultPendingComponent bootstrapCss={bootstrapCss} />)
       : null;
 
-    const pagination = query.pageStrategy === 'paginate' ?
-      <PaginateComponent {...this.props} bootstrapCss={bootstrapCss} onChange={onPageChange} /> :
-      null;
+    /* eslint-disable react/jsx-props-no-spreading */
+
+    const pagination = query.pageStrategy === 'paginate'
+      ? <PaginateComponent {...this.props} bootstrapCss={bootstrapCss} onChange={onPageChange} />
+      : null;
 
     const preloadListItem = query.pageStrategy === 'cursor'
     && results.docs.length < results.numFound
@@ -94,8 +103,8 @@ class FederatedSolrFacetedSearch extends React.Component {
       : null;
 
     let pageTitle;
-    if (this.props.options.pageTitle != null) {
-      pageTitle = <h1>{this.props.options.pageTitle}</h1>;
+    if (options.pageTitle != null) {
+      pageTitle = <h1>{options.pageTitle}</h1>;
     }
 
     return (
@@ -105,14 +114,14 @@ class FederatedSolrFacetedSearch extends React.Component {
             <SearchFieldContainerComponent
               bootstrapCss={bootstrapCss}
               onNewSearch={this.resetFilters}
-              resultsCount={this.props.results.numFound}
+              resultsCount={results.numFound}
             >
               {/* Only render the visible facets / filters.
                   Note: their values may still be used in the query, if they were pre-set. */}
               {searchFields
-                .filter(searchField => this.props.sidebarFilters.indexOf(searchField.field) > -1
+                .filter((searchField) => sidebarFilters.indexOf(searchField.field) > -1
                   && !searchField.isHidden)
-                .map((searchField, i) => {
+                .map((searchField) => {
                   const {
                     type,
                     field,
@@ -124,7 +133,7 @@ class FederatedSolrFacetedSearch extends React.Component {
 
                   return (
                     <SearchComponent
-                      key={i}
+                      key={searchField.field}
                       {...this.props}
                       {...searchField}
                       bootstrapCss={bootstrapCss}
@@ -133,8 +142,7 @@ class FederatedSolrFacetedSearch extends React.Component {
                       onChange={onSearchFieldChange}
                     />
                   );
-                })
-              }
+                })}
             </SearchFieldContainerComponent>
           </aside>
           <div className="fs-main">
@@ -147,7 +155,7 @@ class FederatedSolrFacetedSearch extends React.Component {
                 label="Enter search term:"
                 onSuggest={onTextInputChange}
                 onChange={onSearchFieldChange}
-                value={searchFields.find(sf => sf.field === 'tm_rendered_item').value}
+                value={searchFields.find((sf) => sf.field === 'tm_rendered_item').value}
               />
               <CurrentQueryComponent
                 {...this.props}
@@ -159,8 +167,8 @@ class FederatedSolrFacetedSearch extends React.Component {
                 sortFields={sortFields}
               />
             </div>
-            <p className={(searchFields.find(sf => sf.field === 'tm_rendered_item').value || this.props.options.showEmptySearchResults) ? 'solr-search-results-container__prompt fs-element-invisible' : 'solr-search-results-container__prompt'}>{this.props.options.searchPrompt || 'Please enter a search term.'}</p>
-            <div className={(searchFields.find(sf => sf.field === 'tm_rendered_item').value || this.props.options.showEmptySearchResults) ? 'solr-search-results-container__wrapper' : 'solr-search-results-container__wrapper fs-element-invisible'}>
+            <p className={(searchFields.find((sf) => sf.field === 'tm_rendered_item').value || options.showEmptySearchResults) ? 'solr-search-results-container__prompt fs-element-invisible' : 'solr-search-results-container__prompt'}>{options.searchPrompt || 'Please enter a search term.'}</p>
+            <div className={(searchFields.find((sf) => sf.field === 'tm_rendered_item').value || options.showEmptySearchResults) ? 'solr-search-results-container__wrapper' : 'solr-search-results-container__wrapper fs-element-invisible'}>
               <ResultContainerComponent bootstrapCss={bootstrapCss}>
                 <ResultHeaderComponent bootstrapCss={bootstrapCss}>
                   <ResultCount
@@ -169,8 +177,8 @@ class FederatedSolrFacetedSearch extends React.Component {
                     start={start}
                     rows={rows}
                     onChange={onPageChange}
-                    noResultsText={this.props.options.noResults || null}
-                    termValue={searchFields.find(sf => sf.field === 'tm_rendered_item').value}
+                    noResultsText={options.noResults || null}
+                    termValue={searchFields.find((sf) => sf.field === 'tm_rendered_item').value}
                   />
                   {resultPending}
                 </ResultHeaderComponent>
@@ -181,12 +189,12 @@ class FederatedSolrFacetedSearch extends React.Component {
                       doc={doc}
                       fields={searchFields}
                       key={doc.id || i}
-                      onSelect={this.props.onSelectDoc}
+                      onSelect={onSelectDoc}
                       resultIndex={i}
                       rows={rows}
                       start={start}
                       highlight={results.highlighting[doc.id]}
-                      hostname={this.props.options.hostname}
+                      hostname={options.hostname}
                     />
                   ))}
                   {preloadListItem}
@@ -198,6 +206,8 @@ class FederatedSolrFacetedSearch extends React.Component {
         </div>
       </LiveAnnouncer>
     );
+
+    /* eslint-enable react/jsx-props-no-spreading */
   }
 }
 
@@ -220,19 +230,49 @@ FederatedSolrFacetedSearch.defaultProps = {
 
 FederatedSolrFacetedSearch.propTypes = {
   bootstrapCss: PropTypes.bool,
-  customComponents: PropTypes.object,
-  onCsvExport: PropTypes.func,
-  onNewSearch: PropTypes.func,
-  onPageChange: PropTypes.func,
+  customComponents: PropTypes.shape(FederatedSolrComponentPack),
+  pageStrategy: PropTypes.string,
+  rows: PropTypes.number,
+  searchFields: PropTypes.arrayOf(PropTypes.shape({
+    type: PropTypes.string,
+    field: PropTypes.string,
+  })),
+  sortFields: PropTypes.arrayOf(PropTypes.shape({
+    label: PropTypes.string,
+    field: PropTypes.string,
+  })),
+  onCsvExport: PropTypes.func.isRequired,
+  onNewSearch: PropTypes.func.isRequired,
+  onPageChange: PropTypes.func.isRequired,
   onSearchFieldChange: PropTypes.func.isRequired,
-  onTextInputChange: PropTypes.func,
-  onSelectDoc: PropTypes.func,
+  onTextInputChange: PropTypes.func.isRequired,
+  onSelectDoc: PropTypes.func.isRequired,
   onSortFieldChange: PropTypes.func.isRequired,
-  query: PropTypes.object,
-  results: PropTypes.object,
+  query: PropTypes.shape({
+    searchField: PropTypes.arrayOf(PropTypes.object),
+    searchFields: PropTypes.arrayOf(PropTypes.object),
+    mainQueryField: PropTypes.string,
+    sortFields: PropTypes.arrayOf(PropTypes.shape({
+      label: PropTypes.string,
+      field: PropTypes.string,
+    })),
+    rows: PropTypes.number,
+    start: PropTypes.number,
+    pageStrategy: PropTypes.string,
+  }).isRequired,
+  results: PropTypes.shape(FederatedSolrComponentPack.results).isRequired,
   showCsvExport: PropTypes.bool,
   truncateFacetListsAt: PropTypes.number,
-  options: PropTypes.object,
+  options: PropTypes.shape({
+    pageTitle: PropTypes.string,
+    autocomplete: PropTypes.oneOfType([PropTypes.bool, PropTypes.object]),
+    showEmptySearchResults: PropTypes.bool,
+    searchPrompt: PropTypes.string,
+    noResults: PropTypes.string,
+    hostname: PropTypes.string,
+  }),
+  sidebarFilters: PropTypes.arrayOf(PropTypes.string),
+
 };
 
 export default FederatedSolrFacetedSearch;

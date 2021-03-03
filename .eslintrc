@@ -10,7 +10,8 @@
       1, {
         "extensions": [".js", ".jsx"],
       }
-    ]
+    ],
+    "func-names": "off"
   },
   "env": {
     "browser": true

@@ -3,13 +3,12 @@ import React from 'react';
 import cx from 'classnames';
 import AnimateHeight from 'react-animate-height';
 
-
 class FederatedSearchFieldContainer extends React.Component {
   constructor(props) {
     super(props);
 
     // This will return the width of the viewport.
-    let intFrameWidth = window.innerWidth;
+    const intFrameWidth = window.innerWidth;
 
     this.state = {
       // Filters are visible for large / hidden for small screens by default.
@@ -32,24 +31,27 @@ class FederatedSearchFieldContainer extends React.Component {
   }
 
   handleClick() {
+    const { expanded } = this.state;
     this.setState({
-      expanded: !this.state.expanded,
+      expanded: !expanded,
     });
   }
 
   render() {
-    const { onNewSearch } = this.props;
-    const height = this.state.expanded ? 'auto' : 0;
+    const { onNewSearch, resultsCount, children } = this.props;
+    const { expanded } = this.state;
+    const height = expanded ? 'auto' : 0;
 
     return (
       <div className="fs-search-filters">
         <button
+          type="submit"
           className={cx('fs-search-filters__trigger', {
-            'js-fs-search-filters-open': this.state.expanded,
+            'js-fs-search-filters-open': expanded,
           })}
           onClick={this.handleClick}
         >
-            Filter Results
+          Filter Results
         </button>
         <AnimateHeight
           duration={450}
@@ -60,12 +62,12 @@ class FederatedSearchFieldContainer extends React.Component {
               <div className="fs-search-filters__row">
                 <h2 className="fs-search-filters__title" id="fs-section-title">Filter Results</h2>
               </div>
-              { this.props.resultsCount > 0
-                ? (<ul className="fs-search-accordion__group">{this.props.children}</ul>)
+              { resultsCount > 0
+                ? (<ul className="fs-search-accordion__group">{children}</ul>)
                 : <div className="fs-search-filters__no-results">There are no results to filter.</div> }
             </section>
 
-            { this.props.resultsCount > 0
+            { resultsCount > 0
               ? <div className="fs-search-filters__row"><button className="fs-search-filters__reset" type="button" onClick={onNewSearch}>Clear All</button></div>
               : null }
           </form>
@@ -75,9 +77,14 @@ class FederatedSearchFieldContainer extends React.Component {
   }
 }
 
+FederatedSearchFieldContainer.defaultProps = {
+  children: [],
+};
+
 FederatedSearchFieldContainer.propTypes = {
-  children: PropTypes.array,
-  onNewSearch: PropTypes.func,
+  children: PropTypes.arrayOf(PropTypes.object),
+  onNewSearch: PropTypes.func.isRequired,
+  resultsCount: PropTypes.number.isRequired,
 };
 
 export default FederatedSearchFieldContainer;

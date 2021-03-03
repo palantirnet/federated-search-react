@@ -14,13 +14,16 @@ const highlightText = (text, highlight) => {
   // Split on highlight term and include term into parts, ignore case
   const parts = text.split(new RegExp(`(${highlight})`, 'gi'));
   return (
-    <span> { parts.map((part, i) =>
-      (
+    <span>
+      {' '}
+      { parts.map((part, i) => (
+        /* eslint-disable-next-line react/no-array-index-key */
         <span key={i} style={part.toLowerCase() === highlight.toString().toLowerCase() ? { fontWeight: 'bold' } : {}}>
           { part }
         </span>
       ))}
-    </span>);
+    </span>
+  );
 };
 
 // Those filter fields for which we want to preserve state in qs.
@@ -69,10 +72,10 @@ const qs = {
     const { parsed, params } = qs.getParsedQsAndParams();
 
     // Check if the search field is one for which we preserve state through qs.
-    const isQsParamField = filterFieldsWithQsState.find(item => item === field);
+    const isQsParamField = filterFieldsWithQsState.find((item) => item === field);
 
     // Check if the filter field exists in qs param.
-    const param = params.find(item => item[0] === field);
+    const param = params.find((item) => item[0] === field);
 
     return {
       foundIdx,
@@ -182,7 +185,7 @@ const qs = {
     // Handle multi value params.
     if (typeof param[1] === 'object' && param[1].includes(value)) {
       // Remove the list facet value from the param.
-      newParsed[field] = param[1].filter(item => item !== value);
+      newParsed[field] = param[1].filter((item) => item !== value);
     }
 
     return newParsed;
@@ -223,7 +226,7 @@ const qs = {
     // Make a copy of the searchField arg.
     const newSearchField = searchField;
     // Check if the filter field exists in qs params.
-    const param = params.find(item => item[0] === searchField.field);
+    const param = params.find((item) => item[0] === searchField.field);
     // Check if the filter field is sm_federated_terms.
     // If searchField has corresponding qs param present.
     if (param) {
@@ -235,7 +238,7 @@ const qs = {
       newSearchField.value = searchField.value || [];
       // Don't add qs param values if they're already set in app state.
       // Push single values onto the searchField.value array.
-      if (typeof param[1] !== 'object' && !searchField.value.find(item => item === param[1])) {
+      if (typeof param[1] !== 'object' && !searchField.value.find((item) => item === param[1])) {
         newSearchField.value.push(decodeURI(param[1]));
       }
       // Concatenate existing searchField.value array with multivalue param array..
@@ -251,7 +254,7 @@ const qs = {
           newSearchField.expandedHierarchies = expandedHierarchies;
         }
         // Decode param values.
-        const decodedParam = param[1].map(item => decodeURI(item));
+        const decodedParam = param[1].map((item) => decodeURI(item));
         // Set the searchField.value to the new decoded param values.
         newSearchField.value = [...decodedParam];
       }
