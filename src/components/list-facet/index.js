@@ -330,10 +330,10 @@ FederatedListFacet.propTypes = {
   truncateFacetListsAt: PropTypes.number.isRequired,
   value: PropTypes.arrayOf(PropTypes.number),
   options: PropTypes.shape({
-    siteList: PropTypes.shape({
+    siteList: PropTypes.oneOfType([PropTypes.bool, PropTypes.shape({
       length: PropTypes.number,
       indexOf: PropTypes.func,
-    }),
+    })]),
   }).isRequired,
 };
 
